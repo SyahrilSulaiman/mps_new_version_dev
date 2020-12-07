@@ -208,13 +208,15 @@ export default function SenaraiBil(props) {
                                             <Pane>
                                                 <Text fontWeight={600}>Tempoh Cukai</Text>
                                                 <Heading size={100}>
-                                                    {  (new Date(bills.bill.data[3][0].DATE_BILL_LATEST).getMonth()+1 < parseInt(6)) ? 'Jan-Jun '+(currentYear.getFullYear()+0) : 'Julai-Disember ' +(currentYear.getFullYear()+0)}
+                                                    {/* {  (new Date(bills.bill.data[3][0].DATE_BILL_LATEST).getMonth()+1 < parseInt(6)) ? 'Jan-Jun '+(currentYear.getFullYear()+0) : 'Julai-Disember ' +(currentYear.getFullYear()+0)} */}
+                                                    { "JAN - JUN 2021" }
                                                 </Heading>
                                             </Pane>
                                             <Pane>
                                                 <Text fontWeight={600}>Tempoh Bayaran</Text>
                                                 <Heading size={100}>
-                                                { (new Date(bills.bill.data[3][0].DATE_BILL_LATEST).getMonth()+1 > parseInt(6)) ? '28-Feb-'+ (currentYear.getFullYear()+1) : '31-Aug-'+(currentYear.getFullYear()+0)}
+                                                {/* { (new Date(bills.bill.data[3][0].DATE_BILL_LATEST).getMonth()+1 > parseInt(6)) ? '28-Feb-'+ (currentYear.getFullYear()+1) : '31-Aug-'+(currentYear.getFullYear()+0)} */}
+                                                {"28-FEB-2021"}
                                                 </Heading>
                                             </Pane>
                                         </Card>
@@ -236,7 +238,7 @@ export default function SenaraiBil(props) {
                                             className="cursor-pointer hover:bg-gray-300"
                                         >
                                             <Pane display="grid" gridTemplateColumns="1fr 10px">
-                                                <Heading size={200}>Bil - Lihat Bil</Heading>
+                                                <Heading size={200}>Cetak Bil PDF</Heading>
                                                 <Heading className="mx-auto"><Icon icon={ChevronRightIcon}></Icon></Heading>
                                             </Pane>
                                         </Card>
