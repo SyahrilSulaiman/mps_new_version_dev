@@ -187,7 +187,7 @@ export default function SenaraiBil(props) {
                                         >
                                             <Pane>
                                                 <Text fontWeight={600}>Jenis Bil</Text>
-                                                <Heading size={100}>Cukai</Heading>
+                                                <Heading size={100}>Cukai - Cukai Taksiran</Heading>
                                             </Pane>
                                             <Pane>
                                                 <Text fontWeight={600}>Nombor Akaun</Text>

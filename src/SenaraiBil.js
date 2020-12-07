@@ -163,7 +163,7 @@ export default function SenaraiBil(props) {
                                     >
                                         <Pane>
                                             <Text fontWeight={600}>Jenis Bil</Text>
-                                            <Heading size={100}>Cukai</Heading>
+                                            <Heading size={100}>Cukai - Cukai Taksiran</Heading>
                                         </Pane>
                                         <Pane>
                                             <Text fontWeight={600}>Nombor Akaun</Text>
@@ -184,13 +184,18 @@ export default function SenaraiBil(props) {
                                         <Pane>
                                             <Text fontWeight={600}>Tempoh Cukai</Text>
                                             <Heading size={100}>
-                                            {  (new Date(bills.bill.data[3][0].DATE_BILL_LATEST).getMonth()+1 < parseInt(6)) ? 'Jan-Jun '+(currentYear.getFullYear()+0) : 'Julai-Disember ' +(currentYear.getFullYear()+0)}
-                                        </Heading>                                        </Pane>
+                                            {/* {  (new Date(bills.bill.data[3][0].DATE_BILL_LATEST).getMonth()+1 < parseInt(6)) ? 'Jan-Jun '+(currentYear.getFullYear()+0) : 'Julai-Disember ' +(currentYear.getFullYear()+0)} */}
+                                            { "JAN - JUN 2021" }
+                                            </Heading>
+                                        </Pane>
                                         <Pane>
                                             <Text fontWeight={600}>Tempoh Bayaran</Text>
                                             <Heading size={100}>
-                                            { (new Date(bills.bill.data[3][0].DATE_BILL_LATEST).getMonth()+1 > parseInt(6)) ? '28-Feb-'+ (currentYear.getFullYear()+1) : '31-Aug-'+(currentYear.getFullYear()+0)}
-                                            </Heading>                                            </Pane>
+                                            {/* { (new Date(bills.bill.data[3][0].DATE_BILL_LATEST).getMonth()+1 > parseInt(6)) ? '28-Feb-'+ (currentYear.getFullYear()+1) : '31-Aug-'+(currentYear.getFullYear()+0)}
+                                             */}
+                                             {"28-FEB-2021"}
+                                            </Heading>
+                                        </Pane>
                                     </Card>
                                     <Card
                                         background="tint2"
@@ -210,7 +215,7 @@ export default function SenaraiBil(props) {
                                         className="cursor-pointer hover:bg-gray-300"
                                     >
                                         <Pane>
-                                            <Heading size={200}><i className="fas fa-receipt"></i> Bil PDF <span><i className="pt-1 fas fa-chevron-right float-right"></i></span></Heading> 
+                                            <Heading size={200}><i className="fas fa-receipt"></i> Cetak Bil PDF <span><i className="pt-1 fas fa-chevron-right float-right"></i></span></Heading> 
                                         </Pane>
                                     </Card>
                                 {
@@ -223,7 +228,7 @@ export default function SenaraiBil(props) {
                                         className="cursor-pointer hover:bg-gray-300"
                                     >
                                         <Pane>
-                                            <Heading size={200}><i className="fas fa-receipt"></i> Resit PDF <span><i className="pt-1 fas fa-chevron-right float-right"></i></span></Heading> 
+                                            <Heading size={200}><i className="fas fa-receipt"></i> Cetak Resit PDF <span><i className="pt-1 fas fa-chevron-right float-right"></i></span></Heading> 
                                         </Pane>
                                     </Card>
                                      ) : ''

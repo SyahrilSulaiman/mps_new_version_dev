@@ -196,7 +196,7 @@ function Pay() {
                 <Topbar
                     title="Pembayaran Cukai"
                     leftButtonIcon={ArrowLeftIcon}
-                    onClickLeftButton={() => window.location.href = '/bill'}
+                    onClickLeftButton={() => window.location.href = '/cukaitaksiran'}
                 />
 
                 <div className="bg-white shadow overflow-hidden" style={{ paddingTop: "50px" }}>
@@ -218,6 +218,7 @@ function Pay() {
                                     placeholder="cth: Suriati"
                                     value={payorname}
                                     onChange={(e) => setPayorName(e.target.value)}
+                                    readOnly
                                 />
                             </Pane>
                             <Pane display="flex" width="100%" paddingX={20}>
@@ -228,6 +229,7 @@ function Pay() {
                                     placeholder="cth: kiminawa@gmail.com"
                                     value={payoremail}
                                     onChange={(e) => setPayorEmail(e.target.value)}
+                                    readOnly
                                 />
                             </Pane>
                             <Pane display="flex" width="100%" paddingX={20}>
@@ -238,6 +240,7 @@ function Pay() {
                                     placeholder="cth: 0123456789"
                                     value={payorphone}
                                     onChange={(e) => setPayorPhone(e.target.value)}
+                                    readOnly
                                 />
                             </Pane>
                             <Pane paddingX={20} className="flex flex-wrap">
