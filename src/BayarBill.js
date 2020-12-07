@@ -19,7 +19,7 @@ function Bill(props) {
 		.then((res) => {
 		if(res.data.status === "inactive"){
 			setTimeout(function(){ 
-				swal("Tahniah!","Terima kasih kerana mendaftar sebagai pengguna mymps, sila semak emel anda untuk pengesahan akaun bagi membolehkan pembayaran dilakukan.","success"); 
+				swal("Tahniah!","Terima kasih kerana mendaftar sebagai pengguna MyMPS, sila semak emel anda untuk pengesahan akaun bagi membolehkan pembayaran dilakukan.","success"); 
 			}, 1000);
 		}
 		})
