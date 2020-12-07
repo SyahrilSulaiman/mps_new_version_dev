@@ -35,7 +35,7 @@ function Bill(props) {
         axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=get_user_status', formData)
             .then((res) => {
                 if (res.data.status === "Pending") {
-                    toaster.danger("Pembayaran Dibatalkan.",{description:"Akaun anda masih belum diaktifkan. Sila semak emel anda untuk pengesahan akaun."})
+                    toaster.danger("Pembayaran Dibatalkan.",{description:"Akaun anda masih belum diaktifkan. Sila semak emel anda untuk pengesahan akaun."}, { id: "forbidden-action" })
                 }else{
 					handleUnpaidBil(dataset);
 					if (unpaidBil.length < 1) {
@@ -55,8 +55,6 @@ function Bill(props) {
             });
 	}
 
-
-
 	const handleBayarSelected = () => {
         setDisabled(true);
         const formData = new FormData();
@@ -64,7 +62,7 @@ function Bill(props) {
         axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=get_user_status', formData)
             .then((res) => {
                 if (res.data.status === "Pending") {
-                    toaster.danger("Pembayaran Dibatalkan.",{description:"Akaun anda masih belum diaktifkan. Sila semak emel anda untuk pengesahan akaun."})
+                    toaster.danger("Pembayaran Dibatalkan.",{description:"Akaun anda masih belum diaktifkan. Sila semak emel anda untuk pengesahan akaun."},{ id: "forbidden-action" })
                 }else{
 					if (selectedBil.length < 1) {
 						toaster.danger("Sila pilih akaun yang ingin dibayar dan tekan pada butang bayar bil berwarna biru.", { id: "forbidden-action" });
