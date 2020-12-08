@@ -184,43 +184,6 @@ function Bill(props) {
 							</div>
 						</div>
 						<Pane className="py-2 xl:mx-4 xl:rounded-md" position="relative" width="100%">
-							{/* <Tablist display="grid" gridTemplateColumns="1fr 1fr 1fr">
-								<Tab onSelect={() => handleAddBill()}>
-									<Button
-										width="100%"
-										justifyContent="center"
-										appearance="primary"
-										intent="success"
-										iconBefore={AddIcon}
-										className="xs:ml-5"
-										onClick={handleAddBill}
-									>
-										Tambah Bil
-									</Button>
-								</Tab>
-								<Tab >
-									<Button
-										width="100%"
-										justifyContent="center"
-										appearance="primary"
-										className="xs:ml-5 ml-1"
-										onClick={handleBayarSelected}
-									>
-										Bayar {selectedBil.length} Bil
-									</Button>
-								</Tab>
-								<Tab >
-									<Button
-										width="100%"
-										justifyContent="center"
-										appearance="primary"
-										className="xs:ml-5 ml-1"
-										onClick={handleBayarSemua}
-									>
-										Bayar Semua Bil
-									</Button>
-								</Tab>
-							</Tablist> */}
 						</Pane>
 						<div className="w-full">
 							<div className="flex-auto" style={{ height: "120vh" }}>

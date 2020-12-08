@@ -37,7 +37,6 @@ export default function BillList({dataset,isNoData}) {
 
   const bills = dataset.data.length ? (
     dataset.data.map((bill) => {
-      // console.log(bill)
       let amount = bill.BAKI_DAHULU + bill.CAJ_DIKENAKAN + bill.CUKAI_SEMASA+ bill.TMP_LAIN+ bill.TUNGGAKAN_SEMASA+ bill.WARAN_TAHANAN;
       return (
         <div

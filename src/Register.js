@@ -210,9 +210,9 @@ function Register(props) {
 
       <section className="py-20 relative" style={{ background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)" }}>
 
-        <div class="bg-grey-lighter min-h-screen flex flex-col">
-          <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
-            <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+        <div className="bg-grey-lighter min-h-screen flex flex-col">
+          <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+            <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
 
               <Heading
                 textAlign="center"
@@ -221,7 +221,7 @@ function Register(props) {
               >
                 Pendaftaran Pengguna {title}
               </Heading>
-              {/* <h1 class="mb-8 text-xl text-gray-700 text-center mt-6" style={{ marginTop: "30px" }}>Pendaftaran Pengguna MyMPS</h1> */}
+              {/* <h1 className="mb-8 text-xl text-gray-700 text-center mt-6" style={{ marginTop: "30px" }}>Pendaftaran Pengguna MyMPS</h1> */}
 
               <div className="flex flex-wrap p-2" style={{ marginTop: "30px" }}>
                 <div className="w-full">
@@ -274,38 +274,50 @@ function Register(props) {
                         <div className={openTab === 1 ? "block" : "hidden"} id="link1">
                           <form onSubmit={(e) => handleRegisterIndividu(e)}>
                             <div className="col-span-6 sm:col-span-3 p-2" style={{ marginTop: "30px" }}>
-                              <label for="first_name" className="block text-sm font-medium leading-5 text-gray-700">Nama Penuh</label>
+                              <label htmlFor="first_name" className="block text-sm font-medium leading-5 text-gray-700">Nama Penuh</label>
                               <input {...username} id="name" placeholder="cth: adrian" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
-                              <label for="last_name" className="block text-sm font-medium leading-5 text-gray-700">Nombor Kad Pengenalan</label>
+                              <label htmlFor="last_name" className="block text-sm font-medium leading-5 text-gray-700">Nombor Kad Pengenalan</label>
                               <input onChange={(e) => setNOKP(e.target.value)} onKeyUp={(e) => isNumber("nokp", e.target.value)} id="nokp" minLength="12" maxLength="12" placeholder="cth: 923456061278" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
-                              <label for="street_address" className="block text-sm font-medium leading-5 text-gray-700">Nombor Telefon</label>
+                              <label htmlFor="street_address" className="block text-sm font-medium leading-5 text-gray-700">Nombor Telefon</label>
                               <input {...notel} onKeyUp={(e) => isNumber("notel", e.target.value)} maxLength={15} id="notel" placeholder="cth: 0123456789" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
-                              <label for="email_address" className="block text-sm font-medium leading-5 text-gray-700">Alamat Emel</label>
+                              <label htmlFor="email_address" className="block text-sm font-medium leading-5 text-gray-700">Alamat Emel</label>
                               <input {...email} id="email_address" placeholder="cth: malik@email.com" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
-                              <label for="email_address" className="block text-sm font-medium leading-5 text-gray-700">Sah Alamat Emel</label>
+                              <label htmlFor="email_address" className="block text-sm font-medium leading-5 text-gray-700">Sah Alamat Emel</label>
                               <input {...confemail} id="conf_email_address" placeholder="cth: malik@email.com" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
-                              <label for="street_address" className="block text-sm font-medium leading-5 text-gray-700">Kata Laluan</label>
+                              <label htmlFor="street_address" className="block text-sm font-medium leading-5 text-gray-700">Kata Laluan</label>
                               <input {...password} type="password" id="password" placeholder="cth: 12345678" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
-                              <label for="street_address" className="block text-sm font-medium leading-5 text-gray-700">Sah Kata Laluan</label>
+                              <label htmlFor="street_address" className="block text-sm font-medium leading-5 text-gray-700">Sah Kata Laluan</label>
                               <input {...confpassword} type="password" id="conf_password" placeholder="cth: 12345678" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                            </div>
+
+                            <div className="col-span-6 sm:col-span-3 p-2">
+                              <Heading
+                                  justifyContent="center"
+                                  alignContent="center"
+                                  textAlign="left"
+                                  top={100}
+                                  size={200}
+                                >
+                                  Panjang kata laluan mestilah sekurang-kurangnya lapan (8) aksara, dan mesti terdiri daripada kombinasi huruf dan nombor, atau simbol khas.
+                                </Heading>
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
@@ -340,38 +352,49 @@ function Register(props) {
                         <div className={openTab === 2 ? "block" : "hidden"} id="link2">
                           <form onSubmit={(e) => handleRegisterSyarikat(e)}>
                             <div className="col-span-6 sm:col-span-3 p-2" style={{ marginTop: "30px" }}>
-                              <label for="first_name" className="block text-sm font-medium leading-5 text-gray-700">Nama Penuh (Wakil Syarikat)</label>
+                              <label htmlFor="first_name" className="block text-sm font-medium leading-5 text-gray-700">Nama Penuh (Wakil Syarikat)</label>
                               <input {...username} id="name" placeholder="cth: adrian" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
-                              <label for="last_name" className="block text-sm font-medium leading-5 text-gray-700">Nombor ROB / ROC Syarikat </label>
+                              <label htmlFor="last_name" className="block text-sm font-medium leading-5 text-gray-700">Nombor ROB / ROC Syarikat </label>
                               <input {...ssm} id="ssm" placeholder="cth: A450P45" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
-                              <label for="street_address" className="block text-sm font-medium leading-5 text-gray-700">Nombor Telefon</label>
+                              <label htmlFor="street_address" className="block text-sm font-medium leading-5 text-gray-700">Nombor Telefon</label>
                               <input {...notel} onKeyUp={(e) => isNumber("notel2", e.target.value)} maxLength={15} id="notel2" placeholder="cth: 0123456789" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
-                              <label for="email_address" className="block text-sm font-medium leading-5 text-gray-700">Alamat Emel</label>
+                              <label htmlFor="email_address" className="block text-sm font-medium leading-5 text-gray-700">Alamat Emel</label>
                               <input {...email} id="email_address" placeholder="cth: malik@email.com" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
-                              <label for="email_address" className="block text-sm font-medium leading-5 text-gray-700">Sah Alamat Emel</label>
+                              <label htmlFor="email_address" className="block text-sm font-medium leading-5 text-gray-700">Sah Alamat Emel</label>
                               <input {...confemail} id="conf_email_address" placeholder="cth: malik@email.com" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
-                              <label for="street_address" className="block text-sm font-medium leading-5 text-gray-700">Kata Laluan</label>
+                              <label htmlFor="street_address" className="block text-sm font-medium leading-5 text-gray-700">Kata Laluan</label>
                               <input {...password} type="password" id="password" placeholder="cth: 12345678" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                            </div>
+                            <div className="col-span-6 sm:col-span-3 p-2">
+                              <label htmlFor="street_address" className="block text-sm font-medium leading-5 text-gray-700">Sah Kata Laluan</label>
+                              <input {...confpassword} type="password" id="conf_password" placeholder="cth: 12345678" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
-                              <label for="street_address" className="block text-sm font-medium leading-5 text-gray-700">Sah Kata Laluan</label>
-                              <input {...confpassword} type="password" id="conf_password" placeholder="cth: 12345678" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                              <Heading
+                                  justifyContent="center"
+                                  alignContent="center"
+                                  textAlign="left"
+                                  top={100}
+                                  size={200}
+                                >
+                                  Panjang kata laluan mestilah sekurang-kurangnya lapan (8) aksara, dan mesti terdiri daripada kombinasi huruf dan nombor, atau simbol khas.
+                                </Heading>
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
@@ -416,7 +439,7 @@ function Register(props) {
                   textAlign="center"
                   size={400}
                 >
-                  Dengan mendaftar, anda bersetuju pada <a class="no-underline border-grey-dark text-grey-dark"> terma & syarat </a> {title}
+                  Dengan mendaftar, anda bersetuju pada <a className="no-underline border-grey-dark text-grey-dark"> terma & syarat </a> {title}
                 </Heading>
               </div>
 
@@ -432,7 +455,7 @@ function Register(props) {
                 </Heading>
               </div>
 
-              {/* <div class="text-center text-grey-dark mt-6">
+              {/* <div className="text-center text-grey-dark mt-6">
                 <a href="/login" className="font-extra-small text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
                   Sudah mempunyai akaun? Log Masuk
                       </a>
