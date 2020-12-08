@@ -5,6 +5,7 @@ import swal from "sweetalert";
 import { toaster, Heading, Pane, ArrowLeftIcon, TextInputField, Dialog, Checkbox, Text, Button, SegmentedControl, Paragraph, Spinner } from "evergreen-ui";
 import Topbar from "./Topbar";
 import Bank from "./ListBank";
+import NumberFormat from 'react-number-format';
 
 const FPX = "FPX";
 const CARD = "CARD";

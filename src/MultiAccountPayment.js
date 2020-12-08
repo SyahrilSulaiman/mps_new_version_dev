@@ -7,6 +7,7 @@ import { toaster, Heading, Pane, ArrowLeftIcon, TextInputField, Dialog, Checkbox
 import Topbar from "./Topbar";
 import Bank from "./ListBank";
 import { SelectedBillContext } from "./contexts/SelectedBillContext";
+import NumberFormat from "react-number-format";
 
 const FPX = "FPX";
 const CARD = "CARD";
@@ -254,7 +255,7 @@ function Pay() {
                                     <Pane display="grid" gridTemplateColumns="1fr 1fr">
                                         <Heading size={200}>JUMLAH</Heading>
                                         <Heading size={100} textAlign="right">
-                                            {"RM" + amount.toFixed(2)}
+                                            <NumberFormat value={amount} displayType={'text'} thousandSeparator={true} prefix={'RM'} />
                                         </Heading>
                                     </Pane>
                                 </Pane>
