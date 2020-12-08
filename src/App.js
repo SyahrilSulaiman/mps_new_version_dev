@@ -35,7 +35,6 @@ import MultiAccount from "./MultiAccountPayment";
 import Add from "./Add";
 import UserReport from "./UserReport";
 import TransactionReport from "./LaporanTransaksi";
-import Pdf from "./ReactPDF";
 
 import cukaitaksiran from "./ListCukaiTaksiran";
 import kompaun from "./ListKompaun";
@@ -195,7 +194,6 @@ function App() {
                     <PrivateRoute path="/laporan-transaksi" component={TransactionReport} />
                     <PrivateRoute path="/add_cukai_taksiran" component={Add} />
                     <PrivateRoute path="/PengesahanPembayaran" component={BeforeBayar} />
-                    <Route path="/receipt.php" component={Pdf} />
                     <Route path="*" component={NotFound} />
                   </Switch>
                 </SelectedBillContextProvider>
@@ -228,7 +226,6 @@ function App() {
                   <PrivateRoute path="/laporan-penyata-akaun" component={UserReport} />
                   <PrivateRoute path="/laporan-transaksi" component={TransactionReport} />
                   <PrivateRoute path="/PengesahanPembayaran" component={BeforeBayar} />
-                  <Route path="/receipt.php" component={Pdf} />
                   <PublicRoute
                     path="/forgotpassword"
                     component={ForgotPassword}
