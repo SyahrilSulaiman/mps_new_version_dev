@@ -65,7 +65,7 @@ function Bill(props) {
                     toaster.danger("Pembayaran Dibatalkan.",{description:"Akaun anda masih belum diaktifkan. Sila semak emel anda untuk pengesahan akaun."},{ id: "forbidden-action" })
                 }else{
 					if (selectedBil.length < 1) {
-						toaster.danger("Sila pilih akaun yang ingin dibayar dan tekan pada butang bayar bil berwarna biru.", { id: "forbidden-action" });
+						toaster.danger("Sila pilih akaun yang ingin dibayar dan tekan pada butang bayar bil berwarna kuning.", { id: "forbidden-action" });
 					}
 					else {
 						history.push({
@@ -154,7 +154,7 @@ function Bill(props) {
 											</span>
 										</div>
 										<div className="relative w-auto pl-4 flex-initial" onClick={handleBayarSelected}>
-											<div className="text-white p-3 text-center inline-flex items-center justify-center w-8 h-8 shadow-lg rounded-full bg-orange-500">
+											<div className="text-white p-3 text-center inline-flex items-center justify-center w-8 h-8 shadow-lg rounded-full bg-yellow-500">
 												<Heading size={400} color="white">{selectedBil.length}</Heading>	
 											</div>
 										</div>
