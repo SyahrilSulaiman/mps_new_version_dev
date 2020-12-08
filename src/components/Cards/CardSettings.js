@@ -356,9 +356,9 @@ export default function CardSettings({
           title="Pengesahan Kemaskini Profil"
           onConfirm={() => handleUpdate()}
           onCancel={() => setDialog(false)}
-          cancelLabel="batal"
+          cancelLabel="Tidak"
           intent="danger"
-          confirmLabel="betul"
+          confirmLabel="Ya"
           intent="success"
           shouldCloseOnOverlayClick={false}
         >
@@ -370,9 +370,9 @@ export default function CardSettings({
           title="Pengesahan Kemaskini Kata Laluan"
           onConfirm={() => handleChangePassword()}
           onCancel={() => setDialog2(false)}
-          cancelLabel="batal"
+          cancelLabel="Tidak"
           intent="danger"
-          confirmLabel="betul"
+          confirmLabel="Ya"
           intent="success"
           shouldCloseOnOverlayClick={false}
         >
