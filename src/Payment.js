@@ -260,7 +260,7 @@ function Pay() {
                                 <Pane display="grid" width="100%" padding={10} background="tint2">
                                     <Pane display="grid" gridTemplateColumns="1fr 1fr">
                                         <Heading size={400}>Jumlah Bayaran</Heading>
-                                        <Heading size={100} textAlign="right"><NumberFormat value={amount} displayType={'text'} thousandSeparator={true} prefix={'RM'} /></Heading>
+                                        <Heading size={100} textAlign="right"><NumberFormat value={amount.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'RM'} /></Heading>
                                     </Pane>
                                 </Pane>
                             </Pane>

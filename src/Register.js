@@ -358,7 +358,7 @@ function Register(props) {
 
                             <div className="col-span-6 sm:col-span-3 p-2">
                               <label htmlFor="last_name" className="block text-sm font-medium leading-5 text-gray-700">Nombor ROB / ROC Syarikat </label>
-                              <input {...ssm} id="ssm" placeholder="cth: A450P45" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                              <input {...ssm} id="ssm" placeholder="cth: 450P45-A" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
