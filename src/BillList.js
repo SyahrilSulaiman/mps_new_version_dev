@@ -37,6 +37,8 @@ export default function BillList({dataset,isNoData}) {
 
   const bills = dataset.data.length ? (
     dataset.data.map((bill) => {
+      // console.log(bill)
+      let amount = bill.BAKI_DAHULU + bill.CAJ_DIKENAKAN + bill.CUKAI_SEMASA+ bill.TMP_LAIN+ bill.TUNGGAKAN_SEMASA+ bill.WARAN_TAHANAN;
       return (
         <div
           className=" w-full"
@@ -52,7 +54,7 @@ export default function BillList({dataset,isNoData}) {
                 display="grid"
                 gridTemplateColumns="40px 1fr 10px"
               >
-                <Pane color="gray" alignContent="right" justifyContent="center" onClick={(e) => addSelectedBill(bill.NOAKAUN,bill.BAKI_TUNGGAK)}>
+                <Pane color="gray" alignContent="right" justifyContent="center" onClick={(e) => addSelectedBill(bill.NOAKAUN,amount)}>
                   {handleSelectedBil(bill.NOAKAUN)}
                 </Pane>
                 <Pane onClick={ bill.STATUS !== "PAID" ? (e) => handleBayar(bill.NOAKAUN, bill.BAKI_TUNGGAK, bill.NAMA_PEMILIK, bill.NOAKAUN) : () => handleViewBill(bill.NOAKAUN) }>
@@ -77,7 +79,7 @@ export default function BillList({dataset,isNoData}) {
                     </tbody>
                   </table>
                 </Pane>
-                <Pane color="gray" alignContent="right" justifyContent="center" onClick={ bill.STATUS !== "PAID" ? (e) => handleBayar(bill.NOAKAUN, bill.BAKI_TUNGGAK, bill.NAMA_PEMILIK, bill.NOAKAUN) : () => handleViewBill(bill.NOAKAUN) }>
+                <Pane color="gray" alignContent="right" justifyContent="center" onClick={ bill.STATUS !== "PAID" ? (e) => handleBayar(bill.NOAKAUN, amount, bill.NAMA_PEMILIK, bill.NOAKAUN) : () => handleViewBill(bill.NOAKAUN) }>
                   <i className="pt-12 fas fa-chevron-right"></i>
                 </Pane>
               </Pane>
