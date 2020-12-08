@@ -39,10 +39,9 @@ function Pay() {
         if(account === null || account === ""){
             window.location.href = "/cukaitaksiran";
         }
-
         let total = 0;
         for(var i = 0; i < account.length; i++){
-            setAmount(total = total + account[i]["BAKI_TUNGGAK"]);
+            setAmount(total = total + account[i]["BAKI_DAHULU"] + account[i]["CAJ_DIKENAKAN"] + account[i]["CUKAI_SEMASA"] + account[i]["TMP_LAIN"] + account[i]["TUNGGAKAN_SEMASA"] + account[i]["WARAN_TAHANAN"] );
         }
 
         fetch('https://dev1.toyyibpay.com/api/getBankFPX')
