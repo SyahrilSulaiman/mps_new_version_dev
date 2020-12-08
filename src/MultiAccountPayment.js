@@ -345,7 +345,7 @@ function Pay() {
                     <Pane>
                         <Dialog
                             isShown={dialog}
-                            title="Pengesahan Pembayar"
+                            title="Pengesahan Bayaran"
                             onConfirm={() => handleBayar()}
                             onCancel={() => setDialog(false)}
                             cancelLabel="batal"
