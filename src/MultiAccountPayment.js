@@ -255,7 +255,7 @@ function Pay() {
                                     <Pane display="grid" gridTemplateColumns="1fr 1fr">
                                         <Heading size={200}>JUMLAH</Heading>
                                         <Heading size={100} textAlign="right">
-                                            <NumberFormat value={amount} displayType={'text'} thousandSeparator={true} prefix={'RM'} />
+                                            <NumberFormat value={amount.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'RM'} />
                                         </Heading>
                                     </Pane>
                                 </Pane>
