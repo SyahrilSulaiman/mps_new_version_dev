@@ -12,9 +12,14 @@ import NumberFormat from "react-number-format";
 const FPX = "FPX";
 const CARD = "CARD";
 
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+}
+
 function Pay() {
 
     const location = useLocation();
+    const year = new Date().getFullYear();
 
     const [account, setAccount]         = useState(location.state.payBill);
     const [method, setMethod]           = useState(FPX);
@@ -30,7 +35,7 @@ function Pay() {
 
     const [penama, setPenama]       = useState("");
     const [amount, setAmount]       = useState(0);
-    const [invoiceNo, setInvoiceNo] = useState("MYM" + Date.now());  
+    const [invoiceNo, setInvoiceNo] = useState('A'+year+getRandomInt(1000000000000, 9999999999999));  
     const [receiptno, setReceiptNo] = useState("");
 
     useEffect(() => {
@@ -119,6 +124,9 @@ function Pay() {
                 .then(result => {
                     if (result.status == "success") {
                         setReceiptNo(result.receiptNo);
+                        if(result.newInvoice !== ""){
+                            setInvoiceNo(result.newInvoice);
+                        }
                         document.getElementById("bayar").submit();
                     }
                     else {
@@ -175,6 +183,9 @@ function Pay() {
                 .then(result => {
                     if (result.status == "success") {
                         setReceiptNo(result.receiptNo);
+                        if(result.newInvoice !== ""){
+                            setInvoiceNo(result.newInvoice);
+                        }
                         document.getElementById("bayarCC").submit();
                     }
                     else {

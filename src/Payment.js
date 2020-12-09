@@ -10,7 +10,13 @@ import NumberFormat from 'react-number-format';
 const FPX = "FPX";
 const CARD = "CARD";
 
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+}
+
 function Pay() {
+
+    const year = new Date().getFullYear();
 
     const [method, setMethod]           = useState(FPX);
     const [dialog, setDialog]           = useState(false);
@@ -26,7 +32,7 @@ function Pay() {
     const [penama, setPenama]       = useState("");
     const [accountNo, setAccountNo] = useState(sessionStorage.noakaun);
     const [amount, setAmount]       = useState(0.00);
-    const [invoiceNo, setInvoiceNo] = useState("MYM" + Date.now());  
+    const [invoiceNo, setInvoiceNo] = useState('A'+year+getRandomInt(1000000000000, 9999999999999));  
     const [receiptno, setReceiptNo] = useState("");
 
     useEffect(() => {
@@ -122,7 +128,12 @@ function Pay() {
                 .then(response => response.json())
                 .then(result => {
                     if (result.status == "success") {
+
                         setReceiptNo(result.receiptNo);
+                        if(result.newInvoice !== ""){
+                            setInvoiceNo(result.newInvoice);
+                        }
+                        
                         document.getElementById("bayar").submit();
                     }
                     else {
@@ -180,6 +191,11 @@ function Pay() {
                 .then(result => {
                     if (result.status == "success") {
                         setReceiptNo(result.receiptNo);
+
+                        if(result.newInvoice !== ""){
+                            setInvoiceNo(result.newInvoice);
+                        }
+
                         document.getElementById("bayarCC").submit();
                     }
                     else {
