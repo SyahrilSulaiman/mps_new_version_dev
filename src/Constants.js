@@ -1,4 +1,6 @@
 
+const current_url      = window.location.href;
+
 export const title     = 'MyMPS';
 export const subtitle  = 'Majlis Perbandaran Selayang';
 export const FPX       = 'https://epstaging.mps.gov.my/fpx/sd.php';
