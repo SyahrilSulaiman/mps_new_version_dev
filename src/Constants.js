@@ -14,3 +14,5 @@ export const captchaToken_client_side = "6LeVouYUAAAAAP28NXI2rkRNFpyyJSuLXS62vT6
 export const captchaToken_server_side = "6LeVouYUAAAAAMtOCWv-VownzeBah_fhT31K3xOB";
 
 export const captchaToken = url.search("localhost") !== -1 ? captchaToken_localhost : captchaToken_client_side;
+
+export const SERVER_URL = "https://mymps.corrad.my/int/";
