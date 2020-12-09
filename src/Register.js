@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { setUserSession } from "./Utils/Common";
 import IndexNavbar from "./components/Navbars/IndexNavbar2.js";
-import Footer from "./components/Footers/Footer";
-import { Button, Heading, Strong, Link, TextInput } from "evergreen-ui";
+import { Button, Heading, Link } from "evergreen-ui";
 import swal from "sweetalert";
 import { title, subtitle } from "./Constants";
-import { isNumber } from "@material-ui/data-grid";
+import ReCAPTCHA from "react-google-recaptcha";
+import {captchaToken, SERVER_URL} from "./Constants";
+
 
 function Register(props) {
 
@@ -28,7 +29,12 @@ function Register(props) {
 
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [token, setToken]     = useState(null)
 
+
+  const onChange = (value) => {
+    setToken(value);
+  }
 
   const isNumber = (id, value) => {
     if(!value.match(numbers)){
@@ -41,8 +47,16 @@ function Register(props) {
     setError(null);
     setLoading(true);
 
-    if (username.value == "") {
+    if(token === "" || token === null){
+      swal("Opss!", "Sila tandakan pada ruangan captcha di bawah.", "error");
+      return false;
+    }
+    else if (username.value == "") {
       swal("Opss!", "Sila masukkan kata nama anda.", "error");
+      return false;
+    }
+    else if (!username.value.match(/[0-9\!\"\#\$\%\&\(\)\*\+\,\.\/\:\;\<\=\>\?\@\[\\\]\^\_\{\|\}\~]/g) === false) {
+      swal("Opss!", "Kata nama yang anda masukkan tidak sah.", "error");
       return false;
     }
     else if (nokp == "") {
@@ -95,7 +109,7 @@ function Register(props) {
           redirect: 'follow'
         };
 
-        var urlAPI = "https://mymps.corrad.my/int/api_generator.php?api_name=daftar_pengguna";
+        var urlAPI = SERVER_URL+"api_generator.php?api_name=daftar_pengguna";
 
         fetch(urlAPI, requestOptions)
           .then(response => response.json())
@@ -128,8 +142,16 @@ function Register(props) {
     setError(null);
     setLoading(true);
 
-    if (username.value == "") {
+    if(token === "" || token === null){
+      swal("Opss!", "Sila tandakan pada ruangan captcha di bawah.", "error");
+      return false;
+    }
+    else if (username.value == "") {
       swal("Opss!", "Sila masukkan nama syarikat anda.", "error");
+      return false;
+    }
+    else if (!username.value.match(/[0-9\!\"\#\$\%\&\(\)\*\+\,\.\/\:\;\<\=\>\?\@\[\\\]\^\_\{\|\}\~]/g) === false) {
+      swal("Opss!", "Kata nama yang anda masukkan tidak sah.", "error");
       return false;
     }
     else if (ssm.value == "") {
@@ -215,7 +237,7 @@ function Register(props) {
             <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
 
               <Heading
-                textAlign="center"
+                textalign="center"
                 top={20}
                 size={600}
               >
@@ -285,7 +307,7 @@ function Register(props) {
 
                             <div className="col-span-6 sm:col-span-3 p-2">
                               <label htmlFor="street_address" className="block text-sm font-medium leading-5 text-gray-700">Nombor Telefon</label>
-                              <input {...notel} onKeyUp={(e) => isNumber("notel", e.target.value)} maxLength={15} id="notel" placeholder="cth: 0123456789" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                              <input {...notel} onKeyUp={(e) => isNumber("notel", e.target.value)} maxLength={11} id="notel" placeholder="cth: 0123456789" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
@@ -310,9 +332,9 @@ function Register(props) {
 
                             <div className="col-span-6 sm:col-span-3 p-2">
                               <Heading
-                                  justifyContent="center"
-                                  alignContent="center"
-                                  textAlign="left"
+                                  justifycontent="center"
+                                  aligncontent="center"
+                                  textalign="left"
                                   top={100}
                                   size={200}
                                 >
@@ -327,7 +349,7 @@ function Register(props) {
                                 intent="success"
                                 display="flex"
                                 top={20}
-                                justifyContent="center"
+                                justifycontent="center"
                                 width="100%"
                               >
                                 Daftar Pengguna
@@ -340,7 +362,7 @@ function Register(props) {
                                 intent="danger"
                                 display="flex"
                                 top={20}
-                                justifyContent="center"
+                                justifycontent="center"
                                 width="100%"
                                 onClick={() => window.location.href = "/"}
                               >
@@ -363,7 +385,7 @@ function Register(props) {
 
                             <div className="col-span-6 sm:col-span-3 p-2">
                               <label htmlFor="street_address" className="block text-sm font-medium leading-5 text-gray-700">Nombor Telefon</label>
-                              <input {...notel} onKeyUp={(e) => isNumber("notel2", e.target.value)} maxLength={15} id="notel2" placeholder="cth: 0123456789" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                              <input {...notel} onKeyUp={(e) => isNumber("notel2", e.target.value)} maxLength={11} id="notel2" placeholder="cth: 0123456789" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
@@ -387,9 +409,9 @@ function Register(props) {
 
                             <div className="col-span-6 sm:col-span-3 p-2">
                               <Heading
-                                  justifyContent="center"
-                                  alignContent="center"
-                                  textAlign="left"
+                                  justifycontent="center"
+                                  aligncontent="center"
+                                  textalign="left"
                                   top={100}
                                   size={200}
                                 >
@@ -404,7 +426,7 @@ function Register(props) {
                                 intent="success"
                                 display="flex"
                                 top={20}
-                                justifyContent="center"
+                                justifycontent="center"
                                 width="100%"
                               >
                                 Daftar Pengguna
@@ -417,7 +439,7 @@ function Register(props) {
                                 intent="danger"
                                 display="flex"
                                 top={20}
-                                justifyContent="center"
+                                justifycontent="center"
                                 width="100%"
                                 onClick={() => window.location.href = "/"}
                               >
@@ -432,11 +454,20 @@ function Register(props) {
                 </div>
               </div>
 
+              <ReCAPTCHA
+                justifycontent="center"
+                aligncontent="center"
+                textalign="center"
+                sitekey={captchaToken}
+                onChange={onChange}
+              />
+              <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
               <div className="col-span-6 sm:col-span-3 p-2">
                 <Heading
-                  justifyContent="center"
-                  alignContent="center"
-                  textAlign="center"
+                  justifycontent="center"
+                  aligncontent="center"
+                  textalign="center"
                   size={400}
                 >
                   Dengan mendaftar, anda bersetuju pada <a className="no-underline border-grey-dark text-grey-dark"> terma & syarat </a> {title}
@@ -445,9 +476,9 @@ function Register(props) {
 
               <div className="col-span-6 sm:col-span-3 p-2">
                 <Heading
-                  justifyContent="center"
-                  alignContent="center"
-                  textAlign="center"
+                  justifycontent="center"
+                  aligncontent="center"
+                  textalign="center"
                   top={100}
                   size={200}
                 >
