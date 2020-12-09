@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { setUserSession } from "./Utils/Common";
 import IndexNavbar from "./components/Navbars/IndexNavbar2.js";
-import Footer from "./components/Footers/Footer";
-import { Button, Heading, Strong, Link, TextInput } from "evergreen-ui";
+import { Button, Heading, Link } from "evergreen-ui";
 import swal from "sweetalert";
 import { title, subtitle } from "./Constants";
-import { isNumber } from "@material-ui/data-grid";
+import ReCAPTCHA from "react-google-recaptcha";
+import {captchaToken} from "./Constants";
+
 
 function Register(props) {
 
@@ -28,7 +29,12 @@ function Register(props) {
 
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [token, setToken]     = useState(null)
 
+
+  const onChange = (value) => {
+    setToken(value);
+  }
 
   const isNumber = (id, value) => {
     if(!value.match(numbers)){
@@ -41,7 +47,11 @@ function Register(props) {
     setError(null);
     setLoading(true);
 
-    if (username.value == "") {
+    if(token === "" || token === null){
+      swal("Opss!", "Sila tandakan pada ruangan captcha di bawah.", "error");
+      return false;
+    }
+    else if (username.value == "") {
       swal("Opss!", "Sila masukkan kata nama anda.", "error");
       return false;
     }
@@ -128,7 +138,11 @@ function Register(props) {
     setError(null);
     setLoading(true);
 
-    if (username.value == "") {
+    if(token === "" || token === null){
+      swal("Opss!", "Sila tandakan pada ruangan captcha di bawah.", "error");
+      return false;
+    }
+    else if (username.value == "") {
       swal("Opss!", "Sila masukkan nama syarikat anda.", "error");
       return false;
     }
@@ -431,6 +445,15 @@ function Register(props) {
                   </div>
                 </div>
               </div>
+
+              <ReCAPTCHA
+                justifyContent="center"
+                alignContent="center"
+                textAlign="center"
+                sitekey={captchaToken}
+                onChange={onChange}
+              />
+              <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
               <div className="col-span-6 sm:col-span-3 p-2">
                 <Heading
