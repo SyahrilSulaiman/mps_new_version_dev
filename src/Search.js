@@ -137,7 +137,7 @@ export default function Search({ type }) {
     formData.append('account',account);
     formData.append('status',status);
 
-    Axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=newBill',formData)
+    Axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=newBill",formData)
     .then(res => {
 
         if(res.data.status === "success")
@@ -187,7 +187,7 @@ const handleAddThis = (e) => {
     formData.append('nokp',nokp);
     formData.append('account',accountObj);
 
-    Axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=newBill&mode=many',formData)
+    Axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=newBill&mode=many",formData)
     .then(res => {
 
       if(res.data.status === "success")

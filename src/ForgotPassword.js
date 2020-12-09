@@ -41,7 +41,7 @@ function ForgetPassword(props) {
                 redirect: 'follow'
             };
 
-            var urlAPI1 = 'https://mymps.corrad.my/int/api_generator.php?api_name=change_password';
+            var urlAPI1 = "https://mymps.corrad.my/int/api_generator.php?api_name=change_password";
 
             fetch(urlAPI1, requestOptions)
                 .then(response => response.json())
