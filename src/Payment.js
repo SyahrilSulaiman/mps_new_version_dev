@@ -9,10 +9,6 @@ import { getNOKP, getEmail, setAuthorization } from "./Utils/Common";
 const FPX = "FPX";
 const CARD = "CARD";
 
-function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
-}
-
 function Pay() {
 
     const year = new Date().getFullYear();
@@ -31,7 +27,7 @@ function Pay() {
     const [penama, setPenama]       = useState("");
     const [accountNo, setAccountNo] = useState(sessionStorage.noakaun);
     const [amount, setAmount]       = useState(0.00);
-    const [invoiceNo, setInvoiceNo] = useState('A'+year+getRandomInt(10000000000000, 99999999999999));  
+    const [invoiceNo, setInvoiceNo] = useState('A' + year + Math.floor(Math.random() * 9999999999999));  
     const [receiptno, setReceiptNo] = useState("");
     const nokp = getNOKP();
 	const email = getEmail();

@@ -11,10 +11,6 @@ import { getNOKP, getEmail, setAuthorization } from "./Utils/Common";
 const FPX = "FPX";
 const CARD = "CARD";
 
-function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
-}
-
 function Pay() {
 
     const location = useLocation();
@@ -32,7 +28,7 @@ function Pay() {
     const [payorphone, setPayorPhone]   = useState(sessionStorage.getItem("notel"));
 
     const [amount, setAmount]       = useState(0);
-    const [invoiceNo, setInvoiceNo] = useState('A'+year+getRandomInt(10000000000000, 99999999999999));  
+    const [invoiceNo, setInvoiceNo] = useState('A' + year + Math.floor(Math.random() * 9999999999999)); 
     const [receiptno, setReceiptNo] = useState("");
     const nokp = getNOKP();
 	const email = getEmail();
