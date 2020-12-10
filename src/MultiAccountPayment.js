@@ -220,7 +220,7 @@ function Pay() {
                             <Pane display="flex" width="100%" className="pt-5" paddingX={20}>
                                 <TextInputField
                                     width="100%"
-                                    label="NAMA PEMBAYAR"
+                                    label="Nama Pembayar"
                                     description="Sila isi nama pembayar"
                                     placeholder="cth: Suriati"
                                     value={payorname}
@@ -231,7 +231,7 @@ function Pay() {
                             <Pane display="flex" width="100%" paddingX={20}>
                                 <TextInputField
                                     width="100%"
-                                    label="ALAMAT EMEL"
+                                    label="Alamat Emel"
                                     description="Sila isi alamat emel pembayar"
                                     placeholder="cth: kiminawa@gmail.com"
                                     value={payoremail}
@@ -242,7 +242,7 @@ function Pay() {
                             <Pane display="flex" width="100%" paddingX={20}>
                                 <TextInputField
                                     width="100%"
-                                    label="NOMBOR TELEFON"
+                                    label="Nombor Telefon"
                                     description="Sila isi nombor telefon pembayar"
                                     placeholder="cth: 0123456789"
                                     value={payorphone}
