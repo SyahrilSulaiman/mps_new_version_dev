@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
+import { getNOKP, getEmail, setAuthorization } from "./Utils/Common";
 import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
 import axios from 'axios';
 import swal from 'sweetalert2';
-import { Heading, Spinner, Pane, Button, Text, Paragraph, majorScale, minorScale, Card, UnorderedList, ListItem, Icon, ArrowLeftIcon, KeyDeleteIcon, DeleteIcon } from 'evergreen-ui';
+import { Heading, Spinner, Pane, Button, Text, Paragraph, majorScale, minorScale, Card, ArrowLeftIcon, DeleteIcon } from 'evergreen-ui';
 import Topbaer from "./Topbar2";
 
 
 export default function SenaraiBil(props) {
     const [isLoading, setLoading] = useState(true);
     const [bills, setBill] = useState(null);
-    const nokp = getNOKP();
-    const currentYear = new Date();
-
-    const handleBack = () => {
-        window.location.href = "/bill";
-    }
+	const nokp = getNOKP();
+	const email = getEmail();
+	const auth = setAuthorization(nokp,email);
 
     const handleBill = (e) => {
         window.location.href = "https://mymps.corrad.my/rp/bil_cukai_taksiran.php?noakaun=" + btoa(e)
@@ -56,7 +53,6 @@ export default function SenaraiBil(props) {
             reverseButtons: true
         }).then( result => {
             if(result.isConfirmed){
-                // console.log('Confirm Delete');
                 let formData = new FormData();
                 formData.append('user',btoa(nokp));
                 formData.append('noakaun',btoa(e));

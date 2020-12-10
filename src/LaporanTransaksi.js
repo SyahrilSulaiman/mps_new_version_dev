@@ -3,37 +3,30 @@ import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
 import {
   Pane,
-  toaster,
-  Button,
-  AddIcon,
   ArrowLeftIcon,
-  SortNumericalIcon,
   Spinner,
-  Tablist,
-  Tab,
   TextInput,
   Heading,
-  Table,
-  ChevronRightIcon,
-  Icon,
 } from "evergreen-ui";
-import BillList from "./BillList";
 import Topbaer from "./Topbar2";
+import {  getNOKP, getEmail, setAuthorization } from "./Utils/Common";
 
 function Bill(props) {
-  const [userid, setUserId] = useState(sessionStorage.nokp);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const [searchResult,setSearchResult] = useState([]);
   const [search,setSearch] = useState('');
+  const nokp = getNOKP();
+	const email = getEmail();
+	const auth = setAuthorization(nokp,email);
 
   useEffect(() => {
     var apiUrl =
       "https://mymps.corrad.my/int/api_generator.php?api_name=userReport";
 
     var formData = new FormData();
-    formData.append("userid", userid);
+    formData.append("userid", nokp);
     formData.append("search", search);
 
     var requestOptions = {
@@ -65,55 +58,6 @@ function Bill(props) {
     setSearchResult(results);    
   },[search]);
 
-  const searching = (paramSearch) => {
-    if (paramSearch !== null) {
-      var apiUrl =
-        "https://mymps.corrad.my/int/api_generator.php?api_name=userReport";
-
-      var formData = new FormData();
-      formData.append("userid", userid);
-      formData.append("search", paramSearch);
-
-      var requestOptions = {
-        method: "POST",
-        body: formData,
-        redirect: "follow",
-      };
-
-      fetch(apiUrl, requestOptions)
-        .then((response) => response.json())
-        .then((result) => {
-          setLoading(true);
-          if (result.status == "success") {
-            setData(result.data);
-            setLoading(false);
-          } else {
-            setLoading(false);
-          }
-        });
-    }
-  };
-
-  const viewPenyata = (e) => {
-    window.location.href = "https://mymps.corrad.my/rp/penyata_semasa.php?noakaun=" + btoa(btoa(e))
-  }
-
-  const dataa = {
-    columns: [
-      {
-        label: "Akaun",
-        field: "A_NO",
-        sort: "asc",
-        width: 500,
-      },
-      {
-        label: "No. Invois",
-        field: "AP_INVOICE_NO",
-      },
-    ],
-    rows: data,
-  };
-
   if (loading == true) {
     return (
       <div>
@@ -132,8 +76,6 @@ function Bill(props) {
               >
                 <Topbaer
                   title="Laporan Transaksi"
-                  // leftButtonIcon={ArrowLeftIcon}
-                  // onClickLeftButton={() => window.history.back()}
                 />
               </Pane>
 
@@ -144,7 +86,6 @@ function Bill(props) {
                   justifyContent="center"
                   paddingY={100}
                 >
-                  {/* <Heading size={200}>Tekan pada butang <Button type="button" appearance="primary" intent="success">Tambah Bil</Button> untuk menambah bil.</Heading> */}
                   <Spinner />
                 </Pane>
               </div>
@@ -171,8 +112,6 @@ function Bill(props) {
               >
                 <Topbaer
                   title="Laporan Transaksi"
-                  // leftButtonIcon={ArrowLeftIcon}
-                  // onClickLeftButton={() => window.history.back()}
                 />
               </Pane>
 
@@ -184,11 +123,6 @@ function Bill(props) {
                 <TextInput
                   width="100%"
                   placeholder="carian..."
-                  // onKeyPress={event => {
-                  //   if(event.key == "Enter"){
-                  //     searching(event.target.value)
-                  //   }
-                  // }}
                   value={search}
                   onChange = {handleSearch}
                 />
@@ -224,76 +158,6 @@ function Bill(props) {
                     </Pane>
                   )
                 })}
-                {/* <table id="example" className="display" border="0">
-                  <thead>
-                    <tr>
-                      <th>
-                        <Heading size={200}>No</Heading>
-                      </th>
-                      <th>
-                        <Heading size={200}>Nombor Akaun</Heading>
-                      </th>
-                      <th>
-                        <Heading size={200}>Jumlah Bayaran (RM)</Heading>
-                      </th>
-                      <th>
-                        <Heading size={200}>No. Invois</Heading>
-                      </th>
-                      <th>
-                        <Heading size={200}>No. Rujukan FPX</Heading>
-                      </th>
-                      <th>
-                        <Heading size={200}>Status Pembayaran</Heading>
-                      </th>
-                      <th>
-                        <Heading size={200}>Penyata Akaun</Heading>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {data &&
-                      data.map((data, key) => {
-                        return (
-                          <tr key={key}>
-                            <td>
-                              <Heading size={200}>{key + 1}</Heading>
-                            </td>
-                            <td>
-                              <Heading size={200}>
-                                <b>{data.A_NO}</b>
-                              </Heading>
-                            </td>
-                            <td>
-                              <Heading size={200}>{data.AP_AMOUNT}</Heading>
-                            </td>
-                            <td>
-                              <Heading size={200}>{data.AP_INVOICE_NO}</Heading>
-                            </td>
-                            <td>
-                              <Heading size={200}>
-                                {data.AP_FPX_TRANSACTION_ID !== null
-                                  ? data.AP_FPX_TRANSACTION_ID
-                                  : "--"}
-                              </Heading>
-                            </td>
-                            <td>
-                              <Heading
-                                size={200}
-                                color={data.AP_STATUS == "1" ? "green" : "red"}
-                              >
-                                {data.AP_STATUS == "1"
-                                  ? "Berjaya"
-                                  : "Tidak Berjaya"}
-                              </Heading>
-                            </td>
-                            <td>
-                              <Button>PDF</Button>
-                            </td>
-                          </tr>
-                        );
-                      })}
-                  </tbody>
-                </table> */}
               </Pane>
             </div>
           </div>
@@ -332,7 +196,6 @@ function Bill(props) {
                   paddingY={100}
                 >
                   <Heading size={200}>Tiada data dijumpai.</Heading>
-                  {/* <Spinner /> */}
                 </Pane>
               </div>
             </div>

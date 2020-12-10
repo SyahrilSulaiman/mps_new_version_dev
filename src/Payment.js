@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Footer from "./components/Footers/Footer";
 import axios from 'axios';
 import swal from "sweetalert";
-import { toaster, Heading, Pane, ArrowLeftIcon, TextInputField, Dialog, Checkbox, Text, Button, SegmentedControl, Paragraph, Spinner } from "evergreen-ui";
+import { toaster, Heading, Pane, ArrowLeftIcon, TextInputField, Dialog, Checkbox, Text, Button, SegmentedControl, Paragraph } from "evergreen-ui";
 import Topbar from "./Topbar";
-import Bank from "./ListBank";
 import NumberFormat from 'react-number-format';
+import { getNOKP, getEmail, setAuthorization } from "./Utils/Common";
 
 const FPX = "FPX";
 const CARD = "CARD";
@@ -34,6 +33,9 @@ function Pay() {
     const [amount, setAmount]       = useState(0.00);
     const [invoiceNo, setInvoiceNo] = useState('A'+year+getRandomInt(10000000000000, 99999999999999));  
     const [receiptno, setReceiptNo] = useState("");
+    const nokp = getNOKP();
+	const email = getEmail();
+	const auth = setAuthorization(nokp,email);
 
     useEffect(() => {
         fetch('https://epstaging.mps.gov.my/fpx/bankList.php')

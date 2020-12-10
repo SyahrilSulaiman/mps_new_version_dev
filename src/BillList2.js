@@ -1,35 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { getNOKP } from "./Utils/Common";
+import { getNOKP, getEmail, setAuthorization } from "./Utils/Common";
 import swal from "sweetalert";
-import NoScroll from "no-scroll";
-import BayarCukai from "./BayarCukai";
-import { Pane, Spinner, Heading, Strong, Button, Icon, ArrowLeftIcon, DocumentIcon } from "evergreen-ui";
+import { Pane, Spinner} from "evergreen-ui";
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 export default function BillList() {
 
     sessionStorage.removeItem("cukai");
-    const nokp = getNOKP();
-    const displayKP = '<h5 className="uppercase font-medium text-xs text-gray-600">No Kad Pengenalan </h5>';
-
-    const handleViewBill = (e) => {
-        sessionStorage.setItem("noakaun", btoa(btoa(e)));
-        window.location.href = "/bill_cukai_taksiran";
-    };
-
-    const handleBayar = (cukai, amount, penama, akaun) => {
-
-        var array = [];
-        array["CUKAI"] = cukai;
-        array["TUNGGAKAN"] = amount;
-        array["PEMILIK"] = penama;
-        array["AKAUN"] = akaun;
-
-        sessionStorage.setItem("INFO", btoa(btoa(btoa(JSON.stringify(array)))));
-        sessionStorage.setItem("noakaun", btoa(btoa(akaun)));
-        window.location.href = "/PengesahanPembayaran?Cukai=" + btoa(cukai);
-    };
+	const nokp = getNOKP();
+	const email = getEmail();
+	const auth = setAuthorization(nokp,email);
 
     const [dataset, setDataSet] = useState({
         data: [],

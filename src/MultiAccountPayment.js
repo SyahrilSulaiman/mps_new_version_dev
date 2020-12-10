@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation} from 'react-router-dom';
-import Footer from "./components/Footers/Footer";
 import axios from 'axios';
 import swal from "sweetalert";
-import { toaster, Heading, Pane, ArrowLeftIcon, TextInputField, Dialog, Checkbox, Text, Button, SegmentedControl, Paragraph, Spinner } from "evergreen-ui";
+import { toaster, Heading, Pane, ArrowLeftIcon, TextInputField, Dialog, Checkbox, Text, Button, SegmentedControl, Paragraph } from "evergreen-ui";
 import Topbar from "./Topbar";
-import Bank from "./ListBank";
-import { SelectedBillContext } from "./contexts/SelectedBillContext";
 import NumberFormat from "react-number-format";
+import { getNOKP, getEmail, setAuthorization } from "./Utils/Common";
+
 
 const FPX = "FPX";
 const CARD = "CARD";
@@ -28,15 +27,16 @@ function Pay() {
     const [data, setData]               = useState(null);
     const [bankCode, setBankCode]       = useState("");
     const [block, setBlock]             = useState(false);
-    const [noBill, setNoBill]           = useState(true);
     const [payorname, setPayorName]     = useState(sessionStorage.getItem("username"));
     const [payoremail, setPayorEmail]   = useState(sessionStorage.getItem("email"));
     const [payorphone, setPayorPhone]   = useState(sessionStorage.getItem("notel"));
 
-    const [penama, setPenama]       = useState("");
     const [amount, setAmount]       = useState(0);
     const [invoiceNo, setInvoiceNo] = useState('A'+year+getRandomInt(10000000000000, 99999999999999));  
     const [receiptno, setReceiptNo] = useState("");
+    const nokp = getNOKP();
+	const email = getEmail();
+	const auth = setAuthorization(nokp,email);
 
     useEffect(() => {
         console.log('Bil List:',location.state.payBill);
@@ -360,10 +360,8 @@ function Pay() {
                             onConfirm={() => handleBayar()}
                             onCancel={() => setDialog(false)}
                             cancelLabel="batal"
-                            // cancelBackground = "danger"
                             intent="danger"
                             confirmLabel="betul"
-                            // intent="success"
                             shouldCloseOnOverlayClick={false}
                             hasFooter={false}
                         >

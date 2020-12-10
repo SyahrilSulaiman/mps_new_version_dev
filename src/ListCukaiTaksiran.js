@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
+import { getNOKP, getEmail, setAuthorization } from "./Utils/Common";
 import { useHistory } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
-import { Pane, toaster, Button, AddIcon, ArrowLeftIcon, Dialog, SortNumericalIcon, Tablist, Tab, Heading, TickCircleIcon } from "evergreen-ui";
+import { Pane, toaster, ArrowLeftIcon, Heading, TickCircleIcon } from "evergreen-ui";
 import BillList from './BillList';
 import Topbaer from "./Topbar2";
 import axios from 'axios'
@@ -12,10 +12,9 @@ import { SelectedBillContext } from "./contexts/SelectedBillContext";
 
 function Bill(props) {
 
-	const token = getToken();
-	const user = getUser();
 	const nokp = getNOKP();
-	const [dialog, setDialog] = useState(false);
+	const email = getEmail();
+	const auth = setAuthorization(nokp,email);
 	const [dataset, setDataSet] = useState({ data: [] });
 	const [loading, setLoading] = useState(false);
 	const [isNoData, setIsNoData] = useState(false);

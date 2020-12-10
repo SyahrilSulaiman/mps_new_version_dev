@@ -8,15 +8,12 @@ import {
   Button,
   SearchIcon,
   ArrowLeftIcon,
-  Paragraph,
   Heading,
   toaster,
 } from "evergreen-ui";
 import NoScroll from "no-scroll";
 import Axios from 'axios';
-import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
-import { setPageStateUpdate } from "@material-ui/data-grid";
-
+import { getNOKP, getEmail, setAuthorization } from "./Utils/Common";
 
 export default function Search({ type }) {
   const [search, setSearch] = useState("");
@@ -24,7 +21,9 @@ export default function Search({ type }) {
   const [display, setDisplay] = useState(false);
   const [bill, setBill] = useState([]);
   const [array, setArray] = useState([]);
-  const nokp    = getNOKP();
+	const nokp = getNOKP();
+	const email = getEmail();
+	const auth = setAuthorization(nokp,email);
 
   useEffect(() => {
   }, [type]);
@@ -161,10 +160,6 @@ export default function Search({ type }) {
         toaster.danger('Ralat! Sila hubungi pentadbir sistem.',{id:"forbidden-action"});
     });
 }
-
-// useEffect(()=> {
-//   console.log('Selected Bill : ',array)
-// },[array])
 
 const handleChoose = (e,x) => {
   

@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react'
-import { getUser, getNOKP, getToken, removeUserSession } from "./Utils/Common";
+import { getNOKP, getEmail, setAuthorization } from "./Utils/Common";
 import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
 import axios from 'axios';
 import swal from 'sweetalert2';
-import { Heading, Spinner, Pane, Button, Text, Paragraph, majorScale, minorScale, Card, UnorderedList, ListItem, ArrowRightIcon,Icon , ChevronRightIcon, ArrowLeftIcon, toaster, KeyDeleteIcon, DeleteIcon } from 'evergreen-ui';
+import { Heading, Spinner, Pane, Button, Text, Paragraph, majorScale, minorScale, Card, ArrowRightIcon,Icon , ChevronRightIcon, ArrowLeftIcon, toaster, DeleteIcon } from 'evergreen-ui';
 import Topbaer from "./Topbar2";
-import NoScroll from "no-scroll";
-
 
 export default function SenaraiBil(props) {
 
     const [isLoading, setLoading] = useState(true);
     const [bills, setBill] = useState(null);
     const [disabled, setDisabled] = useState(false);
-    const nokp = getNOKP();
-    const currentYear = new Date();
+	const nokp = getNOKP();
+	const email = getEmail();
+	const auth = setAuthorization(nokp,email);
 
     const viewBill = (e) => {
         window.location.href = "https://mymps.corrad.my/rp/bil_cukai_taksiran.php?noakaun=" + btoa(e)
@@ -58,7 +57,6 @@ export default function SenaraiBil(props) {
                 console.log(err);
                 toaster.danger('Sistem Ralat. Sila hubungi pihak pentadbir sistem anda.');
                 setTimeout(() => {
-                    //window.history.back();
                 }, 3000); 
             })
     }, [])
@@ -84,7 +82,6 @@ export default function SenaraiBil(props) {
                 formData.append('noakaun',btoa(e));
                 axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=deleteBill",formData)
                 .then(res => {
-                    console.log(res);
                     if (res.data.status === 'success'){
                         swal.fire({
                             icon: 'success',
@@ -295,13 +292,6 @@ export default function SenaraiBil(props) {
                                     </div>
                                 </div>
                             </div>
-                            {/* <div className="w-full px-4" onClick={() => handlePayment()}>
-                                <div className="relative flex flex-col min-w-0 break-words bg-green-600 rounded mb-6 shadow-lg xs:mt-16">
-                                    <div className="flex-auto p-3 text-center">
-                                        <Heading color="white">Teruskan Pembayaran</Heading>
-                                    </div>
-                                </div>
-                            </div> */}
                         </div>
                     </div>
                 </div>
