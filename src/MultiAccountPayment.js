@@ -28,7 +28,7 @@ function Pay() {
     const [payorphone, setPayorPhone]   = useState(sessionStorage.getItem("notel"));
 
     const [amount, setAmount]       = useState(0);
-    const [invoiceNo, setInvoiceNo] = useState('A' + year + Math.floor(Math.random() * 9999999999999)); 
+    const [invoiceNo, setInvoiceNo] = useState('A' + year + Math.floor(1000000000000 + Math.random() * 9999999999999)); 
     const [receiptno, setReceiptNo] = useState("");
     const nokp = getNOKP();
 	const email = getEmail();
