@@ -32,7 +32,7 @@ function Pay() {
     const [penama, setPenama]       = useState("");
     const [accountNo, setAccountNo] = useState(sessionStorage.noakaun);
     const [amount, setAmount]       = useState(0.00);
-    const [invoiceNo, setInvoiceNo] = useState('A'+year+getRandomInt(1000000000000, 9999999999999));  
+    const [invoiceNo, setInvoiceNo] = useState('A'+year+getRandomInt(10000000000000, 99999999999999));  
     const [receiptno, setReceiptNo] = useState("");
 
     useEffect(() => {
