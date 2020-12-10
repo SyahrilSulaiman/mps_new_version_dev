@@ -31,7 +31,12 @@ function Pay() {
     const [receiptno, setReceiptNo] = useState("");
     const nokp = getNOKP();
 	const email = getEmail();
-	const auth = setAuthorization(nokp,email);
+    const auth = setAuthorization(nokp,email);
+    const headers = {
+		token: auth
+	}
+    const myHeaders = new Headers();
+    myHeaders.append('token',auth);
 
     useEffect(() => {
         fetch('https://epstaging.mps.gov.my/fpx/bankList.php')
@@ -62,7 +67,7 @@ function Pay() {
         const formData2 = new FormData();
         formData2.append('search', accountNo);
         formData2.append('type', 'akaun');
-        axios.post(urlAPI, formData2)
+        axios.post(urlAPI, formData2, {headers:headers})
         .then((res) => {
             setNoBill(false);
             setAccountNo(res.data[0][0].NOAKAUN);;
@@ -117,7 +122,8 @@ function Pay() {
             var requestOptions = {
                 method: 'POST',
                 body: formdata,
-                redirect: 'follow'
+                redirect: 'follow',
+                headers:myHeaders
             };
 
             var urlAPI1 = "https://mymps.corrad.my/int/api_generator.php?api_name=register_payment";
@@ -179,7 +185,8 @@ function Pay() {
             var requestOptions = {
                 method: 'POST',
                 body: formdata,
-                redirect: 'follow'
+                redirect: 'follow',
+                headers:myHeaders
             };
 
             var urlAPI1 = "https://mymps.corrad.my/int/api_generator.php?api_name=register_payment";

@@ -31,6 +31,9 @@ function Bill(props) {
 	const nokp = getNOKP();
 	const email = getEmail();
 	const auth = setAuthorization(nokp,email);
+	const headers = {
+		token: auth
+	}
 
 	return (
 		<div>

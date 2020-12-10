@@ -32,7 +32,13 @@ function Pay() {
     const [receiptno, setReceiptNo] = useState("");
     const nokp = getNOKP();
 	const email = getEmail();
-	const auth = setAuthorization(nokp,email);
+    const auth = setAuthorization(nokp,email);
+    const headers = {
+		token: auth
+    }
+    
+    const myHeaders = new Headers();
+    myHeaders.append('token',auth);
 
     useEffect(() => {
         console.log('Bil List:',location.state.payBill);
@@ -110,7 +116,8 @@ function Pay() {
             var requestOptions = {
                 method: 'POST',
                 body: formdata,
-                redirect: 'follow'
+                redirect: 'follow',
+                headers : myHeaders
             };
 
             var urlAPI1 = "https://mymps.corrad.my/int/api_generator.php?api_name=multibill_payment";
@@ -169,7 +176,8 @@ function Pay() {
             var requestOptions = {
                 method: 'POST',
                 body: formdata,
-                redirect: 'follow'
+                redirect: 'follow',
+                headers:myHeaders
             };
 
             var urlAPI1 = "https://mymps.corrad.my/int/api_generator.php?api_name=multibill_payment";

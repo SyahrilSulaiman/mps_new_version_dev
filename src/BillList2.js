@@ -11,7 +11,10 @@ export default function BillList() {
 	const nokp = getNOKP();
 	const email = getEmail();
 	const auth = setAuthorization(nokp,email);
-
+	const headers = {
+		token: auth
+    }
+    
     const [dataset, setDataSet] = useState({
         data: [],
     });
@@ -29,10 +32,7 @@ export default function BillList() {
         const formData = new FormData();
         formData.append("nokp", nokp);
         axios
-            .post(
-                "https://mymps.corrad.my/int/api_generator.php?api_name=showBill",
-                formData
-            )
+            .post( "https://mymps.corrad.my/int/api_generator.php?api_name=showBill", formData, {headers:headers} )
             .then((res) => {
                 setLoading(true);
                 if (res.data.status === "success") {

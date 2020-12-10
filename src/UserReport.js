@@ -21,7 +21,13 @@ function Bill(props) {
   const [search, setSearch] = useState('');
   const nokp = getNOKP();
 	const email = getEmail();
-	const auth = setAuthorization(nokp,email);
+  const auth = setAuthorization(nokp,email);
+  const headers = {
+		token: auth
+  }
+  
+  const myHeaders = new Headers();
+  myHeaders.append('token',auth);
 
   useEffect(() => {
     var apiUrl =
@@ -35,6 +41,7 @@ function Bill(props) {
       method: "POST",
       body: formData,
       redirect: "follow",
+      headers:myHeaders
     };
 
     fetch(apiUrl, requestOptions)

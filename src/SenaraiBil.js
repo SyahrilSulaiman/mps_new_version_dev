@@ -13,7 +13,10 @@ export default function SenaraiBil(props) {
     const [bills, setBill] = useState(null);
 	const nokp = getNOKP();
 	const email = getEmail();
-	const auth = setAuthorization(nokp,email);
+    const auth = setAuthorization(nokp,email);
+    const headers = {
+		token: auth
+	}
 
     const handleBill = (e) => {
         window.location.href = "https://mymps.corrad.my/rp/bil_cukai_taksiran.php?noakaun=" + btoa(e)
@@ -24,7 +27,7 @@ export default function SenaraiBil(props) {
     }
 
     useEffect(() => {
-        axios.get("https://mymps.corrad.my/int/api_generator.php?api_name=getBill&noakaun=" + sessionStorage.getItem('noakaun'))
+        axios.get("https://mymps.corrad.my/int/api_generator.php?api_name=getBill&noakaun=" + sessionStorage.getItem('noakaun'), {headers:headers})
             .then(res => {
                 if (res.data.status == 'success') {
                     setBill({
@@ -56,7 +59,7 @@ export default function SenaraiBil(props) {
                 let formData = new FormData();
                 formData.append('user',btoa(nokp));
                 formData.append('noakaun',btoa(e));
-                axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=deleteBill",formData)
+                axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=deleteBill",formData, {headers:headers})
                 .then(res => {
                     console.log(res);
                     if (res.data.status === 'success'){

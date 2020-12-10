@@ -87,11 +87,7 @@ function Bill(props) {
 
 		const formData = new FormData();
 		formData.append("nokp", nokp);
-		axios
-			.post(
-				"https://mymps.corrad.my/int/api_generator.php?api_name=showBill",
-				formData
-			)
+		axios.post(	"https://mymps.corrad.my/int/api_generator.php?api_name=showBill", formData, {headers:headers} )
 			.then((res) => {
 				setLoading(true);
 				if (res.data.status === "success") {

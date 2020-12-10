@@ -47,7 +47,7 @@ export default function SenaraiBil(props) {
     }
 
     useEffect(() => {
-        axios.get("https://mymps.corrad.my/int/api_generator.php?api_name=getBill&noakaun=" + sessionStorage.getItem('noakaun'))
+        axios.get("https://mymps.corrad.my/int/api_generator.php?api_name=getBill&noakaun=" + sessionStorage.getItem('noakaun'), {headers:headers})
             .then(res => {
                 if (res.data.status == 'success') {
                     setBill({
@@ -83,7 +83,7 @@ export default function SenaraiBil(props) {
                 let formData = new FormData();
                 formData.append('user',btoa(nokp));
                 formData.append('noakaun',btoa(e));
-                axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=deleteBill",formData)
+                axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=deleteBill",formData, {headers:headers})
                 .then(res => {
                     if (res.data.status === 'success'){
                         swal.fire({

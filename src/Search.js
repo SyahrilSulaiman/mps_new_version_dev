@@ -23,7 +23,12 @@ export default function Search({ type }) {
   const [array, setArray] = useState([]);
 	const nokp = getNOKP();
 	const email = getEmail();
-	const auth = setAuthorization(nokp,email);
+  const auth = setAuthorization(nokp,email);
+  const headers = {
+		token: auth
+  }
+  const myHeaders = new Headers();
+  myHeaders.append('token',auth);
 
   useEffect(() => {
   }, [type]);
@@ -44,6 +49,7 @@ export default function Search({ type }) {
             search: search.trim(),
             type: type,
           },
+          headers:headers
         }
       )
       .then((res) => {
@@ -106,13 +112,14 @@ export default function Search({ type }) {
 
     var formdata = new FormData();
     formdata.append("type", type);
-    formdata.append("nokp", sessionStorage.nokp);
+    formdata.append("nokp", nokp);
     formdata.append("search", search.trim());
 
     var requestOptions = {
       method: "POST",
       body: formdata,
       redirect: "follow",
+      headers:myHeaders
     };
 
     var urlAPI1 =
@@ -136,7 +143,7 @@ export default function Search({ type }) {
     formData.append('account',account);
     formData.append('status',status);
 
-    Axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=newBill",formData)
+    Axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=newBill",formData, {headers:headers})
     .then(res => {
 
         if(res.data.status === "success")
@@ -182,7 +189,7 @@ const handleAddThis = (e) => {
     formData.append('nokp',nokp);
     formData.append('account',accountObj);
 
-    Axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=newBill&mode=many",formData)
+    Axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=newBill&mode=many",formData, {headers:headers})
     .then(res => {
 
       if(res.data.status === "success")
