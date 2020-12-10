@@ -32,7 +32,7 @@ function Bill(props) {
         setDisabled(true);
         const formData = new FormData();
         formData.append('userSecret', nokp)
-        axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=get_user_status', formData)
+        axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=get_user_status", formData)
             .then((res) => {
                 if (res.data.status === "Pending") {
                     toaster.danger("Pembayaran Dibatalkan.",{description:"Akaun anda masih belum diaktifkan. Sila semak emel anda untuk pengesahan akaun."}, { id: "forbidden-action" })
@@ -59,7 +59,7 @@ function Bill(props) {
         setDisabled(true);
         const formData = new FormData();
         formData.append('userSecret', nokp)
-        axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=get_user_status', formData)
+        axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=get_user_status", formData)
             .then((res) => {
                 if (res.data.status === "Pending") {
                     toaster.danger("Pembayaran Dibatalkan.",{description:"Akaun anda masih belum diaktifkan. Sila semak emel anda untuk pengesahan akaun."},{ id: "forbidden-action" })

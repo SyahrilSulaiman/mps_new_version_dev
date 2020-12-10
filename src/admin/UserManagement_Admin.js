@@ -39,7 +39,7 @@ function Dashboard(props) {
   useEffect(() => {
     const fetchUsers = async () => {
       setLoading(true);
-      const res = await axios.get('https://mymps.corrad.my/int/api_generator.php?api_name=user_list')
+      const res = await axios.get("https://mymps.corrad.my/int/api_generator.php?api_name=user_list")
       .then( res => {
         setUser(JSON.parse(res.data.data));
         setSearchResult(JSON.parse(res.data.data));

@@ -15,7 +15,7 @@ function Bill(props) {
 
 		const formData2 = new FormData();
 		formData2.append("userSecret", nokp)
-		axios.post('https://mymps.corrad.my/int/api_generator.php?api_name=user_notification', formData2)
+		axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=user_notification", formData2)
 		.then((res) => {
 		if(res.data.status === "inactive"){
 			setTimeout(function(){ 

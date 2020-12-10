@@ -25,7 +25,7 @@ function Login(props) {
             redirect: 'follow'
         };
 
-        var urlAPI1 = 'https://mymps.corrad.my/int/api_generator.php?api_name=check_email_token';
+        var urlAPI1 = "https://mymps.corrad.my/int/api_generator.php?api_name=check_email_token";
 
         fetch(urlAPI1, requestOptions)
             .then(response => response.json())
@@ -109,7 +109,7 @@ function Login(props) {
                 redirect: 'follow'
             };
 
-            var urlAPI1 = 'https://mymps.corrad.my/int/api_generator.php?api_name=api_login';
+            var urlAPI1 = "https://mymps.corrad.my/int/api_generator.php?api_name=api_login";
 
             fetch(urlAPI1, requestOptions)
                 .then(response => response.json())

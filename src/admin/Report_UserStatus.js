@@ -13,7 +13,7 @@ function Report_UserStatus(props) {
     useEffect(() => {
       const fetchUsers = async () => {
         setLoading(true);
-        const res = await axios.get('https://mymps.corrad.my/int/api_generator.php?api_name=laporan_pengguna')
+        const res = await axios.get("https://mymps.corrad.my/int/api_generator.php?api_name=laporan_pengguna")
         .then( res => {
           setReport(res.data.result);
           setLoading(false);

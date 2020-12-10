@@ -24,7 +24,7 @@ function Dashboard(props) {
 
   useEffect(() => {
     setLoading(true);
-    axios.get('https://mymps.corrad.my/int/api_generator.php?api_name=laporan_jumlah_pembayaran')
+    axios.get("https://mymps.corrad.my/int/api_generator.php?api_name=laporan_jumlah_pembayaran")
     .then( res => {
       setJumlah(res.data.result);
       console.log('Jumlah :',jumlah);
@@ -34,7 +34,7 @@ function Dashboard(props) {
 
   useEffect(() => {
     setLoading2(false);
-    axios.get('https://mymps.corrad.my/int/api_generator.php?api_name=laporan_pengguna')
+    axios.get("https://mymps.corrad.my/int/api_generator.php?api_name=laporan_pengguna")
     .then( res => {
       setPengguna(res.data.result);
       console.log('Pengguna :',pengguna);
