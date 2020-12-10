@@ -78,8 +78,6 @@ export default function SenaraiBil(props) {
             reverseButtons: true
         }).then( result => {
             if(result.isConfirmed){
-                console.log('e',btoa(e));
-                console.log('user',nokp);
                 let formData = new FormData();
                 formData.append('user',btoa(nokp));
                 formData.append('noakaun',btoa(e));

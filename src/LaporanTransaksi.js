@@ -25,7 +25,7 @@ function Bill(props) {
   }
   const myHeaders = new Headers();
   myHeaders.append('token',auth);
-  
+
   useEffect(() => {
     var apiUrl =
       "https://mymps.corrad.my/int/api_generator.php?api_name=userReport";
@@ -38,7 +38,7 @@ function Bill(props) {
       method: "POST",
       body: formData,
       redirect: "follow",
-      headers:myHeaders
+      // headers:myHeaders
     };
 
     fetch(apiUrl, requestOptions)

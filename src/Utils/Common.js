@@ -62,6 +62,6 @@
   }
 
   export const setAuthorization = (nokp, email) => {
-    let token = sha256(nokp+'^DEADCE6F498F6E88^'+email);
-    return '&token='+token;
+    let token = sha256(nokp+'DEADCE6F498F6E88'+email);
+    return token;
   }

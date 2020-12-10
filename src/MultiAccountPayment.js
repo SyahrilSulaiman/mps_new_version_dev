@@ -117,7 +117,7 @@ function Pay() {
                 method: 'POST',
                 body: formdata,
                 redirect: 'follow',
-                headers : myHeaders
+                // headers : myHeaders
             };
 
             var urlAPI1 = "https://mymps.corrad.my/int/api_generator.php?api_name=multibill_payment";
@@ -177,7 +177,7 @@ function Pay() {
                 method: 'POST',
                 body: formdata,
                 redirect: 'follow',
-                headers:myHeaders
+                // headers:myHeaders
             };
 
             var urlAPI1 = "https://mymps.corrad.my/int/api_generator.php?api_name=multibill_payment";

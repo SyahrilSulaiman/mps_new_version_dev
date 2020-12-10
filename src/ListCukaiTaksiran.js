@@ -21,8 +21,9 @@ function Bill(props) {
 	const { selectedBil, handleUnpaidBil, unpaidBil } = useContext(SelectedBillContext);
 	const [disabled, setDisabled] = useState(false);
 	const headers = {
-		token: auth
+		TOKEN: auth
 	}
+	console.log(auth)
 
 	const history = useHistory();
 
