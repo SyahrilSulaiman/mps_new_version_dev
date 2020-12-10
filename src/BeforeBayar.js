@@ -14,7 +14,10 @@ export default function SenaraiBil(props) {
     const [disabled, setDisabled] = useState(false);
 	const nokp = getNOKP();
 	const email = getEmail();
-	const auth = setAuthorization(nokp,email);
+    const auth = setAuthorization(nokp,email);
+    const headers = {
+        'token' : auth
+    }
 
     const viewBill = (e) => {
         window.location.href = "https://mymps.corrad.my/rp/bil_cukai_taksiran.php?noakaun=" + btoa(e)
