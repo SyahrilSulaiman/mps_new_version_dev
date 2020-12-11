@@ -103,6 +103,7 @@ export default function CardSettings({
   const handleChangePassword = () => {
     
     setDialog2(false);
+    console.log(new_password.length)
 
     if (password == "") 
     {
@@ -120,7 +121,7 @@ export default function CardSettings({
     {
       toaster.danger("Kata Laluan Tidak Sah", {description:"Harap maaf. Kata laluan yang baharu tidak disahkan.", id:"forbidden-action"});
     }
-    else if (!String(new_password).match(/[a-zA-z]/g) || !String(new_password).match(/\b/g) || new_password.value.length < 8) {
+    else if (!String(new_password).match(/[a-zA-z]/g) || !String(new_password).match(/\b/g) || new_password.length < 8) {
       toaster.danger("Kata Laluan Tidak Selamat", {description:"Harap maaf. Kata laluan yang baharu perlu sekurang-kurangnya menpunya lapan (8) aksara, dan mesti terdiri daripada kombinasi huruf dan nombor.", id:"forbidden-action"});
     } 
     else {
@@ -243,7 +244,7 @@ export default function CardSettings({
           <div className="px-4 py-5 flex-auto">
             <div className="tab-content tab-space">
               <div className={openTab === 1 ? "block" : "hidden"} id="link1">
-                <p>
+                
                   <Pane display="flex" padding={10} background="#dfe6e9" borderRadius={5}>
                     <Pane flex={1} alignItems="center" display="flex">
                       <Text size={600}>Profil Akaun mymps</Text>
@@ -300,10 +301,10 @@ export default function CardSettings({
                       Kemaskini
                     </Button>
                   </Pane>
-                </p>
+                
               </div>
               <div className={openTab === 2 ? "block" : "hidden"} id="link2">
-                <p>
+                
                   <Pane display="flex" padding={10} background="#dfe6e9" borderRadius={5}>
                     <Pane flex={1} alignItems="center" display="flex">
                       <Text size={600}>Kemaskini Kata Laluan</Text>
@@ -350,7 +351,7 @@ export default function CardSettings({
                       Kemaskini
                       </Button>
                   </Pane>
-                </p>
+                
               </div>
             </div>
           </div>
