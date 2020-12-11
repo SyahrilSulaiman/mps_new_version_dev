@@ -119,7 +119,11 @@ export default function CardSettings({
     else if (new_password !== conf_password) 
     {
       toaster.danger("Kata Laluan Tidak Sah", {description:"Harap maaf. Kata laluan yang baharu tidak disahkan.", id:"forbidden-action"});
-    } else {
+    }
+    else if (!String(new_password).match(/[a-zA-z]/g) || !String(new_password).match(/\b/g) || new_password.value.length < 8) {
+      toaster.danger("Kata Laluan Tidak Selamat", {description:"Harap maaf. Kata laluan yang baharu perlu sekurang-kurangnya menpunya lapan (8) aksara, dan mesti terdiri daripada kombinasi huruf dan nombor.", id:"forbidden-action"});
+    } 
+    else {
 
       console.log(password);
       console.log(new_password);
