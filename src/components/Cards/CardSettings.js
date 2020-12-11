@@ -103,7 +103,6 @@ export default function CardSettings({
   const handleChangePassword = () => {
     
     setDialog2(false);
-    console.log(new_password.length)
 
     if (password == "") 
     {
@@ -125,10 +124,6 @@ export default function CardSettings({
       toaster.danger("Kata Laluan Tidak Selamat", {description:"Harap maaf. Kata laluan yang baharu perlu sekurang-kurangnya menpunya lapan (8) aksara, dan mesti terdiri daripada kombinasi huruf dan nombor.", id:"forbidden-action"});
     } 
     else {
-
-      console.log(password);
-      console.log(new_password);
-      console.log(conf_password);
 
       swal("Anda pasti untuk set semula kata laluan anda?", {
         buttons: {
@@ -158,7 +153,6 @@ export default function CardSettings({
               fetch("https://mymps.corrad.my/int/api_generator.php?api_name=update_password", requestOptions)
                 .then(response => response.json())
                 .then(result => {
-                  console.log(result);
                   if (result.status == "pending") {
                     swal("Maaf", "Anda perlu tunggu 10 minit sebelum membuat penukaran kata laluan semula.", "error")
                       .then(() => {
