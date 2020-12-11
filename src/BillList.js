@@ -53,7 +53,7 @@ export default function BillList({dataset,isNoData}) {
                 display="grid"
                 gridTemplateColumns="40px 1fr 10px"
               >
-                <Pane color="gray" alignContent="right" justifyContent="center" onClick={(e) => addSelectedBill(bill.NOAKAUN,amount)}>
+                <Pane color="gray" alignContent="right" justifyContent="center" onClick={(e) => addSelectedBill(bill)}>
                   {handleSelectedBil(bill.NOAKAUN)}
                 </Pane>
                 <Pane onClick={ bill.STATUS !== "PAID" ? (e) => handleBayar(bill.NOAKAUN, amount, bill.NAMA_PEMILIK, bill.NOAKAUN) : () => handleViewBill(bill.NOAKAUN) }>

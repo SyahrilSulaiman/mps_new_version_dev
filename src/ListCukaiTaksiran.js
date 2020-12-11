@@ -23,7 +23,6 @@ function Bill(props) {
 	const headers = {
 		TOKEN: auth
 	}
-	console.log(auth)
 
 	const history = useHistory();
 

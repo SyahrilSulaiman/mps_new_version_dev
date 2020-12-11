@@ -41,14 +41,12 @@ function Pay() {
     myHeaders.append('token',auth);
 
     useEffect(() => {
-        console.log('Bil List:',location.state.payBill);
-
         if(account === null || account === ""){
             window.location.href = "/cukaitaksiran";
         }
         let total = 0;
         for(var i = 0; i < account.length; i++){
-            setAmount(total = total + account[i]["BAKI_TUNGGAK"]);
+            setAmount(total = total + (account[i]["BAKI_DAHULU"] + account[i]["CAJ_DIKENAKAN"] + account[i]["CUKAI_SEMASA"] + account[i]["TMP_LAIN"] + account[i]["TUNGGAKAN_SEMASA"] + account[i]["WARAN_TAHANAN"] ));
         }
 
         fetch('https://dev1.toyyibpay.com/api/getBankFPX')
@@ -117,7 +115,7 @@ function Pay() {
                 method: 'POST',
                 body: formdata,
                 redirect: 'follow',
-                // headers : myHeaders
+                headers : myHeaders
             };
 
             var urlAPI1 = "https://mymps.corrad.my/int/api_generator.php?api_name=multibill_payment";
@@ -177,7 +175,7 @@ function Pay() {
                 method: 'POST',
                 body: formdata,
                 redirect: 'follow',
-                // headers:myHeaders
+                headers:myHeaders
             };
 
             var urlAPI1 = "https://mymps.corrad.my/int/api_generator.php?api_name=multibill_payment";

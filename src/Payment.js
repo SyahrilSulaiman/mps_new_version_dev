@@ -70,8 +70,10 @@ function Pay() {
         axios.post(urlAPI, formData2, {headers:headers})
         .then((res) => {
             setNoBill(false);
+            let total = res.data[0][0].BAKI_DAHULU + res.data[0][0].CAJ_DIKENAKAN + res.data[0][0].CUKAI_SEMASA+ res.data[0][0].TMP_LAIN+ res.data[0][0].TUNGGAKAN_SEMASA+ res.data[0][0].WARAN_TAHANAN;
+
             setAccountNo(res.data[0][0].NOAKAUN);;
-            setAmount(res.data[2][0].BAKI);
+            setAmount(total);
             setPenama(res.data[0][0].NAMA_PEMILIK);
         })
         .catch((err) => {

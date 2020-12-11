@@ -38,7 +38,7 @@ function Bill(props) {
       method: "POST",
       body: formData,
       redirect: "follow",
-      // headers:myHeaders
+      headers:myHeaders
     };
 
     fetch(apiUrl, requestOptions)

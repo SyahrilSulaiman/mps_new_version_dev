@@ -16,15 +16,15 @@ const SelectedBillContextProvider = (props) => {
       // console.log('Unpaid : ', unpaidBil)
     },[unpaidBil])
     
-    const addSelectedBill = (account,amount) => {
+    const addSelectedBill = (dataset) => {
         let newArray = [...selectedBil]
-        let index = newArray.findIndex(element => element.NOAKAUN === account)
+        let index = newArray.findIndex(element => element.NOAKAUN === dataset.NOAKAUN)
         if(index !== -1){
           newArray.splice(index,1);
           setSelectedBil(newArray);
         }
         else{
-          setSelectedBil([...selectedBil,{NOAKAUN:account,BAKI_TUNGGAK:amount}])
+          setSelectedBil([...selectedBil,dataset])
         }
     }
 

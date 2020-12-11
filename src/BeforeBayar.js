@@ -248,7 +248,9 @@ export default function SenaraiBil(props) {
                                             >
                                                 <Pane>
                                                     <Heading size={200}>Jumlah Tunggakan</Heading>
-                                                    <Heading size={500}>RM {bills.bill.data[2][0].BAKI.toFixed(2)}</Heading>
+                                                    <Heading size={500}>RM 
+                                                        {(bills.bill.data[0][0].BAKI_DAHULU + bills.bill.data[0][0].CAJ_DIKENAKAN + bills.bill.data[0][0].CUKAI_SEMASA + bills.bill.data[0][0].TMP_LAIN + bills.bill.data[0][0].TUNGGAKAN_SEMASA + bills.bill.data[0][0].WARAN_TAHANAN ).toFixed(2) }
+                                                    </Heading>
                                                 </Pane>
                                             </Card>
                                         }
