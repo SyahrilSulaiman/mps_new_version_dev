@@ -5,6 +5,7 @@ import Navbar from "../components/Navbars/AdminNavbar";
 import PieChart from "./report/Pie"
 // import GraphChart from "./report/Graph"
 import { Pane, Button, SelectField, ArrowLeftIcon , Icon, Heading} from 'evergreen-ui'
+import { SERVER_URL } from '../Constants'
 
 function Report_UserStatus(props) {
     const [report, setReport] = useState([]);
@@ -13,7 +14,7 @@ function Report_UserStatus(props) {
     useEffect(() => {
       const fetchUsers = async () => {
         setLoading(true);
-        const res = await axios.get("https://mymps.corrad.my/int/api_generator.php?api_name=laporan_pengguna")
+        const res = await axios.get(SERVER_URL+"int/api_generator.php?api_name=laporan_pengguna")
         .then( res => {
           setReport(res.data.result);
           setLoading(false);

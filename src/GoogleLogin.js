@@ -8,6 +8,7 @@ import { getGoogleToken, getGoogleEmail, getGoogleName} from "./Utils/Common";
 import IndexNavbar from "./components/Navbars/IndexNavbar2.js";
 import Footer from "./components/Footers/Footer";
 import swal from "sweetalert";
+import { SERVER_URL } from './Constants';
 
 function Register(props) {
 
@@ -88,7 +89,7 @@ function Register(props) {
         redirect: 'follow'
         };
 
-        var urlAPI = "https://mymps.corrad.my/int/api_generator.php?api_name=daftar_pengguna";
+        var urlAPI = SERVER_URL+"int/api_generator.php?api_name=daftar_pengguna";
 
         fetch(urlAPI, requestOptions)
         .then(response => response.json())

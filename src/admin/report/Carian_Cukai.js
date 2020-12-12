@@ -4,7 +4,7 @@ import NoScroll from "no-scroll";
 import swal from 'sweetalert2';
 import axios from 'axios';
 import SenaraiCukai from './Laporan_Carian_Cukai'
-
+import { SERVER_URL } from '../../Constants';
 
 
 export default function Carian_Cuaki({type, startDate}){
@@ -25,7 +25,7 @@ export default function Carian_Cuaki({type, startDate}){
             formData.append('account',account);
             formData.append('type',type);
             formData.append('date',startDate);
-            axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=laporan_cukai_taksiran",formData)
+            axios.post(SERVER_URL+"int/api_generator.php?api_name=laporan_cukai_taksiran",formData)
             .then(res => {
                 console.log(res.data);
                 // console.log(JSON.parse(res.data.result))

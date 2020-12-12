@@ -14,6 +14,7 @@ import {
 import NoScroll from "no-scroll";
 import Axios from 'axios';
 import { getNOKP, getEmail, setAuthorization } from "./Utils/Common";
+import { SERVER_URL } from './Constants';
 
 export default function Search({ type }) {
   const [search, setSearch] = useState("");
@@ -43,7 +44,7 @@ export default function Search({ type }) {
     e.preventDefault();
     axios
       .get(
-        "https://mymps.corrad.my/int/api_generator.php?api_name=searchBill",
+        SERVER_URL+"int/api_generator.php?api_name=searchBill",
         {
           params: {
             search: search.trim(),
@@ -123,7 +124,7 @@ export default function Search({ type }) {
     };
 
     var urlAPI1 =
-      "https://mymps.corrad.my/int/api_generator.php?api_name=addAll";
+      SERVER_URL+"int/api_generator.php?api_name=addAll";
 
     fetch(urlAPI1, requestOptions)
       .then((response) => response.json())
@@ -143,7 +144,7 @@ export default function Search({ type }) {
     formData.append('account',account);
     formData.append('status',status);
 
-    Axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=newBill",formData, {headers:headers})
+    Axios.post(SERVER_URL+"int/api_generator.php?api_name=newBill",formData, {headers:headers})
     .then(res => {
 
         if(res.data.status === "success")
@@ -189,7 +190,7 @@ const handleAddThis = (e) => {
     formData.append('nokp',nokp);
     formData.append('account',accountObj);
 
-    Axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=newBill&mode=many",formData, {headers:headers})
+    Axios.post(SERVER_URL+"int/api_generator.php?api_name=newBill&mode=many",formData, {headers:headers})
     .then(res => {
 
       if(res.data.status === "success")

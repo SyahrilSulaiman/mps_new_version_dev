@@ -4,6 +4,7 @@ import { getNOKP, getEmail, setAuthorization } from "./Utils/Common";
 import swal from "sweetalert";
 import { Pane, Spinner} from "evergreen-ui";
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { SERVER_URL } from './Constants';
 
 export default function BillList() {
 
@@ -32,7 +33,7 @@ export default function BillList() {
         const formData = new FormData();
         formData.append("nokp", nokp);
         axios
-            .post( "https://mymps.corrad.my/int/api_generator.php?api_name=showBill", formData, {headers:headers} )
+            .post( SERVER_URL+"int/api_generator.php?api_name=showBill", formData, {headers:headers} )
             .then((res) => {
                 setLoading(true);
                 if (res.data.status === "success") {

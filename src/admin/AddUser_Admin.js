@@ -3,8 +3,9 @@ import React, { useState } from "react";
 // import Footer from "./components/Footers/Footer";
 import Sidebar from "./Sidebar_Admin";
 import Navbar from "../components/Navbars/AdminNavbar";
-import { Button, Heading, Strong, Link } from "evergreen-ui";
+import { Button, Heading} from "evergreen-ui";
 import swal from "sweetalert";
+import { SERVER_URL } from '../Constants';
 
 const useFormInput = (initialValue) => {
     const [value, setValue] = useState(initialValue);
@@ -86,7 +87,7 @@ export default function AddUser(){
                 redirect: 'follow'
                 };
 
-                var urlAPI = "https://mymps.corrad.my/int/api_generator.php?api_name=add_user";
+                var urlAPI = SERVER_URL+"int/api_generator.php?api_name=add_user";
 
                 fetch(urlAPI, requestOptions)
                 .then(response => response.json())
@@ -143,7 +144,7 @@ export default function AddUser(){
                 redirect: 'follow'
                 };
 
-                var urlAPI = "https://mymps.corrad.my/int/api_generator.php?api_name=add_user";
+                var urlAPI = SERVER_URL+"int/api_generator.php?api_name=add_user";
 
                 fetch(urlAPI, requestOptions)
                 .then(response => response.json())

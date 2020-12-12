@@ -6,6 +6,7 @@ import { Pane, Icon, Heading, ArrowRightIcon } from "evergreen-ui";
 import Topbaer from "./Topbar2";
 import swal from "sweetalert";
 import axios from "axios";
+import { SERVER_URL } from './Constants';
 
 function Bill(props) {
 
@@ -13,7 +14,7 @@ function Bill(props) {
 
 		const formData2 = new FormData();
 		formData2.append("userSecret", nokp)
-		axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=user_notification", formData2)
+		axios.post(SERVER_URL+"int/api_generator.php?api_name=user_notification", formData2)
 		.then((res) => {
 		if(res.data.status === "inactive"){
 			setTimeout(function(){ 

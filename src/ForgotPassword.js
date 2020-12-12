@@ -7,6 +7,7 @@ import IndexNavbar from "./components/Navbars/IndexNavbar2.js";
 import Footer from "./components/Footers/Footer";
 import swal from "sweetalert";
 import { Button, Heading, Pane, ArrowLeftIcon, ArrowRightIcon } from "evergreen-ui";
+import { SERVER_URL } from './Constants';
 
 function onChange(value) {
     console.log("Captcha value:", value);
@@ -41,7 +42,7 @@ function ForgetPassword(props) {
                 redirect: 'follow'
             };
 
-            var urlAPI1 = "https://mymps.corrad.my/int/api_generator.php?api_name=change_password";
+            var urlAPI1 = SERVER_URL+"int/api_generator.php?api_name=change_password";
 
             fetch(urlAPI1, requestOptions)
                 .then(response => response.json())

@@ -12,6 +12,7 @@ import {
 } from "evergreen-ui";
 import Topbaer from "./Topbar2";
 import { getNOKP, getEmail, setAuthorization } from "./Utils/Common";
+import { SERVER_URL } from './Constants';
 
 
 function Bill(props) {
@@ -31,7 +32,7 @@ function Bill(props) {
 
   useEffect(() => {
     var apiUrl =
-      "https://mymps.corrad.my/int/api_generator.php?api_name=laporan_penyata_akaun";
+      SERVER_URL+"int/api_generator.php?api_name=laporan_penyata_akaun";
 
     var formData = new FormData();
     formData.append("userid", nokp);
@@ -68,7 +69,7 @@ function Bill(props) {
   }, [search]);
 
   const viewPenyata = (e) => {
-    window.location.href = "https://mymps.corrad.my/rp/penyata_semasa.php?noakaun=" + btoa(btoa(e))
+    window.location.href = SERVER_URL+"rp/penyata_semasa.php?noakaun=" + btoa(btoa(e))
   }
 
   const dataa = {

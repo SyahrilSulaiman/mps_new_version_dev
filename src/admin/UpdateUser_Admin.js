@@ -9,6 +9,7 @@ import { get } from "jquery";
 import { Pane, Button, Heading, TextInputField, Text } from "evergreen-ui";
 import axios from 'axios'
 import { getUser, getNOKP, getToken, removeUserSession } from "../Utils/Common";
+import { SERVER_URL } from '../Constants';
 
 export default function UserDetail({showUser,display}) {
   const admin = getNOKP();
@@ -38,7 +39,7 @@ export default function UserDetail({showUser,display}) {
     }).then((result) => {
       if (result.isConfirmed) {
         formData.append('mode','approve');
-        axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=update_user",formData)
+        axios.post(SERVER_URL+"int/api_generator.php?api_name=update_user",formData)
         .then(res=>{
           console.log(res);
           swal.fire({
@@ -70,7 +71,7 @@ export default function UserDetail({showUser,display}) {
     }).then((result) => {
       if (result.isConfirmed) {
         formData.append('username',user_email);
-        axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=change_password",formData)
+        axios.post(SERVER_URL+"int/api_generator.php?api_name=change_password",formData)
         .then(res=>{
           console.log(res);
           if (res.data.status == "unsuccess") {
@@ -105,7 +106,7 @@ export default function UserDetail({showUser,display}) {
     }).then((result) => {
       if (result.isConfirmed) {
         formData.append('mode','remove');
-        axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=update_user",formData)
+        axios.post(SERVER_URL+"int/api_generator.php?api_name=update_user",formData)
         .then(res=>{
           console.log(res);
           swal.fire({

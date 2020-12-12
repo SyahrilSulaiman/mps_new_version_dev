@@ -6,6 +6,7 @@ import axios from 'axios';
 import swal from 'sweetalert2';
 import { Heading, Spinner, Pane, Button, Text, Paragraph, majorScale, minorScale, Card, ArrowRightIcon,Icon , ChevronRightIcon, ArrowLeftIcon, toaster, DeleteIcon } from 'evergreen-ui';
 import Topbaer from "./Topbar2";
+import { SERVER_URL } from './Constants';
 
 export default function SenaraiBil(props) {
 
@@ -20,7 +21,7 @@ export default function SenaraiBil(props) {
     }
 
     const viewBill = (e) => {
-        window.location.href = "https://mymps.corrad.my/rp/bil_cukai_taksiran.php?noakaun=" + btoa(e)
+        window.location.href = SERVER_URL+"rp/bil_cukai_taksiran.php?noakaun=" + btoa(e)
     }
 
     const handlePayment = () => {
@@ -30,7 +31,7 @@ export default function SenaraiBil(props) {
         const formData = new FormData();
         formData.append('userSecret', nokp)
 
-        axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=get_user_status", formData)
+        axios.post(SERVER_URL+"int/api_generator.php?api_name=get_user_status", formData)
             .then((res) => {
                 if (res.data.status === "Pending") {
                     toaster.danger("Pembayaran Dibatalkan.",{description:"Akaun anda masih belum diaktifkan. Sila semak emel anda untuk pengesahan akaun."})
@@ -47,7 +48,7 @@ export default function SenaraiBil(props) {
     }
 
     useEffect(() => {
-        axios.get("https://mymps.corrad.my/int/api_generator.php?api_name=getBill&noakaun=" + sessionStorage.getItem('noakaun'), {headers:headers})
+        axios.get(SERVER_URL+"int/api_generator.php?api_name=getBill&noakaun=" + sessionStorage.getItem('noakaun'), {headers:headers})
             .then(res => {
                 if (res.data.status == 'success') {
                     setBill({
@@ -81,7 +82,7 @@ export default function SenaraiBil(props) {
                 let formData = new FormData();
                 formData.append('user',btoa(nokp));
                 formData.append('noakaun',btoa(e));
-                axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=deleteBill",formData, {headers:headers})
+                axios.post(SERVER_URL+"int/api_generator.php?api_name=deleteBill",formData, {headers:headers})
                 .then(res => {
                     if (res.data.status === 'success'){
                         swal.fire({

@@ -51,6 +51,7 @@ import AddUser from "./admin/AddUser_Admin";
 import { useLoading, Audio } from "@agney/react-loading";
 
 import SelectedBillContextProvider from './contexts/SelectedBillContext';
+import { SERVER_URL } from './Constants';
 
 //import "./main.css";
 
@@ -79,8 +80,7 @@ function App() {
         redirect: "follow",
       };
 
-      var urlAPI =
-        "https://mymps.corrad.my/int/api_generator.php?api_name=check_session";
+      var urlAPI = SERVER_URL+"int/api_generator.php?api_name=check_session";
 
       fetch(urlAPI, requestOptions)
         .then((response) => response.json())

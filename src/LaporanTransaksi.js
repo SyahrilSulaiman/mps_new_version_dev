@@ -10,6 +10,7 @@ import {
 } from "evergreen-ui";
 import Topbaer from "./Topbar2";
 import {  getNOKP, getEmail, setAuthorization } from "./Utils/Common";
+import { SERVER_URL } from './Constants';
 
 function Bill(props) {
   const [data, setData] = useState([]);
@@ -28,7 +29,7 @@ function Bill(props) {
 
   useEffect(() => {
     var apiUrl =
-      "https://mymps.corrad.my/int/api_generator.php?api_name=userReport";
+      SERVER_URL+"int/api_generator.php?api_name=userReport";
 
     var formData = new FormData();
     formData.append("userid", nokp);

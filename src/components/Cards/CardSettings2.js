@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import swal from "sweetalert";
-
+import { SERVER_URL } from '../../Constants';
 // components
 
 const useFormInput = (initialValue) => {
@@ -62,7 +62,7 @@ export default function CardSettings({notel=""}) {
         redirect: 'follow'
         };
 
-        var urlAPI = "https://mymps.corrad.my/int/api_generator.php?api_name=update_profile";
+        var urlAPI = SERVER_URL+"int/api_generator.php?api_name=update_profile";
 
         fetch(urlAPI, requestOptions)
         .then(response => response.json())

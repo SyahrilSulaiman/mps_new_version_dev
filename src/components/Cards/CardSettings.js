@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Pane, Button, Heading, TextInputField, Text, Dialog, toaster } from "evergreen-ui";
 import swal from "sweetalert";
-
+import { SERVER_URL } from '../../Constants';
 // components
 
 const useFormInput = (initialValue) => {
@@ -68,7 +68,7 @@ export default function CardSettings({
         redirect: 'follow'
       };
 
-      var urlAPI = "https://mymps.corrad.my/int/api_generator.php?api_name=update_profile";
+      var urlAPI = SERVER_URL+"int/api_generator.php?api_name=update_profile";
 
       fetch(urlAPI, requestOptions)
         .then(response => response.json())
@@ -150,7 +150,7 @@ export default function CardSettings({
                 redirect: 'follow'
               };
 
-              fetch("https://mymps.corrad.my/int/api_generator.php?api_name=update_password", requestOptions)
+              fetch(SERVER_URL+"int/api_generator.php?api_name=update_password", requestOptions)
                 .then(response => response.json())
                 .then(result => {
                   if (result.status == "pending") {

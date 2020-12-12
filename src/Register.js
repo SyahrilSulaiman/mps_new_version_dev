@@ -3,10 +3,8 @@ import { setUserSession } from "./Utils/Common";
 import IndexNavbar from "./components/Navbars/IndexNavbar2.js";
 import { Button, Heading, Link } from "evergreen-ui";
 import swal from "sweetalert";
-import { title, subtitle } from "./Constants";
+import { title, subtitle, captchaToken, SERVER_URL } from "./Constants";
 import ReCAPTCHA from "react-google-recaptcha";
-import {captchaToken, SERVER_URL} from "./Constants";
-
 
 function Register(props) {
 
@@ -196,7 +194,7 @@ function Register(props) {
           redirect: 'follow'
         };
 
-        var urlAPI = "https://mymps.corrad.my/int/api_generator.php?api_name=daftar_pengguna";
+        var urlAPI = SERVER_URL+"int/api_generator.php?api_name=daftar_pengguna";
 
         fetch(urlAPI, requestOptions)
           .then(response => response.json())

@@ -6,7 +6,7 @@ import { toaster, Heading, Pane, ArrowLeftIcon, TextInputField, Dialog, Checkbox
 import Topbar from "./Topbar";
 import NumberFormat from "react-number-format";
 import { getNOKP, getEmail, setAuthorization } from "./Utils/Common";
-
+import { SERVER_URL } from './Constants';
 
 const FPX = "FPX";
 const CARD = "CARD";
@@ -61,7 +61,7 @@ function Pay() {
 
         const formData = new FormData();
         formData.append('userSecret', sessionStorage.nokp)
-        axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=get_user_status", formData)
+        axios.post(SERVER_URL+"int/api_generator.php?api_name=get_user_status", formData)
         .then((res) => {
             if (res.data.status === "Pending") {
                 toaster.warning("Pembayaran Dibatalkan.", { id: "forbidden-action", description: "Akaun anda masih belum diaktifkan. Sila semak emel anda untuk pengesahan akaun." });
@@ -118,7 +118,7 @@ function Pay() {
                 headers : myHeaders
             };
 
-            var urlAPI1 = "https://mymps.corrad.my/int/api_generator.php?api_name=multibill_payment";
+            var urlAPI1 = SERVER_URL+"int/api_generator.php?api_name=multibill_payment";
 
             fetch(urlAPI1, requestOptions)
                 .then(response => response.json())
@@ -178,7 +178,7 @@ function Pay() {
                 headers:myHeaders
             };
 
-            var urlAPI1 = "https://mymps.corrad.my/int/api_generator.php?api_name=multibill_payment";
+            var urlAPI1 = SERVER_URL+"int/api_generator.php?api_name=multibill_payment";
 
             fetch(urlAPI1, requestOptions)
                 .then(response => response.json())
@@ -495,8 +495,8 @@ function Pay() {
                             <input type="hidden" name="payment_ref_no" value={invoiceNo} />
                             <input type="hidden" name="bank" value={bankCode ? bankCode : 'TEST0021'} />
                             <input type="hidden" name="channel" value="01" />
-                            <input type="hidden" name="web_return_address" value="https://mymps.corrad.my/int/resitpembayaran.php" />
-                            <input type="hidden" name="web_service_return_address" value="https://mymps.corrad.my/int/callback.php" />
+                            <input type="hidden" name="web_return_address" value={SERVER_URL+"int/resitpembayaran.php"} />
+                            <input type="hidden" name="web_service_return_address" value={SERVER_URL+"int/callback.php"} />
                             <input type="hidden" name="payment_amount" value={amount} />
                             <input type="hidden" name="payment_description" value={"Cukai " + invoiceNo} />
                             <input type="hidden" name="email" value={payoremail} />
@@ -505,8 +505,8 @@ function Pay() {
                         <form action="https://epstaging.mps.gov.my/MiGS/payment.php" method="post" id="bayarCC">
                             <input type="hidden" name="receipt_no" value={receiptno} />
                             <input type="hidden" name="payment_ref_no" value={invoiceNo} />
-                            <input type="hidden" name="web_return_address" value="https://mymps.corrad.my/int/resitpembayaran.php" />
-                            <input type="hidden" name="web_service_return_address" value="https://mymps.corrad.my/int/callback.php" />
+                            <input type="hidden" name="web_return_address" value={SERVER_URL+"int/resitpembayaran.php"} />
+                            <input type="hidden" name="web_service_return_address" value={SERVER_URL+"int/callback.php"} />
                             <input type="hidden" name="payment_amount" value={amount} />
                             <input type="hidden" name="payment_description" value={"Cukai " + invoiceNo} />
                             <input type="hidden" name="email" value={payoremail} />

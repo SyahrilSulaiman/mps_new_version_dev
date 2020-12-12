@@ -10,6 +10,7 @@ import {Pane, Text} from 'evergreen-ui';
 import JumlahPembayaran from './report/Dashboard_Page/JumlahPembayaran'
 import LineGraph from './report/Dashboard_Page/LineGraph'
 import Axios from "axios";
+import { SERVER_URL } from '../Constants';
 
 function Dashboard(props) {
 
@@ -24,7 +25,7 @@ function Dashboard(props) {
 
   useEffect(() => {
     setLoading(true);
-    axios.get("https://mymps.corrad.my/int/api_generator.php?api_name=laporan_jumlah_pembayaran")
+    axios.get(SERVER_URL+"int/api_generator.php?api_name=laporan_jumlah_pembayaran")
     .then( res => {
       setJumlah(res.data.result);
       console.log('Jumlah :',jumlah);
@@ -34,7 +35,7 @@ function Dashboard(props) {
 
   useEffect(() => {
     setLoading2(false);
-    axios.get("https://mymps.corrad.my/int/api_generator.php?api_name=laporan_pengguna")
+    axios.get(SERVER_URL+"int/api_generator.php?api_name=laporan_pengguna")
     .then( res => {
       setPengguna(res.data.result);
       console.log('Pengguna :',pengguna);

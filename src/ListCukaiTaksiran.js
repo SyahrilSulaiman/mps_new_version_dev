@@ -9,6 +9,7 @@ import Topbaer from "./Topbar2";
 import axios from 'axios'
 import swal from 'sweetalert'
 import { SelectedBillContext } from "./contexts/SelectedBillContext";
+import { SERVER_URL } from './Constants';
 
 function Bill(props) {
 
@@ -34,7 +35,7 @@ function Bill(props) {
         setDisabled(true);
         const formData = new FormData();
         formData.append('userSecret', nokp)
-        axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=get_user_status", formData)
+        axios.post(SERVER_URL+"int/api_generator.php?api_name=get_user_status", formData)
             .then((res) => {
                 if (res.data.status === "Pending") {
                     toaster.danger("Pembayaran Dibatalkan.",{description:"Akaun anda masih belum diaktifkan. Sila semak emel anda untuk pengesahan akaun."}, { id: "forbidden-action" })
@@ -61,7 +62,7 @@ function Bill(props) {
         setDisabled(true);
         const formData = new FormData();
         formData.append('userSecret', nokp)
-        axios.post("https://mymps.corrad.my/int/api_generator.php?api_name=get_user_status", formData)
+        axios.post(SERVER_URL+"int/api_generator.php?api_name=get_user_status", formData)
             .then((res) => {
                 if (res.data.status === "Pending") {
                     toaster.danger("Pembayaran Dibatalkan.",{description:"Akaun anda masih belum diaktifkan. Sila semak emel anda untuk pengesahan akaun."},{ id: "forbidden-action" })
@@ -87,7 +88,7 @@ function Bill(props) {
 
 		const formData = new FormData();
 		formData.append("nokp", nokp);
-		axios.post(	"https://mymps.corrad.my/int/api_generator.php?api_name=showBill", formData, {headers:headers} )
+		axios.post(	SERVER_URL+"int/api_generator.php?api_name=showBill", formData, {headers:headers} )
 			.then((res) => {
 				setLoading(true);
 				if (res.data.status === "success") {
