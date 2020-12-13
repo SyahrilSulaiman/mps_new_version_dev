@@ -7,12 +7,20 @@ import Footer from "./components/Footers/Footer";
 import swal from "sweetalert";
 import { Button, Heading, Pane, ArrowLeftIcon, LogInIcon, Icon, CloudDownloadIcon } from "evergreen-ui";
 import Modal from './components/Modal/Install_Modal';
-import {title, subtitle, SERVER_URL} from "./Constants";
+import {title, subtitle, captchaToken, SERVER_URL} from "./Constants";
+import ReCAPTCHA from "react-google-recaptcha";
+
 
 function Login(props) {
     let url_string = window.location.href;
     const url = new URL(url_string);
     const c = url.searchParams.get('token');
+
+    const [token, setToken]     = useState(null)
+
+    const onChange = (value) => {
+      setToken(value);
+    }
 
     if (url.searchParams.get('token')) {
 
@@ -94,7 +102,11 @@ function Login(props) {
             swal("Opss!", "Sila pastikan kata nama dan kata laluan anda sah", "error");
             setLoading(false);
 
-        } 
+        }
+        else if(token === "" || token === null){
+            swal("Opss!", "Sila tandakan pada ruangan captcha di bawah.", "error");
+            return false;
+        }
         else {
 
             var sha256 = require('js-sha256');
@@ -192,7 +204,6 @@ function Login(props) {
                                     </a>
                                 </div>
                             </div>
-
                             <div className="flex flex-wrap" style={{marginTop:"30px"}}>
                                 <div className="w-full lg:w-6/12 px-1">
                                     <div className="relative w-full mb-3">
@@ -206,7 +217,12 @@ function Login(props) {
                                 </div>
                             </div>
                             <div className="items-center text-center text-indigo-100">
-
+                                <Pane alignItems="center" justifyContent="center" display="flex" paddingBottom={2}>
+                                    <ReCAPTCHA
+                                        sitekey={captchaToken}
+                                        onChange={onChange}
+                                    />
+                                </Pane>
                                 <Heading size={400} color="white" onClick={handleShow} style={{cursor:"pointer"}}> Muat turun aplikasi ini di telefon anda sekarang</Heading>
                                 {/* <a href="#" onClick={handleShow} className="text-center">Install aplikasi ini di telefon anda</a> */}
                             </div>

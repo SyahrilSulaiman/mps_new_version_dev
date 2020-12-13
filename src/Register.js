@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { setUserSession } from "./Utils/Common";
 import IndexNavbar from "./components/Navbars/IndexNavbar2.js";
-import { Button, Heading, Link } from "evergreen-ui";
+import { Button, Heading, Link, Pane } from "evergreen-ui";
 import swal from "sweetalert";
 import { title, subtitle, captchaToken, SERVER_URL } from "./Constants";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -449,32 +449,22 @@ function Register(props) {
                   </div>
                 </div>
               </div>
-
-              <ReCAPTCHA
-                justifycontent="center"
-                aligncontent="center"
-                textalign="center"
-                sitekey={captchaToken}
-                onChange={onChange}
-              />
-              <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
-              <div className="col-span-6 sm:col-span-3 p-2">
+              <Pane alignItems="center" justifyContent="center" display="flex" paddingBottom={2}>
+                <ReCAPTCHA
+                  sitekey={captchaToken}
+                  onChange={onChange}
+                />
+              </Pane>
+              <div className="col-span-6 sm:col-span-3 p-2 text-center">
                 <Heading
-                  justifycontent="center"
-                  aligncontent="center"
-                  textalign="center"
                   size={400}
                 >
                   Dengan mendaftar, anda bersetuju pada <a className="no-underline border-grey-dark text-grey-dark"> terma & syarat </a> {title}
                 </Heading>
               </div>
 
-              <div className="col-span-6 sm:col-span-3 p-2">
+              <div className="col-span-6 sm:col-span-3 p-2 text-center">
                 <Heading
-                  justifycontent="center"
-                  aligncontent="center"
-                  textalign="center"
                   top={100}
                   size={200}
                 >
