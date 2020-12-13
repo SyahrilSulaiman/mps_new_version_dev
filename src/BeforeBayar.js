@@ -267,8 +267,8 @@ export default function SenaraiBil(props) {
                                                     Kembali
                                                 </Button>
                                                 <Button
-                                                    disabled={disabled}
-                                                    // disabled="disabled"
+                                                    // disabled={disabled}
+                                                    disabled="disabled"
                                                     appearance="primary"
                                                     intent="success"
                                                     type="button"
