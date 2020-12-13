@@ -144,7 +144,10 @@ function Bill(props) {
 								</div>
 							</div>
 						</div>
-						<div className="w-full lg:w-6/12 xl:w-4/12 px-6 opacity-75" onClick={/*handleBayarSelected*/ disabledButton}>
+						<div className="w-full lg:w-6/12 xl:w-4/12 px-6 opacity-75" onClick={
+																								handleBayarSelected
+																								// disabledButton
+																							}>
 							<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg cursor-not-allowed">
 								<div className="flex-auto p-3">
 									<div className="flex flex-wrap">
@@ -156,7 +159,10 @@ function Bill(props) {
 												<Pane display="flex"> Sila tekan pada <TickCircleIcon color="success" marginLeft="2px" marginRight="2px"/> untuk pilih bil</Pane>
 											</span>
 										</div>
-										<div className="relative w-auto pl-4 flex-initial" onClick={/*handleBayarSelected*/ disabledButton}>
+										<div className="relative w-auto pl-4 flex-initial" onClick={
+																										handleBayarSelected
+																										// disabledButton
+																									}>
 											<div className="text-white p-3 text-center inline-flex items-center justify-center w-8 h-8 shadow-lg rounded-full bg-yellow-500">
 												<Heading size={400} color="white">{selectedBil.length}</Heading>	
 											</div>
@@ -165,7 +171,10 @@ function Bill(props) {
 								</div>
 							</div>
 						</div>
-						<div className="w-full lg:w-6/12 xl:w-4/12 px-6 opacity-75" onClick={/*handleBayarSemua*/ disabledButton}>
+						<div className="w-full lg:w-6/12 xl:w-4/12 px-6 opacity-75" onClick={
+																								handleBayarSemua
+																								// disabledButton
+																							}>
 							<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg cursor-not-allowed">
 								<div className="flex-auto p-3">
 									<div className="flex flex-wrap">
@@ -177,7 +186,10 @@ function Bill(props) {
 												<Pane>Membayar keseluruhan bil yang tertunggak</Pane>
 											</span>
 										</div>
-										<div className="relative w-auto pl-4 flex-initial" onClick={/*handleBayarSemua*/ disabledButton}>
+										<div className="relative w-auto pl-4 flex-initial" onClick={
+																								handleBayarSemua
+																								// disabledButton
+																							}>
 											<div className="text-white p-3 text-center inline-flex items-center justify-center w-8 h-8 shadow-lg rounded-full bg-blue-500">
 												<Heading size={400} color="white">{unpaidBil.length}</Heading>
 											</div>
