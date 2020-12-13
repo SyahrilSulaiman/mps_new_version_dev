@@ -1,13 +1,13 @@
 import react, { useState } from "react";
 import { setUserSession } from './Utils/Common';
 import logo1 from "./assets/img/logo1.png";
-import ReCAPTCHA from "react-google-recaptcha";
 import noScroll from "no-scroll";
 import IndexNavbar from "./components/Navbars/IndexNavbar2.js";
 import Footer from "./components/Footers/Footer";
 import swal from "sweetalert";
 import { Button, Heading, Pane, ArrowLeftIcon, ArrowRightIcon } from "evergreen-ui";
-import { SERVER_URL } from './Constants';
+import { captchaToken, SERVER_URL } from './Constants';
+import ReCAPTCHA from "react-google-recaptcha";
 
 function onChange(value) {
     console.log("Captcha value:", value);
@@ -21,7 +21,11 @@ function ForgetPassword(props) {
 
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [token, setToken]     = useState(null)
 
+    const onChange = (value) => {
+      setToken(value);
+    }
     const handleForgetPassword = () => {
         setError(null);
         setLoading(true);
@@ -31,7 +35,12 @@ function ForgetPassword(props) {
             swal("Opss!", "Emel tidak boleh dikosongkan.", "error");
             setLoading(false);
 
-        } else {
+        }
+        else if(token === "" || token === null){
+            swal("Opss!", "Sila tandakan pada ruangan captcha di bawah.", "error");
+            return false;
+        }
+        else {
 
             var formdata = new FormData();
             formdata.append("username", username.value);
@@ -106,7 +115,12 @@ function ForgetPassword(props) {
                                     <input aria-label="username" {...username} name="username" type="username" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="Sila masukkan alamat emel anda" />
                                 </div>
                             </div>
-
+                            <Pane alignItems="center" justifyContent="center" display="flex" paddingTop={10}>
+                                <ReCAPTCHA
+                                    sitekey={captchaToken}
+                                    onChange={onChange}
+                                />
+                            </Pane>
                             <div className="flex flex-wrap" style={{ marginTop: "30px" }}>
                                 <div className="w-full lg:w-6/12 px-1">
                                     <div className="relative w-full mb-3">
