@@ -204,7 +204,13 @@ function Login(props) {
                                     </a>
                                 </div>
                             </div>
-                            <div className="flex flex-wrap" style={{marginTop:"30px"}}>
+                            <Pane alignItems="center" justifyContent="center" display="flex" paddingTop={10}>
+                                <ReCAPTCHA
+                                    sitekey={captchaToken}
+                                    onChange={onChange}
+                                />
+                            </Pane>
+                            <div className="flex flex-wrap" style={{marginTop:"10px"}}>
                                 <div className="w-full lg:w-6/12 px-1">
                                     <div className="relative w-full mb-3">
                                     <Button iconBefore={LogInIcon} type="submit" appearance="primary" intent="success" display="flex" justifyContent="center" width="100%">{loading ? 'Memuatkan...' : 'Log Masuk'}</Button>
@@ -217,12 +223,7 @@ function Login(props) {
                                 </div>
                             </div>
                             <div className="items-center text-center text-indigo-100">
-                                <Pane alignItems="center" justifyContent="center" display="flex" paddingBottom={2}>
-                                    <ReCAPTCHA
-                                        sitekey={captchaToken}
-                                        onChange={onChange}
-                                    />
-                                </Pane>
+                                
                                 <Heading size={400} color="white" onClick={handleShow} style={{cursor:"pointer"}}> Muat turun aplikasi ini di telefon anda sekarang</Heading>
                                 {/* <a href="#" onClick={handleShow} className="text-center">Install aplikasi ini di telefon anda</a> */}
                             </div>
