@@ -107,7 +107,7 @@ function Register(props) {
           redirect: 'follow'
         };
 
-        var urlAPI = SERVER_URL+"api_generator.php?api_name=daftar_pengguna";
+        var urlAPI = SERVER_URL+"int/api_generator.php?api_name=daftar_pengguna";
 
         fetch(urlAPI, requestOptions)
           .then(response => response.json())
@@ -347,7 +347,7 @@ function Register(props) {
                                 intent="success"
                                 display="flex"
                                 top={20}
-                                justifycontent="center"
+                                justifyContent="center"
                                 width="100%"
                               >
                                 Daftar Pengguna
@@ -360,7 +360,7 @@ function Register(props) {
                                 intent="danger"
                                 display="flex"
                                 top={20}
-                                justifycontent="center"
+                                justifyContent="center"
                                 width="100%"
                                 onClick={() => window.location.href = "/"}
                               >
