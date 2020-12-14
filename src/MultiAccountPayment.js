@@ -49,7 +49,7 @@ function Pay() {
             setAmount(total = total + (account[i]["BAKI_DAHULU"] + account[i]["CAJ_DIKENAKAN"] + account[i]["CUKAI_SEMASA"] + account[i]["TMP_LAIN"] + account[i]["TUNGGAKAN_SEMASA"] + account[i]["WARAN_TAHANAN"] ));
         }
 
-        fetch('https://dev1.toyyibpay.com/api/getBankFPX')
+        fetch('https://toyyibpay.com/api/getBankFPX')
         .then(response => response.json())
         .then(result => {
             setData(result);
@@ -490,7 +490,7 @@ function Pay() {
                     )}
 
                     <div>
-                        <form action="https://epstaging.mps.gov.my/fpx/sd.php" method="post" id="bayar">
+                        <form action="https://payment.mps.gov.my/fpx/sd.php" method="post" id="bayar">
                             <input type="hidden" name="receipt_no" value={receiptno} />
                             <input type="hidden" name="payment_ref_no" value={invoiceNo} />
                             <input type="hidden" name="bank" value={bankCode ? bankCode : 'TEST0021'} />
@@ -502,7 +502,7 @@ function Pay() {
                             <input type="hidden" name="email" value={payoremail} />
                         </form>
 
-                        <form action="https://epstaging.mps.gov.my/MiGS/payment.php" method="post" id="bayarCC">
+                        <form action="https://payment.mps.gov.my/MiGS/payment.php" method="post" id="bayarCC">
                             <input type="hidden" name="receipt_no" value={receiptno} />
                             <input type="hidden" name="payment_ref_no" value={invoiceNo} />
                             <input type="hidden" name="web_return_address" value={SERVER_URL+"int/resitpembayaran.php"} />

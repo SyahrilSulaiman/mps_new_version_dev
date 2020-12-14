@@ -40,7 +40,7 @@ function Pay() {
     myHeaders.append('token',auth);
 
     useEffect(() => {
-        fetch('https://epstaging.mps.gov.my/fpx/bankList.php')
+        fetch('https://payment.mps.gov.my/fpx/bankList.php')
         .then(response => response.json())
         .then(result => {
             setData(result);
@@ -507,7 +507,7 @@ function Pay() {
                     )}
 
                     <div>
-                        <form action="https://epstaging.mps.gov.my/fpx/sd.php" method="post" id="bayar">
+                        <form action="https://payment.mps.gov.my/fpx/sd.php" method="post" id="bayar">
                             <input type="hidden" name="account_no" value={accountNo} />
                             <input type="hidden" name="receipt_no" value={receiptno} />
                             <input type="hidden" name="payment_ref_no" value={invoiceNo} />
@@ -520,7 +520,7 @@ function Pay() {
                             <input type="hidden" name="email" value={payoremail} />
                         </form>
 
-                        <form action="https://epstaging.mps.gov.my/MiGS/payment.php" method="post" id="bayarCC">
+                        <form action="https://payment.mps.gov.my/MiGS/payment.php" method="post" id="bayarCC">
                             <input type="hidden" name="account_no" value={accountNo} />
                             <input type="hidden" name="receipt_no" value={receiptno} />
                             <input type="hidden" name="payment_ref_no" value={invoiceNo} />
