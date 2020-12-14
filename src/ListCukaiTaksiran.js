@@ -85,7 +85,7 @@ function Bill(props) {
 	}
 
 	const disabledButton = () => {
-		toaster.danger("Fungsi belum diaktifkan.",{description:"Harap maaf. Fungsi pembayaran belum diaktifkan."},{ id: "forbidden-action" })
+		toaster.danger("Fungsi belum diaktifkan.",{ description: "Harap maaf. Fungsi pembayaran belum diaktifkan.", id: "forbidden-action"});
 	}
 
 	useEffect(() => {
