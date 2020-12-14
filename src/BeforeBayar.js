@@ -65,6 +65,10 @@ export default function SenaraiBil(props) {
             })
     }, [])
 
+    const disabledButton = () => {
+		toaster.danger("Fungsi belum diaktifkan.",{ description: "Harap maaf. Fungsi pembayaran belum diaktifkan.", id: "forbidden-action"});
+	}
+
     const handleDelete = (e) => {
         swal.fire({
             icon:'warning',
@@ -270,8 +274,10 @@ export default function SenaraiBil(props) {
                                                     appearance="primary"
                                                     intent="success"
                                                     type="button"
-                                                    className="float-right"
+                                                    className="float-right cursor-pointer"
                                                     onClick={() => handlePayment()}
+                                                    // className="float-right cursor-not-allowed opacity-75"
+                                                    // onClick={disabledButton}
                                                     iconAfter={ArrowRightIcon}
                                                 >
                                                     Bayar
