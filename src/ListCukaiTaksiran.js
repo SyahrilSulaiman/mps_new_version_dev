@@ -65,7 +65,7 @@ function Bill(props) {
         axios.post(SERVER_URL+"int/api_generator.php?api_name=get_user_status", formData)
             .then((res) => {
                 if (res.data.status === "Pending") {
-                    toaster.danger("Pembayaran Dibatalkan.",{description:"Akaun anda masih belum diaktifkan. Sila semak emel anda untuk pengesahan akaun."},{ id: "forbidden-action" })
+                    toaster.danger("Pembayaran Dibatalkan.",{ description:"Akaun anda masih belum diaktifkan. Sila semak emel anda untuk pengesahan akaun.", id: "forbidden-action" })
                 }else{
 					if (selectedBil.length < 1) {
 						toaster.danger("Sila pilih akaun yang ingin dibayar dan tekan pada butang bayar bil berwarna kuning.", { id: "forbidden-action" });
