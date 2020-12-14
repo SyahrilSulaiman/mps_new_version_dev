@@ -144,11 +144,11 @@ function Bill(props) {
 								</div>
 							</div>
 						</div>
-						<div className="w-full lg:w-6/12 xl:w-4/12 px-6 opacity-75" onClick={
+						<div className="w-full lg:w-6/12 xl:w-4/12 px-6" onClick={
 																								handleBayarSelected
 																								// disabledButton
 																							}>
-							<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg cursor-not-allowed">
+							<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
 								<div className="flex-auto p-3">
 									<div className="flex flex-wrap">
 										<div className="relative w-full pr-4 max-w-full flex-grow flex-1">
@@ -171,11 +171,11 @@ function Bill(props) {
 								</div>
 							</div>
 						</div>
-						<div className="w-full lg:w-6/12 xl:w-4/12 px-6 opacity-75" onClick={
+						<div className="w-full lg:w-6/12 xl:w-4/12 px-6" onClick={
 																								handleBayarSemua
 																								// disabledButton
 																							}>
-							<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg cursor-not-allowed">
+							<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
 								<div className="flex-auto p-3">
 									<div className="flex flex-wrap">
 										<div className="relative w-full pr-4 max-w-full flex-grow flex-1">
