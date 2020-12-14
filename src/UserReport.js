@@ -205,7 +205,7 @@ function Bill(props) {
                 width="100%"
               >
                 <Topbaer
-                  title="Laporan / Laporan Transaksi"
+                  title="Laporan Penyata Akaun"
                   leftButtonIcon={ArrowLeftIcon}
                   onClickLeftButton={() => window.history.back()}
                 />
