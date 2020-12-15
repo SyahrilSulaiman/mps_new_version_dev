@@ -274,10 +274,10 @@ export default function SenaraiBil(props) {
                                                     appearance="primary"
                                                     intent="success"
                                                     type="button"
-                                                    className="float-right cursor-pointer"
-                                                    onClick={() => handlePayment()}
-                                                    // className="float-right cursor-not-allowed opacity-75"
-                                                    // onClick={disabledButton}
+                                                    // className="float-right cursor-pointer"
+                                                    // onClick={() => handlePayment()}
+                                                    className="float-right cursor-not-allowed opacity-75"
+                                                    onClick={disabledButton}
                                                     iconAfter={ArrowRightIcon}
                                                 >
                                                     Bayar
