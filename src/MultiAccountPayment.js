@@ -40,6 +40,10 @@ function Pay() {
     const myHeaders = new Headers();
     myHeaders.append('token',auth);
 
+    const disabledButton = () => {
+		toaster.danger("Fungsi belum diaktifkan.",{ description: "Harap maaf. Fungsi pembayaran belum diaktifkan.", id: "forbidden-action"});
+    }
+    
     useEffect(() => {
         if(account === null || account === ""){
             window.location.href = "/cukaitaksiran";
@@ -327,6 +331,7 @@ function Pay() {
                                                         paddingX={15}
                                                         paddingY={10}
                                                         marginBottom={1}
+                                                        className="cursor-pointer"
                                                         alignItems="center"
                                                         textAlign="center"
                                                         borderRadius={3}
@@ -435,7 +440,7 @@ function Pay() {
                                 >
                                 </Paragraph>
                             </Pane>
-                            <Pane alignItems="center" alignContent="center" textAlign="center" justifyContent="center" onClick={() => {
+                            <Pane alignItems="center" alignContent="center" textAlign="center" justifyContent="center" className="cursor-pointer" onClick={() => {
                                 if (bankCode && method === "FPX") {
                                     setDialog(true)
                                 } else if (bankCode == "" && method === "FPX") {
@@ -479,11 +484,12 @@ function Pay() {
                             >
                             </Paragraph>
                         </Pane>
-                        <Pane alignItems="center" alignContent="center" textAlign="center" justifyContent="center" onClick={() => {
-                            if (method === "CARD") {
-                                setDialogCC(true);
-                            }
-                        }}>
+                        <Pane alignItems="center" alignContent="center" textAlign="center" justifyContent="center" 
+                            // onClick={() => {    if (method === "CARD") {    setDialogCC(true)   }   }}
+
+                            className="cursor-not-allowed opacity-75"
+                            onClick={ disabledButton }
+                        >
                             <Heading size={400} color="white">Teruskan Pembayaran (Credit Card)</Heading>
                         </Pane>
                     </Pane>
