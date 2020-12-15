@@ -376,10 +376,10 @@ function Pay() {
                             title="Pengesahan Bayaran"
                             onConfirm={() => handleBayar()}
                             onCancel={() => setDialog(false)}
-                            cancelLabel="batal"
+                            cancelLabel="Tidak"
                             // cancelBackground = "danger"
                             intent="danger"
-                            confirmLabel="betul"
+                            confirmLabel="Ya"
                             // intent="success"
                             shouldCloseOnOverlayClick={false}
                             hasFooter={false}
@@ -388,10 +388,10 @@ function Pay() {
                             <Pane paddingTop={30} display="float" className="float-right">
                                 <Button marginRight={16} intent="success" appearance="primary" onClick={() => handleBayar()}
 >
-                                            Betul
+                                            Ya
                                 </Button>
                                 <Button marginRight={16} intent="none" onClick={() => setDialog(false)}>
-                                            Batal
+                                            Tidak
                                 </Button>
                             </Pane>
                         </Dialog>
@@ -401,9 +401,9 @@ function Pay() {
                             title="Pengesahan Pembayar"
                             onConfirm={() => handleBayar2()}
                             onCancel={() => setDialogCC(false)}
-                            cancelLabel="batal"
+                            cancelLabel="Tidak"
                             intent="danger"
-                            confirmLabel="betul"
+                            confirmLabel="Ya"
                             intent="success"
                             shouldCloseOnOverlayClick={false}
                             hasFooter={false}
@@ -412,10 +412,10 @@ function Pay() {
                             <Pane paddingTop={30} display="float" className="float-right">
                                 <Button marginRight={16} intent="success" appearance="primary" onClick={() => handleBayar2()}
 >
-                                            Betul
+                                            Ya
                                 </Button>
                                 <Button marginRight={16} intent="none" onClick={() => setDialogCC(false)}>
-                                            Batal
+                                            Tidak
                                 </Button>
                             </Pane>
                         </Dialog>
