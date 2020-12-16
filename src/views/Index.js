@@ -6,6 +6,7 @@ import logo1 from "../assets/img/logo1.png";
 import IndexNavbar from "../components/Navbars/IndexNavbar.js";
 import Footer from "../components/Footers/Footer.js";
 import {title, subtitle} from "../Constants";
+import Image from "../assets/img/photo-1498050108023-c5249f4df085.jfif"
 
 export default function Index() {
   return (
@@ -72,7 +73,7 @@ export default function Index() {
               <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-blue-600">
                 <img
                   alt="..."
-                  src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80"
+                  src={Image}
                   className="w-full align-middle rounded-t-lg"
                 />
                 <blockquote className="relative p-8">
