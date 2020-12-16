@@ -123,13 +123,13 @@ function ForgetPassword(props) {
                             </Pane>
                             <div className="flex flex-wrap" style={{ marginTop: "30px" }}>
                                 <div className="w-full lg:w-6/12 px-1">
-                                    <div className="relative w-full mb-3">
-                                        <Button iconBefore={ArrowLeftIcon} onClick={() => window.location.href = "/login"} type="button" appearance="primary" intent="danger" display="flex" justifyContent="center" width="100%">Kembali</Button>
+                                        <div className="relative w-full mb-3">
+                                            <Button iconAfter={ArrowRightIcon} type="button" onClick={handleForgetPassword} appearance="primary" intent="success" display="flex" justifyContent="center" width="100%">{loading ? 'Memuatkan...' : 'Hantar'}</Button>
+                                        </div>
                                     </div>
-                                </div>
                                 <div className="w-full lg:w-6/12 px-1">
                                     <div className="relative w-full mb-3">
-                                        <Button iconBefore={ArrowRightIcon} type="button" onClick={handleForgetPassword} appearance="primary" intent="success" display="flex" justifyContent="center" width="100%">{loading ? 'Memuatkan...' : 'Hantar'}</Button>
+                                        <Button iconBefore={ArrowLeftIcon} onClick={() => window.location.href = "/login"} type="button" appearance="primary" intent="danger" display="flex" justifyContent="center" width="100%">Kembali</Button>
                                     </div>
                                 </div>
                             </div>

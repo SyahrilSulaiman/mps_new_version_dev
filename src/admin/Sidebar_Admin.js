@@ -232,9 +232,9 @@ export default function Sidebar() {
           title="Notifikasi Log Keluar"
           onConfirm={() => handleLogout()}
           onCancel={() => setDialog(false)}
-          cancelLabel="batal"
+          cancelLabel="Tidak"
           intent="danger"
-          confirmLabel="betul"
+          confirmLabel="Ya"
           intent="success"
           shouldCloseOnOverlayClick={false}
         >

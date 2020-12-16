@@ -7,14 +7,6 @@ import { Pane, Heading, Icon, ArrowLeftIcon } from "evergreen-ui";
 import Topbaer from "./Topbar2";
 
 function Profile(props) {
-  const token = getToken();
-  const user = getUser();
-  const nokp = getNOKP();
-
-  const handleLogout = () => {
-    removeUserSession();
-    props.history.push("/login");
-  };
 
   return (
     <div>
