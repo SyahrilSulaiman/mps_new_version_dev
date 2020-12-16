@@ -86,7 +86,7 @@ export default function CardSettings({
 
             swal("Berjaya", "Akaun profil anda sudah dikemaskini.", "success")
               .then(() => {
-                window.location.href = "/setting";
+                window.location.href = "/admin/setting";
               });
 
 
@@ -156,18 +156,18 @@ export default function CardSettings({
                   if (result.status == "pending") {
                     swal("Maaf", "Anda perlu tunggu 10 minit sebelum membuat penukaran kata laluan semula.", "error")
                       .then(() => {
-                        window.location.href = "/setting";
+                        window.location.href = "/admin/setting";
                       });
                   }
                   else if (result.status == "success") {
                     swal("Berjaya", "Kata laluan akaun telah berjaya ditukar", "success")
                       .then(() => {
-                        window.location.href = "/setting";
+                        window.location.href = "/admin/setting";
                       });
                   } else {
                     swal("Maaf", "Kata laluan akaun tidak berjaya ditukar", "error")
                       .then(() => {
-                        window.location.href = "/setting";
+                        window.location.href = "/admin/setting";
                       });
                   }
                 }
@@ -237,7 +237,7 @@ export default function CardSettings({
         <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
           <div className="px-4 py-5 flex-auto">
             <div className="tab-content tab-space">
-              <div className={openTab === 1 ? "block" : "hidden"} id="link1">
+              <div className={openTab === 1 ? "block" : "hidden" + " overscroll-y-auto"} id="link1">
                 
                   <Pane display="flex" padding={10} background="#dfe6e9" borderRadius={5}>
                     <Pane flex={1} alignItems="center" display="flex">
@@ -297,7 +297,7 @@ export default function CardSettings({
                   </Pane>
                 
               </div>
-              <div className={openTab === 2 ? "block" : "hidden"} id="link2">
+              <div className={openTab === 2 ? "block" : "hidden" + " overscroll-y-auto"} id="link2">
                 
                   <Pane display="flex" padding={10} background="#dfe6e9" borderRadius={5}>
                     <Pane flex={1} alignItems="center" display="flex">

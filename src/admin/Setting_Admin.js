@@ -16,7 +16,7 @@ function Profile(props) {
         <div className="relative bg-blue-600 md:pt-20 pb-16 ">
         <div className="flex flex-wrap">
             <Pane background="#2c3e50" className="xl:mx-4 xl:rounded-md" width="100%">
-              <Topbaer title="Akaun / Kemaskini Akaun" onClickLeftButton={() => window.history.back()} />
+              <Topbaer title="Akaun / Kemaskini Akaun"/>
             </Pane>
             <div className="w-full">
               <div className="flex-auto mt-6 px-3">
