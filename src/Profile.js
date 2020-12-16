@@ -16,7 +16,7 @@ function Profile(props) {
         <div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
           <div className="flex flex-wrap">
             <Pane background="#2c3e50" className="xl:mx-4 xl:rounded-md" width="100%">
-              <Topbaer title="Akaun / Kemaskini Akaun" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => window.history.back()} />
+              <Topbaer title="Akaun / Kemaskini Akaun" onClickLeftButton={() => window.history.back()} />
             </Pane>
             <div className="w-full">
               <div className="flex-auto mt-6 px-3">
