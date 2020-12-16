@@ -108,7 +108,7 @@ export default function Carian_Cuaki({type, startDate}){
                     </div>
                 </form>
             </div>
-            <div className="relative pb-4 overflow-y-scroll" style={{height:"42vh"}}>
+            <div className="relative pb-4 overflow-y-scroll" style={{height:"62vh"}}>
                 <div className="flex flex-wrap">
                     <div className="w-full">
                         <Pane background="tint1">

@@ -5,7 +5,7 @@ import Pagination from './Pagination';
 
 export default function SenaraiCukai({result,type}){
     const [currentPage, setCurrentPage] = useState(1);
-    const [resultPerPage, setResultPerPage] = useState(5);
+    const [resultPerPage, setResultPerPage] = useState(10);
 
     const indexOfLastResult = currentPage * resultPerPage;
     const indexOfFirstResult = indexOfLastResult - resultPerPage;

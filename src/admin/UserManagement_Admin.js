@@ -20,7 +20,7 @@ function Dashboard(props) {
   const [users, setUser] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [userPerPage, setUserPerPage] = useState(5);
+  const [userPerPage, setUserPerPage] = useState(10);
   const [searchResult,setSearchResult] = useState([]);
   const [search,setSearch] = useState('');
 
@@ -72,11 +72,11 @@ function Dashboard(props) {
     return (
       <div className="">
         <Sidebar />
-        <div className="relative md:ml-64 bg-blue-600" style={{ height: "100%" }}>
+        <div className="relative md:ml-64 bg-blue-600  overflow-y-auto" style={{ height: "120vh" }}>
           <Navbar />
-          <div className="relative bg-blue-600 md:pt-32 pb-32 pt-12">
+          <div className="relative bg-blue-600 md:pt-20 pb-32 pt-12 ">
 
-            <div className="px-4 md:my-4 md:px-2 mx-auto w-full">
+            <div className="px-4 md:my-4 md:px-2 mx-auto w-full overflow-y-auto">
               <div className="flex flex-wrap">
                 <div className="w-full px-4">
                   <div className="relative flex flex-col min-w-0 break-words bg-blue-100 border-b border-gray-400 shadow-lg rounded-lg">
