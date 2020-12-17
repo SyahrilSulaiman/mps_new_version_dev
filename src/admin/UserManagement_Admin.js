@@ -77,7 +77,7 @@ function Dashboard(props) {
     return (
       <div className="">
         <Sidebar />
-        <div className="relative md:ml-64 bg-blue-600  overflow-y-auto" style={{ height: "120vh" }}>
+        <div className="relative md:ml-64 bg-blue-600  overflow-y-auto" style={{ height: "100vh" }}>
           <Navbar />
           <div className="relative bg-blue-600 md:pt-20 pb-32 pt-12 ">
 
@@ -166,7 +166,7 @@ function Dashboard(props) {
     return (
       <div className="">
         <Sidebar />
-        <div className="relative md:ml-64 bg-blue-600" style={{ height: "100%" }}>
+        <div className="relative md:ml-64 bg-blue-600" style={{ height: "100vh" }}>
           <Navbar />
           <div className="relative bg-blue-600 pb-32 pt-12">
 

@@ -39,14 +39,14 @@ export default function SenaraiCukai({result,type}){
     }
 
     return(
-        <div>
+        <div style={{ height: "100%" }}>
             <table className="table-auto w-full shadow-lg bg-white">
                 <thead>
                 <tr>
                     <th className=" bg-blue-100 border text-xs text-center px-2">Bil</th>
                     {/* <th className=" bg-blue-100 border text-left px-8 py-4">Emel</th> */}
-                    <th className=" bg-blue-100 border hidden md:table-cell text-sm text-center px-4 py-2">Nama</th>
-                    <th className=" bg-blue-100 border md:table-cell text-sm text-center px-4 py-2">No Tel</th>
+                    <th className=" bg-blue-100 border md:table-cell text-sm text-center px-4 py-2">Nama</th>
+                    <th className=" bg-blue-100 border hidden md:table-cell text-sm text-center px-4 py-2">No Tel</th>
                     <th className=" bg-blue-100 border text-sm text-center px-4 py-2">
                         {/* {
                             type === 'akaun' ? 'No Akaun':

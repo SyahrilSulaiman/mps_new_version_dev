@@ -45,7 +45,7 @@ function Dashboard(props) {
   return (
     <div>
       <Sidebar />
-      <div className="relative md:ml-64 bg-blue-600  overflow-y-auto" style={{ height: "120vh" }}>
+      <div className="relative md:ml-64 bg-blue-600  overflow-y-auto" style={{ height: "100vh" }}>
         <Navbar />
         {/* Header */}
         <div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16">
