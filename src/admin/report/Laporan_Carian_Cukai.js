@@ -1,6 +1,6 @@
 import React,{ useEffect, useState} from 'react';
 import SenaraiCarianCukai from './Senarai_Carian_Cukai';
-import Pagination from './Pagination';
+import PaginationRounded from './PaginationRounded'
 // import {Table} from 'evergreen-ui';
 
 export default function SenaraiCukai({result,type}){
@@ -15,6 +15,10 @@ export default function SenaraiCukai({result,type}){
     // const showResult = (result) => setResultDetail(user);
     const [isSort,setSorting] = useState(false);
     const [sort,setSort] = useState('desc');
+
+    const handleChange = (event, value) => {
+        setCurrentPage(value);
+      };
 
     const handleSort = (e) => {
         setSorting(true);
@@ -67,9 +71,7 @@ export default function SenaraiCukai({result,type}){
                 }
                 </tbody>
             </table>
-            {
-                <Pagination resultPerPage={resultPerPage} totalResult={result.length} paginate={paginate} />
-            }
+            <PaginationRounded resultPerPage={resultPerPage} totalResult={result.length} paginate={handleChange}/>
         </div>
     )
 }

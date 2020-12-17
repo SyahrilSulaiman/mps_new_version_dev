@@ -8,13 +8,17 @@ import CukaiTaksiran from './report/Carian_Cukai';
 import PieChart from "./report/Pie"
 import { Pane, Button, SelectField, ArrowLeftIcon , Icon, Heading} from 'evergreen-ui'
 import DatePicker from 'react-datepicker';
+import axios from 'axios'
+import {SERVER_URL} from '../Constants';
 import "react-datepicker/dist/react-datepicker.css";
 
 function Dashboard(props) {
   const token = getToken();
   const user = getUser();
   const nokp = getNOKP();
-
+  const [amount,setAmount] = useState();
+  const [loading,setLoading] = useState(false);
+  const [displayAmount,setDisplayAmount] = useState(false);
   const [type, setType] = useState('');
   // setType(false)
 
@@ -22,6 +26,19 @@ function Dashboard(props) {
     removeUserSession();
     props.history.push("/login");
   };
+
+  useEffect(() =>{
+    setLoading(false);
+    axios.get(SERVER_URL+"int/api_generator.php?api_name=api_total_payment")
+    .then(res => {
+      setLoading(true);
+      setAmount(res.data.result[0].amount);
+    })
+    .then( res => {
+      setLoading(false);
+      setDisplayAmount(true);
+    })
+  },[amount])
 
   const [startDate, setStartDate] = useState('');
 
@@ -40,6 +57,11 @@ function Dashboard(props) {
             </Pane>
         </div>
 
+            <div className="flex flex-wrap xl:pt-2">
+              <Pane background="white" className="p-3 xl:mx-4 xl:rounded-md" position="relative" width="100%">
+                <Heading size={300}>Jumlah Keseluruhan Pembayaran Melalui MyMPS : <strong>RM {loading === false && displayAmount === true ? amount : ''}</strong></Heading>
+              </Pane>
+            </div>
             <div className="flex flex-wrap xl:pt-2">
               <Pane background="white" className="p-3 xl:mx-4 xl:rounded-md" position="relative" width="100%">
                 <Heading size={500}>Tarikh : &nbsp;<DatePicker selected={startDate} onChange={date => setStartDate(date)} dateFormat="yyyy-MM-dd" isClearable placeholderText="Sila pilih tarikh" /></Heading>

@@ -7,6 +7,7 @@ import Navbar from "../components/Navbars/AdminNavbar";
 import Footer from "../components/Footers/Footer";
 import CardUser from "../components/Cards/CardUser";
 import Pagination from "../components/Pagination/Pagination"
+import PaginationRounded from './report/PaginationRounded'
 import UserDetail from "./UpdateUser_Admin";
 import { Button, Pane, SearchInput } from 'evergreen-ui'
 import { searchBegin } from "@syncfusion/ej2-react-grids";
@@ -27,6 +28,10 @@ function Dashboard(props) {
   const handleSearch = (e) => {
     setSearch(e.target.value);
   }
+
+  const handleChange = (event, value) => {
+    setCurrentPage(value);
+  };
 
   useEffect(() =>{
 
@@ -145,7 +150,8 @@ function Dashboard(props) {
                       </div>
                     </div>
                     <CardUser users={currentUsers} loading={loading} currentPage={currentPage} userPerPage={userPerPage} showUser={showUser} display={setShowDetail}/>
-                    <Pagination usersPerPage={userPerPage} totalUsers={searchResult.length} paginate={paginate} />
+                    {/* <Pagination usersPerPage={userPerPage} totalUsers={searchResult.length} paginate={paginate} /> */}
+                    <PaginationRounded resultPerPage={userPerPage} totalResult={searchResult.length} paginate={handleChange}/>
                   </div>
                 </div>
               </div>
