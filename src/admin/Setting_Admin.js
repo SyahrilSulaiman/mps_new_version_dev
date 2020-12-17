@@ -11,7 +11,7 @@ function Profile(props) {
   return (
     <div>
       <Sidebar />
-      <div className="relative md:ml-64 bg-blue-400  overflow-y-auto" style={{ height: "100%" }}>
+      <div className="relative md:ml-64 bg-blue-400  overflow-y-auto" style={{ height: "100vh" }}>
         <Navbar />
         <div className="relative bg-blue-600 md:pt-20 pb-16 ">
         <div className="flex flex-wrap">

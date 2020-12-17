@@ -39,7 +39,7 @@ export default function SenaraiCukai({result,type}){
     }
 
     return(
-        <div style={{ height: "100%" }}>
+        <div>
             <table className="table-auto w-full shadow-lg bg-white">
                 <thead>
                 <tr>
