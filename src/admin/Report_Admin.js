@@ -59,7 +59,7 @@ function Dashboard(props) {
 
             <div className="flex flex-wrap xl:pt-2">
               <Pane background="white" className="p-3 xl:mx-4 xl:rounded-md" position="relative" width="100%">
-                <Heading size={300}>Jumlah Keseluruhan Pembayaran Melalui MyMPS : <strong>RM {loading === false && displayAmount === true ? amount : ''}</strong></Heading>
+                <Heading size={300}>Jumlah Keseluruhan Pembayaran Melalui MyMPS : <strong>RM {(loading === false && displayAmount === true) ? amount : ''}</strong></Heading>
               </Pane>
             </div>
             <div className="flex flex-wrap xl:pt-2">
