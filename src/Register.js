@@ -308,12 +308,12 @@ function Register(props) {
 
                             <div className="col-span-6 sm:col-span-3 p-2">
                               <label htmlFor="email_address" className="block text-sm font-medium leading-5 text-gray-700">Alamat Emel</label>
-                              <input {...email} id="email_address" placeholder="cth: malik@email.com" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                              <input {...email} id="email_address" placeholder="cth: malik@email.com" type="email" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
                               <label htmlFor="email_address" className="block text-sm font-medium leading-5 text-gray-700">Sah Alamat Emel</label>
-                              <input {...confemail} id="conf_email_address" placeholder="cth: malik@email.com" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                              <input {...confemail} id="conf_email_address" placeholder="cth: malik@email.com" type="email" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
@@ -386,12 +386,12 @@ function Register(props) {
 
                             <div className="col-span-6 sm:col-span-3 p-2">
                               <label htmlFor="email_address" className="block text-sm font-medium leading-5 text-gray-700">Alamat Emel</label>
-                              <input {...email} id="email_address" placeholder="cth: malik@email.com" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                              <input {...email} id="email_address" placeholder="cth: malik@email.com" type="email" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
                               <label htmlFor="email_address" className="block text-sm font-medium leading-5 text-gray-700">Sah Alamat Emel</label>
-                              <input {...confemail} id="conf_email_address" placeholder="cth: malik@email.com" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                              <input {...confemail} id="conf_email_address" placeholder="cth: malik@email.com" type="email" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">

@@ -261,7 +261,9 @@ function Pay() {
                                     <Pane key={index} display="grid" width="100%" padding={10} background="tint2">
                                         <Pane display="grid" gridTemplateColumns="1fr 1fr">
                                             <Heading size={200}>AKAUN {index + 1}</Heading>
-                                            <Heading size={100} textAlign="right">{bill.NOAKAUN}</Heading>
+                                            <Heading size={100} textAlign="right">{bill.NOAKAUN}&emsp;&emsp;
+                                                <NumberFormat value={(bill.BAKI_DAHULU + bill.CAJ_DIKENAKAN + bill.CUKAI_SEMASA + bill.TMP_LAIN + bill.TUNGGAKAN_SEMASA + bill.WARAN_TAHANAN ).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'RM'} />
+                                            </Heading>
                                         </Pane>
                                     </Pane>
                                 )}
@@ -270,7 +272,7 @@ function Pay() {
                                 <Pane display="grid" width="100%" padding={10} className="bg-gray-200">
                                     <Pane display="grid" gridTemplateColumns="1fr 1fr">
                                         <Heading size={200}>JUMLAH</Heading>
-                                        <Heading size={100} textAlign="right">
+                                        <Heading size={100} textAlign="right">(Untuk {account.length} Akaun)&emsp;&emsp;
                                             <NumberFormat value={amount.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'RM'} />
                                         </Heading>
                                     </Pane>
@@ -485,11 +487,11 @@ function Pay() {
                             </Paragraph>
                         </Pane>
                         <Pane alignItems="center" alignContent="center" textAlign="center" justifyContent="center" 
-                            onClick={() => {    if (method === "CARD") {    setDialogCC(true)   }   }}
-                            className="cursor-pointer"
+                            // onClick={() => {    if (method === "CARD") {    setDialogCC(true)   }   }}
+                            // className="cursor-pointer"
                             
-                            // className="cursor-not-allowed opacity-75"
-                            // onClick={ disabledButton }
+                            className="cursor-not-allowed opacity-75"
+                            onClick={ disabledButton }
                         >
                             <Heading size={400} color="white">Teruskan Pembayaran (Credit Card)</Heading>
                         </Pane>

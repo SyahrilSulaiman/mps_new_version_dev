@@ -6,12 +6,13 @@ import PaginationRounded from './PaginationRounded'
 export default function SenaraiCukai({result,type}){
     const [currentPage, setCurrentPage] = useState(1);
     const [resultPerPage, setResultPerPage] = useState(10);
+    const [total,setTotal] = useState(0);
 
     const indexOfLastResult = currentPage * resultPerPage;
     const indexOfFirstResult = indexOfLastResult - resultPerPage;
     const currentResults = result.slice(indexOfFirstResult, indexOfLastResult);
 
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    // const paginate = (pageNumber) => setCurrentPage(pageNumber);
     // const showResult = (result) => setResultDetail(user);
     const [isSort,setSorting] = useState(false);
     const [sort,setSort] = useState('desc');
@@ -31,12 +32,26 @@ export default function SenaraiCukai({result,type}){
             }
             else{
                 setSort('desc')
-                console.log('desc')
+                // console.log('desc')
                 // result.invoice_no.sort();
                 // result.invoice_no.reverse();
             }
         }
     }
+
+    useEffect(() => {
+        let temp = 0
+        if (result.length > 0) {
+            result.map(response => {
+                temp += parseFloat(response.amount)
+            })
+        }
+        else{
+            temp += parseFloat(result.amount)
+        }
+        console.log(total);
+        return setTotal(temp)
+    },[])
 
     return(
         <div>
@@ -44,17 +59,9 @@ export default function SenaraiCukai({result,type}){
                 <thead>
                 <tr>
                     <th className=" bg-blue-100 border text-xs text-center px-2">Bil</th>
-                    {/* <th className=" bg-blue-100 border text-left px-8 py-4">Emel</th> */}
                     <th className=" bg-blue-100 border md:table-cell text-sm text-center px-4 py-2">Nama</th>
-                    <th className=" bg-blue-100 border hidden md:table-cell text-sm text-center px-4 py-2">No Tel</th>
-                    <th className=" bg-blue-100 border text-sm text-center px-4 py-2">
-                        {/* {
-                            type === 'akaun' ? 'No Akaun':
-                            type === 'nokp' ? 'No kad Pengenalan': 'No ROB ROC'
-                        } */}
-                        No Akaun
-                    </th>
-
+                    <th className=" bg-blue-100 border hidden md:table-cell text-sm text-center px-4 py-2">No KP / ROBROC</th>
+                    <th className=" bg-blue-100 border text-sm text-center px-4 py-2">No Akaun</th>
                     <th className=" bg-blue-100 border hidden lg:table-cell text-sm text-center px-4 py-2">No Invois</th>
                     <th className=" bg-blue-100 border hidden md:table-cell text-sm text-center px-4 py-2">No Resit</th>
                     <th className=" bg-blue-100 border hidden lg:table-cell text-sm text-center px-4 py-2" onClick={handleSort}>Tarikh Pembayaran&nbsp;
@@ -67,7 +74,7 @@ export default function SenaraiCukai({result,type}){
                 </thead>
                 <tbody>
                 {
-                    <SenaraiCarianCukai result={currentResults} currentPage={currentPage} resultPerPage={resultPerPage}/>
+                    <SenaraiCarianCukai result={currentResults} currentPage={currentPage} resultPerPage={resultPerPage} total={total}/>
                 }
                 </tbody>
             </table>

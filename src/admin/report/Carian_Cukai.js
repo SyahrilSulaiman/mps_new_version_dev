@@ -11,16 +11,11 @@ export default function Carian_Cuaki({type, startDate}){
     const [loading, setLoading] = useState(false);
     const [account,setAccount] = useState('');
     const [result,setResult] = useState('');
-    // console.log(result);
     const handleChange = (e) => {
         setAccount(e.target.value);
     }
-
     const handleSubmit = (e) => {
             e.preventDefault();
-            console.log(account);
-            console.log(type);
-            console.log(startDate);
             const formData = new FormData();
             formData.append('account',account);
             formData.append('type',type);
@@ -39,6 +34,8 @@ export default function Carian_Cuaki({type, startDate}){
                 }
             })
     }
+
+    
 
     return (
         <div>
@@ -113,7 +110,7 @@ export default function Carian_Cuaki({type, startDate}){
                             {
                                 // <Carian className="bg-gray-100" bill={bill} type={type} display={display} />
                                 loading? (
-                                    result === '' ? 'Maklumat laporan bayaran tidak ditemui' : <SenaraiCukai result={result} type={type}/> ):  ''
+                                    result === '' ? 'Maklumat laporan bayaran tidak ditemui' : <SenaraiCukai result={result} type={type} /> ):  ''
                                 // <SenaraiCukai result={result} type={type}/>
                             }
                         </Pane>

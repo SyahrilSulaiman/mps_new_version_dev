@@ -502,11 +502,11 @@ function Pay() {
                             </Paragraph>
                         </Pane>
                         <Pane alignItems="center" alignContent="center" textAlign="center" justifyContent="center"
-                            onClick={() => {if (method === "CARD") { setDialogCC(true)}}}
-                            className="cursor-pointer"
+                            // onClick={() => {if (method === "CARD") { setDialogCC(true)}}}
+                            // className="cursor-pointer"
 
-                            // className="cursor-not-allowed opacity-75"
-                            // onClick={ disabledButton }
+                            className="cursor-not-allowed opacity-75"
+                            onClick={ disabledButton }
                         >
                             <Heading size={400} color="white">Teruskan Pembayaran (Credit Card)</Heading>
                         </Pane>
