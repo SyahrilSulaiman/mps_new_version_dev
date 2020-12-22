@@ -50,6 +50,7 @@ function Dashboard(props) {
         setTotal(res.data.total);
       })
       .then(res => {
+        setCurrentPage(1);
         setLoading(false);
       })
     }
