@@ -48,6 +48,9 @@ import Admin_UserStatus from "./admin/Report_UserStatus";
 import UserDetail from "./admin/UpdateUser_Admin";
 import AddUser from "./admin/AddUser_Admin";
 
+import ServerSideDataTable from "./admin/Server_Side/DataTable.js";
+import ClientSideDataTable from "./admin/Client_Side/DataTable.js";
+
 import { useLoading, Audio } from "@agney/react-loading";
 
 import SelectedBillContextProvider from './contexts/SelectedBillContext';
@@ -140,8 +143,22 @@ function App() {
                 />
                 <PrivateRoute
                   path="/admin/usermanagement"
+                  component={ServerSideDataTable}
+                />
+
+                {/* <PrivateRoute
+                  path="/admin/usermanagement"
                   component={Admin_UserManagement}
                 />
+                <PrivateRoute
+                  path="/admin/server-side"
+                  component={ServerSideDataTable}
+                />
+                <PrivateRoute
+                  path="/admin/client-side"
+                  component={ClientSideDataTable}
+                /> */}
+                
                 <PrivateRoute
                   path="/admin/report"
                   component={Admin_Report}
@@ -240,8 +257,22 @@ function App() {
                   />
                   <PrivateRoute
                     path="/admin/usermanagement"
+                    component={ServerSideDataTable}
+                  />
+
+                  {/* <PrivateRoute
+                    path="/admin/usermanagement"
                     component={Admin_UserManagement}
                   />
+                  <PrivateRoute
+                  path="/admin/server-side"
+                  component={ServerSideDataTable}
+                />
+                  <PrivateRoute
+                  path="/admin/client-side"
+                  component={ClientSideDataTable}
+                /> */}
+                
                   <PrivateRoute
                     path="/admin/report"
                     component={Admin_Report}
