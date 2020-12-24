@@ -49,7 +49,8 @@ import UserDetail from "./admin/UpdateUser_Admin";
 import AddUser from "./admin/AddUser_Admin";
 
 import ServerSideDataTable from "./admin/Server_Side/DataTable.js";
-import ClientSideDataTable from "./admin/Client_Side/DataTable.js";
+// import ClientSideDataTable from "./admin/Client_Side/DataTable.js";
+// import CollapsibleDataTable from "./admin/Collapsible_DataTable/Collapsible_DataTable.js";
 
 import { useLoading, Audio } from "@agney/react-loading";
 
@@ -146,18 +147,28 @@ function App() {
                   component={ServerSideDataTable}
                 />
 
-                {/* <PrivateRoute
+                 {/* <PrivateRoute
                   path="/admin/usermanagement"
                   component={Admin_UserManagement}
-                />
-                <PrivateRoute
+                /> */}
+
+                {/* <PrivateRoute
                   path="/admin/server-side"
                   component={ServerSideDataTable}
-                />
-                <PrivateRoute
+                /> */}
+
+                {/* <PrivateRoute
                   path="/admin/client-side"
                   component={ClientSideDataTable}
-                /> */}
+                />  */}
+                
+                
+                {/* <PrivateRoute
+                  path="/admin/collapsible-datatable"
+                  component={CollapsibleDataTable}
+                />  */}
+                
+                
                 
                 <PrivateRoute
                   path="/admin/report"
@@ -260,18 +271,25 @@ function App() {
                     component={ServerSideDataTable}
                   />
 
-                  {/* <PrivateRoute
+                   {/* <PrivateRoute
                     path="/admin/usermanagement"
                     component={Admin_UserManagement}
-                  />
-                  <PrivateRoute
+                  /> */}
+
+                  {/* <PrivateRoute
                   path="/admin/server-side"
                   component={ServerSideDataTable}
-                />
-                  <PrivateRoute
+                /> */}
+
+                  {/* <PrivateRoute
                   path="/admin/client-side"
                   component={ClientSideDataTable}
-                /> */}
+                />  */}
+
+                {/* <PrivateRoute
+                  path="/admin/collapsible-datatable"
+                  component={CollapsibleDataTable}
+                />  */}
                 
                   <PrivateRoute
                     path="/admin/report"

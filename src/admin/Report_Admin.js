@@ -11,6 +11,7 @@ import DatePicker from 'react-datepicker';
 import axios from 'axios'
 import {SERVER_URL} from '../Constants';
 import "react-datepicker/dist/react-datepicker.css";
+import NumberFormat from "react-number-format";
 
 function Dashboard(props) {
   const token = getToken();
@@ -59,7 +60,9 @@ function Dashboard(props) {
 
             <div className="flex flex-wrap xl:pt-2">
               <Pane background="white" className="p-3 xl:mx-4 xl:rounded-md" position="relative" width="100%">
-                <Heading size={300}>Jumlah Keseluruhan Pembayaran Melalui MyMPS : <strong>RM {(loading === false && displayAmount === true) ? amount : ''}</strong></Heading>
+                <Heading size={300}>Jumlah Keseluruhan Pembayaran Melalui MyMPS :&nbsp;
+                  <NumberFormat className="text-base" value={(loading === false && displayAmount === true) ? amount : ''} displayType={'text'} thousandSeparator={true} prefix={'RM'} />
+                </Heading>
               </Pane>
             </div>
             <div className="flex flex-wrap xl:pt-2">
