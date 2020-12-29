@@ -134,10 +134,10 @@ function App() {
                   path="/forgotpassword"
                   component={ForgotPassword}
                 />
-                <PrivateRoute
+                {/* <PrivateRoute
                   path="/admin/dashboard"
                   component={Admin_Dashboard}
-                />
+                /> */}
                 <PrivateRoute
                   path="/admin/setting"
                   component={Admin_Setting}
@@ -241,7 +241,7 @@ function App() {
                   <Route exact path="/" component={Home} />
                   <PublicRoute path="/login" component={Login} />
                   <PublicRoute path="/register" component={Register} />
-                  <PrivateRoute path="/home" component={Dashboard} />
+                  {/* <PrivateRoute path="/home" component={Dashboard} /> */}
                   <PrivateRoute path="/setting" component={Setting} />
                   <PrivateRoute path="/bill" component={Bill} />
                   <PrivateRoute path="/cukaitaksiran" component={cukaitaksiran} />
@@ -258,10 +258,10 @@ function App() {
                     path="/forgotpassword"
                     component={ForgotPassword}
                   />
-                  <PrivateRoute
+                  {/* <PrivateRoute
                     path="/admin/dashboard"
                     component={Admin_Dashboard}
-                  />
+                  /> */}
                   <PrivateRoute
                     path="/admin/setting"
                     component={Admin_Setting}

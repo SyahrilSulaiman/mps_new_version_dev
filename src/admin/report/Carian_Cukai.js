@@ -11,6 +11,7 @@ export default function Carian_Cuaki({type, startDate}){
     const [loading, setLoading] = useState(false);
     const [account,setAccount] = useState('');
     const [result,setResult] = useState('');
+    const [total,setTotal] = useState(0);
     const handleChange = (e) => {
         setAccount(e.target.value);
     }
@@ -25,6 +26,7 @@ export default function Carian_Cuaki({type, startDate}){
                 setLoading(true);
                 if(res.data.status === 'success'){
                     setResult(JSON.parse(res.data.result))
+                    setTotal(0)
                 }
                 else if(res.data.status === 'failure'){
                     setResult('');
@@ -34,6 +36,10 @@ export default function Carian_Cuaki({type, startDate}){
                 }
             })
     }
+
+    // useEffect(() => {
+    //     console.log(total);
+    // },[total])
 
     
 
@@ -82,7 +88,7 @@ export default function Carian_Cuaki({type, startDate}){
                                     className="float-right"
                                     // onClick={handleSearch}
                                 >
-                                    {loading ? 'Mencari..' : 'Cari'}
+                                    {loading ? 'Cari' : 'Cari'}
                                     
                                 </Button>
     
@@ -110,7 +116,7 @@ export default function Carian_Cuaki({type, startDate}){
                             {
                                 // <Carian className="bg-gray-100" bill={bill} type={type} display={display} />
                                 loading? (
-                                    result === '' ? 'Maklumat laporan bayaran tidak ditemui' : <SenaraiCukai result={result} type={type} /> ):  ''
+                                    result === '' ? 'Maklumat laporan bayaran tidak ditemui' : <SenaraiCukai total={total} setTotal={setTotal} result={result} type={type} /> ):  ''
                                 // <SenaraiCukai result={result} type={type}/>
                             }
                         </Pane>

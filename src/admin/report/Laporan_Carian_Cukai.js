@@ -3,10 +3,9 @@ import SenaraiCarianCukai from './Senarai_Carian_Cukai';
 import PaginationRounded from './PaginationRounded'
 // import {Table} from 'evergreen-ui';
 
-export default function SenaraiCukai({result,type}){
+export default function SenaraiCukai({result,type,total,setTotal}){
     const [currentPage, setCurrentPage] = useState(1);
     const [resultPerPage, setResultPerPage] = useState(10);
-    const [total,setTotal] = useState(0);
 
     const indexOfLastResult = currentPage * resultPerPage;
     const indexOfFirstResult = indexOfLastResult - resultPerPage;
@@ -49,9 +48,9 @@ export default function SenaraiCukai({result,type}){
         else{
             temp += parseFloat(result.amount)
         }
-        console.log(total);
+        // console.log(total);
         return setTotal(temp)
-    },[])
+    },[total])
 
     return(
         <div>
