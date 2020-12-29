@@ -487,11 +487,11 @@ function Pay() {
                             </Paragraph>
                         </Pane>
                         <Pane alignItems="center" alignContent="center" textAlign="center" justifyContent="center" 
-                            // onClick={() => {    if (method === "CARD") {    setDialogCC(true)   }   }}
-                            // className="cursor-pointer"
+                            onClick={() => {    if (method === "CARD") {    setDialogCC(true)   }   }}
+                            className="cursor-pointer"
                             
-                            className="cursor-not-allowed opacity-75"
-                            onClick={ disabledButton }
+                            // className="cursor-not-allowed opacity-75"
+                            // onClick={ disabledButton }
                         >
                             <Heading size={400} color="white">Teruskan Pembayaran (Credit Card)</Heading>
                         </Pane>
@@ -504,6 +504,16 @@ function Pay() {
                             <input type="hidden" name="payment_ref_no" value={invoiceNo} />
                             <input type="hidden" name="bank" value={bankCode ? bankCode : 'TEST0021'} />
                             <input type="hidden" name="channel" value="01" />
+                            <input type="hidden" name="web_return_address" value={SERVER_URL+"int/resitpembayaran.php"} />
+                            <input type="hidden" name="web_service_return_address" value={SERVER_URL+"int/callback.php"} />
+                            <input type="hidden" name="payment_amount" value={amount} />
+                            <input type="hidden" name="payment_description" value={"Cukai " + invoiceNo} />
+                            <input type="hidden" name="email" value={payoremail} />
+                        </form>
+
+                        <form action="https://payment.mps.gov.my/MiGS/payment.php" method="post" id="bayarCC">
+                            <input type="hidden" name="receipt_no" value={receiptno} />
+                            <input type="hidden" name="payment_ref_no" value={invoiceNo} />
                             <input type="hidden" name="web_return_address" value={SERVER_URL+"int/resitpembayaran.php"} />
                             <input type="hidden" name="web_service_return_address" value={SERVER_URL+"int/callback.php"} />
                             <input type="hidden" name="payment_amount" value={amount} />
