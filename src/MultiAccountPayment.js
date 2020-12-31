@@ -53,7 +53,7 @@ function Pay() {
             setAmount(total = total + (account[i]["BAKI_DAHULU"] + account[i]["CAJ_DIKENAKAN"] + account[i]["CUKAI_SEMASA"] + account[i]["TMP_LAIN"] + account[i]["TUNGGAKAN_SEMASA"] + account[i]["WARAN_TAHANAN"] ));
         }
 
-        fetch('https://toyyibpay.com/api/getBankFPX')
+        fetch('https://payment.mps.gov.my/fpx/bankList.php')
         .then(response => response.json())
         .then(result => {
             setData(result);
@@ -487,11 +487,11 @@ function Pay() {
                             </Paragraph>
                         </Pane>
                         <Pane alignItems="center" alignContent="center" textAlign="center" justifyContent="center" 
-                            // onClick={() => {    if (method === "CARD") {    setDialogCC(true)   }   }}
-                            // className="cursor-pointer"
+                            onClick={() => {    if (method === "CARD") {    setDialogCC(true)   }   }}
+                            className="cursor-pointer"
                             
-                            className="cursor-not-allowed opacity-75"
-                            onClick={ disabledButton }
+                            // className="cursor-not-allowed opacity-75"
+                            // onClick={ disabledButton }
                         >
                             <Heading size={400} color="white">Teruskan Pembayaran (Credit Card)</Heading>
                         </Pane>
