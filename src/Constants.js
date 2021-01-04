@@ -16,3 +16,5 @@ export const captchaToken_server_side = "6LeVouYUAAAAAMtOCWv-VownzeBah_fhT31K3xO
 export const captchaToken = url.search("localhost") !== -1 ? captchaToken_localhost : captchaToken_client_side;
 
 export const SERVER_URL = url.search("https://mymps.mps.gov.my/") !== -1 ? "https://mymps.mps.gov.my/" : "https://mymps.corrad.my/";
+
+export const PAYMENT_URL = url.search("https://mymps.mps.gov.my/") !== -1 ? "https://payment.mps.gov.my/" : "https://epstaging.mps.gov.my/";
