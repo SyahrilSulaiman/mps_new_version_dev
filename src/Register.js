@@ -61,12 +61,16 @@ function Register(props) {
       swal("Opss!", "Sila masukkan nombor kad pengenalan anda.", "error");
       return false;
     }
+    else if (notel.length < 10 || notel.length > 11) {
+      swal("Opss!", "No telefon yang anda masukkan tidak sah.", "error");
+      return false;
+    }
     else if (nokp.length < 12 || nokp.length > 12) {
-      swal("Opss!", "No kad pengenalan yang anda masuk tidak sah.", "error");
+      swal("Opss!", "No kad pengenalan yang anda masukkan tidak sah.", "error");
       return false;
     }
     else if (!nokp.match(numbers)) {
-      swal("Opss!", "No kad pengenalan yang anda masuk tidak sah.", "error");
+      swal("Opss!", "No kad pengenalan yang anda masukkan tidak sah.", "error");
       return false;
     }
     else if (email.value == "") {
@@ -153,6 +157,10 @@ function Register(props) {
     }
     else if (ssm.value == "") {
       swal("Opss!", "Sila masukkan nombor pendaftaran syarikat anda.", "error");
+      return false;
+    }
+    else if (notel.length < 10 || notel.length > 11) {
+      swal("Opss!", "No telefon yang anda masukkan tidak sah.", "error");
       return false;
     }
     else if (email.value == "") {

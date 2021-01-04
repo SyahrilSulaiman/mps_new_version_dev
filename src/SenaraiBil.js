@@ -24,7 +24,7 @@ export default function SenaraiBil(props) {
     }
 
     const handleReceipt = (e) => {
-        window.location.href = 'https://mymps.corrad.my/rp/resit.php?account=' + btoa(e);
+        window.location.href = SERVER_URL+'rp/resit.php?invoice=' + btoa(e);
     }
 
     useEffect(() => {
@@ -221,7 +221,7 @@ export default function SenaraiBil(props) {
                                 {
                                     bills.bill.status_bil === '1' ? (
                                     <Card
-                                        onClick={() => handleReceipt(btoa(bills.bill.data[0][0].NOAKAUN))}
+                                        onClick={() => handleReceipt(btoa(bills.bill.invoice))}
                                         background="tint2"
                                         marginBottom={majorScale(2)}
                                         padding={minorScale(2)}
