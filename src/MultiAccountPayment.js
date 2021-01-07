@@ -6,7 +6,7 @@ import { toaster, Heading, Pane, ArrowLeftIcon, TextInputField, Dialog, Checkbox
 import Topbar from "./Topbar";
 import NumberFormat from "react-number-format";
 import { getNOKP, getEmail, setAuthorization } from "./Utils/Common";
-import { SERVER_URL } from './Constants';
+import { SERVER_URL, PAYMENT_URL } from './Constants';
 
 const FPX = "FPX";
 const CARD = "CARD";

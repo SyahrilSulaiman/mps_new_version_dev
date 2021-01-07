@@ -127,8 +127,7 @@ function Register(props) {
 
             } else {
               setLoading("false");
-              swal("Ralat!", "Pendaftaran pengguna tidak berjaya!", "error");
-
+              swal("Ralat!", "Pendaftaran pengguna tidak berjaya! "+result.error, "error");
             }
 
           })
@@ -217,8 +216,8 @@ function Register(props) {
 
             } else {
               setLoading("false");
-              swal("Ralat!", "Pendaftaran pengguna tidak berjaya!", "error");
-
+              console.log(result.error);
+              swal("Ralat!", "Pendaftaran pengguna tidak berjaya! "+result.error, "error");
             }
 
           })
