@@ -216,7 +216,6 @@ function Register(props) {
 
             } else {
               setLoading("false");
-              console.log(result.error);
               swal("Ralat!", "Pendaftaran pengguna tidak berjaya! "+result.error, "error");
             }
 
