@@ -37,7 +37,7 @@ function Bill(props) {
         formData.append('userSecret', nokp)
         axios.post(SERVER_URL+"int/api_generator.php?api_name=get_user_status", formData)
             .then((res) => {
-                if (res.data.status === "Pending") {
+                if (res.data.status !== "Pending" && res.data.status !== 'Active' ) {
                     toaster.danger("Pembayaran Dibatalkan.",{description:"Akaun anda masih belum diaktifkan. Sila semak emel anda untuk pengesahan akaun."}, { id: "forbidden-action" })
                 }else{
 					handleUnpaidBil(dataset);
@@ -64,7 +64,7 @@ function Bill(props) {
         formData.append('userSecret', nokp)
         axios.post(SERVER_URL+"int/api_generator.php?api_name=get_user_status", formData)
             .then((res) => {
-                if (res.data.status === "Pending") {
+                if (res.data.status !== "Pending" && res.data.status !== 'Active' ) {
                     toaster.danger("Pembayaran Dibatalkan.",{ description:"Akaun anda masih belum diaktifkan. Sila semak emel anda untuk pengesahan akaun.", id: "forbidden-action" })
                 }else{
 					if (selectedBil.length < 1) {

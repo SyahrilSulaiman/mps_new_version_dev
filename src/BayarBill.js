@@ -19,7 +19,8 @@ function Bill(props) {
 		if(res.data.status === "inactive"){
 			setTimeout(function(){ 
 				swal.fire({title:"Tahniah!",
-							html: "Terima kasih kerana mendaftar sebagai pengguna MyMPS, sila semak emel anda untuk pengesahan akaun bagi membolehkan pembayaran dilakukan. Jika Bil Cukai Taksiran anda tidak dipaparkan secara automatik selepas log masuk, sila ke halaman <a href='https://digitalbil.mps.gov.my/' target='_blank' class='text-blue-400 hover:text-blue-200'>https://digitalbil.mps.gov.my/</a> untuk kemaskini maklumat akaun anda.",
+							// html: "Terima kasih kerana mendaftar sebagai pengguna MyMPS, sila semak emel anda untuk pengesahan akaun bagi membolehkan pembayaran dilakukan. Jika Bil Cukai Taksiran anda tidak dipaparkan secara automatik selepas log masuk, sila ke halaman <a href='https://digitalbil.mps.gov.my/' target='_blank' class='text-blue-400 hover:text-blue-200'>https://digitalbil.mps.gov.my/</a> untuk kemaskini maklumat akaun anda.",
+							html: "Terima kasih kerana mendaftar sebagai pengguna MyMPS. Jika Bil Cukai Taksiran anda tidak dipaparkan secara automatik selepas log masuk, sila ke halaman <a href='https://digitalbil.mps.gov.my/' target='_blank' class='text-blue-400 hover:text-blue-200'>https://digitalbil.mps.gov.my/</a> untuk kemaskini maklumat akaun anda.",
 							icon:"success"}); 
 			}, 1000);
 		}

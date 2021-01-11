@@ -33,7 +33,7 @@ export default function SenaraiBil(props) {
 
         axios.post(SERVER_URL+"int/api_generator.php?api_name=get_user_status", formData)
             .then((res) => {
-                if (res.data.status === "Pending") {
+                if (res.data.status !== "Pending" && res.data.status !== 'Active' ) {
                     toaster.danger("Pembayaran Dibatalkan.",{description:"Akaun anda masih belum diaktifkan. Sila semak emel anda untuk pengesahan akaun."})
                 }else{
                     sessionStorage.setItem("noakaun", bills.bill.data[0][0].NOAKAUN);
