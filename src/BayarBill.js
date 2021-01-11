@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
 import { Pane, Icon, Heading, ArrowRightIcon } from "evergreen-ui";
 import Topbaer from "./Topbar2";
-import swal from "sweetalert";
+import swal from "sweetalert2";
 import axios from "axios";
 import { SERVER_URL } from './Constants';
 
@@ -18,13 +18,15 @@ function Bill(props) {
 		.then((res) => {
 		if(res.data.status === "inactive"){
 			setTimeout(function(){ 
-				swal("Tahniah!","Terima kasih kerana mendaftar sebagai pengguna MyMPS, sila semak emel anda untuk pengesahan akaun bagi membolehkan pembayaran dilakukan.","success"); 
+				swal.fire({title:"Tahniah!",
+							html: "Terima kasih kerana mendaftar sebagai pengguna MyMPS, sila semak emel anda untuk pengesahan akaun bagi membolehkan pembayaran dilakukan. Jika Bil Cukai Taksiran anda tidak dipaparkan secara automatik selepas log masuk, sila ke halaman <a href='https://digitalbil.mps.gov.my/' target='_blank' class='text-blue-400 hover:text-blue-200'>https://digitalbil.mps.gov.my/</a> untuk kemaskini maklumat akaun anda.",
+							icon:"success"}); 
 			}, 1000);
 		}
 		})
 		.catch((err) => {
 		console.log(err);
-		swal("Ralat", "Sila hubungi pentadbir sistem!", "error");
+		swal.fire("Ralat", "Sila hubungi pentadbir sistem!", "error");
 		});
 
 	}, []);

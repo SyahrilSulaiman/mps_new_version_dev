@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { setUserSession } from "./Utils/Common";
 import IndexNavbar from "./components/Navbars/IndexNavbar2.js";
 import { Button, Heading, Link, Pane } from "evergreen-ui";
-import swal from "sweetalert";
+import swal from "sweetalert2";
 import { title, subtitle, captchaToken, SERVER_URL } from "./Constants";
 import ReCAPTCHA from "react-google-recaptcha";
 
@@ -46,51 +46,51 @@ function Register(props) {
     setLoading(true);
 
     if(token === "" || token === null){
-      swal("Opss!", "Sila tandakan pada ruangan captcha di bawah.", "error");
+      swal.fire("Opss!", "Sila tandakan pada ruangan captcha di bawah.", "error");
       return false;
     }
     else if (username.value == "") {
-      swal("Opss!", "Sila masukkan kata nama anda.", "error");
+      swal.fire("Opss!", "Sila masukkan kata nama anda.", "error");
       return false;
     }
     else if (!username.value.match(/[0-9\!\"\#\$\%\&\(\)\*\+\,\.\/\:\;\<\=\>\?\@\[\\\]\^\_\{\|\}\~]/g) === false) {
-      swal("Opss!", "Kata nama yang anda masukkan tidak sah.", "error");
+      swal.fire("Opss!", "Kata nama yang anda masukkan tidak sah.", "error");
       return false;
     }
     else if (nokp == "") {
-      swal("Opss!", "Sila masukkan nombor kad pengenalan anda.", "error");
+      swal.fire("Opss!", "Sila masukkan nombor kad pengenalan anda.", "error");
       return false;
     }
     else if (notel.length < 10 || notel.length > 11) {
-      swal("Opss!", "No telefon yang anda masukkan tidak sah.", "error");
+      swal.fire("Opss!", "No telefon yang anda masukkan tidak sah.", "error");
       return false;
     }
     else if (nokp.length < 12 || nokp.length > 12) {
-      swal("Opss!", "No kad pengenalan yang anda masukkan tidak sah.", "error");
+      swal.fire("Opss!", "No kad pengenalan yang anda masukkan tidak sah.", "error");
       return false;
     }
     else if (!nokp.match(numbers)) {
-      swal("Opss!", "No kad pengenalan yang anda masukkan tidak sah.", "error");
+      swal.fire("Opss!", "No kad pengenalan yang anda masukkan tidak sah.", "error");
       return false;
     }
     else if (email.value == "") {
-      swal("Opss!", "Sila masukkan emel anda.", "error");
+      swal.fire("Opss!", "Sila masukkan emel anda.", "error");
       return false;
     }
     else if (email.value !== confemail.value) {
-      swal("Opss!", "Sila pastikan emel dan emel pengesahan sah.", "error");
+      swal.fire("Opss!", "Sila pastikan emel dan emel pengesahan sah.", "error");
       return false;
     }
     else if (password.value == "") {
-      swal("Opss!", "Sila masukkan kata laluan anda.", "error");
+      swal.fire("Opss!", "Sila masukkan kata laluan anda.", "error");
       return false;
     }
     else if (password.value !== confpassword.value) {
-      swal("Opss!", "Sila pastikan kataluan dan sah kata laluan sama.", "error");
+      swal.fire("Opss!", "Sila pastikan kataluan dan sah kata laluan sama.", "error");
       return false;
     }
     else if (!String(password).match(/[a-zA-z]/g) || !String(password).match(/\b/g) || password.value.length < 8) {
-      swal("Opss!", "Kata laluan anda tidak selamat. Sekurang-kurangnya mempunyai  lapan (8) akrasa, dan mesti terdiri daripada kombinasi huruf dan nombor", "error");
+      swal.fire("Opss!", "Kata laluan anda tidak selamat. Sekurang-kurangnya mempunyai  lapan (8) akrasa, dan mesti terdiri daripada kombinasi huruf dan nombor", "error");
       return false;
     }
     else {
@@ -127,7 +127,9 @@ function Register(props) {
 
             } else {
               setLoading("false");
-              swal("Ralat!", "Pendaftaran pengguna tidak berjaya! "+result.error, "error");
+              swal.fire({ title: "Ralat!",
+                          html: "Pendaftaran pengguna tidak berjaya! "+result.error,
+                          icon: "error"});
             }
 
           })
@@ -143,43 +145,43 @@ function Register(props) {
     setLoading(true);
 
     if(token === "" || token === null){
-      swal("Opss!", "Sila tandakan pada ruangan captcha di bawah.", "error");
+      swal.fire("Opss!", "Sila tandakan pada ruangan captcha di bawah.", "error");
       return false;
     }
     else if (username.value == "") {
-      swal("Opss!", "Sila masukkan nama syarikat anda.", "error");
+      swal.fire("Opss!", "Sila masukkan nama syarikat anda.", "error");
       return false;
     }
     else if (!username.value.match(/[0-9\!\"\#\$\%\&\(\)\*\+\,\.\/\:\;\<\=\>\?\@\[\\\]\^\_\{\|\}\~]/g) === false) {
-      swal("Opss!", "Kata nama yang anda masukkan tidak sah.", "error");
+      swal.fire("Opss!", "Kata nama yang anda masukkan tidak sah.", "error");
       return false;
     }
     else if (ssm.value == "") {
-      swal("Opss!", "Sila masukkan nombor pendaftaran syarikat anda.", "error");
+      swal.fire("Opss!", "Sila masukkan nombor pendaftaran syarikat anda.", "error");
       return false;
     }
     else if (notel.length < 10 || notel.length > 11) {
-      swal("Opss!", "No telefon yang anda masukkan tidak sah.", "error");
+      swal.fire("Opss!", "No telefon yang anda masukkan tidak sah.", "error");
       return false;
     }
     else if (email.value == "") {
-      swal("Opss!", "Sila masukkan emel anda.", "error");
+      swal.fire("Opss!", "Sila masukkan emel anda.", "error");
       return false;
     }
     else if (email.value !== confemail.value) {
-      swal("Opss!", "Sila pastikan emel dan emel pengesahan sah.", "error");
+      swal.fire("Opss!", "Sila pastikan emel dan emel pengesahan sah.", "error");
       return false;
     }
     else if (password.value == "") {
-      swal("Opss!", "Sila masukkan kata laluan anda.", "error");
+      swal.fire("Opss!", "Sila masukkan kata laluan anda.", "error");
       return false;
     }
     else if (password.value !== confpassword.value) {
-      swal("Opss!", "Sila pastikan kataluan dan sah kata laluan sama.", "error");
+      swal.fire("Opss!", "Sila pastikan kataluan dan sah kata laluan sama.", "error");
       return false;
     }
     else if (!String(password).match(/[a-zA-z]/g) || !String(password).match(/\b/g) || password.value.length < 8) {
-      swal("Opss!", "Kata laluan anda tidak selamat. Sekurang-kurangnya mempunyai  lapan (8) akrasa, dan mesti terdiri daripada kombinasi huruf dan nombor", "error");
+      swal.fire("Opss!", "Kata laluan anda tidak selamat. Sekurang-kurangnya mempunyai  lapan (8) akrasa, dan mesti terdiri daripada kombinasi huruf dan nombor", "error");
       return false;
     }
     else {
@@ -216,7 +218,9 @@ function Register(props) {
 
             } else {
               setLoading("false");
-              swal("Ralat!", "Pendaftaran pengguna tidak berjaya! "+result.error, "error");
+              swal.fire({ title: "Ralat!",
+                          html: "Pendaftaran pengguna tidak berjaya! "+result.error,
+                          icon: "error"});
             }
 
           })
