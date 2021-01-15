@@ -7,6 +7,7 @@ import swal from 'sweetalert2';
 import { Heading, Spinner, Pane, Button, Text, Paragraph, majorScale, minorScale, Card, ArrowRightIcon,Icon , ChevronRightIcon, ArrowLeftIcon, toaster, DeleteIcon } from 'evergreen-ui';
 import Topbaer from "./Topbar2";
 import { SERVER_URL } from './Constants';
+import NumberFormat from 'react-number-format';
 
 export default function SenaraiBil(props) {
 
@@ -253,8 +254,8 @@ export default function SenaraiBil(props) {
                                             >
                                                 <Pane>
                                                     <Heading size={200}>Jumlah Tunggakan</Heading>
-                                                    <Heading size={500}>RM 
-                                                        {(bills.bill.data[0][0].BAKI_DAHULU + bills.bill.data[0][0].CAJ_DIKENAKAN + bills.bill.data[0][0].CUKAI_SEMASA + bills.bill.data[0][0].TMP_LAIN + bills.bill.data[0][0].TUNGGAKAN_SEMASA + bills.bill.data[0][0].WARAN_TAHANAN ).toFixed(2) }
+                                                    <Heading size={500}>
+                                                        <NumberFormat value={(bills.bill.data[0][0].BAKI_DAHULU + bills.bill.data[0][0].CAJ_DIKENAKAN + bills.bill.data[0][0].CUKAI_SEMASA + bills.bill.data[0][0].TMP_LAIN + bills.bill.data[0][0].TUNGGAKAN_SEMASA + bills.bill.data[0][0].WARAN_TAHANAN ).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'RM'} />
                                                     </Heading>
                                                 </Pane>
                                             </Card>

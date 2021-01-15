@@ -352,7 +352,8 @@ function Pay() {
                                                             }
                                                         }}
                                                     >
-                                                        <img className="mx-auto" style={{ height: "40px", width: "40px" }} src={"https://dev1.toyyibpay.com/asset/img/logobank/" + bankk.CODE + ".png"} /><Heading size={200}>{bankk.NAME}</Heading></Pane>)
+                                                        <img className="mx-auto" style={{ height: "40px", width: "40px" }} src={process.env.PUBLIC_URL + "/assets/img/" + bankk.CODE + ".png"} /><Heading size={200}>{bankk.NAME}</Heading></Pane>)
+                                                        {/* <img className="mx-auto" style={{ height: "40px", width: "40px" }} src={"https://dev1.toyyibpay.com/asset/img/logobank/" + bankk.CODE + ".png"} /><Heading size={200}>{bankk.NAME}</Heading></Pane>) */}
                                             }
                                             )
                                             }
