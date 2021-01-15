@@ -71,6 +71,7 @@ export default function UserDetail({showUser,display}) {
     }).then((result) => {
       if (result.isConfirmed) {
         formData.append('username',user_email);
+        formData.append('admin',true);
         axios.post(SERVER_URL+"int/api_generator.php?api_name=change_password",formData)
         .then(res=>{
           console.log(res);
@@ -85,8 +86,11 @@ export default function UserDetail({showUser,display}) {
         }
         else if (res.data.status == "success") {
             console.log(res);
-            swal.fire("Berjaya", "Sila semak emel anda untuk mendapatkan kata laluan yang baharu.", "success");
-            window.location.href = "./usermanagement"
+            swal.fire({
+              title: "Berjaya",
+              html: "Kata laluan baru anda ialah <strong>"+res.data.password+"</strong>",
+              icon: "success"});
+            // window.location.href = "./usermanagement"
         }
         }).catch(err=>{})
       }
