@@ -81,6 +81,7 @@ function Dashboard(props) {
                       <option value="nokp">Kad Pengenalan</option>
                       <option value="ssm">Nombor ROC/ROB Syarikat</option>
                       <option value="akaun">Nombor Akaun</option>
+                      <option value="invoice">No Invoice</option>
                   </SelectField>
                   {
                     // type === '' ? '' :
