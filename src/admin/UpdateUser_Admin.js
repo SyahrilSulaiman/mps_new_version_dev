@@ -24,9 +24,6 @@ export default function UserDetail({showUser,display}) {
     display(false);
   }
   const handleApprove = (e) => {
-    console.log('Approve');
-    console.log(admin);
-    console.log(user);
     swal.fire({
       title: 'Adakah anda pasti?',
       text: "Mengesahkan Pengguna",
@@ -41,7 +38,6 @@ export default function UserDetail({showUser,display}) {
         formData.append('mode','approve');
         axios.post(SERVER_URL+"int/api_generator.php?api_name=update_user",formData)
         .then(res=>{
-          console.log(res);
           swal.fire({
             title:'',
             text:'Pengguna telah disahkan',
@@ -58,7 +54,6 @@ export default function UserDetail({showUser,display}) {
     })
   }
   const handleUpdate = (e) => {
-    console.log('Update');
     swal.fire({
       title: 'Adakah anda pasti?',
       text: "Menetapkan semula kata laluan pengguna",
@@ -74,18 +69,14 @@ export default function UserDetail({showUser,display}) {
         formData.append('admin',true);
         axios.post(SERVER_URL+"int/api_generator.php?api_name=change_password",formData)
         .then(res=>{
-          console.log(res);
           if (res.data.status == "unsuccess") {
-            console.log(res);
             swal.fire("Opss!", "Sila pastikan emel anda telah diisi dan sah.", "error");
             return false;
         }
         else if (res.data.status == "pending") {
-            console.log(res);
             swal.fire("Harap Maaf!", "Akaun ini mesti menunggu 10 minit sebelum ingin menukar kata laluan yang baru.", "error");
         }
         else if (res.data.status == "success") {
-            console.log(res);
             swal.fire({
               title: "Berjaya",
               html: "Kata laluan baru anda ialah <strong>"+res.data.password+"</strong>",
@@ -97,7 +88,6 @@ export default function UserDetail({showUser,display}) {
     })
   }
   const handleRemove = (e) => {
-    console.log("Remove");
     swal.fire({
       title: 'Adakah anda pasti?',
       text: "Anda tidak akan dapat membalikkan tindakan ini!",
@@ -112,7 +102,6 @@ export default function UserDetail({showUser,display}) {
         formData.append('mode','remove');
         axios.post(SERVER_URL+"int/api_generator.php?api_name=update_user",formData)
         .then(res=>{
-          console.log(res);
           swal.fire({
             title:'',
             text:'Pengguna telah dihapuskan',
@@ -128,7 +117,6 @@ export default function UserDetail({showUser,display}) {
       }
     })
   }
-  console.log(showUser);
   return (
         <div className="w-full">
         <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">

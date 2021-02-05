@@ -61,21 +61,21 @@ export default function Carian_Cuaki({type, startDate}){
                                         type === 'akaun' ? ('Nombor Akaun')
                                             : type === 'ssm' ? ('Nombor ROC/ROB Syarikat')
                                                 : type === 'nokp' ? ('Nombor Kad Pengenalan')
-                                                    : type === 'invoice' ? ('No Invoice')
+                                                    : type === 'invoice' ? ('No Invois')
                                                     : ('Carian...')
                                     }
                                     description={
                                         type === 'akaun' ? ('Lengkapkan maklumat nombor akaun dibawah.')
                                             : type === 'ssm' ? ('Lengkapkan nombor ROC/ROB syarikat dibawah.')
                                                 : type === 'nokp' ? ('Lengkapkan nombor kad pengenalan dibawah')
-                                                    : type === 'invoice' ? ('Lengkapkan no invoice dibawah')
+                                                    : type === 'invoice' ? ('Lengkapkan no invois dibawah')
                                                     : ('Carian...')
                                     }
                                     placeholder={
                                         type === 'akaun' ? ('Sila isi nombor akaun')
                                             : type === 'ssm' ? ('Sila isi nombor ROC/ROB Syarikat')
                                                 : type === 'nokp' ? ('Sila isi nombor kad pengenalan')
-                                                    : type === 'invoice' ? ('Sila isi no invoice')
+                                                    : type === 'invoice' ? ('Sila isi no invois')
                                                     : ('Carian...')
                                     }
                                 />

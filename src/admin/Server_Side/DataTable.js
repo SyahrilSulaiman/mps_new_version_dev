@@ -27,6 +27,8 @@ function Dashboard(props) {
   const [total,setTotal] = useState(0);
   const [showDetail,setShowDetail] = useState(false);
   const [userDetail,setUserDetail] = useState([]);
+  const [pengguna,setPengguna] = useState([]);
+  const [penggunaLoading,setPenggunaLoading] = useState(false);
   const showUser = (user) => setUserDetail(user);
 
   // useEffect(() =>{
@@ -91,6 +93,21 @@ function Dashboard(props) {
     fetchUsers();
   }, []);
 
+  useEffect(() => {
+    const fetchUsers = async () => {
+      setLoading(true);
+      setPenggunaLoading(true);
+      const res = await axios.get(SERVER_URL+"int/api_generator.php?api_name=user_count")
+      .then( res => {
+        setPengguna(res.data.data[0]);
+        setLoading(false);
+        setPenggunaLoading(false);
+      })
+
+    }
+    fetchUsers();
+  }, []);
+
   const indexOfLastUser = currentPage * userPerPage;
   const indexOfFirstUser = indexOfLastUser - userPerPage;
   const currentUsers = searchResult.slice(indexOfFirstUser, indexOfLastUser);
@@ -120,13 +137,36 @@ function Dashboard(props) {
                 <div className="w-full px-4">
                   <div className="relative flex flex-col min-w-0 break-words bg-blue-100 border-b border-gray-400 shadow-lg rounded-lg">
                   <Pane padding={3}>
+                    <Pane width="100%" className='flex flex-wrap'>
+                      <Pane className='p-4 xl:w-1/4 md:w-1/2 w-7/12'>
+                        <Pane className="bg-green-500 h-full rounded-lg flex flex-col relative overflow-hidden shadow-xl">
+                          <Pane className='p-4 text-white flex rounded-lg items-center justify-center'>
+                            Bil Pengguna Berdaftar : {penggunaLoading ? '0' : pengguna.TOTAL}
+                          </Pane>
+                        </Pane>
+                      </Pane>
+                      <Pane className='p-4 xl:w-1/4 md:w-1/2 w-7/12'>
+                        <Pane className="bg-green-500 h-full rounded-lg flex flex-col relative overflow-hidden shadow-xl">
+                          <Pane className='p-4 text-white flex rounded-lg items-center justify-center'>
+                            Bil Pengguna Disahkan : {penggunaLoading ? '0' : pengguna.BERDAFTAR}
+                          </Pane>
+                        </Pane>
+                      </Pane>
+                      <Pane className='p-4 xl:w-1/4 md:w-1/2 w-7/12'>
+                        <Pane className="bg-green-500 h-full rounded-lg flex flex-col relative overflow-hidden shadow-xl">
+                          <Pane className='p-4 text-white flex rounded-lg items-center justify-center'>
+                            Bil Pengguna Belum Disahkan : {penggunaLoading ? '0' : pengguna.TIDAK_BERDAFTAR}
+                          </Pane>
+                        </Pane>
+                      </Pane>
+                    </Pane>
                     <Pane>
                       <Button height={40} appearance="primary" intent="success" onClick={handleAdd}>Tambah Pengguna</Button>
                     </Pane>
                     <Pane display="flex" width="100%">
                       <Pane paddingTop={10} alignItems="center" display="flex">
                         <SearchInput 
-                          placeholder="Kad Pengenalan / ROB ROC"
+                          placeholder="Carian Pengguna"
                           onChange = {handleSearch}
                           value={search}
                           width="200px"
