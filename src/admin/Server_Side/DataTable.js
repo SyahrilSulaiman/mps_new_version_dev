@@ -13,6 +13,8 @@ import { Button, Pane, SearchInput } from 'evergreen-ui'
 // import { searchBegin } from "@syncfusion/ej2-react-grids";
 // import UserDetail from "../components/Cards/CardSettings"
 import { SERVER_URL } from '../../Constants';
+import { PlusIcon, SearchIcon} from "evergreen-ui";
+
 
 function Dashboard(props) {
   const token = getToken();
@@ -137,7 +139,59 @@ function Dashboard(props) {
                 <div className="w-full px-4">
                   <div className="relative flex flex-col min-w-0 break-words bg-blue-100 border-b border-gray-400 shadow-lg rounded-lg">
                   <Pane padding={3}>
-                    <Pane width="100%" className='flex flex-wrap'>
+                  <Pane className="flex flex-wrap p-4">
+                  <Pane className="w-full lg:w-6/12 xl:w-4/12 px-4">
+                  <Pane className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+                    <Pane className="flex-auto pl-4 pr-4 pb-2 pt-3 bg-indigo-900 rounded">
+                      <Pane className="flex flex-wrap">
+                        <Pane className="relative w-full pr-4 max-w-full flex-grow flex-1">
+                          <h5 className="text-white uppercase font-bold text-xs pb-3">
+                          Bil Pengguna Berdaftar :    
+                          </h5>
+                          <span className="font-semibold text-l text-green-300">
+                          {penggunaLoading ? '0' : pengguna.TOTAL}  Pengguna
+                          </span>
+                        </Pane>
+                      </Pane>
+                    </Pane>
+                  </Pane>
+                </Pane>
+
+                <Pane className="w-full lg:w-6/12 xl:w-4/12 px-4">
+                  <Pane className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+                    <Pane className="flex-auto pl-4 pr-4 pb-2 pt-3 bg-indigo-900 rounded">
+                      <Pane className="flex flex-wrap">
+                        <Pane className="relative w-full pr-4 max-w-full flex-grow flex-1">
+                          <h5 className="text-white uppercase font-bold text-xs pb-3">
+                          Bil Pengguna Disahkan :
+                          </h5>
+                          <span className="font-semibold text-l text-green-300">
+                          {penggunaLoading ? '0' : pengguna.BERDAFTAR}  Pengguna
+                          </span>
+                        </Pane>
+                      </Pane>
+                    </Pane>
+                  </Pane>
+                </Pane>
+
+                <Pane className="w-full lg:w-6/12 xl:w-4/12 px-4">
+                  <Pane className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+                    <Pane className="flex-auto pl-4 pr-4 pb-2 pt-3 bg-indigo-900 rounded">
+                      <Pane className="flex flex-wrap">
+                        <Pane className="relative w-full pr-4 max-w-full flex-grow flex-1">
+                          <h5 className="text-white uppercase font-bold text-xs pb-3">
+                          Bil Pengguna Belum Disahkan :
+                          </h5>
+                          <span className="font-semibold text-l text-green-300">
+                          {penggunaLoading ? '0' : pengguna.TIDAK_BERDAFTAR}  Pengguna
+                          </span>
+                        </Pane>
+                      </Pane>
+                    </Pane>
+                  </Pane>
+                </Pane>
+              </Pane>
+                    {/* <Pane width="100%" className='flex flex-wrap'>
                       <Pane className='p-4 xl:w-1/4 md:w-1/2 w-7/12'>
                         <Pane className="bg-green-500 h-full rounded-lg flex flex-col relative overflow-hidden shadow-xl">
                           <Pane className='p-4 text-white flex rounded-lg items-center justify-center'>
@@ -159,7 +213,7 @@ function Dashboard(props) {
                           </Pane>
                         </Pane>
                       </Pane>
-                    </Pane>
+                    </Pane> */}
                     <Pane>
                       <Button height={40} appearance="primary" intent="success" onClick={handleAdd}>Tambah Pengguna</Button>
                     </Pane>
