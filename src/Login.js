@@ -5,7 +5,7 @@ import noScroll from "no-scroll";
 import IndexNavbar from "./components/Navbars/IndexNavbar2.js";
 import Footer from "./components/Footers/Footer";
 import swal from "sweetalert";
-import { Button, Heading, Pane, ArrowLeftIcon, LogInIcon, Icon, CloudDownloadIcon } from "evergreen-ui";
+import { Button, Heading, Pane, ArrowLeftIcon, LogInIcon, Icon, CloudDownloadIcon, EyeOpenIcon } from "evergreen-ui";
 import Modal from './components/Modal/Install_Modal';
 import {title, subtitle, captchaToken, SERVER_URL} from "./Constants";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -15,8 +15,12 @@ function Login(props) {
     let url_string = window.location.href;
     const url = new URL(url_string);
     const c = url.searchParams.get('token');
-
+    const [passwordShown,setPasswordShown] = useState(false);
     const [token, setToken]     = useState(null)
+
+    const togglePasswordVisiblity = () => {
+        setPasswordShown(passwordShown ? false : true);
+      };
 
     const onChange = (value) => {
       setToken(value);
@@ -187,7 +191,10 @@ function Login(props) {
                                     <input aria-label="Email" {...username} name="email" type="text" required className="mb-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="No KP / No ROC/ROB" />
                                 </div>
                                 <div className="-mt-px">
-                                    <input aria-label="Password" {...password} name="password" type="password" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" placeholder="Kata Laluan" />
+                                    <div className="bg-white rounded-none relative block w-full  border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5">
+                                        <input aria-label="Password" {...password} name="password" type={passwordShown ? 'password':'text' } class="px-3 py-2 w-11/12 appearance-none" required  placeholder="Kata Laluan" />
+                                        <Icon className={passwordShown ? "text-gray-400 hover:text-gray-700" : "text-gray-700 hover:text-gray-400"} onClick={togglePasswordVisiblity} icon={EyeOpenIcon} size={18} marginLeft={8}/>
+                                    </div>
                                 </div>
                             </div>
 
