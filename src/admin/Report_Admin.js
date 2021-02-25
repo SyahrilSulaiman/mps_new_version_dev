@@ -18,8 +18,10 @@ function Dashboard(props) {
   const user = getUser();
   const nokp = getNOKP();
   const [amount,setAmount] = useState();
+  const [transaction,setTransaction] = useState();
   const [loading,setLoading] = useState(false);
   const [displayAmount,setDisplayAmount] = useState(false);
+  const [displayTransaction,setDisplayTransaction] = useState(false);
   const [type, setType] = useState('');
   // setType(false)
 
@@ -34,10 +36,12 @@ function Dashboard(props) {
     .then(res => {
       setLoading(true);
       setAmount(res.data.result[0].amount);
+      setTransaction(res.data.result[0].transaction);
     })
     .then( res => {
       setLoading(false);
       setDisplayAmount(true);
+      setDisplayTransaction(true);
     })
   },[amount])
 
@@ -61,7 +65,14 @@ function Dashboard(props) {
             <div className="flex flex-wrap xl:pt-2">
               <Pane background="white" className="p-3 xl:mx-4 xl:rounded-md" position="relative" width="100%">
                 <Heading size={300}>Jumlah Keseluruhan Pembayaran Melalui MyMPS :&nbsp;
-                  <NumberFormat className="text-base" value={(loading === false && displayAmount === true) ? amount : ''} displayType={'text'} thousandSeparator={true} prefix={'RM'} />
+                  <NumberFormat className="text-base" value={(loading === false && displayAmount === true) ? amount : '0'} displayType={'text'} thousandSeparator={true} prefix={'RM'} />
+                </Heading>
+              </Pane>
+            </div>
+            <div className="flex flex-wrap xl:pt-2">
+              <Pane background="white" className="p-3 xl:mx-4 xl:rounded-md" position="relative" width="100%">
+                <Heading size={300}>Bilangan Transaksi :&nbsp;
+                  <NumberFormat className="text-base" value={(loading === false && displayTransaction === true) ? transaction : '0'} displayType={'text'} />
                 </Heading>
               </Pane>
             </div>

@@ -347,7 +347,14 @@ function Register(props) {
                                   Panjang kata laluan mestilah sekurang-kurangnya lapan (8) aksara, dan mesti terdiri daripada kombinasi huruf dan nombor, atau simbol khas.
                                 </Heading>
                             </div>
-
+                            <div className="col-span-6 sm:col-span-3 p-2">
+                              <Pane alignItems="center" justifyContent="center" display="flex" paddingBottom={2}>
+                                <ReCAPTCHA
+                                  sitekey={captchaToken}
+                                  onChange={onChange}
+                                />
+                              </Pane>
+                            </div>
                             <div className="col-span-6 sm:col-span-3 p-2">
                               <Button
                                 type="submit"
@@ -424,7 +431,14 @@ function Register(props) {
                                   Panjang kata laluan mestilah sekurang-kurangnya lapan (8) aksara, dan mesti terdiri daripada kombinasi huruf dan nombor, atau simbol khas.
                                 </Heading>
                             </div>
-
+                            <div className="col-span-6 sm:col-span-3 p-2">
+                              <Pane alignItems="center" justifyContent="center" display="flex" paddingBottom={2}>
+                                <ReCAPTCHA
+                                  sitekey={captchaToken}
+                                  onChange={onChange}
+                                />
+                              </Pane>
+                            </div>
                             <div className="col-span-6 sm:col-span-3 p-2">
                               <Button
                                 type="submit"
@@ -459,12 +473,6 @@ function Register(props) {
                   </div>
                 </div>
               </div>
-              <Pane alignItems="center" justifyContent="center" display="flex" paddingBottom={2}>
-                <ReCAPTCHA
-                  sitekey={captchaToken}
-                  onChange={onChange}
-                />
-              </Pane>
               <div className="col-span-6 sm:col-span-3 p-2 text-center">
                 <Heading
                   size={400}

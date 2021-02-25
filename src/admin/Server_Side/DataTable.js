@@ -146,10 +146,14 @@ function Dashboard(props) {
                       <Pane className="flex flex-wrap">
                         <Pane className="relative w-full pr-4 max-w-full flex-grow flex-1">
                           <h5 className="text-white uppercase font-bold text-xs pb-3">
-                          Bil Pengguna Berdaftar :    
+                          Bil Pengguna Berdaftar : {penggunaLoading ? '0' : pengguna.TOTAL}  Pengguna
                           </h5>
-                          <span className="font-semibold text-l text-green-300">
-                          {penggunaLoading ? '0' : pengguna.TOTAL}  Pengguna
+                          <span className="font-semibold text-sm text-green-300">
+                          Individu : {penggunaLoading ? '0' : pengguna.INDIVIDU}  Pengguna
+                          </span>
+                          <br></br>
+                          <span className="font-semibold text-sm text-green-300">
+                          Syarikat : {penggunaLoading ? '0' : pengguna.SYARIKAT}  Pengguna
                           </span>
                         </Pane>
                       </Pane>
