@@ -50,11 +50,11 @@ function Register(props) {
       return false;
     }
     else if (username.value == "") {
-      swal.fire("Opss!", "Sila masukkan kata nama anda.", "error");
+      swal.fire("Opss!", "Sila masukkan nama anda.", "error");
       return false;
     }
-    else if (!username.value.match(/[0-9\!\"\#\$\%\&\(\)\*\+\,\.\/\:\;\<\=\>\?\@\[\\\]\^\_\{\|\}\~]/g) === false) {
-      swal.fire("Opss!", "Kata nama yang anda masukkan tidak sah.", "error");
+    else if (!username.value.match(/[0-9\!\"\#\$\%\&\(\)\*\+\,\.\:\;\<\=\>\?\@\[\\\]\^\_\{\|\}\~]/g) === false) {
+      swal.fire("Opss!", "Nama yang anda masukkan tidak sah.", "error");
       return false;
     }
     else if (nokp == "") {
@@ -152,8 +152,8 @@ function Register(props) {
       swal.fire("Opss!", "Sila masukkan nama syarikat anda.", "error");
       return false;
     }
-    else if (!username.value.match(/[0-9\!\"\#\$\%\&\(\)\*\+\,\.\/\:\;\<\=\>\?\@\[\\\]\^\_\{\|\}\~]/g) === false) {
-      swal.fire("Opss!", "Kata nama yang anda masukkan tidak sah.", "error");
+    else if (!username.value.match(/[0-9\!\"\#\$\%\&\(\)\*\+\,\.\:\;\<\=\>\?\@\[\\\]\^\_\{\|\}\~]/g) === false) {
+      swal.fire("Opss!", "Nama yang anda masukkan tidak sah.", "error");
       return false;
     }
     else if (ssm.value == "") {
