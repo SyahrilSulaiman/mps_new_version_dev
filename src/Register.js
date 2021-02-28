@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { setUserSession } from "./Utils/Common";
 import IndexNavbar from "./components/Navbars/IndexNavbar2.js";
-import { Button, Heading, Link, Pane } from "evergreen-ui";
+import { Button, Heading, Link, Pane, Icon, EyeOpenIcon } from "evergreen-ui";
 import swal from "sweetalert2";
 import { title, subtitle, captchaToken, SERVER_URL } from "./Constants";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -27,8 +27,16 @@ function Register(props) {
 
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [passwordShown2,setPasswordShown2] = useState(false);
+  const [passwordShown,setPasswordShown] = useState(false);
   const [token, setToken]     = useState(null)
 
+  const togglePasswordVisiblity = () => {
+      setPasswordShown(passwordShown ? false : true);
+    };
+  const togglePasswordVisiblity2 = () => {
+      setPasswordShown2(passwordShown2 ? false : true);
+    };
 
   const onChange = (value) => {
     setToken(value);
@@ -328,12 +336,17 @@ function Register(props) {
 
                             <div className="col-span-6 sm:col-span-3 p-2">
                               <label htmlFor="street_address" className="block text-sm font-medium leading-5 text-gray-700">Kata Laluan</label>
-                              <input {...password} type="password" id="password" placeholder="cth: 123@abcd" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                              <div className="rounded-none relative block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                                <input {...password} type={passwordShown ? 'text':'password' } id="password" placeholder="cth: 123@abcd" className="form-input w-11/12 py-2 px-3 " />
+                                <Icon className={passwordShown ? "text-gray-700 hover:text-gray-400" : "text-gray-400 hover:text-gray-700" } onClick={togglePasswordVisiblity} icon={EyeOpenIcon} size={15} marginRight={5}/>
+                              </div>
                             </div>
-
                             <div className="col-span-6 sm:col-span-3 p-2">
                               <label htmlFor="street_address" className="block text-sm font-medium leading-5 text-gray-700">Sah Kata Laluan</label>
-                              <input {...confpassword} type="password" id="conf_password" placeholder="cth: 123@abcd" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                              <div className="rounded-none relative block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                                <input {...confpassword} type={passwordShown2 ? 'text':'password' } id="conf_password" placeholder="cth: 123@abcd" className="form-input w-11/12 py-2 px-3 " />
+                                <Icon className={passwordShown2 ? "text-gray-700 hover:text-gray-400" : "text-gray-400 hover:text-gray-700" } onClick={togglePasswordVisiblity2} icon={EyeOpenIcon} size={15} marginRight={5}/>
+                              </div>
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
@@ -413,11 +426,17 @@ function Register(props) {
 
                             <div className="col-span-6 sm:col-span-3 p-2">
                               <label htmlFor="street_address" className="block text-sm font-medium leading-5 text-gray-700">Kata Laluan</label>
-                              <input {...password} type="password" id="password" placeholder="cth: 123@abcd" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                              <div className="rounded-none relative block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                                <input {...password} type={passwordShown ? 'text':'password' } id="password" placeholder="cth: 123@abcd" className="form-input w-11/12 py-2 px-3 " />
+                                <Icon className={passwordShown ? "text-gray-700 hover:text-gray-400" : "text-gray-400 hover:text-gray-700" } onClick={togglePasswordVisiblity} icon={EyeOpenIcon} size={15} marginRight={5}/>
+                              </div>
                             </div>
                             <div className="col-span-6 sm:col-span-3 p-2">
                               <label htmlFor="street_address" className="block text-sm font-medium leading-5 text-gray-700">Sah Kata Laluan</label>
-                              <input {...confpassword} type="password" id="conf_password" placeholder="cth: 123@abcd" className="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                              <div className="rounded-none relative block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                                <input {...confpassword} type={passwordShown2 ? 'text':'password' } id="conf_password" placeholder="cth: 123@abcd" className="form-input w-11/12 py-2 px-3 " />
+                                <Icon className={passwordShown2 ? "text-gray-700 hover:text-gray-400" : "text-gray-400 hover:text-gray-700" } onClick={togglePasswordVisiblity2} icon={EyeOpenIcon} size={15} marginRight={5}/>
+                              </div>
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 p-2">
