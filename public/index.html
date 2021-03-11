@@ -30,13 +30,18 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/Asset 2.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" />
+    <link rel="preload" as="style" type="text/css" crossorigin href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <link rel="preload" as="image" href="%PUBLIC_URL%/assets/img/pattern_react.png" />
+    <link rel="preload" as="image" href="%PUBLIC_URL%/assets/img/logo1.png" />
+    <link rel="preload" as="image" href="%PUBLIC_URL%/assets/img/photo-1498050108023-c5249f4df085.jfif" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="%PUBLIC_URL%/assets/fonts/fa-brands-400.c967a94c.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="%PUBLIC_URL%/assets/fonts/fa-solid-900.3ceb50e7.woff2" />
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <script type="text/babel" src="../src/App.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script type="text/babel" src="../src/App.js" ></script>
+    <!-- <script src="https://www.google.com/recaptcha/api.js" async defer></script> -->
   </body>
 </html>

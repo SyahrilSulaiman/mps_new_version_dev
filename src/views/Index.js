@@ -1,12 +1,11 @@
 /*eslint-disable*/
 import React from "react";
-import Bckg1 from "../assets/img/pattern_react.png";
-import { Link } from "react-router-dom";
-import logo1 from "../assets/img/logo1.png";
+// import Bckg1 from "../assets/img/pattern_react.png";
+// import logo1 from "../assets/img/logo1.png";
 import IndexNavbar from "../components/Navbars/IndexNavbar.js";
 import Footer from "../components/Footers/Footer.js";
 import {title, subtitle} from "../Constants";
-import Image from "../assets/img/photo-1498050108023-c5249f4df085.jfif"
+// import Image from "../assets/img/photo-1498050108023-c5249f4df085.jfif"
 
 export default function Index() {
   return (
@@ -15,7 +14,11 @@ export default function Index() {
       <section className="header relative pt-16 items-center flex h-screen max-h-860-px">
         <div className="container mx-auto items-center flex flex-wrap">
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
-          <img src={logo1} className="pl-32 w-auto" style={{ height: "120px", marginBottom:"20px" }}></img>
+          <img 
+            // src={logo1}
+            src={process.env.PUBLIC_URL + "/assets/img/logo1.png"}
+            className="pl-32 w-auto" 
+            style={{ height: "120px", marginBottom:"20px" }}></img>
             <div className="pt-8 sm:pt-0">
               <h2 className="font-semibold text-4xl text-gray-700">
                 Selamat Datang ke {title}
@@ -43,7 +46,8 @@ export default function Index() {
 
         <img
           className="absolute top-0 b-auto right-0 pt-16 sm:w-6/12 -mt-48 sm:mt-0 w-10/12 max-h-860px"
-          src={Bckg1}
+          // src={Bckg1}
+          src={process.env.PUBLIC_URL + "/assets/img/pattern_react.png"}
         />
       </section>
 
@@ -73,7 +77,8 @@ export default function Index() {
               <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-blue-600">
                 <img
                   alt="..."
-                  src={Image}
+                  // src={Image}
+                  src={process.env.PUBLIC_URL + "/assets/img/photo-1498050108023-c5249f4df085.jfif"}
                   className="w-full align-middle rounded-t-lg"
                 />
                 <blockquote className="relative p-8">
