@@ -36,7 +36,7 @@ function Dashboard(props) {
     console.log("type :" , type);
     console.log("date :" , startDate);
     console.log("account :" , account);
-    window.open(SERVER_URL+"rp/resit2.php?date="+startDate+"&type="+type+"&account="+account);
+    window.open(SERVER_URL+"rp/laporan_bayaran.php?date="+startDate+"&type="+type+"&account="+account);
   }
 
   useEffect(() =>{
