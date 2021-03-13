@@ -17,18 +17,27 @@ function Dashboard(props) {
   const token = getToken();
   const user = getUser();
   const nokp = getNOKP();
+  const [account,setAccount] = useState('');
   const [amount,setAmount] = useState();
   const [transaction,setTransaction] = useState();
   const [loading,setLoading] = useState(false);
   const [displayAmount,setDisplayAmount] = useState(false);
   const [displayTransaction,setDisplayTransaction] = useState(false);
   const [type, setType] = useState('');
+  const [startDate, setStartDate] = useState('');
   // setType(false)
 
   const handleLogout = () => {
     removeUserSession();
     props.history.push("/login");
   };
+
+  const handlePdf = () =>{
+    console.log("type :" , type);
+    console.log("date :" , startDate);
+    console.log("account :" , account);
+    window.open(SERVER_URL+"rp/resit2.php?date="+startDate+"&type="+type+"&account="+account);
+  }
 
   useEffect(() =>{
     setLoading(false);
@@ -45,7 +54,7 @@ function Dashboard(props) {
     })
   },[amount])
 
-  const [startDate, setStartDate] = useState('');
+  
 
   return (
     <div>
@@ -96,7 +105,7 @@ function Dashboard(props) {
                   </SelectField>
                   {
                     // type === '' ? '' :
-                    <CukaiTaksiran type={type} startDate={startDate}/>
+                    <CukaiTaksiran type={type} startDate={startDate} handlePdf={handlePdf} returnAccount={setAccount}/>
                   }
               </Pane>
             </div>

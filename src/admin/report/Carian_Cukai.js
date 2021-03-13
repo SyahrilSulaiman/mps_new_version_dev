@@ -7,13 +7,14 @@ import SenaraiCukai from './Laporan_Carian_Cukai'
 import { SERVER_URL } from '../../Constants';
 
 
-export default function Carian_Cuaki({type, startDate}){
+export default function Carian_Cukai({type, startDate, handlePdf, returnAccount}){
     const [loading, setLoading] = useState(false);
     const [account,setAccount] = useState('');
     const [result,setResult] = useState('');
     const [total,setTotal] = useState(0);
     const handleChange = (e) => {
         setAccount(e.target.value);
+        returnAccount(e.target.value);
     }
     const handleSubmit = (e) => {
             e.preventDefault();
@@ -93,6 +94,17 @@ export default function Carian_Cuaki({type, startDate}){
                                 >
                                     {loading ? 'Cari' : 'Cari'}
                                     
+                                </Button>
+                                <Button
+                                    type="button"
+                                    iconBefore={SearchIcon}
+                                    appearance="primary"
+                                    intent="warning"
+                                    className="float-right"
+                                    marginRight={10}
+                                    onClick={handlePdf}
+                                >
+                                    {loading ? 'Export PDF' : 'Export PDF'}
                                 </Button>
     
                                 <Button
