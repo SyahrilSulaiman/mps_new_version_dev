@@ -7,7 +7,7 @@ import SenaraiCukai from './Laporan_Carian_Cukai'
 import { SERVER_URL } from '../../Constants';
 
 
-export default function Carian_Cukai({type, startDate, handlePdf, returnAccount}){
+export default function Carian_Cukai({type, startDate, endDate, handlePdf, returnAccount}){
     const [loading, setLoading] = useState(false);
     const [account,setAccount] = useState('');
     const [result,setResult] = useState('');
@@ -21,7 +21,8 @@ export default function Carian_Cukai({type, startDate, handlePdf, returnAccount}
             const formData = new FormData();
             formData.append('account',account);
             formData.append('type',type);
-            formData.append('date',startDate);
+            formData.append('startDate',startDate);
+            formData.append('endDate',endDate);
             axios.post(SERVER_URL+"int/api_generator.php?api_name=laporan_cukai_taksiran",formData)
             .then(res => {
                 setLoading(true);

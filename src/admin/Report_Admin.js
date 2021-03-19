@@ -25,6 +25,7 @@ function Dashboard(props) {
   const [displayTransaction,setDisplayTransaction] = useState(false);
   const [type, setType] = useState('');
   const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
   // setType(false)
 
   const handleLogout = () => {
@@ -33,10 +34,7 @@ function Dashboard(props) {
   };
 
   const handlePdf = () =>{
-    console.log("type :" , type);
-    console.log("date :" , startDate);
-    console.log("account :" , account);
-    window.open(SERVER_URL+"rp/laporan_bayaran.php?date="+startDate+"&type="+type+"&account="+account);
+     window.open(SERVER_URL+"rp/laporan_bayaran.php?startDate="+startDate+"&endDate="+endDate+"&type="+type+"&account="+account);
   }
 
   useEffect(() =>{
@@ -87,7 +85,9 @@ function Dashboard(props) {
             </div>
             <div className="flex flex-wrap xl:pt-2">
               <Pane background="white" className="p-3 xl:mx-4 xl:rounded-md" position="relative" width="100%">
-                <Heading size={500}>Tarikh : &nbsp;<DatePicker selected={startDate} onChange={date => setStartDate(date)} dateFormat="yyyy-MM-dd" isClearable placeholderText="Sila pilih tarikh" /></Heading>
+                <Heading marginBottom={10} size={500}>Tarikh Mula: &nbsp;<DatePicker selected={startDate} onChange={date => setStartDate(date)} dateFormat="yyyy-MM-dd" isClearable placeholderText="Sila pilih tarikh mula" /></Heading>
+
+                <Heading size={500}>Tarikh Akhir: &nbsp;<DatePicker selected={endDate} onChange={date => setEndDate(date)} dateFormat="yyyy-MM-dd" isClearable placeholderText="Sila pilih tarikh akhir" /></Heading>
               </Pane>
             </div>
             <div className="flex flex-wrap xl:pt-2">
@@ -105,7 +105,7 @@ function Dashboard(props) {
                   </SelectField>
                   {
                     // type === '' ? '' :
-                    <CukaiTaksiran type={type} startDate={startDate} handlePdf={handlePdf} returnAccount={setAccount}/>
+                    <CukaiTaksiran type={type} startDate={startDate} endDate={endDate} handlePdf={handlePdf} returnAccount={setAccount}/>
                   }
               </Pane>
             </div>
