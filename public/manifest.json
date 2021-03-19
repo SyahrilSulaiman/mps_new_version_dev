@@ -1,36 +1,37 @@
 {
-  "short_name": "MyMPS",
-  "name": "Aplikasi MyMPS",
-  "icons": [
-      {
-          "src": "https://mymps.mps.gov.my/Asset%202.png",
-          "sizes": "64x64 32x32 24x24 16x16",
-          "type": "image/x-icon"
-      },
-      {
-          "src": "https://mymps.mps.gov.my/Asset%202.png",
-          "type": "image/png",
-          "sizes": "192x192"
-      },
-      {
-          "src": "https://mymps.mps.gov.my/Asset%202.png",
-          "type": "image/png",
-          "sizes": "512x512"
-      },
-      {
-          "src": "https://mymps.mps.gov.my/maskable_icon_x192.png",
-          "type": "image/png",
-          "sizes": "192x192",
-          "purpose": "maskable"
-      }
-  ],
-  "scope": "/",
-  "start_url": "/",
-  "display": "standalone",
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
-  "orientation": "portrait-primary",
-  "url": "https://mymps.mps.gov.my/",
-  "manifestUrl": "https://mymps.mps.gov.my/manifest.json",
-  "lang": "Malay"
+    "short_name": "MyMPS",
+    "name": "Aplikasi MyMPS",
+    "icons": [
+        {
+            "src": "https://mymps.mps.gov.my/Asset%202.png",
+            "sizes": "64x64 32x32 24x24 16x16",
+            "type": "image/x-icon"
+        },
+        {
+            "src": "https://mymps.mps.gov.my/Asset%202.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "https://mymps.mps.gov.my/Asset%202.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        },
+        {
+            "src": "https://mymps.mps.gov.my/maskable_icon_x192.png",
+            "type": "image/png",
+            "sizes": "192x192",
+            "purpose": "maskable"
+        }
+    ],
+    "scope": "/",
+    "start_url": "/login",
+    "display": "standalone",
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "orientation": "portrait-primary",
+    "url": "https://mymps.corrad.my/",
+    "manifestUrl": "https://mymps.corrad.my/manifest.json",
+    "lang": "Malay",
+    "description": "MyMPS merupakan sebuah gerbang pembayaran pelbagai bil untuk Majlis Perbandaran Selayang"
 }
