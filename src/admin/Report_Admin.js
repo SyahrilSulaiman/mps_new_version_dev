@@ -36,6 +36,9 @@ function Dashboard(props) {
   const handlePdf = () =>{
      window.open(SERVER_URL+"rp/laporan_bayaran.php?startDate="+startDate+"&endDate="+endDate+"&type="+type+"&account="+account);
   }
+  const handleExcel = () =>{
+    window.open(SERVER_URL+"rp/laporan_bayaran_excel.php?startDate="+startDate+"&endDate="+endDate+"&type="+type+"&account="+account);
+ }
 
   useEffect(() =>{
     setLoading(false);
@@ -105,7 +108,7 @@ function Dashboard(props) {
                   </SelectField>
                   {
                     // type === '' ? '' :
-                    <CukaiTaksiran type={type} startDate={startDate} endDate={endDate} handlePdf={handlePdf} returnAccount={setAccount}/>
+                    <CukaiTaksiran type={type} startDate={startDate} endDate={endDate} handlePdf={handlePdf} handleExcel={handleExcel} returnAccount={setAccount}/>
                   }
               </Pane>
             </div>

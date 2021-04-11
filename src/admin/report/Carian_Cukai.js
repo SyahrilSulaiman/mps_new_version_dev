@@ -7,7 +7,7 @@ import SenaraiCukai from './Laporan_Carian_Cukai'
 import { SERVER_URL } from '../../Constants';
 
 
-export default function Carian_Cukai({type, startDate, endDate, handlePdf, returnAccount}){
+export default function Carian_Cukai({type, startDate, endDate, handlePdf, handleExcel, returnAccount}){
     const [loading, setLoading] = useState(false);
     const [account,setAccount] = useState('');
     const [result,setResult] = useState('');
@@ -106,6 +106,17 @@ export default function Carian_Cukai({type, startDate, endDate, handlePdf, retur
                                     onClick={handlePdf}
                                 >
                                     {loading ? 'Export PDF' : 'Export PDF'}
+                                </Button>
+                                <Button
+                                    type="button"
+                                    iconBefore={SearchIcon}
+                                    appearance="primary"
+                                    intent="warning"
+                                    className="float-right"
+                                    marginRight={10}
+                                    onClick={handleExcel}
+                                >
+                                    {loading ? 'Export Excel' : 'Export Excel'}
                                 </Button>
     
                                 <Button

@@ -30,8 +30,7 @@
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
     "orientation": "portrait-primary",
-    "url": "https://mymps.corrad.my/",
-    "manifestUrl": "https://mymps.corrad.my/manifest.json",
-    "lang": "Malay",
-    "description": "MyMPS merupakan sebuah gerbang pembayaran pelbagai bil untuk Majlis Perbandaran Selayang"
+    "url": "https://mymps.gov.my.my/",
+    "manifestUrl": "https://mymps.gov.my.my/manifest.json",
+    "lang": "Malay"
 }
