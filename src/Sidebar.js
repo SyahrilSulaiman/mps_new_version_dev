@@ -172,6 +172,28 @@ export default function Sidebar() {
               <li className="items-center">
                 <Link
                   className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/bayaran-akaun") !== -1
+                      ? "text-blue-500 hover:text-blue-600"
+                      : "text-gray-800 hover:text-gray-600")
+                  }
+                  to="/bayaran-akaun"
+                >
+                  <i
+                    className={
+                      "fas fa-file mr-2 text-sm " +
+                      (window.location.href.indexOf("/bayaran-akaun") !== -1
+                        ? "opacity-75"
+                        : "text-gray-400")
+                    }
+                  ></i>{" "}
+                  Resit Bayaran
+                </Link>
+              </li>
+
+              <li className="items-center">
+                <Link
+                  className={
                     "text-xs uppercase py-3 font-bold block text-gray-800 hover:text-gray-600"
                   }
                   onClick={() => setDialog(true)}

@@ -30,10 +30,13 @@ import GoogleLogin from "./GoogleLogin";
 import NotFound from "./NotFound";
 import SenaraiBil from "./SenaraiBil";
 import BeforeBayar from "./BeforeBayar";
+import DetailAccountPayment from "./DetailAccountPayment";
 import Payment from "./Payment";
 import MultiAccount from "./MultiAccountPayment";
 import Add from "./Add";
 import UserReport from "./UserReport";
+import ReceiptReport from "./ReceiptReport";
+import ReceiptReportAccount from "./ReceiptReportAccount";
 import TransactionReport from "./LaporanTransaksi";
 
 import cukaitaksiran from "./ListCukaiTaksiran";
@@ -219,9 +222,12 @@ function App() {
                     <PrivateRoute path="/payment" component={Payment} />
                     <PrivateRoute path="/multiaccount-payment" component={MultiAccount} />
                     <PrivateRoute path="/laporan-penyata-akaun" component={UserReport} />
+                    <PrivateRoute path="/resit-bayaran" component={ReceiptReport} />
+                    <PrivateRoute path="/bayaran-akaun" component={ReceiptReportAccount} />
                     <PrivateRoute path="/laporan-transaksi" component={TransactionReport} />
                     <PrivateRoute path="/add_cukai_taksiran" component={Add} />
                     <PrivateRoute path="/PengesahanPembayaran" component={BeforeBayar} />
+                    <PrivateRoute path="/DetailPembayaranAkaun" component={DetailAccountPayment} />
                     <Route path="*" component={NotFound} />
                   </Switch>
                 </SelectedBillContextProvider>
@@ -252,8 +258,11 @@ function App() {
                   <PrivateRoute path="/multiaccount-payment" component={MultiAccount} />
                   <PrivateRoute path="/add_cukai_taksiran" component={Add} />
                   <PrivateRoute path="/laporan-penyata-akaun" component={UserReport} />
+                  <PrivateRoute path="/resit-bayaran" component={ReceiptReport} />
+                  <PrivateRoute path="/bayaran-akaun" component={ReceiptReportAccount} />
                   <PrivateRoute path="/laporan-transaksi" component={TransactionReport} />
                   <PrivateRoute path="/PengesahanPembayaran" component={BeforeBayar} />
+                  <PrivateRoute path="/DetailPembayaranAkaun" component={DetailAccountPayment} />
                   <PublicRoute
                     path="/forgotpassword"
                     component={ForgotPassword}

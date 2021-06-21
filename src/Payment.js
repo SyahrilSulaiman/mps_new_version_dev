@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import swal from "sweetalert";
-import { toaster, Heading, Pane, ArrowLeftIcon, TextInputField, Dialog, Checkbox, Text, Button, SegmentedControl, Paragraph } from "evergreen-ui";
+import { toaster, Heading, Pane, ArrowLeftIcon, TextInputField, Dialog, Checkbox, Text, Button, SegmentedControl, Paragraph, BanCircleIcon, TickCircleIcon, UnorderedList, ListItem } from "evergreen-ui";
 import Topbar from "./Topbar";
 import NumberFormat from 'react-number-format';
 import { getNOKP, getEmail, setAuthorization } from "./Utils/Common";
@@ -30,6 +30,7 @@ function Pay() {
     const [amount, setAmount]       = useState(0.00);
     const [invoiceNo, setInvoiceNo] = useState('A' + year + Math.floor(1000000000000 + Math.random() * 9999999999999));  
     const [receiptno, setReceiptNo] = useState("");
+    const [openAmount, setOpenAmount] = useState(0.00)
     const nokp = getNOKP();
 	const email = getEmail();
     const auth = setAuthorization(nokp,email);
@@ -79,6 +80,7 @@ function Pay() {
 
             setAccountNo(res.data[0][0].NOAKAUN);;
             setAmount(total);
+            setOpenAmount(total);
             setPenama(res.data[0][0].NAMA_PEMILIK);
         })
         .catch((err) => {
@@ -94,8 +96,12 @@ function Pay() {
         setDialogCC(false);
         setDialog(false);
 
-        if(amount == 0.00 || amount == "") {
+        if(openAmount == 0.00 || openAmount == "") {
             toaster.danger("Harap maaf, Pembayaran batal kerana maklumat pembayaran tidak lengkap.", { id: "forbidden-action" });
+            return false;
+        }
+        if(openAmount <= 100.00 && amount > 100.00) {
+            toaster.danger("Harap maaf, Pembayaran batal kerana jumlah pembayaran tidak mencukupi nilai minimum.", { id: "forbidden-action" });
             return false;
         }
         else if (payorname == "") {
@@ -118,7 +124,7 @@ function Pay() {
 
             var formdata = new FormData();
             formdata.append("accountId", accountNo);
-            formdata.append("amount", amount);
+            formdata.append("amount", openAmount);
             formdata.append("invoiceNo", invoiceNo);
             formdata.append("payorname", payorname);
             formdata.append("payoremail", payoremail);
@@ -161,8 +167,12 @@ function Pay() {
         setDialogCC(false);
         setDialog(false);
 
-        if(amount == 0.00 || amount == "") {
+        if(openAmount == 0.00 || openAmount == "") {
             toaster.danger("Harap maaf, Pembayaran batal kerana maklumat jumlah pembayaran tidak lengkap.", { id: "forbidden-action" });
+            return false;
+        }
+        if(openAmount <= 100.00 && amount > 100.00) {
+            toaster.danger("Harap maaf, Pembayaran batal kerana jumlah pembayaran tidak mencukupi nilai minimum.", { id: "forbidden-action" });
             return false;
         }
         else if (payorname == "") {
@@ -181,7 +191,7 @@ function Pay() {
 
             var formdata = new FormData();
             formdata.append("accountId", accountNo);
-            formdata.append("amount", amount);
+            formdata.append("amount", openAmount);
             formdata.append("invoiceNo", invoiceNo);
             formdata.append("payorname", payorname);
             formdata.append("payoremail", payoremail);
@@ -272,7 +282,28 @@ function Pay() {
                                     readOnly
                                 />
                             </Pane>
-                            <Pane paddingX={20} className="flex flex-wrap">
+                            <Pane display="flex" width="100%" paddingX={20}>
+                                <TextInputField
+                                    width="100%"
+                                    label={"No Akaun: "+ (accountNo ? accountNo : "-")}
+                                    description={"Jumlah: RM  "+ amount}
+                                    placeholder="Minimum Bayaran RM 100.00"
+                                    value={openAmount}
+                                    onChange={(e) => setOpenAmount(e.target.value)}
+                                    readOnly = {amount < 100 ? true : false}
+                                    isInvalid = { openAmount < 100 ? true : false }
+                                    hint = 
+                                    {
+                                        openAmount < 100 ?
+                                    <UnorderedList>
+                                        <ListItem icon={BanCircleIcon} iconColor="danger">
+                                            Minimum Bayaran RM 100.00
+                                        </ListItem>
+                                    </UnorderedList>
+                                    : ""}
+                                />
+                            </Pane>
+                            {/* <Pane paddingX={20} className="flex flex-wrap">
                                 <Pane display="grid" width="100%" padding={10} background="tint2" >
                                     <Pane display="grid" gridTemplateColumns="1fr 200px">
                                         <Heading size={400}>Pemilik</Heading>
@@ -291,7 +322,7 @@ function Pay() {
                                         <Heading size={100} textAlign="right"><NumberFormat value={amount.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'RM'} /></Heading>
                                     </Pane>
                                 </Pane>
-                            </Pane>
+                            </Pane> */}
                             <Pane marginY={15} paddingX={20}>
                                 <Paragraph fontWeight="bold" fontSize={15}>
                                     Kaedah Pembayaran
@@ -523,7 +554,7 @@ function Pay() {
                             <input type="hidden" name="channel" value="01" />
                             <input type="hidden" name="web_return_address" value={SERVER_URL+"int/resitpembayaran.php"} />
                             <input type="hidden" name="web_service_return_address" value={SERVER_URL+"int/callback.php"} />
-                            <input type="hidden" name="payment_amount" value={amount} />
+                            <input type="hidden" name="payment_amount" value={openAmount} />
                             <input type="hidden" name="payment_description" value={"Cukai Taksiran " + accountNo} />
                             <input type="hidden" name="email" value={payoremail} />
                         </form>
@@ -534,7 +565,7 @@ function Pay() {
                             <input type="hidden" name="payment_ref_no" value={invoiceNo} />
                             <input type="hidden" name="web_return_address" value={SERVER_URL+"int/resitpembayaran.php"} />
                             <input type="hidden" name="web_service_return_address" value={SERVER_URL+"int/callback.php"} />
-                            <input type="hidden" name="payment_amount" value={amount} />
+                            <input type="hidden" name="payment_amount" value={openAmount} />
                             <input type="hidden" name="payment_description" value={"Cukai Taksiran " + accountNo} />
                             <input type="hidden" name="email" value={payoremail} />
                         </form>
