@@ -297,7 +297,7 @@ function Pay() {
                                         openAmount < 100 ?
                                     <UnorderedList>
                                         <ListItem icon={BanCircleIcon} iconColor="danger">
-                                            Minimum Bayaran RM 100.00
+                                           <Text size={300} color = 'danger'> Minimum Bayaran RM 100.00 </Text>
                                         </ListItem>
                                     </UnorderedList>
                                     : ""}
