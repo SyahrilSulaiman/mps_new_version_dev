@@ -100,7 +100,7 @@ function Pay() {
             toaster.danger("Harap maaf, Pembayaran batal kerana maklumat pembayaran tidak lengkap.", { id: "forbidden-action" });
             return false;
         }
-        if(openAmount <= 100.00 && amount > 100.00) {
+        if(openAmount < 100.00 && amount > 100.00) {
             toaster.danger("Harap maaf, Pembayaran batal kerana jumlah pembayaran tidak mencukupi nilai minimum.", { id: "forbidden-action" });
             return false;
         }
@@ -171,7 +171,7 @@ function Pay() {
             toaster.danger("Harap maaf, Pembayaran batal kerana maklumat jumlah pembayaran tidak lengkap.", { id: "forbidden-action" });
             return false;
         }
-        if(openAmount <= 100.00 && amount > 100.00) {
+        if(openAmount < 100.00 && amount > 100.00) {
             toaster.danger("Harap maaf, Pembayaran batal kerana jumlah pembayaran tidak mencukupi nilai minimum.", { id: "forbidden-action" });
             return false;
         }
