@@ -212,15 +212,13 @@ export default function SenaraiBil(props) {
                                             <Pane>
                                                 <Text fontWeight={600}>Tempoh Cukai</Text>
                                                 <Heading size={100}>
-                                                    {/* {  (new Date(bills.bill.data[3][0].DATE_BILL_LATEST).getMonth()+1 < parseInt(6)) ? 'Jan-Jun '+(currentYear.getFullYear()+0) : 'Julai-Disember ' +(currentYear.getFullYear()+0)} */}
-                                                    { "JUL - DIS 2021" }
+                                                    { bills.bill.data[5][0].TEMPOH_CUKAI }
                                                 </Heading>
                                             </Pane>
                                             <Pane>
                                                 <Text fontWeight={600}>Tempoh Bayaran</Text>
                                                 <Heading size={100}>
-                                                {/* { (new Date(bills.bill.data[3][0].DATE_BILL_LATEST).getMonth()+1 > parseInt(6)) ? '28-Feb-'+ (currentYear.getFullYear()+1) : '31-Aug-'+(currentYear.getFullYear()+0)} */}
-                                                {"22-JUN-2021"}
+                                                {bills.bill.data[5][0].TEMPOH_BAYARAN}
                                                 </Heading>
                                             </Pane>
                                         </Card>
@@ -231,7 +229,7 @@ export default function SenaraiBil(props) {
                                         >
                                             <Pane>
                                                 <Heading size={200}>Status Bayaran</Heading>
-                                                <Heading size={200} fontWeight={400}>{bills.bill.data[0][0].STATUS == "PAID" ? (<span className="uppercase font-medium text-xs text-green-400">Telah Dibayar</span>) : (<span className="uppercase font-medium text-xs text-red-400">Tertunggak</span>)}</Heading>
+                                                <Heading size={200} fontWeight={400}>{bills.bill.data[3][0].STATUS == "PAID" ? (<span className="uppercase font-medium text-xs text-green-400">Telah Dibayar</span>) : (<span className="uppercase font-medium text-xs text-red-400">Tertunggak</span>)}</Heading>
                                             </Pane>
                                         </Card>
                                         <Card
@@ -246,7 +244,7 @@ export default function SenaraiBil(props) {
                                                 <Heading className="mx-auto"><Icon icon={ChevronRightIcon}></Icon></Heading>
                                             </Pane>
                                         </Card>
-                                        {bills.bill.data[0][0].STATUS !== "PAID" &&
+                                        {bills.bill.data[3][0].STATUS !== "PAID" &&
                                             <Card
                                                 background="tint2"
                                                 marginBottom={majorScale(1)}

@@ -36,12 +36,12 @@ export default function BillList({dataset,isNoData}) {
   // Reset selected bill guna context 'resetSelectedBill' 
 
   const bills = dataset.data.length ? (
-    dataset.data.map((bill) => {
-      let amount = bill.BAKI_DAHULU + bill.CAJ_DIKENAKAN + bill.CUKAI_SEMASA+ bill.TMP_LAIN+ bill.TUNGGAKAN_SEMASA+ bill.WARAN_TAHANAN;
+    dataset.data.map((bill,index) => {
+      let amount = bill[0][0].BAKI_DAHULU + bill[0][0].CAJ_DIKENAKAN + bill[0][0].CUKAI_SEMASA+ bill[0][0].TMP_LAIN+ bill[0][0].TUNGGAKAN_SEMASA+ bill[0][0].WARAN_TAHANAN;
       return (
         <div
           className=" w-full"
-          key={bill.NOAKAUN}
+          key={bill[0][0].NOAKAUN}
         >
           <div className="flex flex-wrap ">
             <div className="w-full px-2 border-white">
@@ -49,36 +49,36 @@ export default function BillList({dataset,isNoData}) {
                 borderColor="white"
                 width="100%"
                 // background={}
-                className={"p-2 border cursor-pointer hover:bg-gray-500 " + handleBgChange(bill.NOAKAUN)}
+                className={"p-2 border cursor-pointer hover:bg-gray-500 " + handleBgChange(bill[0][0].NOAKAUN)}
                 display="grid"
                 gridTemplateColumns="40px 1fr 10px"
               >
                 <Pane color="gray" alignContent="right" justifyContent="center" onClick={(e) => addSelectedBill(bill)}>
-                  {handleSelectedBil(bill.NOAKAUN)}
+                  {handleSelectedBil(bill[0][0].NOAKAUN)}
                 </Pane>
-                <Pane onClick={ bill.STATUS !== "PAID" ? (e) => handleBayar(bill.NOAKAUN, amount, bill.NAMA_PEMILIK, bill.NOAKAUN) : () => handleViewBill(bill.NOAKAUN) }>
+                <Pane onClick={  (e) => handleBayar(bill[0][0].NOAKAUN, amount, bill[0][0].NAMA_PEMILIK, bill[0][0].NOAKAUN) }>
                   <table border="1" cellPadding="0" className="text-left overflow-x:auto">
                     <tbody>
                       <tr>
                         <th width="110px"><Heading size={200}>{bill.NOKP === null ? "No. SSM Syarikat" : "No. Kad Pengenalan"}</Heading></th>
-                        <td><Strong size={300}> : {bill.NOKP === null ? bill.NOSSM : bill.NOKP}</Strong ></td>
+                        <td><Strong size={300}> : {bill[0][0].NOKP === null ? bill[0][0].NOSSM : bill[0][0].NOKP}</Strong ></td>
                       </tr>
                       <tr>
                         <th><Heading size={200}>No. Akaun </Heading></th>
-                        <td><Strong size={300}> : {bill.NOAKAUN === null ? "-" : bill.NOAKAUN}</Strong></td>
+                        <td><Strong size={300}> : {bill[0][0].NOAKAUN === null ? "-" : bill[0][0].NOAKAUN}</Strong></td>
                       </tr>
                       <tr>
                         <th><Heading size={200}>Nama Pemilik </Heading></th>
-                        <td><Strong size={300}> : {bill.NAMA_PEMILIK === null ? "-" : bill.NAMA_PEMILIK}</Strong></td>
+                        <td><Strong size={300}> : {bill[0][0].NAMA_PEMILIK === null ? "-" : bill[0][0].NAMA_PEMILIK}</Strong></td>
                       </tr>
                       <tr>
                         <th><Heading size={200}>Status </Heading></th>
-                        <td><Strong size={300} color={bill.STATUS === "PAID" ? "#47B881" : "#EC4C47"}> : {bill.NAMA_PEMILIK === null ? "-" : bill.STATUS == "PAID" ? "TELAH DIBAYAR" : "TERTUNGGAK"}</Strong></td>
+                        <td><Strong size={300} color={bill[3][0].STATUS === "PAID" ? "#47B881" : "#EC4C47"}> : {bill[0][0].NAMA_PEMILIK === null ? "-" : bill[3][0].STATUS == "PAID" ? "TELAH DIBAYAR" : "TERTUNGGAK"}</Strong></td>
                       </tr>
                     </tbody>
                   </table>
                 </Pane>
-                <Pane color="gray" alignContent="right" justifyContent="center" onClick={ bill.STATUS !== "PAID" ? (e) => handleBayar(bill.NOAKAUN, amount, bill.NAMA_PEMILIK, bill.NOAKAUN) : () => handleViewBill(bill.NOAKAUN) }>
+                <Pane color="gray" alignContent="right" justifyContent="center" onClick={ bill[3][0].STATUS !== "PAID" ? (e) => handleBayar(bill[0][0].NOAKAUN, amount, bill[0][0].NAMA_PEMILIK, bill[0][0].NOAKAUN) : () => handleViewBill(bill[0][0].NOAKAUN) }>
                   <i className="pt-12 fas fa-chevron-right"></i>
                 </Pane>
               </Pane>

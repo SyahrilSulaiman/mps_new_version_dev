@@ -8,7 +8,7 @@ const SelectedBillContextProvider = (props) => {
     const [unpaidBil, setUnpaidBil] = useState([]);
 
     const handleUnpaidBil = (dataset) => {
-      const results = dataset.data.filter( json => json.STATUS.toUpperCase().includes('PENDING PAYMENT'))
+      const results = dataset.data.filter( json => json[3][0].STATUS.toUpperCase().includes('PENDING PAYMENT'))
       setUnpaidBil(results); 
     }
 
