@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { getNOKP, getEmail, setAuthorization } from "./Utils/Common";
+import { getNOKP, getEmail, setAuthorization, getAccessToken } from "./Utils/Common";
 import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
 import axios from 'axios';
@@ -16,13 +16,14 @@ export default function SenaraiBil(props) {
     const [disabled, setDisabled] = useState(false);
 	const nokp = getNOKP();
 	const email = getEmail();
+    const accessToken = getAccessToken();
     const auth = setAuthorization(nokp,email);
     const headers = {
         'token' : auth
     }
 
     const viewBill = (e) => {
-        window.location.href = SERVER_URL+"rp/bil_cukai_taksiran.php?noakaun=" + btoa(e)
+        window.location.href = SERVER_URL+"rp/bil_cukai_taksiran.php?noakaun=" + btoa(e)+"&token="+accessToken
     }
 
     const handlePayment = () => {

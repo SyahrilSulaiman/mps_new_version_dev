@@ -11,7 +11,7 @@ import {
   Icon,
 } from "evergreen-ui";
 import Topbaer from "./Topbar2";
-import { getNOKP, getEmail, setAuthorization } from "./Utils/Common";
+import { getNOKP, getEmail, setAuthorization, getAccessToken } from "./Utils/Common";
 import { SERVER_URL } from './Constants';
 
 
@@ -23,6 +23,7 @@ export default function ReceiptReport(props) {
   const nokp = getNOKP();
 	const email = getEmail();
   const auth = setAuthorization(nokp,email);
+  const accessToken = getAccessToken();
   
   const myHeaders = new Headers();
   myHeaders.append('token',auth);
@@ -66,7 +67,7 @@ export default function ReceiptReport(props) {
   }, [search]);
 
   const viewPenyata = (e) => {
-    window.location.href = SERVER_URL+"rp/resit.php?invoice=" + btoa(btoa(e))
+    window.location.href = SERVER_URL+"rp/resit.php?invoice=" + btoa(btoa(e))+"&token="+accessToken
   }
 
   if (loading == true) {

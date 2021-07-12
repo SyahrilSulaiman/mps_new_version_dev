@@ -30,6 +30,7 @@ function Pay() {
     const [amount, setAmount]       = useState(0.00);
     const [invoiceNo, setInvoiceNo] = useState('A' + year + Math.floor(1000000000000 + Math.random() * 9999999999999));  
     const [receiptno, setReceiptNo] = useState("");
+    const [billStatus, setBillStatus] = useState("PENDING PAYMENT");
     const [openAmount, setOpenAmount] = useState(0.00)
     const nokp = getNOKP();
 	const email = getEmail();
@@ -82,6 +83,7 @@ function Pay() {
             setAmount(total);
             setOpenAmount(total);
             setPenama(res.data[0][0].NAMA_PEMILIK);
+            setBillStatus(res.data[3][0].STATUS);
         })
         .catch((err) => {
             console.log(err);
@@ -100,7 +102,7 @@ function Pay() {
             toaster.danger("Harap maaf, Pembayaran batal kerana maklumat pembayaran tidak lengkap.", { id: "forbidden-action" });
             return false;
         }
-        if(openAmount < 100.00 && amount > 100.00) {
+        if(openAmount < 100.00 && amount > 100.00 && billStatus === 'PENDING PAYMENT') {
             toaster.danger("Harap maaf, Pembayaran batal kerana jumlah pembayaran tidak mencukupi nilai minimum.", { id: "forbidden-action" });
             return false;
         }
@@ -171,7 +173,7 @@ function Pay() {
             toaster.danger("Harap maaf, Pembayaran batal kerana maklumat jumlah pembayaran tidak lengkap.", { id: "forbidden-action" });
             return false;
         }
-        if(openAmount < 100.00 && amount > 100.00) {
+        if(openAmount < 100.00 && amount > 100.00 && billStatus === 'PENDING PAYMENT') {
             toaster.danger("Harap maaf, Pembayaran batal kerana jumlah pembayaran tidak mencukupi nilai minimum.", { id: "forbidden-action" });
             return false;
         }
@@ -286,15 +288,15 @@ function Pay() {
                                 <TextInputField
                                     width="100%"
                                     label={"No Akaun: "+ (accountNo ? accountNo : "-")}
-                                    description={"Jumlah: RM  "+ amount}
+                                    description={"Jumlah: RM  "+ ( amount < 0.00 ? 0 : amount )}
                                     placeholder="Minimum Bayaran RM 100.00"
-                                    value={openAmount}
+                                    value={openAmount < 0.00 ? 0 : openAmount}
                                     onChange={(e) => setOpenAmount(e.target.value)}
-                                    readOnly = {amount < 100 ? true : false}
-                                    isInvalid = { openAmount < 100 ? true : false }
+                                    readOnly = {(amount < 100 && billStatus === "PENDING PAYMENT") ? true : false}
+                                    isInvalid = {(openAmount < 100.00 && amount > 100.00 && billStatus === "PENDING PAYMENT") ? true : false }
                                     hint = 
                                     {
-                                        openAmount < 100 ?
+                                        (openAmount < 100.00 && amount > 100.00 && billStatus === "PENDING PAYMENT")?
                                     <UnorderedList>
                                         <ListItem icon={BanCircleIcon} iconColor="danger">
                                            <Text size={300} color = 'danger'> Minimum Bayaran RM 100.00 </Text>

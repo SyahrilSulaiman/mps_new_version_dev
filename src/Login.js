@@ -130,7 +130,6 @@ function Login(props) {
             fetch(urlAPI1, requestOptions)
                 .then(response => response.json())
                 .then(result => {
-
                     setLoading(false);
 
                     if (result.status == "unsuccess") {
@@ -141,6 +140,7 @@ function Login(props) {
                         setUserSession(btoa(result.data[0]), result.data[0]["U_USERNAME"], result.data[0]["U_USERIC"], result.data[0]["U_USEREMAIL"]);
                         sessionStorage.setItem("role", result.data[0]["U_USERROLE"]);
                         sessionStorage.setItem("notel", result.data[0]["U_USERPHONE"]);
+                        sessionStorage.setItem("access", result.data[0]["ACCESS_TOKEN"]);
 
                         if (result.data[0]['U_USERROLE'] == "Admin") {
                             props.history.push('/admin/usermanagement');
@@ -157,6 +157,7 @@ function Login(props) {
                     swal("Opss!", "Something went wrong. Please contact your administrator!", "error")
                         .then((value) => {
                             //props.history.push('/');
+                            console.log(error)
                         })
 
                 });

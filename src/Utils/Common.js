@@ -16,6 +16,10 @@
     return sessionStorage.getItem('email');
   }
 
+  export const getAccessToken = () => {
+    return sessionStorage.getItem('access');
+  }
+
   export const getGoogleToken = () => {
     return sessionStorage.getItem('GoogleToken');
   }
@@ -44,6 +48,9 @@
     sessionStorage.removeItem('role');
     sessionStorage.removeItem('cukai');
     sessionStorage.removeItem('notel');
+    sessionStorage.removeItem('access');
+    sessionStorage.removeItem('noakaun');
+    sessionStorage.removeItem('INFO');
   }
   
   // set the token and user from the session storage
