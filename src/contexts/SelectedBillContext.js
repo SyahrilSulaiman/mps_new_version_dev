@@ -8,12 +8,17 @@ const SelectedBillContextProvider = (props) => {
     const [unpaidBil, setUnpaidBil] = useState([]);
 
     const handleUnpaidBil = (dataset) => {
-      const results = dataset.data.filter( json => json[3][0].STATUS.toUpperCase().includes('PENDING PAYMENT'))
-      setUnpaidBil(results); 
+
+      const tmptArr = [];
+      dataset.data.map((bill,index) => {
+        if(bill[3][0].STATUS.toUpperCase() === 'PENDING PAYMENT'){
+          tmptArr.push(bill[0][0]);
+        }
+      })
+      setUnpaidBil(tmptArr); 
     }
 
     useEffect(() => {
-      // console.log('Unpaid : ', unpaidBil)
     },[unpaidBil])
     
     const addSelectedBill = (dataset) => {
@@ -55,7 +60,6 @@ const SelectedBillContextProvider = (props) => {
     }
     
     useEffect(() => {
-		// console.log('Selected Bil :', selectedBil)
     },[selectedBil])
     
     return ( 

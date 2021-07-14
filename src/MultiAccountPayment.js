@@ -50,6 +50,7 @@ function Pay() {
         }
         let total = 0;
         for(var i = 0; i < account.length; i++){
+            // console.log(account);
             setAmount(total = total + (account[i]["BAKI_DAHULU"] + account[i]["CAJ_DIKENAKAN"] + account[i]["CUKAI_SEMASA"] + account[i]["TMP_LAIN"] + account[i]["TUNGGAKAN_SEMASA"] + account[i]["WARAN_TAHANAN"] ));
         }
 
