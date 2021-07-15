@@ -205,7 +205,7 @@ export default function SenaraiBil(props) {
                                     >
                                         <Pane>
                                             <Heading size={200}>Status Bayaran</Heading>
-                                            <Heading size={200}>{bills.bill.data[0][0].STATUS == "PAID" ? (<span className="uppercase font-medium text-xs text-green-400">Telah Dibayar</span>) : (<span className="uppercase font-medium text-xs text-red-400">Tertunggak</span>)}</Heading>
+                                            <Heading size={200}>{bills.bill.data[0][0].STATUS === "PENDING PAYMENT" ? (<span className="uppercase font-medium text-xs text-red-400">Tertunggak</span>) : (<span className="uppercase font-medium text-xs text-green-400">Telah Dibayar</span>)}</Heading>
                                         </Pane>
                                     </Card>
                                     <Card
@@ -219,7 +219,7 @@ export default function SenaraiBil(props) {
                                             <Heading size={200}><i className="fas fa-receipt"></i> Cetak Bil PDF <span><i className="pt-1 fas fa-chevron-right float-right"></i></span></Heading> 
                                         </Pane>
                                     </Card>
-                                {
+                                {/* {
                                     bills.bill.status_bil === '1' ? (
                                     <Card
                                         onClick={() => handleReceipt(btoa(bills.bill.invoice))}
@@ -233,7 +233,7 @@ export default function SenaraiBil(props) {
                                         </Pane>
                                     </Card>
                                      ) : ''
-                                }
+                                } */}
                                 <div className="flex flex-wrap py-1 w-full mt-4 rounded-md">
                                 <Pane width="100%" >
                                     <Button
