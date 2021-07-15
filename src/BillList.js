@@ -56,7 +56,9 @@ export default function BillList({dataset,isNoData}) {
                 <Pane color="gray" alignContent="right" justifyContent="center" onClick={(e) => addSelectedBill(bill[0][0])}>
                   {handleSelectedBil(bill[0][0].NOAKAUN)}
                 </Pane>
-                <Pane onClick={  (e) => handleBayar(bill[0][0].NOAKAUN, amount, bill[0][0].NAMA_PEMILIK, bill[0][0].NOAKAUN) }>
+                <Pane 
+                onClick={ bill[3][0].STATUS === "PENDING PAYMENT" ? (e) => handleBayar(bill[0][0].NOAKAUN, amount, bill[0][0].NAMA_PEMILIK, bill[0][0].NOAKAUN) : () => handleViewBill(bill[0][0].NOAKAUN) }
+                >
                   <table border="1" cellPadding="0" className="text-left overflow-x:auto">
                     <tbody>
                       <tr>
@@ -78,7 +80,7 @@ export default function BillList({dataset,isNoData}) {
                     </tbody>
                   </table>
                 </Pane>
-                <Pane color="gray" alignContent="right" justifyContent="center" onClick={ bill[3][0].STATUS !== "PAID" ? (e) => handleBayar(bill[0][0].NOAKAUN, amount, bill[0][0].NAMA_PEMILIK, bill[0][0].NOAKAUN) : () => handleViewBill(bill[0][0].NOAKAUN) }>
+                <Pane color="gray" alignContent="right" justifyContent="center" onClick={ bill[3][0].STATUS === "PENDING PAYMENT" ? (e) => handleBayar(bill[0][0].NOAKAUN, amount, bill[0][0].NAMA_PEMILIK, bill[0][0].NOAKAUN) : () => handleViewBill(bill[0][0].NOAKAUN) }>
                   <i className="pt-12 fas fa-chevron-right"></i>
                 </Pane>
               </Pane>
