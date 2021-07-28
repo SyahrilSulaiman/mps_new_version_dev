@@ -193,7 +193,7 @@ function Pay() {
 
             var formdata = new FormData();
             formdata.append("accountId", accountNo);
-            formdata.append("amount", openAmount);
+            formdata.append("amount", openAmount.toFixed(2));
             formdata.append("invoiceNo", invoiceNo);
             formdata.append("payorname", payorname);
             formdata.append("payoremail", payoremail);
@@ -556,7 +556,7 @@ function Pay() {
                             <input type="hidden" name="channel" value="01" />
                             <input type="hidden" name="web_return_address" value={SERVER_URL+"int/resitpembayaran.php"} />
                             <input type="hidden" name="web_service_return_address" value={SERVER_URL+"int/callback.php"} />
-                            <input type="hidden" name="payment_amount" value={openAmount} />
+                            <input type="hidden" name="payment_amount" value={openAmount.toFixed(2)} />
                             <input type="hidden" name="payment_description" value={"Cukai Taksiran " + accountNo} />
                             <input type="hidden" name="email" value={payoremail} />
                         </form>
@@ -567,7 +567,7 @@ function Pay() {
                             <input type="hidden" name="payment_ref_no" value={invoiceNo} />
                             <input type="hidden" name="web_return_address" value={SERVER_URL+"int/resitpembayaran.php"} />
                             <input type="hidden" name="web_service_return_address" value={SERVER_URL+"int/callback.php"} />
-                            <input type="hidden" name="payment_amount" value={openAmount} />
+                            <input type="hidden" name="payment_amount" value={openAmount.toFixed(2)} />
                             <input type="hidden" name="payment_description" value={"Cukai Taksiran " + accountNo} />
                             <input type="hidden" name="email" value={payoremail} />
                         </form>

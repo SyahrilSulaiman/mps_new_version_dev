@@ -35,6 +35,9 @@ export default function SenaraiBil(props) {
                     setBill({
                         bill: res.data
                     });
+                    console.log('res.data =',res.data)
+                    console.log('bil status =',res.data.status_bil)
+                    console.log('invoice =',res.data.invoice)
                     setLoading(false);
                 }
             })
