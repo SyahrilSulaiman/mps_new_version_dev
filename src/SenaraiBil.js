@@ -222,8 +222,8 @@ export default function SenaraiBil(props) {
                                             <Heading size={200}><i className="fas fa-receipt"></i> Cetak Bil PDF <span><i className="pt-1 fas fa-chevron-right float-right"></i></span></Heading> 
                                         </Pane>
                                     </Card>
-                                {/* {
-                                    bills.bill.status_bil === '1' ? (
+                                {
+                                    bills.bill.status_bil == '1' ? (
                                     <Card
                                         onClick={() => handleReceipt(btoa(bills.bill.invoice))}
                                         background="tint2"
@@ -236,7 +236,7 @@ export default function SenaraiBil(props) {
                                         </Pane>
                                     </Card>
                                      ) : ''
-                                } */}
+                                }
                                 <div className="flex flex-wrap py-1 w-full mt-4 rounded-md">
                                 <Pane width="100%" >
                                     <Button
