@@ -11,6 +11,7 @@ import swal from 'sweetalert'
 import { SelectedBillContext } from "./contexts/SelectedBillContext";
 import { SERVER_URL } from './Constants';
 
+
 function Bill(props) {
 
 	const nokp = getNOKP();
@@ -212,10 +213,9 @@ function Bill(props) {
 								</div>
 							</div>
 						</div>
-						<Pane className="py-2 xl:mx-4 xl:rounded-md" position="relative" width="100%">
-						</Pane>
-						<div className="w-full">
-							<div className="flex-auto" style={{ height: "120vh" }}>
+
+						<div className="w-full py-4">
+							<div className="flex-auto">
 								<BillList dataset={dataset} isNoData={isNoData} />
 							</div>
 						</div>

@@ -44,7 +44,7 @@ export default function BillList({dataset,isNoData}) {
           key={bill[0][0].NOAKAUN}
         >
           <div className="flex flex-wrap ">
-            <div className="w-full px-2 border-white">
+            <div className="w-full px-6 border-white">
               <Pane
                 borderColor="white"
                 width="100%"
@@ -62,7 +62,7 @@ export default function BillList({dataset,isNoData}) {
                   <table border="1" cellPadding="0" className="text-left overflow-x:auto">
                     <tbody>
                       <tr>
-                        <th width="110px"><Heading size={200}>{bill.NOKP === null ? "No. SSM Syarikat" : "No. Kad Pengenalan"}</Heading></th>
+                        <th width="110px"><Heading size={200}>{bill[0][0].NOKP === null ? "No. SSM Syarikat" : "No. Kad Pengenalan"}</Heading></th>
                         <td><Strong size={300}> : {bill[0][0].NOKP === null ? bill[0][0].NOSSM : bill[0][0].NOKP}</Strong ></td>
                       </tr>
                       <tr>

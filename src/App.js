@@ -41,7 +41,11 @@ import TransactionReport from "./LaporanTransaksi";
 
 import cukaitaksiran from "./ListCukaiTaksiran";
 import kompaun from "./ListKompaun";
-import lesen from "./ListLesen";
+
+// lesen
+import Lesen from "./ListLesen";
+import JenisLesen from "./pages/LesenType";
+import LesenMenu from "./pages/LesenMenu"
 
 import Admin_Dashboard from "./admin/Dashboard_Admin";
 import Admin_Setting from "./admin/Setting_Admin";
@@ -217,7 +221,11 @@ function App() {
                     <PrivateRoute path="/bill" component={Bill} />
                     <PrivateRoute path="/cukaitaksiran" component={cukaitaksiran} data="dataa" />
                     <PrivateRoute path="/kompaun" component={kompaun} />
-                    <PrivateRoute path="/lesen" component={lesen} />
+                    
+                    <PrivateRoute path="/lesen" component={Lesen} />
+                    <PrivateRoute path="/jenislesen" component={JenisLesen} />
+                    <PrivateRoute path="/menulesen" component={LesenMenu} />
+
                     <PrivateRoute path="/bill_cukai_taksiran" component={SenaraiBil} />
                     <PrivateRoute path="/payment" component={Payment} />
                     <PrivateRoute path="/multiaccount-payment" component={MultiAccount} />
@@ -252,7 +260,11 @@ function App() {
                   <PrivateRoute path="/bill" component={Bill} />
                   <PrivateRoute path="/cukaitaksiran" component={cukaitaksiran} />
                   <PrivateRoute path="/kompaun" component={kompaun} />
-                  <PrivateRoute path="/lesen" component={lesen} />
+
+                  <PrivateRoute path="/lesen" component={Lesen} />
+                  <PrivateRoute path="/jenislesen" component={JenisLesen} />
+                  <PrivateRoute path="/menulesen" component={LesenMenu} />
+
                   <PrivateRoute path="/bill_cukai_taksiran" component={SenaraiBil} />
                   <PrivateRoute path="/payment" component={Payment} />
                   <PrivateRoute path="/multiaccount-payment" component={MultiAccount} />

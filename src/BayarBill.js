@@ -7,6 +7,8 @@ import Topbaer from "./Topbar2";
 import swal from "sweetalert2";
 import axios from "axios";
 import { SERVER_URL } from './Constants';
+import { Link } from "react-router-dom";
+import MenuList from "./components/MenuList";
 
 function Bill(props) {
 
@@ -39,6 +41,12 @@ function Bill(props) {
 		token: auth
 	}
 
+    const listMenu = [
+        {"title":"Cukai Taksiran","subtitle":"Senarai bil cukai Taksiran","status":true, "to":"cukaitaksiran"},
+        {"title":"Lesen","subtitle":"Senarai bil lesen","status":true, "to":"jenislesen"},
+        {"title":"Kompaun","subtitle":"Senarai bil kompaun","status":false, "to":"#"},
+    ]
+
 	return (
 		<div>
 			<Sidebar />
@@ -52,30 +60,7 @@ function Bill(props) {
 						<div className="w-full xl:mx-4">
 							<div className="flex-auto" style={{ height: "100vh" }}>
 								<Pane width="100%">
-									<Pane display="grid" gridTemplateColumns="1fr 20px" className="p-5 my-1 rounded-lg" background="#2f3542" onClick={() => window.location.href = "/cukaitaksiran"} cursor="pointer">
-										<Pane>
-											<Heading color="#f1f2f6"> Cukai Taksiran </Heading><small className="text-gray-500">Senarai bil cukai taksiran</small>
-										</Pane>
-										<Pane>
-											<Icon icon={ArrowRightIcon} color="#f1f2f6" className="py-5"></Icon>
-										</Pane>
-									</Pane>
-									<Pane display="grid" gridTemplateColumns="1fr 20px" className="p-5 my-1 rounded-lg" background="#2f3542"  opacity={0.5} color="#f1f2f6" cursor="not-allowed">
-										<Pane>
-											<Heading color="#f1f2f6"> Kompaun </Heading><small className="text-gray-500">Senarai bil kompaun</small>
-										</Pane>
-										<Pane>
-											<Icon icon={ArrowRightIcon} color="#f1f2f6" className="py-5"></Icon>
-										</Pane>
-									</Pane>
-									<Pane display="grid" gridTemplateColumns="1fr 20px" className="p-5 my-1 rounded-lg" background="#2f3542"  opacity={0.5} color="#f1f2f6" cursor="not-allowed">
-										<Pane>
-											<Heading color="#f1f2f6"> Lesen </Heading><small className="text-gray-500">Senarai bil lesen</small>
-										</Pane>
-										<Pane>
-											<Icon icon={ArrowRightIcon} color="#f1f2f6" className="py-5"></Icon>
-										</Pane>
-									</Pane>
+									<MenuList menu={listMenu}/>
 								</Pane>
 							</div>
 						</div>
