@@ -1,15 +1,21 @@
 import React from 'react'
 import Sidebar from "../Sidebar"
 import Navbar from "../components/Navbars/AdminNavbar"
-import { Pane, toaster, ArrowLeftIcon, Heading, TickCircleIcon } from "evergreen-ui";
+import { Pane, toaster, ArrowLeftIcon, Heading, TickCircleIcon, Button } from "evergreen-ui";
 import Topbaer from "../Topbar2";
 import { useHistory } from 'react-router';
 import { useLocation } from 'react-router-dom';
 import BillList from '../BillList';
+import BillCardList from '../components/BillCardList';
+import useFetch from '../hooks/useFetch';
+import EmptyBill from '../components/EmptyBill';
 
 function LesenMenu(props) {
+	const url = "";
     const history = useHistory()
     const location = useLocation()
+	const { data, isPending, error} = useFetch(url);
+	console.log("data",data);
 
     const handleBayarSemua = {};
     const handleBayarSelected = {};
@@ -119,10 +125,14 @@ function LesenMenu(props) {
 						</div>
                     </div>
                     <div className="w-full py-4">
-							<div className="flex-auto">
-								{/* <BillList dataset={dataset} isNoData={isNoData} /> */}
-							</div>
+						<div className="flex-auto">
+							{data === null
+								? <EmptyBill />
+								: <BillCardList data={data}/>
+							}
 						</div>
+						
+					</div>
                 </div>
             </div>
         </div>
