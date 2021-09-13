@@ -1,33 +1,12 @@
 import React, { useContext } from 'react'
 import { Pane, Heading, Strong, } from "evergreen-ui";
 import { SelectedBillContext } from '../contexts/SelectedBillContext';
+import { Link } from 'react-router-dom';
 
-function BillCardList() {
+function BillCardList({response}) {
   sessionStorage.removeItem("cukai")
-  
   const { addSelectedBill, handleSelectedBil, handleBgChange } = useContext(SelectedBillContext)
-  
-  const handleViewBill = (e) => {
-    sessionStorage.setItem("noakaun", btoa(btoa(e)));
-    // window.location.href = "/bill_cukai_taksiran";
-  };
-
-  const handleBayar = (cukai, amount, penama, akaun) => {
-
-    var array = [];
-    array["CUKAI"] = cukai;
-    array["TUNGGAKAN"] = amount;
-    array["PEMILIK"] = penama;
-    array["AKAUN"] = akaun;
-
-    sessionStorage.setItem("INFO", btoa(btoa(btoa(JSON.stringify(array)))));
-    sessionStorage.setItem("noakaun", btoa(btoa(akaun)));
-    // window.location.href = "/PengesahanPembayaran?Cukai=" + btoa(cukai);
-  };
-
-  const data = { account:"", status:"", kp:"", ssm:"", owner:"", amount:""}
-
-  
+  const data = { NOAKAUN:response[0][0].NOAKAUN, STATUS:response[2][0].STATUS, NOKP:response[0][0].NOKP, NOSSM:response[0][0].NOSSM, NAMA_PEMILIK:response[0][0].NAMA_PEMILIK, BAKI:response[2][0].BAKI}
 
   return (
         <div
@@ -38,49 +17,52 @@ function BillCardList() {
               <Pane
                 borderColor="white"
                 width="100%"
-                className={"p-2 border cursor-pointer hover:bg-gray-500 " + handleBgChange(data.account) }
+                className={"p-2 border cursor-pointer hover:bg-gray-500 " + handleBgChange(data.NOAKAUN) }
                 display="grid"
                 gridTemplateColumns="40px 1fr 10px"
               >
                 <Pane color="gray" alignContent="right" justifyContent="center" onClick={ (e) => addSelectedBill(data) }>
-                  { handleSelectedBil(data.account) }
+                  { handleSelectedBil(data.NOAKAUN) }
                 </Pane>
-                <Pane 
-                onClick={ data.status === "PENDING PAYMENT" ? (e) => handleBayar(data.account, data.amount, data.owner, data.account) : () => handleViewBill(data.account) }
+                <Link 
+                  to={{
+                    pathname: "/lesen",
+                    state:{ STATUS:data.STATUS, NOAKAUN:data.NOAKAUN }
+                  }}
                 >
                   <table border="1" cellPadding="0" className="text-left overflow-x:auto">
                     <tbody>
                       <tr>
                         <th width="110px">
-                          <Heading size={200}>{ data.kp === null ? "No. SSM Syarikat" : "No. Kad Pengenalan" }
+                          <Heading size={200}>{ data.NOKP === null ? "No. SSM Syarikat" : "No. Kad Pengenalan" }
                           </Heading>
                         </th>
                         <td>
-                            <Strong size={300}> : { data.kp === null ? data.ssm : data.kp } </Strong>
+                            <Strong size={300}> : { data.NOKP === null ? data.NOSSM : data.NOKP } </Strong>
                         </td>
                       </tr>
                       <tr>
                         <th><Heading size={200}>No. Akaun </Heading></th>
                         <td>
-                          <Strong size={300}> : {data.account === null ? "-" : data.account} </Strong>
+                          <Strong size={300}> : {data.NOAKAUN === null ? "-" : data.NOAKAUN} </Strong>
                         </td>
                       </tr>
                       <tr>
                         <th><Heading size={200}>Nama Pemilik </Heading></th>
                         <td>
-                          <Strong size={300}> : {data.owner === null ? "-" : data.owner} </Strong>
+                          <Strong size={300}> : {data.NAMA_PEMILIK === null ? "-" : data.NAMA_PEMILIK} </Strong>
                         </td>
                       </tr>
                       <tr>
                         <th><Heading size={200}>Status </Heading></th>
                         <td>
-                          <Strong size={300} color={ data.status === "PAID" ? "#47B881" : "#EC4C47"}>: { data.owner === null ? "-" : data.status == "PAID" ? "TELAH DIBAYAR" : "TERTUNGGAK" }</Strong>
+                          <Strong size={300} color={ data.STATUS === "PAID" ? "#47B881" : "#EC4C47"}>: { data.NAMA_PEMILIK === null ? "-" : data.STATUS == "PAID" ? "TELAH DIBAYAR" : "TERTUNGGAK" }</Strong>
                         </td>
                       </tr>
                     </tbody>
                   </table>
-                </Pane>
-                <Pane color="gray" alignContent="right" justifyContent="center" onClick={ data.status === "PENDING PAYMENT" ? (e) => handleBayar(data.account, data.amount, data.owner, data.account) : () => handleViewBill(data.account) }>
+                </Link>
+                <Pane color="gray" alignContent="right" justifyContent="center" >
                   <i className="pt-12 fas fa-chevron-right"></i>
                 </Pane>
               </Pane>

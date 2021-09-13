@@ -1,157 +1,81 @@
-import React, { useState, useEffect } from 'react'
-import { getNOKP, getEmail, setAuthorization, getAccessToken } from "./Utils/Common";
-import Sidebar from "./Sidebar";
-import Navbar from "./components/Navbars/AdminNavbar";
-import axios from 'axios';
-import swal from 'sweetalert2';
+import React from 'react'
+import useFetch from '../../hooks/useFetch'
+import Sidebar from "../../Sidebar"
+import Navbar from "../../components/Navbars/AdminNavbar"
+import Topbaer from "../../Topbar2";
 import { Heading, Spinner, Pane, Button, Text, Paragraph, majorScale, minorScale, Card, ArrowRightIcon,Icon , ChevronRightIcon, ArrowLeftIcon, toaster, DeleteIcon } from 'evergreen-ui';
-import Topbaer from "./Topbar2";
-import { SERVER_URL } from './Constants';
 import NumberFormat from 'react-number-format';
+import { useHistory, useLocation } from "react-router-dom";
 
-export default function SenaraiBil(props) {
+function Lesen() {
+    const history = useHistory()
 
-    const [isLoading, setLoading] = useState(true);
-    const [bills, setBill] = useState(null);
-    const [disabled, setDisabled] = useState(false);
-	const nokp = getNOKP();
-	const email = getEmail();
-    const accessToken = getAccessToken();
-    const auth = setAuthorization(nokp,email);
-    const headers = {
-        'token' : auth
+    const handleView = (e) => {
+        console.log('handleView ', e)
     }
 
-    const viewBill = (e) => {
-        window.location.href = SERVER_URL+"rp/bil_cukai_taksiran.php?noakaun=" + btoa(e)+"&token="+accessToken
+    const handleDelete = (e)  => {
+        console.log('delete ', e)
     }
 
     const handlePayment = () => {
+        console.log('pay')
+        history.push("/paymentV2", data)
 
-        setDisabled(true);
-
-        const formData = new FormData();
-        formData.append('userSecret', nokp)
-
-        axios.post(SERVER_URL+"int/api_generator.php?api_name=get_user_status", formData)
-            .then((res) => {
-                if (res.data.status !== "Pending" && res.data.status !== 'Active' ) {
-                    toaster.danger("Pembayaran Dibatalkan.",{description:"Akaun anda masih belum diaktifkan. Sila semak emel anda untuk pengesahan akaun."})
-                }else{
-                    sessionStorage.setItem("noakaun", bills.bill.data[0][0].NOAKAUN);
-                    sessionStorage.setItem("jumlah",bills.bill.data[2][0].BAKI)
-                    window.location.href = "/Payment?Cukai=" + sessionStorage.noakaun;
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-                swal.fire("Ralat", "Sila hubungi pentadbir sistem!", "error");
-            });
     }
-
-    useEffect(() => {
-        axios.get(SERVER_URL+"int/api_generator.php?api_name=getBill&noakaun=" + sessionStorage.getItem('noakaun'), {headers:headers})
-            .then(res => {
-                if (res.data.status == 'success') {
-                    setBill({
-                        bill: res.data
-                    });
-                    setLoading(false);
-                }
-            })
-            .catch(err => {
-                console.log(err);
-                toaster.danger('Sistem Ralat. Sila hubungi pihak pentadbir sistem anda.');
-                setTimeout(() => {
-                }, 3000); 
-            })
-    }, [])
 
     const disabledButton = () => {
 		toaster.danger("Fungsi belum diaktifkan.",{ description: "Harap maaf. Fungsi pembayaran belum diaktifkan.", id: "forbidden-action"});
 	}
 
-    const handleDelete = (e) => {
-        swal.fire({
-            icon:'warning',
-            title:'Hapus Bil',
-            text:'Adakah anda pasti untuk memadam bil ini?',
-            showCancelButton:true,
-            focusConfirm:false,
-            confirmButtonText:'Ya',
-            confirmButtonColor:'#d33',
-            cancelButtonText:'Tidak',
-            cancelButtonColor:'#3a4',
-            reverseButtons: true
-        }).then( result => {
-            if(result.isConfirmed){
-                let formData = new FormData();
-                formData.append('user',btoa(nokp));
-                formData.append('noakaun',btoa(e));
-                axios.post(SERVER_URL+"int/api_generator.php?api_name=deleteBill",formData, {headers:headers})
-                .then(res => {
-                    if (res.data.status === 'success'){
-                        swal.fire({
-                            icon: 'success',
-                            title: 'Berjaya',
-                            text: 'Bil telah dihapuskan'
-                        }).then(res => {
-                            window.location.href = "/cukaitaksiran";
-                        })
-                    }
-                    else{
-                        swal.fire({
-                            icon: 'error',
-                            title:'Ralat',
-                            text:'Sila hubungi pentadbir system'
-                        })
-                    }
-                })
-            }
-        })
-    }
+    const location = useLocation();
+    console.log(location);
+// const url = "";
+// const header = "";
+// const { data, loading } = useFetch(url,header);
+const loading = false;
+const data = {NOAKAUN:'noakaun', BAKI:100, NAMA_PEMILIK:'nama_pemilik', ADDRHARTA: 'alamat harta', MUKIM:'mukim', TEMPOH_CUKAI:'tempoh cukai', TEMPOH_BAYARAN:'tempoh_bayaran' }
 
-    if (isLoading) {
-        return (
-            <div>
-                <Sidebar />
-                <div className="relative bg-gray-400 md:ml-64" style={{ height: "100vh", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)" }}>
-                    <Navbar />
-                    <div className=" w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
-                        <div className="flex flex-wrap">
-                            <Pane background="#2c3e50" className="xl:mx-4 xl:rounded-md" width="100%">
-                                <Topbaer title="Bil / Maklumat Pembayaran" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => window.history.back()} />
-                            </Pane>
-                            <div className="w-full px-4 mt-3">
-                                <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-lg xs:mt-16">
-                                    <div className="flex-auto p-4 mt-6">
-                                        <Heading
-                                            is="h1"
-                                            size={500}
-                                            marginBottom={majorScale(2)}
-                                            textTransform="uppercase"
-                                            letterSpacing="2px"
-                                            fontWeight={700}
-                                            display="flex"
-                                            alignItems="center"
-                                        >
-                                            MAKLUMAT PEMBAYARAN BIL
-                                    </Heading>
-                                    </div>
-                                    <Pane display="flex" alignItems="center" justifyContent="center" height={400}>
-                                        <Spinner />
-                                    </Pane>
+if(loading){
+    return <div>
+        <div>
+            <Sidebar />
+            <div className="relative bg-gray-400 md:ml-64" style={{ height: "100vh", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)" }}>
+                <Navbar />
+                <div className=" w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
+                    <div className="flex flex-wrap">
+                        <Pane background="#2c3e50" className="xl:mx-4 xl:rounded-md" width="100%">
+                            <Topbaer title="Bil / Maklumat Pembayaran" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => window.history.back()} />
+                        </Pane>
+                        <div className="w-full px-4 mt-3">
+                            <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-lg xs:mt-16">
+                                <div className="flex-auto p-4 mt-6">
+                                    <Heading
+                                        is="h1"
+                                        size={500}
+                                        marginBottom={majorScale(2)}
+                                        textTransform="uppercase"
+                                        letterSpacing="2px"
+                                        fontWeight={700}
+                                        display="flex"
+                                        alignItems="center"
+                                    >
+                                        MAKLUMAT PEMBAYARAN BIL
+                                </Heading>
                                 </div>
+                                <Pane display="flex" alignItems="center" justifyContent="center" height={400}>
+                                    <Spinner />
+                                </Pane>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        );
-    }
-
-    else if (!isLoading && bills.bill) {
-        return (
+        </div>
+    </div>
+}
+else if(!loading){
+    return (
             <div>
                 <Sidebar />
                 <div className="relative bg-gray-400 md:ml-64 " style={{ height: "100vh", background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)" }}>
@@ -180,7 +104,7 @@ export default function SenaraiBil(props) {
 
                                         <Pane background="#c7ecee" marginBottom={majorScale(2)}>
                                             <Paragraph padding={majorScale(2)} size={400}>
-                                                Berikut merupakan maklumat bil cukai taksiran bagi akaun <b>{bills.bill.data[0][0].NOAKAUN}</b>.
+                                                Berikut merupakan maklumat bil cukai taksiran bagi akaun <b>{data.NOAKAUN}</b>.
                                             </Paragraph>
                                         </Pane>
 
@@ -196,30 +120,30 @@ export default function SenaraiBil(props) {
                                             </Pane>
                                             <Pane>
                                                 <Text fontWeight={600}>Nombor Akaun</Text>
-                                                <Heading size={100}>{bills.bill.data[0][0].NOAKAUN ? bills.bill.data[0][0].NOAKAUN : "Tiada"}</Heading>
+                                                <Heading size={100}>{ data.NOAKAUN ? data.NOAKAUN : "Tiada"}</Heading>
                                             </Pane>
                                             <Pane>
                                                 <Text fontWeight={600}>Nama Pemilik</Text>
-                                                <Heading size={100}>{bills.bill.data[0][0].NAMA_PEMILIK ? bills.bill.data[0][0].NAMA_PEMILIK : "Tiada"}</Heading>
+                                                <Heading size={100}>{ data.NAMA_PEMILIK ? data.NAMA_PEMILIK : "Tiada"}</Heading>
                                             </Pane>
                                             <Pane>
                                                 <Text fontWeight={600}>Alamat Harta</Text>
-                                                <Heading size={100}>{bills.bill.data[0][0].ADDRHARTA ? bills.bill.data[0][0].ADDRHARTA : "Tiada"}</Heading>
+                                                <Heading size={100}>{ data.ADDRHARTA ? data.ADDRHARTA : "Tiada"}</Heading>
                                             </Pane>
                                             <Pane>
                                                 <Text fontWeight={600}>Mukim</Text>
-                                                <Heading size={100}>{bills.bill.data[0][0].MUKIM ? bills.bill.data[0][0].MUKIM : "Tiada"}</Heading>
+                                                <Heading size={100}>{ data.MUKIM ? data.MUKIM : "Tiada"}</Heading>
                                             </Pane>
                                             <Pane>
                                                 <Text fontWeight={600}>Tempoh Cukai</Text>
                                                 <Heading size={100}>
-                                                    { bills.bill.data[5][0].TEMPOH_CUKAI }
+                                                    { data.TEMPOH_CUKAI }
                                                 </Heading>
                                             </Pane>
                                             <Pane>
                                                 <Text fontWeight={600}>Tempoh Bayaran</Text>
                                                 <Heading size={100}>
-                                                {bills.bill.data[5][0].TEMPOH_BAYARAN}
+                                                { data.TEMPOH_BAYARAN}
                                                 </Heading>
                                             </Pane>
                                         </Card>
@@ -230,14 +154,14 @@ export default function SenaraiBil(props) {
                                         >
                                             <Pane>
                                                 <Heading size={200}>Status Bayaran</Heading>
-                                                <Heading size={200} fontWeight={400}>{bills.bill.data[3][0].STATUS == "PAID" ? (<span className="uppercase font-medium text-xs text-green-400">Telah Dibayar</span>) : (<span className="uppercase font-medium text-xs text-red-400">Tertunggak</span>)}</Heading>
+                                                <Heading size={200} fontWeight={400}>{ data.STATUS === "PAID" ? (<span className="uppercase font-medium text-xs text-green-400">Telah Dibayar</span>) : (<span className="uppercase font-medium text-xs text-red-400">Tertunggak</span>)}</Heading>
                                             </Pane>
                                         </Card>
                                         <Card
                                             background="tint2"
                                             marginBottom={majorScale(2)}
                                             padding={minorScale(2)}
-                                            onClick={() => viewBill(btoa(bills.bill.data[0][0].NOAKAUN))}
+                                            onClick={() => handleView(data.NOAKAUN)}
                                             className="cursor-pointer hover:bg-gray-300"
                                         >
                                             <Pane display="grid" gridTemplateColumns="1fr 10px">
@@ -245,7 +169,7 @@ export default function SenaraiBil(props) {
                                                 <Heading className="mx-auto"><Icon icon={ChevronRightIcon}></Icon></Heading>
                                             </Pane>
                                         </Card>
-                                        {bills.bill.data[3][0].STATUS !== "PAID" &&
+                                        { data.STATUS !== "PAID" &&
                                             <Card
                                                 background="tint2"
                                                 marginBottom={majorScale(1)}
@@ -254,7 +178,7 @@ export default function SenaraiBil(props) {
                                                 <Pane>
                                                     <Heading size={200}>Jumlah Tunggakan</Heading>
                                                     <Heading size={500}>
-                                                        <NumberFormat value={(bills.bill.data[0][0].BAKI_DAHULU + bills.bill.data[0][0].CAJ_DIKENAKAN + bills.bill.data[0][0].CUKAI_SEMASA + bills.bill.data[0][0].TMP_LAIN + bills.bill.data[0][0].TUNGGAKAN_SEMASA + bills.bill.data[0][0].WARAN_TAHANAN ).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'RM'} />
+                                                        <NumberFormat value={(data.BAKI).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'RM'} />
                                                     </Heading>
                                                 </Pane>
                                             </Card>
@@ -291,7 +215,7 @@ export default function SenaraiBil(props) {
                                                     intent="danger"
                                                     type="button"
                                                     className="float-right"
-                                                    onClick={(e) => handleDelete(btoa(bills.bill.data[0][0].NOAKAUN))}
+                                                    onClick={(e) => handleDelete(data.NOAKAUN)}
                                                     iconAfter={DeleteIcon}
                                                 >
                                                     Hapus
@@ -305,7 +229,8 @@ export default function SenaraiBil(props) {
                     </div>
                 </div>
             </div>
-        );
+        )
     }
-
 }
+
+export default Lesen

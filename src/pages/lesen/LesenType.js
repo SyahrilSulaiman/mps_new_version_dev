@@ -1,15 +1,16 @@
 import React from 'react'
-import Sidebar from "../Sidebar"
-import Navbar from "../components/Navbars/AdminNavbar"
-import { Pane, toaster, ArrowLeftIcon, Heading, TickCircleIcon } from "evergreen-ui";
-import Topbaer from "../Topbar2";
-import MenuList from "../components/MenuList"
+import Sidebar from "../../Sidebar"
+import Navbar from "../../components/Navbars/AdminNavbar"
+import { Pane, ArrowLeftIcon,} from "evergreen-ui";
+import Topbaer from "../../Topbar2";
+import MenuList from "../../components/MenuList"
+import { SERVER_URL } from "../../Constants"
 
 export default function lesen() {
     const listMenu = [
-        {"title":"Lesen Tred / Penjana / Pasar Malam","subtitle":"-","status":true, "to":"/menulesen", data:{title:"Bil / Lesen Tred / Penjana / Pasar Malam"}},
-        {"title":"Visual Papan Iklan","subtitle":"-","status":false, "to":" Bil / Visual Papan Iklan", data:{}},
-        {"title":"Permit Lesen","subtitle":"-","status":false, "to":"Bil / Permit Lesen", data:{}},
+        {"title":"Lesen Tred / Penjana / Pasar Malam","subtitle":"-","status":true, "to":"/menulesen", data:{title:"Bil / Lesen Tred / Penjana / Pasar Malam", api:SERVER_URL+"int/api_generator.php?api_name=showV2&type=lesen&code=L"}},
+        {"title":"Visual Papan Iklan","subtitle":"-","status":true, "to":"/menulesen", data:{title: "Bil / Visual Papan Iklan", api:SERVER_URL+"int/api_generator.php?api_name=showV2&type=lesen&code=LV"}},
+        {"title":"Permit Lesen","subtitle":"-","status":true, "to":"/menulesen", data:{title:"Bil / Permit Lesen", api:SERVER_URL+"int/api_generator.php?api_name=showV2&type=lesen&code=PS"}},
     ]
 
     return (

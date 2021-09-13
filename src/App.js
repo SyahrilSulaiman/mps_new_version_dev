@@ -43,9 +43,16 @@ import cukaitaksiran from "./ListCukaiTaksiran";
 import kompaun from "./ListKompaun";
 
 // lesen
-import Lesen from "./ListLesen";
-import JenisLesen from "./pages/LesenType";
-import LesenMenu from "./pages/LesenMenu"
+import Lesen from "./pages/lesen/Lesen"
+import JenisLesen from "./pages/lesen/LesenType";
+import LesenMenu from "./pages/lesen/LesenMenu"
+
+// page payment
+import MultiplePayment from "./pages/payment/MultiplePayment"
+import SinglePayment from "./pages/payment/SinglePayment"
+
+// carian
+import Carian from "./pages/carian/Carian"
 
 import Admin_Dashboard from "./admin/Dashboard_Admin";
 import Admin_Setting from "./admin/Setting_Admin";
@@ -225,6 +232,11 @@ function App() {
                     <PrivateRoute path="/lesen" component={Lesen} />
                     <PrivateRoute path="/jenislesen" component={JenisLesen} />
                     <PrivateRoute path="/menulesen" component={LesenMenu} />
+                    
+                    <PrivateRoute path="/paymentV2" component={SinglePayment} />
+                    <PrivateRoute path="/multiplepayment" component={MultiplePayment} />
+
+                    <PrivateRoute path="/carian" component={Carian} />
 
                     <PrivateRoute path="/bill_cukai_taksiran" component={SenaraiBil} />
                     <PrivateRoute path="/payment" component={Payment} />
@@ -264,6 +276,11 @@ function App() {
                   <PrivateRoute path="/lesen" component={Lesen} />
                   <PrivateRoute path="/jenislesen" component={JenisLesen} />
                   <PrivateRoute path="/menulesen" component={LesenMenu} />
+
+                  <PrivateRoute path="/paymentV2" component={SinglePayment} />
+                  <PrivateRoute path="/multiplepayment" component={MultiplePayment} />
+
+                  <PrivateRoute path="/carian" component={Carian} />
 
                   <PrivateRoute path="/bill_cukai_taksiran" component={SenaraiBil} />
                   <PrivateRoute path="/payment" component={Payment} />

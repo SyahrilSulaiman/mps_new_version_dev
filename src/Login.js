@@ -193,7 +193,7 @@ function Login(props) {
                                 </div>
                                 <div className="-mt-px">
                                     <div className="bg-white rounded-none relative block w-full  border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5">
-                                        <input aria-label="Password" {...password} name="password" type={passwordShown ? 'text':'password' } class="px-3 py-2 w-11/12 appearance-none" required  placeholder="Kata Laluan" />
+                                        <input aria-label="Password" {...password} name="password" type={passwordShown ? 'text':'password' } className="px-3 py-2 w-11/12 appearance-none" required  placeholder="Kata Laluan" />
                                         <Icon className={passwordShown ? "text-gray-400 hover:text-gray-700" : "text-gray-700 hover:text-gray-400"} onClick={togglePasswordVisiblity} icon={EyeOpenIcon} size={15} marginLeft={8}/>
                                     </div>
                                 </div>
