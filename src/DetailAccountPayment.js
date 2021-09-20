@@ -10,7 +10,7 @@ import {
   ChevronRightIcon,
   Icon,
 } from "evergreen-ui";
-import Topbaer from "./Topbar2";
+import Topbar from "./Topbar2";
 import { getNOKP, getEmail, setAuthorization, getAccessToken } from "./Utils/Common";
 import { SERVER_URL } from './Constants';
 
@@ -89,7 +89,7 @@ export default function ReceiptReport(props) {
                 className="xl:mx-4 xl:rounded-md"
                 width="100%"
               >
-                <Topbaer
+                <Topbar
                   title="Laporan Resit"
                 />
               </Pane>
@@ -125,7 +125,7 @@ export default function ReceiptReport(props) {
                 className="xl:mx-4 xl:rounded-md"
                 width="100%"
               >
-                <Topbaer
+                <Topbar
                   title="Laporan Resit"
                 />
               </Pane>
@@ -190,7 +190,7 @@ export default function ReceiptReport(props) {
                 className="xl:mx-4 xl:rounded-md"
                 width="100%"
               >
-                <Topbaer
+                <Topbar
                   title="Laporan Penyata Akaun"
                   leftButtonIcon={ArrowLeftIcon}
                   onClickLeftButton={() => window.history.back()}

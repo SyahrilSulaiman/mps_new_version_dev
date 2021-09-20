@@ -99,8 +99,7 @@ export default function Search({ type }) {
             setDisplay(false);
             swal("Tidak ditemui", searchType + " tidak ditemui", "error");
           } else {
-            setBill(res);
-            // setArray(res);
+            setBill(res[1]);
             setDisplay(true);
           }
         }
@@ -333,7 +332,7 @@ const resetArray = (e) => {
         </div>
         <div
           className="relative pb-4 overflow-y-scroll"
-          style={{ height: "250px" }}
+          style={{ height: "45vh" }}
         >
           <div className="flex flex-wrap">
             <div className="w-full">

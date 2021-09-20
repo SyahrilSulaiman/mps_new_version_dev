@@ -116,8 +116,8 @@ function Login(props) {
             var sha256 = require('js-sha256');
 
             var formdata = new FormData();
-            formdata.append("email", username.value);
-            formdata.append("password", sha256(password.value));
+            formdata.append("email", username.value.trim());
+            formdata.append("password", sha256(password.value.trim()));
 
             var requestOptions = {
                 method: 'POST',

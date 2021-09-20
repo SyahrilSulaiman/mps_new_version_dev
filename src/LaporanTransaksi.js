@@ -8,7 +8,7 @@ import {
   TextInput,
   Heading,
 } from "evergreen-ui";
-import Topbaer from "./Topbar2";
+import Topbar from "./Topbar2";
 import {  getNOKP, getEmail, setAuthorization } from "./Utils/Common";
 import { SERVER_URL } from './Constants';
 
@@ -81,7 +81,7 @@ function Bill(props) {
                 className="xl:mx-4 xl:rounded-md"
                 width="100%"
               >
-                <Topbaer
+                <Topbar
                   title="Laporan Transaksi"
                 />
               </Pane>
@@ -117,7 +117,7 @@ function Bill(props) {
                 className="xl:mx-4 xl:rounded-md"
                 width="100%"
               >
-                <Topbaer
+                <Topbar
                   title="Laporan Transaksi"
                 />
               </Pane>
@@ -188,7 +188,7 @@ function Bill(props) {
                 className="xl:mx-4 xl:rounded-md"
                 width="100%"
               >
-                <Topbaer
+                <Topbar
                   title="Laporan Transaksi"
                   leftButtonIcon={ArrowLeftIcon}
                   onClickLeftButton={() => window.history.back()}

@@ -5,7 +5,7 @@ import Navbar from "./components/Navbars/AdminNavbar";
 import axios from 'axios';
 import swal from 'sweetalert2';
 import { Heading, Spinner, Pane, Button, Text, Paragraph, majorScale, minorScale, Card, ArrowRightIcon,Icon , ChevronRightIcon, ArrowLeftIcon, toaster, DeleteIcon } from 'evergreen-ui';
-import Topbaer from "./Topbar2";
+import Topbar from "./Topbar2";
 import { SERVER_URL } from './Constants';
 import NumberFormat from 'react-number-format';
 
@@ -120,7 +120,7 @@ export default function SenaraiBil(props) {
                     <div className=" w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
                         <div className="flex flex-wrap">
                             <Pane background="#2c3e50" className="xl:mx-4 xl:rounded-md" width="100%">
-                                <Topbaer title="Bil / Maklumat Pembayaran" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => window.history.back()} />
+                                <Topbar title="Bil / Maklumat Pembayaran" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => window.history.back()} />
                             </Pane>
                             <div className="w-full px-4 mt-3">
                                 <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-lg xs:mt-16">
@@ -159,7 +159,7 @@ export default function SenaraiBil(props) {
                     <div className=" w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
                         <div className="flex flex-wrap">
                             <Pane background="#2c3e50" className="xl:mx-4 xl:rounded-md" width="100%">
-                                <Topbaer title="Bil / Maklumat Pembayaran" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => window.history.back()} />
+                                <Topbar title="Bil / Maklumat Pembayaran" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => window.history.back()} />
                             </Pane>
                             <div className="w-full px-4 mt-3">
                                 <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-lg xs:mt-16">

@@ -2,7 +2,7 @@ import React from 'react'
 import useFetch from '../../hooks/useFetch'
 import Sidebar from "../../Sidebar"
 import Navbar from "../../components/Navbars/AdminNavbar"
-import Topbaer from "../../Topbar2";
+import Topbar from "../../Topbar2";
 import { Heading, Spinner, Pane, Button, Text, Paragraph, majorScale, minorScale, Card, ArrowRightIcon,Icon , ChevronRightIcon, ArrowLeftIcon, toaster, DeleteIcon } from 'evergreen-ui';
 import NumberFormat from 'react-number-format';
 import { useHistory, useLocation } from "react-router-dom";
@@ -29,12 +29,12 @@ function Lesen() {
 	}
 
     const location = useLocation();
-    console.log(location);
 // const url = "";
 // const header = "";
 // const { data, loading } = useFetch(url,header);
+
 const loading = false;
-const data = {NOAKAUN:'noakaun', BAKI:100, NAMA_PEMILIK:'nama_pemilik', ADDRHARTA: 'alamat harta', MUKIM:'mukim', TEMPOH_CUKAI:'tempoh cukai', TEMPOH_BAYARAN:'tempoh_bayaran' }
+const data = location.state.data;
 
 if(loading){
     return <div>
@@ -45,7 +45,7 @@ if(loading){
                 <div className=" w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
                     <div className="flex flex-wrap">
                         <Pane background="#2c3e50" className="xl:mx-4 xl:rounded-md" width="100%">
-                            <Topbaer title="Bil / Maklumat Pembayaran" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => window.history.back()} />
+                            <Topbar title="Bil / Maklumat Pembayaran" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => window.history.back()} />
                         </Pane>
                         <div className="w-full px-4 mt-3">
                             <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-lg xs:mt-16">
@@ -60,7 +60,7 @@ if(loading){
                                         display="flex"
                                         alignItems="center"
                                     >
-                                        MAKLUMAT PEMBAYARAN BIL
+                                        MAKLUMAT PEMBAYARAN LESEN
                                 </Heading>
                                 </div>
                                 <Pane display="flex" alignItems="center" justifyContent="center" height={400}>
@@ -83,7 +83,7 @@ else if(!loading){
                     <div className=" w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
                         <div className="flex flex-wrap">
                             <Pane background="#2c3e50" className="xl:mx-4 xl:rounded-md" width="100%">
-                                <Topbaer title="Bil / Maklumat Pembayaran" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => window.history.back()} />
+                                <Topbar title="Bil / Maklumat Pembayaran" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => window.history.back()} />
                             </Pane>
                             <div className="w-full px-4 mt-3">
                                 <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-lg xs:mt-16">
@@ -99,12 +99,12 @@ else if(!loading){
                                             display="flex"
                                             alignItems="center"
                                         >
-                                            MAKLUMAT PEMBAYARAN BIL
+                                            MAKLUMAT PEMBAYARAN LESEN
                                         </Heading>
 
                                         <Pane background="#c7ecee" marginBottom={majorScale(2)}>
                                             <Paragraph padding={majorScale(2)} size={400}>
-                                                Berikut merupakan maklumat bil cukai taksiran bagi akaun <b>{data.NOAKAUN}</b>.
+                                                Berikut merupakan maklumat lesen {location.state.data.TITLE} : <b>{data.NOAKAUN}</b>.
                                             </Paragraph>
                                         </Pane>
 
@@ -116,7 +116,7 @@ else if(!loading){
                                         >
                                             <Pane>
                                                 <Text fontWeight={600}>Jenis Bil</Text>
-                                                <Heading size={100}>Cukai - Cukai Taksiran</Heading>
+                                                <Heading size={100}>LESEN - {location.state.data.TITLE.toUpperCase()}</Heading>
                                             </Pane>
                                             <Pane>
                                                 <Text fontWeight={600}>Nombor Akaun</Text>
@@ -127,24 +127,28 @@ else if(!loading){
                                                 <Heading size={100}>{ data.NAMA_PEMILIK ? data.NAMA_PEMILIK : "Tiada"}</Heading>
                                             </Pane>
                                             <Pane>
-                                                <Text fontWeight={600}>Alamat Harta</Text>
-                                                <Heading size={100}>{ data.ADDRHARTA ? data.ADDRHARTA : "Tiada"}</Heading>
+                                                <Text fontWeight={600}>Nama Syarikat</Text>
+                                                <Heading size={100}>{ data.NAMA_SYARIKAT ? data.NAMA_SYARIKAT : "Tiada"}</Heading>
                                             </Pane>
                                             <Pane>
-                                                <Text fontWeight={600}>Mukim</Text>
-                                                <Heading size={100}>{ data.MUKIM ? data.MUKIM : "Tiada"}</Heading>
+                                                <Text fontWeight={600}>Alamat Syarikat</Text>
+                                                <Heading size={100}>{ data.ALAMAT_SYARIKAT ? data.ALAMAT_SYARIKAT : "Tiada"}</Heading>
                                             </Pane>
                                             <Pane>
-                                                <Text fontWeight={600}>Tempoh Cukai</Text>
+                                                <Text fontWeight={600}>Tempoh Lesen</Text>
                                                 <Heading size={100}>
-                                                    { data.TEMPOH_CUKAI }
+                                                { data.TEMPOH_LESEN}
                                                 </Heading>
                                             </Pane>
+                                        </Card>
+                                        <Card
+                                            background="tint2"
+                                            marginBottom={majorScale(2)}
+                                            padding={minorScale(2)}
+                                        >
                                             <Pane>
-                                                <Text fontWeight={600}>Tempoh Bayaran</Text>
-                                                <Heading size={100}>
-                                                { data.TEMPOH_BAYARAN}
-                                                </Heading>
+                                                <Text fontWeight={600}>Senarai Aktiviti</Text>
+                                                <Heading size={100}>{ data.AKTIVITI ? data.AKTIVITI : "Tiada"}</Heading>
                                             </Pane>
                                         </Card>
                                         <Card
@@ -157,7 +161,9 @@ else if(!loading){
                                                 <Heading size={200} fontWeight={400}>{ data.STATUS === "PAID" ? (<span className="uppercase font-medium text-xs text-green-400">Telah Dibayar</span>) : (<span className="uppercase font-medium text-xs text-red-400">Tertunggak</span>)}</Heading>
                                             </Pane>
                                         </Card>
-                                        <Card
+
+
+                                        {/* <Card
                                             background="tint2"
                                             marginBottom={majorScale(2)}
                                             padding={minorScale(2)}
@@ -168,7 +174,8 @@ else if(!loading){
                                                 <Heading size={200}>Cetak Bil PDF</Heading>
                                                 <Heading className="mx-auto"><Icon icon={ChevronRightIcon}></Icon></Heading>
                                             </Pane>
-                                        </Card>
+                                        </Card> */}
+
                                         { data.STATUS !== "PAID" &&
                                             <Card
                                                 background="tint2"
@@ -178,7 +185,7 @@ else if(!loading){
                                                 <Pane>
                                                     <Heading size={200}>Jumlah Tunggakan</Heading>
                                                     <Heading size={500}>
-                                                        <NumberFormat value={(data.BAKI).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'RM'} />
+                                                        <NumberFormat value={(parseInt(data.BAKI)).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'RM'} />
                                                     </Heading>
                                                 </Pane>
                                             </Card>

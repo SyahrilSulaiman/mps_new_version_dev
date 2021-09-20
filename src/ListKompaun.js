@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
 import { Pane, toaster, Button, AddIcon, ArrowLeftIcon, Dialog, SortNumericalIcon, Tablist, Tab, Heading } from "evergreen-ui";
 import BillList from './BillList';
-import Topbaer from "./Topbar2";
+import Topbar from "./Topbar2";
 
 function Bill(props) {
 
@@ -25,7 +25,7 @@ function Bill(props) {
 				<div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16">
 					<div className="flex flex-wrap ">
 						<Pane background="#2c3e50" className="xl:mx-4 xl:rounded-md" width="100%">
-							<Topbaer title="Bil / Kompaun" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => window.history.back()} />
+							<Topbar title="Bil / Kompaun" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => window.history.back()} />
 						</Pane>
 						<Pane className="py-5 xl:mx-4 xl:rounded-md" position="relative" width="100%">
 							<Tablist display="grid" gridTemplateColumns="1fr 1fr">

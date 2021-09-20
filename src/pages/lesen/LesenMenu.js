@@ -2,11 +2,11 @@ import React,{ useState,useContext } from 'react'
 import Sidebar from "../../Sidebar"
 import Navbar from "../../components/Navbars/AdminNavbar"
 import { Pane, Spinner, toaster, ArrowLeftIcon, Heading, TickCircleIcon } from "evergreen-ui";
-import Topbaer from "../../Topbar2";
+import Topbar from "../../Topbar2";
 import { useHistory } from 'react-router';
 import { useLocation } from 'react-router-dom';
 import { SelectedBillContext } from '../../contexts/SelectedBillContext';
-import BillCardList from '../../components/BillCardList';
+import LesenList from './LesenList';
 import useFetch from '../../hooks/useFetch';
 import EmptyBill from '../../components/EmptyBill';
 import { SERVER_URL } from '../../Constants';
@@ -58,7 +58,7 @@ function LesenMenu(props) {
     const handleAddBill = () => {
 		history.push({
 			pathname:'/carian',
-			state:{type:location.state.type, code:location.state.code, from:location.pathname}
+			state:{type:location.state.type, code:location.state.code, title:location.state.title}
 		})
 	};
 
@@ -70,7 +70,7 @@ function LesenMenu(props) {
                 <div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)" }}>
                     <div className="flex flex-wrap">
                     <Pane background="#2c3e50" className="xl:mx-6 xl:rounded-md mb-5" width="100%">
-							<Topbaer title={location.state.title} leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => history.goBack()} />
+							<Topbar title={"Bil / "+location.state.title} leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => history.goBack()} />
 						</Pane>
 						<div className="w-full lg:w-6/12 xl:w-4/12 px-6" onClick={handleAddBill}>
 							<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg cursor-pointer">
@@ -175,10 +175,10 @@ function LesenMenu(props) {
 											<Spinner />
 										</Pane>
 									</div>
-								: 	response.data.length !== 0
+								: 	(response.data !== null)
 								? 
 									response.data.map((res,index) => {
-										return <BillCardList response={res} key={index}/>
+										return <LesenList response={res} title={location.state.title} key={index}/>
 									})
 								: <EmptyBill />	
 
