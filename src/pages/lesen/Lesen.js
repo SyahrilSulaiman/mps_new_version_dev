@@ -1,27 +1,102 @@
-import React from 'react'
+import React,{ useState } from 'react'
 import useFetch from '../../hooks/useFetch'
 import Sidebar from "../../Sidebar"
 import Navbar from "../../components/Navbars/AdminNavbar"
 import Topbar from "../../Topbar2";
+import swal from 'sweetalert2';
 import { Heading, Spinner, Pane, Button, Text, Paragraph, majorScale, minorScale, Card, ArrowRightIcon,Icon , ChevronRightIcon, ArrowLeftIcon, toaster, DeleteIcon } from 'evergreen-ui';
 import NumberFormat from 'react-number-format';
 import { useHistory, useLocation } from "react-router-dom";
+import { getNOKP, getEmail, setAuthorization } from "../../Utils/Common";
+import { SERVER_URL } from '../../Constants';
 
 function Lesen() {
+    const nokp = getNOKP();
+    const email = getEmail();
+    const auth = setAuthorization(nokp,email);
+    const abortCont = new AbortController()
     const history = useHistory()
+
+    const [res, setRes] = useState(null)
+    const [pending, setPending] = useState(true)
+    const [isError, setIsError] = useState(null)
 
     const handleView = (e) => {
         console.log('handleView ', e)
     }
 
     const handleDelete = (e)  => {
-        console.log('delete ', e)
+        swal.fire({
+            icon:'warning',
+            title:'Hapus Bil',
+            text:'Adakah anda pasti untuk memadam bil ini?',
+            showCancelButton:true,
+            focusConfirm:false,
+            confirmButtonText:'Ya',
+            confirmButtonColor:'#d33',
+            cancelButtonText:'Tidak',
+            cancelButtonColor:'#3a4',
+            reverseButtons: true
+        }).then( result => {
+            if(result.isConfirmed){
+                const headers = new Headers();
+                const formData = new FormData();
+                headers.append('TOKEN', auth);
+                formData.append('user',nokp);
+                formData.append('noakaun',e);
+
+                const url = SERVER_URL+"int/api_generator.php?api_name=deleteV2&code="+location.state.data.CODE
+                const requestOptions = {
+                    method : 'POST',
+                    redirect : 'follow',
+                    body : formData,
+                    headers : headers,
+                    signal: abortCont.signal
+                  }
+                fetch(url, requestOptions)
+                .then(res => {
+                    if(!res.ok){
+                        throw Error("Could't fetch response from the resource")
+                    }
+                    return res.json()
+                })
+                .then(response => {
+                    setPending(false)
+                    setRes(response)
+
+                    if(response.status === 'success'){
+                        swal.fire({
+                            icon: 'success',
+                            title: 'Berjaya',
+                            text: 'Bil telah dihapuskan'
+                        }).then(res => {
+                            history.goBack();
+                        })
+                    }
+                    else{
+                        swal.fire({
+                            icon: 'error',
+                            title:'Ralat',
+                            text:'Sila hubungi pentadbir system'
+                        })
+                    }
+                })
+                .catch(err => {
+                    if(err.name === "AbortError"){
+                        console.log("fetch aborted")
+                    }
+                    else{
+                        setPending(false)
+                        setIsError(err.message)
+                        toaster.danger(err.message,{id:"forbidden-action"});
+                    }
+                })
+            }
+        })
     }
 
     const handlePayment = () => {
-        console.log('pay')
         history.push("/paymentV2", data)
-
     }
 
     const disabledButton = () => {
@@ -29,8 +104,23 @@ function Lesen() {
 	}
 
     const location = useLocation();
-    const loading = false;
     const data = location.state.data;
+    const loading = false;
+    const headers = new Headers()
+    headers.append('TOKEN',auth)
+    const formData = new FormData()
+    formData.append('nokp',nokp)
+    formData.append('account',data.NOAKAUN)
+
+	const requestOptions = {
+		method : 'POST',
+		redirect : 'follow',
+		body : formData,
+		headers : headers
+	}
+
+    const url = SERVER_URL+"int/api_generator.php?api_name=getActivity&code="+data.CODE
+    const {response, loading:isLoading, error} = useFetch(url, requestOptions)
 
 if(loading){
     return <div>
@@ -41,7 +131,7 @@ if(loading){
                 <div className=" w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
                     <div className="flex flex-wrap">
                         <Pane background="#2c3e50" className="xl:mx-4 xl:rounded-md" width="100%">
-                            <Topbar title="Bil / Maklumat Pembayaran" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => window.history.back()} />
+                            <Topbar title="Bil / Maklumat Pembayaran" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => history.goBack()} />
                         </Pane>
                         <div className="w-full px-4 mt-3">
                             <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-lg xs:mt-16">
@@ -144,7 +234,20 @@ else if(!loading){
                                         >
                                             <Pane>
                                                 <Text fontWeight={600}>Senarai Aktiviti</Text>
-                                                <Heading size={100}>{ data.AKTIVITI ? data.AKTIVITI : "Tiada"}</Heading>
+                                                {(!isLoading) ?
+                                                    (response.data.status === 'FAILED') ? 
+                                                        <Heading size={100}>Tiada</Heading>
+                                                    :
+                                                    response.data.map((res,index) => {
+                                                    return (
+                                                        <div className="pt-2" key={index}>
+                                                            <Heading size={100}>Kod Aktivit - { res.KOD_AKTIVITI}</Heading>
+                                                            <Heading size={100}>{ res.KETERANGAN}</Heading>
+                                                        </div>
+                                                        )
+                                                        
+                                                })
+                                                : ''}
                                             </Pane>
                                         </Card>
                                         <Card

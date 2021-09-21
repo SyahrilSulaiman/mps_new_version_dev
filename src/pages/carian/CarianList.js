@@ -3,7 +3,7 @@ import useFetch from '../../hooks/useFetch'
 import swal from "sweetalert"
 import { Pane, TextInputField, Button, SearchIcon, ArrowLeftIcon, Heading, toaster } from "evergreen-ui";
 import NoScroll from "no-scroll";
-import CarianLesen from './CarianLesen';
+import CarianItem from './CarianItem';
 import { getNOKP, getEmail, setAuthorization } from "../../Utils/Common";
 import { SERVER_URL } from '../../Constants';
 
@@ -21,28 +21,129 @@ function CarianList({type, code, carianBy}) {
     const nokp = getNOKP();
     const email = getEmail();
     const auth = setAuthorization(nokp,email);
-    const headers = new Headers();
-    headers.append('TOKEN',auth);
 
     // add state
     const [addLoading, setAddLoading] = useState(false);
 
     const handleAddThis = () => {
-        console.log('handleAddThis')
+      const url = SERVER_URL+"int/api_generator.php?api_name=newV2&mode=many&type="+carianBy+"&code="+code
+      const addHeader = new Headers()
+      const addData = new FormData()
+      const accountAdded = JSON.stringify(array);
+      addHeader.append('TOKEN',auth);
+      addData.append('nokp', nokp)
+      addData.append('account', accountAdded)
+      
+      setAddLoading(true)
+      const requestOptions = {
+        method : 'POST',
+        redirect : 'follow',
+        body : addData,
+        headers : addHeader,
+        signal: abortCont.signal
+      }
+      fetch(url, requestOptions)
+    .then(res => {
+        if(!res.ok){
+            throw Error("Could't fetch response from the resource")
+        }
+        return res.json()
+    })
+    .then(response => {
+        setAddLoading(false)
+        setError(null)
+        if(response.status === "success")
+        {
+            toaster.success('Berjaya tambah akaun untuk pembayaran.',{id:"forbidden-action"})
+        }
+        else if(response.status === "failure")
+        {
+            toaster.danger("Akaun ini telah didaftarkan ke senarai bayaran anda.",{id:"forbidden-action"});
+        }
+        else
+        {
+            toaster.danger('Maaf. Sila hubungi bahagian pihak pentadbiran.',{id:"forbidden-action"});
+        }
+    })
+    .catch(err => {
+        if(err.name === "AbortError"){
+            console.log("fetch aborted")
+        }
+        else{
+            setAddLoading(false)
+            setError(err.message)
+            toaster.danger(err.message,{id:"forbidden-action"});
+        }
+    })
     }
+
     const addAll = () => {
-        console.log('addAll')
+      let account = []
+      response.map((res,index) =>  account.push({account:res.NOAKAUN}));
+      const url = SERVER_URL+"int/api_generator.php?api_name=newV2&mode=many&type="+carianBy+"&code="+code
+      const addHeader = new Headers()
+      const addData = new FormData()
+      const accountAdded = JSON.stringify(account);
+      addHeader.append('TOKEN',auth);
+      addData.append('nokp', nokp)
+      addData.append('account', accountAdded)
+      
+      setAddLoading(true)
+      const requestOptions = {
+        method : 'POST',
+        redirect : 'follow',
+        body : addData,
+        headers : addHeader,
+        signal: abortCont.signal
+      }
+      fetch(url, requestOptions)
+    .then(res => {
+        if(!res.ok){
+            throw Error("Could't fetch response from the resource")
+        }
+        return res.json()
+    })
+    .then(response => {
+        setAddLoading(false)
+        setError(null)
+        if(response.status === "success")
+        {
+            toaster.success('Berjaya tambah akaun untuk pembayaran.',{id:"forbidden-action"})
+        }
+        else if(response.status === "failure")
+        {
+            toaster.danger("Akaun ini telah didaftarkan ke senarai bayaran anda.",{id:"forbidden-action"});
+        }
+        else
+        {
+            toaster.danger('Maaf. Sila hubungi bahagian pihak pentadbiran.',{id:"forbidden-action"});
+        }
+    })
+    .catch(err => {
+        if(err.name === "AbortError"){
+            console.log("fetch aborted")
+        }
+        else{
+            setAddLoading(false)
+            setError(err.message)
+            toaster.danger(err.message,{id:"forbidden-action"});
+        }
+    })
     }
+
     const resetArray = () => {
-        console.log('resetArray')
+      setArray([]);
     }
+
     const handleChange = (e) => {
         setSearch(e.target.value);
     }
 
     const handleSubmit = () => {
       const url = SERVER_URL+"int/api_generator.php?api_name=searchV2&type="+carianBy+"&code="+code
-  
+      const headers = new Headers();
+      headers.append('TOKEN',auth);
+      
       const formData = new FormData()
       formData.append('search',search.trim())
       formData.append('type',type.trim())
@@ -50,6 +151,7 @@ function CarianList({type, code, carianBy}) {
       const requestOptions = {
       method : 'POST',
       redirect : 'follow',
+      // mode: 'no-cors',
       body : formData,
       headers : headers,
       signal: abortCont.signal
@@ -63,7 +165,7 @@ function CarianList({type, code, carianBy}) {
           return res.json()
         })
         .then(response => {
-          setResponse(response)
+          setResponse(response.data)
           setLoading(false)
           setError(null)
           setDisplay(true)
@@ -80,32 +182,23 @@ function CarianList({type, code, carianBy}) {
 
     const handleAdd = (event) => {
       const url = SERVER_URL+"int/api_generator.php?api_name=newV2&type="+carianBy+"&code="+code
-      console.log(event)
-      const formData = new FormData()
-      formData.append('nokp', nokp)
-      formData.append('account', event)
+      const addHeader = new Headers()
+      const addData = new FormData()
+
+      addHeader.append('TOKEN',auth);
+      addData.append('nokp', nokp)
+      addData.append('account', event)
 
       const requestOptions = {
         method : 'POST',
         redirect : 'follow',
-        mode : 'no-cors',
-        body : formData,
-        headers : headers,
+        body : addData,
+        headers : addHeader,
         signal: abortCont.signal
       }
       setAddLoading(true)
 
-      fetch(url, {
-        method:requestOptions.method,   // *GET, POST, PUT, DELETE, etc.
-        mode:requestOptions.mode,        // *cors, no-cors, same-origin
-        cache:"default",       // *default, no-cache, reload, force-cache, only-if-cache
-        credentials:"same-origin", // *same-origin, inlude, omit
-        headers:requestOptions.headers,     // 
-        redirect:requestOptions.redirect,    // *follow, manual, error
-        referrerPolicy:"no-referrer", // *no-referrer-when-downgrade, no-referrer, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-        body:requestOptions.body,        // body data type must match "Content-Type" header
-        signal:abortCont.signal
-    })
+      fetch(url, requestOptions)
     .then(res => {
         if(!res.ok){
             throw Error("Could't fetch response from the resource")
@@ -115,13 +208,11 @@ function CarianList({type, code, carianBy}) {
     .then(response => {
         setAddLoading(false)
         setError(null)
-        if(response.data.status === "success")
+        if(response.status === "success")
         {
             toaster.success('Berjaya tambah akaun untuk pembayaran.',{id:"forbidden-action"})
-            // redirect to back
-            // setTimeout(function(){window.location.href = '/cukaitaksiran'; }, 1000);
         }
-        else if(response.data.status === "failure")
+        else if(response.status === "failure")
         {
             toaster.danger("Akaun ini telah didaftarkan ke senarai bayaran anda.",{id:"forbidden-action"});
         }
@@ -175,7 +266,7 @@ function CarianList({type, code, carianBy}) {
                         ? "Nombor Akaun"
                         : type === "ssm"
                         ? "Nombor ROC/ROB Syarikat"
-                        : type === "nokp"
+                        : type === "kp"
                         ? "Nombor Kad Pengenalan"
                         : "Carian..."
                     }
@@ -184,7 +275,7 @@ function CarianList({type, code, carianBy}) {
                         ? "Lengkapkan maklumat nombor akaun dibawah."
                         : type === "ssm"
                         ? "Lengkapkan nombor ROC/ROB syarikat dibawah."
-                        : type === "nokp"
+                        : type === "kp"
                         ? "Lengkapkan nombor kad pengenalan dibawah"
                         : "Carian..."
                     }
@@ -193,7 +284,7 @@ function CarianList({type, code, carianBy}) {
                         ? "cth: 1234567"
                         : type === "ssm"
                         ? "cth 123456-X"
-                        : type === "nokp"
+                        : type === "kp"
                         ? "cth: 901212059876"
                         : "Carian..."
                     }
@@ -208,7 +299,7 @@ function CarianList({type, code, carianBy}) {
                     className="float-right"
                     onClick = {() => handleSubmit()}
                   >
-                    {loading ? "Mencari.." : "Cari"}
+                    {addLoading ? "Mencari.." : "Cari"}
                   </Button>
 
                   <Button
@@ -222,7 +313,8 @@ function CarianList({type, code, carianBy}) {
                   </Button>
                 </Pane>
                 <Pane marginTop={5}  background="#fff">
-                    {bill.length > 1 ? (
+                {!loading ? 
+                  response.length > 1  ? (
                       <>
                         <Button
                           type="button"
@@ -252,9 +344,9 @@ function CarianList({type, code, carianBy}) {
                       </>
                     ) : (
                       ""
-                    )}
+                    )
+                : ''}
                 </Pane>
-
                 <Pane marginTop={10} padding={10} background="#2d3436">
                   <Heading size={400} textAlign="center" color="white">
                     Senarai bil akan dipaparkan dibawah
@@ -283,7 +375,7 @@ function CarianList({type, code, carianBy}) {
                 {
                   (display) ?
                   carianBy === 'lesen' ?
-                    <CarianLesen className="bg-gray-100" response={response} loading={loading} handleAdd={response.length > 1 ? handleChoose : handleAdd} array={array} />
+                    <CarianItem className="bg-gray-100" response={response} loading={loading} handleAdd={response.length > 1 ? handleChoose : handleAdd} array={array} />
                     : carianBy === 'permit' ?
                       'permit'
                       : carianBy === 'kompaun' ?

@@ -4,12 +4,10 @@ import { SelectedBillContext } from '../../contexts/SelectedBillContext';
 import { ContextHandler } from '../../contexts/ContextHandler';
 import { Link } from 'react-router-dom';
 
-function BillCardList({response, title}) {
+function BillCardList({response, title,code}) {
   sessionStorage.removeItem("cukai")
-  // const { addSelectedBill, handleSelectedBil, handleBgChange } = useContext(SelectedBillContext)
   const { addSelected, handleSelected, handleBgChange } = useContext(ContextHandler)
-  // const data = { NOAKAUN:response[0].NOACC, STATUS:response[1].STATUS, NOKP:response[0].NOKP, NOSSM:response[0].REG_NO, NAMA_PEMILIK:response[0].OWNER, BAKI:response[1].BAKI, NAMA_SYARIKAT:response[0].COMP_NAME, ALAMAT_SYARIKAT:response[0].ALAMAT_PREMIS, TEMPOH_LESEN:response[0].TKH_TAMAT, TITLE:title}
-  const data = { NOAKAUN:response.NOAKAUN, STATUS:response.STATUS, NOKP:response.NOKP, NOSSM:response.NOSSM, NAMA_PEMILIK:response.NAMA_PEMILIK, BAKI:response.BAKI, NAMA_SYARIKAT:response.NAMA_SYARIKAT, ALAMAT_SYARIKAT:response.ALAMAT_PREMIS, TEMPOH_LESEN:response.TARIKH_TAMAT, TITLE:title}
+  const data = { NOAKAUN:response.NOAKAUN, STATUS:response.STATUS, NOKP:response.NOKP, NOSSM:response.NOSSM, NAMA_PEMILIK:response.NAMA_PEMILIK, BAKI:response.BAKI, NAMA_SYARIKAT:response.NAMA_SYARIKAT, ALAMAT_SYARIKAT:response.ALAMAT_PREMIS, TEMPOH_LESEN:response.TARIKH_TAMAT, TITLE:title, CODE:code}
 
   return (
         <div

@@ -43,8 +43,8 @@ function Bill(props) {
 
     const listMenu = [
         {"title":"Cukai Taksiran","subtitle":"Senarai bil cukai Taksiran","status":true, "to":"cukaitaksiran"},
-        {"title":"Lesen","subtitle":"Senarai bil lesen","status":false, "to":"#"},
-        // {"title":"Lesen","subtitle":"Senarai bil lesen","status":true, "to":"jenislesen"},
+        // {"title":"Lesen","subtitle":"Senarai bil lesen","status":false, "to":"#"},
+        {"title":"Lesen","subtitle":"Senarai bil lesen","status":true, "to":"jenislesen"},
         {"title":"Kompaun","subtitle":"Senarai bil kompaun","status":false, "to":"#"},
     ]
 

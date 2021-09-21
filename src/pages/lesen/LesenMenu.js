@@ -33,10 +33,12 @@ function LesenMenu(props) {
 		body : formData,
 		headers : headers
 	}
-
+	
     const history = useHistory()
     const location = useLocation()
-	const { response, loading, } = useFetch(location.state.api,requestOptions);
+
+	const url = SERVER_URL+"int/api_generator.php?api_name=showV2&type="+location.state.type+"&code="+location.state.code;
+	const { response, loading, } = useFetch(url,requestOptions);
 	const [ disabled,setDisabled] = useState(false);
 
 	const handleBayarSemua = () => {
@@ -59,7 +61,7 @@ function LesenMenu(props) {
     const handleAddBill = () => {
 		history.push({
 			pathname:'/carian',
-			state:{type:location.state.type, code:location.state.code, title:location.state.title}
+			state:{type:location.state.type, code:location.state.code, title:location.state.title, from:location.pathname}
 		})
 	};
 
@@ -179,7 +181,7 @@ function LesenMenu(props) {
 								: 	(response.data !== null)
 								? 
 									response.data.map((res,index) => {
-										return <LesenList response={res} title={location.state.title} key={index}/>
+										return <LesenList response={res} title={location.state.title} code={location.state.code} key={index}/>
 									})
 								: <EmptyBill />	
 
