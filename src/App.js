@@ -47,6 +47,10 @@ import Lesen from "./pages/lesen/Lesen"
 import JenisLesen from "./pages/lesen/LesenType";
 import LesenMenu from "./pages/lesen/LesenMenu"
 
+// cukai
+import Cukai from "./pages/cukai/Cukai"
+import CukaiMenu from "./pages/cukai/CukaiMenu"
+
 // page payment
 import MultiplePayment from "./pages/payment/MultiplePayment"
 import SinglePayment from "./pages/payment/SinglePayment"
@@ -69,6 +73,7 @@ import ServerSideDataTable from "./admin/Server_Side/DataTable.js";
 import { useLoading, Audio } from "@agney/react-loading";
 
 import SelectedBillContextProvider from './contexts/SelectedBillContext';
+import ContextHandlerProvider from './contexts/ContextHandler';
 import { SERVER_URL } from './Constants';
 
 //import "./main.css";
@@ -214,6 +219,7 @@ function App() {
           <div>
             <div className="content">
               <SelectedBillContextProvider>
+              <ContextHandlerProvider>
                   <Switch>
                     <Route exact path="/" component={Home} />
                     <PublicRoute path="/login" component={Login} />
@@ -250,6 +256,7 @@ function App() {
                     <PrivateRoute path="/DetailPembayaranAkaun" component={DetailAccountPayment} />
                     <Route path="*" component={NotFound} />
                   </Switch>
+                  </ContextHandlerProvider>
                 </SelectedBillContextProvider>
               </div>
           </div>
@@ -263,6 +270,7 @@ function App() {
           <div>
             <div className="content">
             <SelectedBillContextProvider>
+            <ContextHandlerProvider>
                 <Switch>
                   <Route exact path="/" component={Home} />
                   <PublicRoute path="/login" component={Login} />
@@ -343,6 +351,7 @@ function App() {
                   />
                   <Route path="*" component={NotFound} />
                 </Switch>
+                </ContextHandlerProvider>
               </SelectedBillContextProvider>
             </div>
           </div>

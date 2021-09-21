@@ -5,7 +5,8 @@ import swal from "sweetalert";
 import NoScroll from "no-scroll";
 import BayarCukai from "./BayarCukai";
 import { Pane, Spinner, Heading, Strong, Button, Icon, ArrowLeftIcon, DocumentIcon, AddIcon, CrossIcon } from "evergreen-ui";
-import { SelectedBillContext } from "./contexts/SelectedBillContext";
+// import { SelectedBillContext } from "./contexts/SelectedBillContext";
+import { ContextHandler } from "./contexts/ContextHandler";
 
 export default function BillList({dataset,isNoData}) {
 
@@ -31,17 +32,18 @@ export default function BillList({dataset,isNoData}) {
     window.location.href = "/PengesahanPembayaran?Cukai=" + btoa(cukai);
   };
 
-  const {addSelectedBill, resetSelectedBill, handleSelectedBil, handleBgChange} = useContext(SelectedBillContext);
+  // const {addSelectedBill, resetSelectedBill, handleSelectedBil, handleBgChange} = useContext(SelectedBillContext);
+  const {addSelected, resetSelected, handleSelected, handleBgChange} = useContext(ContextHandler);
 
   // Reset selected bill guna context 'resetSelectedBill' 
 
   const bills = dataset.data.length ? (
     dataset.data.map((bill,index) => {
-      let amount = bill[0][0].BAKI_DAHULU + bill[0][0].CAJ_DIKENAKAN + bill[0][0].CUKAI_SEMASA+ bill[0][0].TMP_LAIN+ bill[0][0].TUNGGAKAN_SEMASA+ bill[0][0].WARAN_TAHANAN;
+      let amount = bill.BAKI
       return (
         <div
           className=" w-full"
-          key={bill[0][0].NOAKAUN}
+          key={bill.NOAKAUN}
         >
           <div className="flex flex-wrap ">
             <div className="w-full px-6 border-white">
@@ -49,38 +51,38 @@ export default function BillList({dataset,isNoData}) {
                 borderColor="white"
                 width="100%"
                 // background={}
-                className={"p-2 border cursor-pointer hover:bg-gray-500 " + handleBgChange(bill[0][0].NOAKAUN)}
+                className={"p-2 border cursor-pointer hover:bg-gray-500 " + handleBgChange(bill.NOAKAUN)}
                 display="grid"
                 gridTemplateColumns="40px 1fr 10px"
               >
-                <Pane color="gray" alignContent="right" justifyContent="center" onClick={(e) => addSelectedBill(bill[0][0])}>
-                  {handleSelectedBil(bill[0][0].NOAKAUN)}
+                <Pane color="gray" alignContent="right" justifyContent="center" onClick={(e) => addSelected(bill)}>
+                  {handleSelected(bill.NOAKAUN)}
                 </Pane>
                 <Pane 
-                onClick={ bill[3][0].STATUS === "PENDING PAYMENT" ? (e) => handleBayar(bill[0][0].NOAKAUN, amount, bill[0][0].NAMA_PEMILIK, bill[0][0].NOAKAUN) : () => handleViewBill(bill[0][0].NOAKAUN) }
+                onClick={ bill.STATUS === "PENDING PAYMENT" ? (e) => handleBayar(bill.NOAKAUN, amount, bill.NAMA_PEMILIK, bill.NOAKAUN) : () => handleViewBill(bill.NOAKAUN) }
                 >
                   <table border="1" cellPadding="0" className="text-left overflow-x:auto">
                     <tbody>
                       <tr>
-                        <th width="110px"><Heading size={200}>{bill[0][0].NOKP === null ? "No. SSM Syarikat" : "No. Kad Pengenalan"}</Heading></th>
-                        <td><Strong size={300}> : {bill[0][0].NOKP === null ? bill[0][0].NOSSM : bill[0][0].NOKP}</Strong ></td>
+                        <th width="110px"><Heading size={200}>{bill.NOKP === null ? "No. SSM Syarikat" : "No. Kad Pengenalan"}</Heading></th>
+                        <td><Strong size={300}> : {bill.NOKP === null ? bill.NOSSM : bill.NOKP}</Strong ></td>
                       </tr>
                       <tr>
                         <th><Heading size={200}>No. Akaun </Heading></th>
-                        <td><Strong size={300}> : {bill[0][0].NOAKAUN === null ? "-" : bill[0][0].NOAKAUN}</Strong></td>
+                        <td><Strong size={300}> : {bill.NOAKAUN === null ? "-" : bill.NOAKAUN}</Strong></td>
                       </tr>
                       <tr>
                         <th><Heading size={200}>Nama Pemilik </Heading></th>
-                        <td><Strong size={300}> : {bill[0][0].NAMA_PEMILIK === null ? "-" : bill[0][0].NAMA_PEMILIK}</Strong></td>
+                        <td><Strong size={300}> : {bill.NAMA_PEMILIK === null ? "-" : bill.NAMA_PEMILIK}</Strong></td>
                       </tr>
                       <tr>
                         <th><Heading size={200}>Status </Heading></th>
-                        <td><Strong size={300} color={bill[3][0].STATUS === "PAID" ? "#47B881" : "#EC4C47"}> : {bill[0][0].NAMA_PEMILIK === null ? "-" : bill[3][0].STATUS == "PAID" ? "TELAH DIBAYAR" : "TERTUNGGAK"}</Strong></td>
+                        <td><Strong size={300} color={bill.STATUS === "PAID" ? "#47B881" : "#EC4C47"}> : {bill.NAMA_PEMILIK === null ? "-" : bill.STATUS == "PAID" ? "TELAH DIBAYAR" : "TERTUNGGAK"}</Strong></td>
                       </tr>
                     </tbody>
                   </table>
                 </Pane>
-                <Pane color="gray" alignContent="right" justifyContent="center" onClick={ bill[3][0].STATUS === "PENDING PAYMENT" ? (e) => handleBayar(bill[0][0].NOAKAUN, amount, bill[0][0].NAMA_PEMILIK, bill[0][0].NOAKAUN) : () => handleViewBill(bill[0][0].NOAKAUN) }>
+                <Pane color="gray" alignContent="right" justifyContent="center" onClick={ bill.STATUS === "PENDING PAYMENT" ? (e) => handleBayar(bill.NOAKAUN, amount, bill.NAMA_PEMILIK, bill.NOAKAUN) : () => handleViewBill(bill.NOAKAUN) }>
                   <i className="pt-12 fas fa-chevron-right"></i>
                 </Pane>
               </Pane>

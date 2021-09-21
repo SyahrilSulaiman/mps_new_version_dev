@@ -43,7 +43,8 @@ function Bill(props) {
 
     const listMenu = [
         {"title":"Cukai Taksiran","subtitle":"Senarai bil cukai Taksiran","status":true, "to":"cukaitaksiran"},
-        {"title":"Lesen","subtitle":"Senarai bil lesen","status":true, "to":"jenislesen"},
+        {"title":"Lesen","subtitle":"Senarai bil lesen","status":false, "to":"#"},
+        // {"title":"Lesen","subtitle":"Senarai bil lesen","status":true, "to":"jenislesen"},
         {"title":"Kompaun","subtitle":"Senarai bil kompaun","status":false, "to":"#"},
     ]
 
@@ -52,7 +53,7 @@ function Bill(props) {
 			<Sidebar />
 			<div className="relative md:ml-64" style={{ height: "100vh" }} >
 				<Navbar />
-				<div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)" }}>
+				<div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)" }}>
 					<div className="flex flex-wrap" >
 						<Pane background="#2c3e50" className="xl:mx-4 xl:rounded-md" width="100%">
 							<Topbar title="Bil / Senarai Bil" />

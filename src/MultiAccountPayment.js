@@ -36,7 +36,7 @@ function Pay() {
     const headers = {
 		token: auth
     }
-    
+
     const myHeaders = new Headers();
     myHeaders.append('token',auth);
 
@@ -51,7 +51,7 @@ function Pay() {
         let total = 0;
         for(var i = 0; i < account.length; i++){
             // console.log(account);
-            setAmount(total = total + (account[i]["BAKI_DAHULU"] + account[i]["CAJ_DIKENAKAN"] + account[i]["CUKAI_SEMASA"] + account[i]["TMP_LAIN"] + account[i]["TUNGGAKAN_SEMASA"] + account[i]["WARAN_TAHANAN"] ));
+            setAmount(total = total + (account[i].BAKI ));
         }
 
         fetch(PAYMENT_URL+'fpx/bankList.php')
@@ -264,7 +264,7 @@ function Pay() {
                                         <Pane display="grid" gridTemplateColumns="1fr 1fr">
                                             <Heading size={200}>AKAUN {index + 1}</Heading>
                                             <Heading size={100} textAlign="right">{bill.NOAKAUN}&emsp;&emsp;
-                                                <NumberFormat value={(bill.BAKI_DAHULU + bill.CAJ_DIKENAKAN + bill.CUKAI_SEMASA + bill.TMP_LAIN + bill.TUNGGAKAN_SEMASA + bill.WARAN_TAHANAN ).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'RM'} />
+                                                <NumberFormat value={(bill.BAKI ).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'RM'} />
                                             </Heading>
                                         </Pane>
                                     </Pane>
@@ -354,8 +354,7 @@ function Pay() {
                                                             }
                                                         }}
                                                     >
-                                                        <img className="mx-auto" style={{ height: "40px", width: "40px" }} src={process.env.PUBLIC_URL + "/assets/img/" + bankk.CODE + ".png"} /><Heading size={200}>{bankk.NAME}</Heading></Pane>)
-                                                        {/* <img className="mx-auto" style={{ height: "40px", width: "40px" }} src={"https://dev1.toyyibpay.com/asset/img/logobank/" + bankk.CODE + ".png"} /><Heading size={200}>{bankk.NAME}</Heading></Pane>) */}
+                                                        <img className="mx-auto" alt={bankk.CODE} style={{ height: "40px", width: "40px" }} src={process.env.PUBLIC_URL + "/assets/img/" + bankk.CODE + ".png"} /><Heading size={200}>{bankk.NAME}</Heading></Pane>)
                                             }
                                             )
                                             }

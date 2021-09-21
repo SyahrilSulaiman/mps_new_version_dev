@@ -8,7 +8,8 @@ import BillList from './BillList';
 import Topbaer from "./Topbar2";
 import axios from 'axios'
 import swal from 'sweetalert'
-import { SelectedBillContext } from "./contexts/SelectedBillContext";
+// import { SelectedBillContext } from "./contexts/SelectedBillContext";
+import { ContextHandler } from "./contexts/ContextHandler";
 import { SERVER_URL } from './Constants';
 
 
@@ -20,7 +21,8 @@ function Bill(props) {
 	const [dataset, setDataSet] = useState({ data: [] });
 	const [loading, setLoading] = useState(false);
 	const [isNoData, setIsNoData] = useState(false);
-	const { selectedBil, handleUnpaidBil, unpaidBil } = useContext(SelectedBillContext);
+	const { selected, handleUnpaid, unpaid } = useContext(ContextHandler);
+	// const { selectedBil, handleUnpaidBil, unpaidBil } = useContext(SelectedBillContext);
 	const [disabled, setDisabled] = useState(false);
 	const headers = {
 		TOKEN: auth
@@ -41,14 +43,14 @@ function Bill(props) {
                 if (res.data.status !== "Pending" && res.data.status !== 'Active' ) {
                     toaster.danger("Pembayaran Dibatalkan.",{description:"Akaun anda masih belum diaktifkan. Sila semak emel anda untuk pengesahan akaun."}, { id: "forbidden-action" })
                 }else{
-					handleUnpaidBil(dataset);
-					if (unpaidBil.length < 1) {
+					handleUnpaid(dataset);
+					if (unpaid.length < 1) {
 						toaster.danger("Tiada bil tertunggak buat masa sekarang.", { id: "forbidden-action" });
 					}
 					else {
 						history.push({
 							pathname: '/multiaccount-payment',
-							state: { payBill: unpaidBil }
+							state: { payBill: unpaid }
 						})
 					}
                 }
@@ -68,13 +70,13 @@ function Bill(props) {
                 if (res.data.status !== "Pending" && res.data.status !== 'Active' ) {
                     toaster.danger("Pembayaran Dibatalkan.",{ description:"Akaun anda masih belum diaktifkan. Sila semak emel anda untuk pengesahan akaun.", id: "forbidden-action" })
                 }else{
-					if (selectedBil.length < 1) {
+					if (selected.length < 1) {
 						toaster.danger("Sila pilih akaun yang ingin dibayar dan tekan pada butang bayar bil berwarna kuning.", { id: "forbidden-action" });
 					}
 					else {
 						history.push({
 							pathname: '/multiaccount-payment',
-							state: { payBill: selectedBil }
+							state: { payBill: selected }
 						})
 					}
                 }
@@ -93,12 +95,12 @@ function Bill(props) {
 
 		const formData = new FormData();
 		formData.append("nokp", nokp);
-		axios.post(	SERVER_URL+"int/api_generator.php?api_name=showBill", formData, {headers:headers} )
+		axios.post(	SERVER_URL+"int/api_generator.php?api_name=showV2&type=cukai&code=A", formData, {headers:headers} )
 			.then((res) => {
 				setLoading(true);
 				if (res.data.status === "success") {
 					setDataSet({ data: res.data.data, });
-					handleUnpaidBil({ data: res.data.data });
+					handleUnpaid({ data: res.data.data });
 					setLoading(false);
 				} else {
 					setIsNoData(true);
@@ -172,7 +174,7 @@ function Bill(props) {
 											// onClick={	disabledButton	}
 										>
 											<div className="text-white p-3 text-center inline-flex items-center justify-center w-8 h-8 shadow-lg rounded-full bg-yellow-500">
-												<Heading size={400} color="white">{selectedBil.length}</Heading>	
+												<Heading size={400} color="white">{selected.length}</Heading>	
 											</div>
 										</div>
 									</div>
@@ -206,7 +208,7 @@ function Bill(props) {
 											// onClick={	disabledButton	}
 										>
 											<div className="text-white p-3 text-center inline-flex items-center justify-center w-8 h-8 shadow-lg rounded-full bg-blue-500">
-												<Heading size={400} color="white">{unpaidBil.length}</Heading>
+												<Heading size={400} color="white">{unpaid.length}</Heading>
 											</div>
 										</div>
 									</div>

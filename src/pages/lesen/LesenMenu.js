@@ -5,7 +5,7 @@ import { Pane, Spinner, toaster, ArrowLeftIcon, Heading, TickCircleIcon } from "
 import Topbar from "../../Topbar2";
 import { useHistory } from 'react-router';
 import { useLocation } from 'react-router-dom';
-import { SelectedBillContext } from '../../contexts/SelectedBillContext';
+import { ContextHandler } from '../../contexts/ContextHandler';
 import LesenList from './LesenList';
 import useFetch from '../../hooks/useFetch';
 import EmptyBill from '../../components/EmptyBill';
@@ -14,7 +14,8 @@ import { getNOKP, getEmail, setAuthorization } from "../../Utils/Common";
 
 
 function LesenMenu(props) {
-	const { selectedBil, handleUnpaidBil, unpaidBil } = useContext(SelectedBillContext);
+	// const { selectedBil, handleUnpaidBil, unpaidBil } = useContext(SelectedBillContext);
+	const { handleUnpaid, selected, unpaid } = useContext(ContextHandler);
 
 	const nokp = getNOKP();
 	const email = getEmail();
@@ -40,14 +41,14 @@ function LesenMenu(props) {
 
 	const handleBayarSemua = () => {
         setDisabled(true);
-		handleUnpaidBil(response);
-		if (unpaidBil.length < 1) {
+		handleUnpaid(response);
+		if (unpaid.length < 1) {
 			toaster.danger("Tiada bil tertunggak buat masa sekarang.", { id: "forbidden-action" });
 		}
 		else {
 			history.push({
 				pathname: '/multiplepayment',
-				state: { payBill: unpaidBil }
+				state: { payBill: unpaid }
 			})
 		}
 	}
@@ -121,7 +122,7 @@ function LesenMenu(props) {
 										>
 											<div className="text-white p-3 text-center inline-flex items-center justify-center w-8 h-8 shadow-lg rounded-full bg-yellow-500">
 												<Heading size={400} color="white">
-                                                {selectedBil.length}
+                                                {selected.length}
                                                 </Heading>	
 											</div>
 										</div>
@@ -157,7 +158,7 @@ function LesenMenu(props) {
 										>
 											<div className="text-white p-3 text-center inline-flex items-center justify-center w-8 h-8 shadow-lg rounded-full bg-blue-500">
 												<Heading size={400} color="white">
-                                                {unpaidBil.length}
+                                                {unpaid.length}
                                                 </Heading>
 											</div>
 										</div>
