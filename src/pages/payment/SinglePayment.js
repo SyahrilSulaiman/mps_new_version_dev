@@ -245,11 +245,11 @@ function SinglePayment() {
                             placeholder="Minimum Bayaran RM 100.00"
                             value={openAmount < 0.00 ? 0 : openAmount}
                             onChange={(e) => setOpenAmount(e.target.value)}
-                            readOnly = {(amount < 100 && billStatus === "PENDING PAYMENT") ? true : false}
-                            isInvalid = {(openAmount < 100.00 && amount > 100.00 && billStatus === "PENDING PAYMENT") ? true : false }
+                            readOnly = {(amount < 100  || location.state.TYPE.toLowerCase() === "lesen") ? true : false}
+                            isInvalid = {(openAmount < 100.00 && amount > 100.00 ) ? true : false }
                             hint = 
                             {
-                                (openAmount < 100.00 && amount > 100.00 && billStatus === "PENDING PAYMENT")?
+                                (openAmount < 100.00 && amount > 100.00 )?
                             <UnorderedList>
                                 <ListItem icon={BanCircleIcon} iconColor="danger">
                                     <Text size={300} color = 'danger'> Minimum Bayaran RM 100.00 </Text>

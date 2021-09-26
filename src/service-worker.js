@@ -11,7 +11,7 @@ import { clientsClaim } from 'workbox-core';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
-import { StaleWhileRevalidate } from 'workbox-strategies';
+import { StaleWhileRevalidate, NetworkFirst } from 'workbox-strategies';
 
 clientsClaim();
 
@@ -20,6 +20,8 @@ clientsClaim();
 // This variable must be present somewhere in your service worker file,
 // even if you decide not to use precaching. See https://cra.link/PWA
 precacheAndRoute(self.__WB_MANIFEST);
+
+
 
 // Set up App Shell-style routing, so that all navigation requests
 // are fulfilled with your index.html shell. Learn more at
@@ -46,20 +48,20 @@ registerRoute(
   createHandlerBoundToURL(process.env.PUBLIC_URL + '/index.html')
 );
 
-// An example runtime caching route for requests that aren't handled by the
-// precache, in this case same-origin .png requests like those from in public/
-registerRoute(
-  // Add in any other file extensions or routing criteria as needed.
-  ({ url }) => url.origin === self.location.origin && url.pathname.endsWith('.png'), // Customize this strategy as needed, e.g., by changing to CacheFirst.
-  new StaleWhileRevalidate({
-    cacheName: 'images',
-    plugins: [
-      // Ensure that once this runtime cache reaches a maximum size the
-      // least-recently used images are removed.
-      new ExpirationPlugin({ maxEntries: 50 }),
-    ],
-  })
-);
+// // An example runtime caching route for requests that aren't handled by the
+// // precache, in this case same-origin .png requests like those from in public/
+// registerRoute(
+//   // Add in any other file extensions or routing criteria as needed.
+//   ({ url }) => url.origin === self.location.origin && url.pathname.endsWith('.png'), // Customize this strategy as needed, e.g., by changing to CacheFirst.
+//   new StaleWhileRevalidate({
+//     cacheName: 'images',
+//     plugins: [
+//       // Ensure that once this runtime cache reaches a maximum size the
+//       // least-recently used images are removed.
+//       new ExpirationPlugin({ maxEntries: 50 }),
+//     ],
+//   }),
+// );
 
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
@@ -70,3 +72,76 @@ self.addEventListener('message', (event) => {
 });
 
 // Any other custom service worker logic can go here.
+
+// pwabuilder advance caching
+const HTML_CACHE = "html";
+const JS_CACHE = "javascript";
+const STYLE_CACHE = "stylesheets";
+const IMAGE_CACHE = "images";
+const FONT_CACHE = "fonts";
+
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+});
+
+registerRoute(
+  ({event}) => event.request.destination === 'document',
+  new NetworkFirst({
+    cacheName: HTML_CACHE,
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 10,
+      }),
+    ],
+  })
+);
+
+registerRoute(
+  ({event}) => event.request.destination === 'script',
+  new StaleWhileRevalidate({
+    cacheName: JS_CACHE,
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 15,
+      }),
+    ],
+  })
+);
+
+registerRoute(
+  ({event}) => event.request.destination === 'style',
+  new StaleWhileRevalidate({
+    cacheName: STYLE_CACHE,
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 15,
+      }),
+    ],
+  })
+);
+
+registerRoute(
+  ({event}) => event.request.destination === 'image',
+  new StaleWhileRevalidate({
+    cacheName: IMAGE_CACHE,
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 15,
+      }),
+    ],
+  })
+);
+
+registerRoute(
+  ({event}) => event.request.destination === 'font',
+  new StaleWhileRevalidate({
+    cacheName: FONT_CACHE,
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 15,
+      }),
+    ],
+  })
+);

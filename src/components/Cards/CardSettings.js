@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { TRANSLATION } from "../../Translation";
 import { Pane, Button, Heading, TextInputField, Text, Dialog, toaster } from "evergreen-ui";
 import swal from "sweetalert";
 import { SERVER_URL } from '../../Constants';
+import { ContextHandler } from "../../contexts/ContextHandler";
 // components
 
 const useFormInput = (initialValue) => {
+
   const [value, setValue] = useState(initialValue);
 
   const handleChange = (e) => {
@@ -23,8 +26,7 @@ export default function CardSettings({
   notel = "",
   color = "blue",
 }) {
-
-  const [error, setError] = useState(null);
+  const { language } = useContext(ContextHandler)
   const [loading, setLoading] = useState(false);
   const [namapenuh, setUsername] = useState(nama);
   const [kadpengenalan, setIC] = useState(nokp);
@@ -41,16 +43,16 @@ export default function CardSettings({
 
     setDialog(false);
 
-    if (namapenuh == "") {
-      swal("Opss!", "Kata nama tidak boleh dikosongkan.", "error");
+    if (namapenuh === "") {
+      swal("Opss!", TRANSLATION[language].MESSAGE.emptyNameMessage, "error");
       return false;
     }
-    else if (emel == "") {
-      swal("Opss!", "Emel tidak boleh dikosongkan", "error");
+    else if (emel === "") {
+      swal("Opss!", TRANSLATION[language].MESSAGE.emptyEmailMessage, "error");
       return false;
     }
-    else if (telefon == "") {
-      swal("Opss!", "Nombor telefon tidak boleh dikosongkan", "error");
+    else if (telefon === "") {
+      swal("Opss!", TRANSLATION[language].MESSAGE.emptyPhoneMessage, "error");
       return false;
     }
     else {
@@ -74,17 +76,16 @@ export default function CardSettings({
         .then(response => response.json())
         .then(result => {
 
-          if (result.status == "success") {
+          if (result.status.toLowerCase() === "success") {
 
             setLoading("false");
 
             sessionStorage.removeItem('username');
-            sessionStorage.setItem('username', result.data[0]["U_USERNAME"]);
-
             sessionStorage.removeItem('email');
+            sessionStorage.setItem('username', result.data[0]["U_USERNAME"]);
             sessionStorage.setItem('email', result.data[0]['U_USEREMAIL']);
 
-            swal("Berjaya", "Akaun profil anda sudah dikemaskini.", "success")
+            swal("Berjaya", TRANSLATION[language].MESSAGE.successUpdateProfileMessage, "success")
               .then(() => {
                 window.location.href = "/setting";
               });
@@ -93,7 +94,7 @@ export default function CardSettings({
           }
           else {
             setLoading("false");
-            swal("Ralat!", "Kemaskini tidak berjaya.", "error");
+            swal("Ralat!", TRANSLATION[language].MESSAGE.failUpdateProfileMessage, "error");
           }
 
         })
@@ -104,24 +105,24 @@ export default function CardSettings({
     
     setDialog2(false);
 
-    if (password == "") 
+    if (password === "") 
     {
-      toaster.danger("Tiada Kata Laluan Semasa", {description:"Harap maaf. Sila isi kata laluan semasa anda.", id:"forbidden-action"});
+      toaster.danger(TRANSLATION[language].CONSTANT.NO_PASSWORD, {description:TRANSLATION[language].MESSAGE.emptyPasswordMessage, id:"forbidden-action"});
     } 
-    else if (new_password == "") 
+    else if (new_password === "") 
     {
-      toaster.danger("Tiada Kata Laluan Baharu", {description:"Harap maaf. Sila isi kata laluan baharu anda.", id:"forbidden-action"});
+      toaster.danger(TRANSLATION[language].CONSTANT.NO_NEW_PASSWORD, {description:TRANSLATION[language].MESSAGE.emptyPasswordMessage, id:"forbidden-action"});
     } 
-    else if (conf_password == "") 
+    else if (conf_password === "") 
     {
-      toaster.danger("Tiada Kata Laluan Pengesahan", {description:"Harap maaf. Sila isi pengesahan kata laluan anda.", id:"forbidden-action"});
+      toaster.danger(TRANSLATION[language].CONSTANT.NO_CONFIRM_PASSWORD, {description:TRANSLATION[language].MESSAGE.emptyPasswordMessage, id:"forbidden-action"});
     } 
     else if (new_password !== conf_password) 
     {
-      toaster.danger("Kata Laluan Tidak Sah", {description:"Harap maaf. Kata laluan yang baharu tidak disahkan.", id:"forbidden-action"});
+      toaster.danger(TRANSLATION[language].CONSTANT.INCORRECT_PASSWORD, {description:TRANSLATION[language].MESSAGE.incorrectPasswordMessage, id:"forbidden-action"});
     }
     else if (!String(new_password).match(/[a-zA-z]/g) || !String(new_password).match(/\b/g) || new_password.length < 8) {
-      toaster.danger("Kata Laluan Tidak Selamat", {description:"Harap maaf. Kata laluan yang baharu perlu sekurang-kurangnya menpunya lapan (8) aksara, dan mesti terdiri daripada kombinasi huruf dan nombor.", id:"forbidden-action"});
+      toaster.danger(TRANSLATION[language].CONSTANT.UNSAFE_PASSWORD, {description:TRANSLATION[language].REGISTER.PASSWORD.SUBTITLE, id:"forbidden-action"});
     } 
     else {
 
@@ -153,19 +154,19 @@ export default function CardSettings({
               fetch(SERVER_URL+"int/api_generator.php?api_name=update_password", requestOptions)
                 .then(response => response.json())
                 .then(result => {
-                  if (result.status == "pending") {
-                    swal("Maaf", "Anda perlu tunggu 10 minit sebelum membuat penukaran kata laluan semula.", "error")
+                  if (result.status.toLowerCase() === "pending") {
+                    swal("Maaf", TRANSLATION[language].MESSAGE.resetPasswordWaitingMessage, "error")
                       .then(() => {
                         window.location.href = "/setting";
                       });
                   }
-                  else if (result.status == "success") {
-                    swal("Berjaya", "Kata laluan akaun telah berjaya ditukar", "success")
+                  else if (result.status.toLowerCase() === "success") {
+                    swal("Berjaya", TRANSLATION[language].MESSAGE.successUpdateProfileMessage, "success")
                       .then(() => {
                         window.location.href = "/setting";
                       });
                   } else {
-                    swal("Maaf", "Kata laluan akaun tidak berjaya ditukar", "error")
+                    swal("Maaf", TRANSLATION[language].MESSAGE.failUpdateProfileMessage, "error")
                       .then(() => {
                         window.location.href = "/setting";
                       });
@@ -210,7 +211,7 @@ export default function CardSettings({
               href="#link1"
               role="tablist"
             >
-              Profil
+              {TRANSLATION[language].PROFILE.PROFILE.BUTTON}
               </a>
           </li>
           <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
@@ -229,7 +230,7 @@ export default function CardSettings({
               href="#link2"
               role="tablist"
             >
-              Kata Laluan
+              {TRANSLATION[language].CONSTANT.PASSWORD}
               </a>
           </li>
         </ul>
@@ -241,43 +242,43 @@ export default function CardSettings({
                 
                   <Pane display="flex" padding={10} background="#dfe6e9" borderRadius={5}>
                     <Pane flex={1} alignItems="center" display="flex">
-                      <Text size={600}>Profil Akaun MyMPS</Text>
+                      <Text size={600}>{TRANSLATION[language].PROFILE.PROFILE.TITLE}</Text>
                     </Pane>
                   </Pane>
 
                   <Pane display="flex" padding={3} background="tint3" borderRadius={3} marginTop="30px">
                     <Pane flex={1} alignItems="center">
                       <TextInputField
-                        label="Nama Penuh"
+                        label={TRANSLATION[language].PROFILE.PROFILE.NAMA_PENUH}
                         width="100%"
-                        placeholder="Sila isi nama penuh anda"
+                        placeholder={TRANSLATION[language].PROFILE.PROFILE.PLACEHOLDER.NAME}
                         required={true}
                         defaultValue={namapenuh}
                         onChange={(e) => setUsername(e.target.value)}
                       />
 
                       <TextInputField
-                        label="No Kad Pengenalan"
+                        label={TRANSLATION[language].CONSTANT.NOKP}
                         width="100%"
-                        placeholder="Sila isi nombor kad pengenalan anda"
+                        placeholder={TRANSLATION[language].PROFILE.PROFILE.PLACEHOLDER.NOKP}
                         required={true}
                         disabled
                         defaultValue={kadpengenalan}
                       />
 
                       <TextInputField
-                        label="Alamat Emel"
+                        label={TRANSLATION[language].PROFILE.PROFILE.EMAIL}
                         width="100%"
-                        placeholder="Sila isi alamat emel anda"
+                        placeholder={TRANSLATION[language].PROFILE.PROFILE.PLACEHOLDER.EMAIL}
                         required={true}
                         defaultValue={emel}
                         disabled
                       />
 
                       <TextInputField
-                        label="Nombor Telefon"
+                        label={TRANSLATION[language].PROFILE.PROFILE.PHONE}
                         width="100%"
-                        placeholder="Sila isi nombor telefon anda"
+                        placeholder={TRANSLATION[language].PROFILE.PROFILE.PLACEHOLDER.PHONE}
                         required={true}
                         defaultValue={telefon}
                         onChange={(e) => setTelephone(e.target.value)}
@@ -292,7 +293,7 @@ export default function CardSettings({
                       type="button"
                       onClick={() => setDialog(true)}
                     >
-                      Kemaskini
+                      {TRANSLATION[language].CONSTANT.UPDATE}
                     </Button>
                   </Pane>
                 
@@ -301,34 +302,34 @@ export default function CardSettings({
                 
                   <Pane display="flex" padding={10} background="#dfe6e9" borderRadius={5}>
                     <Pane flex={1} alignItems="center" display="flex">
-                      <Text size={600}>Kemaskini Kata Laluan</Text>
+                      <Text size={600}>{TRANSLATION[language].CONSTANT.CONFIRM+" "+TRANSLATION[language].CONSTANT.PASSWORD}</Text>
                     </Pane>
                   </Pane>
 
                   <Pane padding={3} background="tint3" borderRadius={3} marginTop="30px">
                     <TextInputField
                       type="password"
-                      label="Kata Laluan Semasa"
+                      label={TRANSLATION[language].CONSTANT.PASSWORD}
                       width="100%"
-                      placeholder="Sila isi kata laluan terkini"
+                      placeholder={TRANSLATION[language].PROFILE.PASSWORD.PLACEHOLDER.CURRENT_PASSWORD}
                       required={true}
                       onChange={(e) => setPassword(e.target.value)}
                     />
 
                     <TextInputField
                       type="password"
-                      label="Kata Laluan Baharu"
+                      label={TRANSLATION[language].PROFILE.PASSWORD.NEW_PASSWORD}
                       width="100%"
-                      placeholder="Sila isi kata laluan baru"
+                      placeholder={TRANSLATION[language].PROFILE.PASSWORD.PLACEHOLDER.NEW_PASSWORD}
                       required={true}
                       onChange={(e) => setNewPassword(e.target.value)}
                     />
 
                     <TextInputField
                       type="password"
-                      label="Sah Kata Laluan Baharu"
+                      label={TRANSLATION[language].CONSTANT.CONFIRM+' '+TRANSLATION[language].PROFILE.PASSWORD.NEW_PASSWORD}
                       width="100%"
-                      placeholder="Sila sahkan kata laluan baru"
+                      placeholder={TRANSLATION[language].PROFILE.PASSWORD.PLACEHOLDER.CONFIRM_PASSWORD}
                       required={true}
                       onChange={(e) => setConformPassword(e.target.value)}
                     />
@@ -342,7 +343,7 @@ export default function CardSettings({
                       type="button"
                       onClick={() => setDialog2(true)}
                     >
-                      Kemaskini
+                      {TRANSLATION[language].CONSTANT.UPDATE}
                       </Button>
                   </Pane>
                 
@@ -352,30 +353,30 @@ export default function CardSettings({
         </div>
         <Dialog
           isShown={dialog}
-          title="Pengesahan Kemaskini Profil"
+          title={TRANSLATION[language].PROFILE.MESSAGE.updateAccountTitle}
           onConfirm={() => handleUpdate()}
           onCancel={() => setDialog(false)}
-          cancelLabel="Tidak"
+          cancelLabel={TRANSLATION[language].CONSTANT.NO}
           intent="danger"
-          confirmLabel="Ya"
-          intent="success"
+          confirmLabel={TRANSLATION[language].CONSTANT.YES}
+          // intent="success"
           shouldCloseOnOverlayClick={false}
         >
-          Anda pasti untuk kemaskini maklumat akaun anda?
+          {TRANSLATION[language].PROFILE.MESSAGE.updateAccountMessage}
         </Dialog>
 
         <Dialog
           isShown={dialog2}
-          title="Pengesahan Kemaskini Kata Laluan"
+          title={TRANSLATION[language].PROFILE.MESSAGE.updatePasswordTitle}
           onConfirm={() => handleChangePassword()}
           onCancel={() => setDialog2(false)}
-          cancelLabel="Tidak"
+          cancelLabel={TRANSLATION[language].CONSTANT.NO}
           intent="danger"
-          confirmLabel="Ya"
-          intent="success"
+          confirmLabel={TRANSLATION[language].CONSTANT.YES}
+          // intent="success"
           shouldCloseOnOverlayClick={false}
         >
-          Anda pasti untuk kemaskini kata laluan akaun anda?
+          {TRANSLATION[language].PROFILE.MESSAGE.updatePasswordMessage}
         </Dialog>
       </div>
 

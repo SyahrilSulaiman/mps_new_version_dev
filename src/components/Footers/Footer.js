@@ -1,10 +1,10 @@
-import React from "react";
+import React,{ useContext } from "react";
 import www_icon from '../../assets/img/www-icon.png'
+import { ContextHandler } from "../../contexts/ContextHandler";
+import { TRANSLATION } from "../../Translation";
 
-export default function Footer({
-  title = "",
-  subtitle = ""
-}) {
+export default function Footer(){
+  const {language} = useContext(ContextHandler)
   return (
     <>
       <footer className="relative bg-gray-300 pt-8 pb-6">
@@ -30,9 +30,9 @@ export default function Footer({
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap text-center lg:text-left">
             <div className="w-full lg:w-6/12 px-4">
-              <h4 className="text-3xl font-semibold">Portal {title}</h4>
+              <h4 className="text-3xl font-semibold">{TRANSLATION[language].HOME.TITLE}</h4>
               <h5 className="text-lg mt-0 mb-2 text-gray-700">
-              Kami sedia membantu anda untuk menguruskan dan memudahkan bayaran bil anda setiap hari.
+                {TRANSLATION[language].HOME.FOOTER.SUBTITLE}
               </h5>
               <div className="mt-6 lg:mb-0 mb-6">
                 <button
@@ -70,60 +70,36 @@ export default function Footer({
               <div className="flex flex-wrap items-top mb-6">
                 <div className="w-full lg:w-4/12 px-4 ml-auto">
                   <span className="block uppercase text-gray-600 text-sm font-semibold mb-2">
-                    Keterangan Lanjut
+                  {TRANSLATION[language].HOME.FOOTER.DETAILS.TITLE}
                   </span>
                   <ul className="list-unstyled">
                     <li>
-                      <a
-                        className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                      >
-                        Tentang {title}
+                      <a href="#" className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm" >
+                      {TRANSLATION[language].HOME.FOOTER.DETAILS.ITEM_1}
                       </a>
                     </li>
                     <li>
-                      <a
-                        className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                      >
-                        Cara Penggunaan {title}
+                      <a href="#" className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm" >
+                      {TRANSLATION[language].HOME.FOOTER.DETAILS.ITEM_2}
                       </a>
                     </li>
                     <li>
-                      <a
-                        className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                      >
-                        Terma & Syarat
+                      <a href="#" className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm" >
+                      {TRANSLATION[language].HOME.FOOTER.DETAILS.ITEM_3}
                       </a>
                     </li>
                     <li>
-                      <a
-                        className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                      >
-                        Polisi Privasi
+                      <a href="#" className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm" >
+                      {TRANSLATION[language].HOME.FOOTER.DETAILS.ITEM_4}
                       </a>
                     </li>
                     <li>
-                      <a
-                        className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                      >
-                        Hubungi Kami
+                      <a href="#" className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm" >
+                      {TRANSLATION[language].HOME.FOOTER.DETAILS.ITEM_5}
                       </a>
                     </li>
                   </ul>
                 </div>
-                {/* <div className="w-full lg:w-4/12 px-4">
-                  <span className="block uppercase text-gray-300 text-sm font-semibold mb-2">
-                    Lanjut
-                  </span>
-                  <ul className="list-unstyled">
-                    <li>
-                      <a
-                        className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                      >
-                        Hubungi Kami
-                      </a>
-                    </li>
-                  </ul>
-                </div> */}
               </div>
             </div>
 
@@ -132,7 +108,7 @@ export default function Footer({
           <div className="flex flex-wrap items-center md:justify-between justify-center">
             <div className="w-full px-4 mx-auto text-center">
               <div className="text-sm text-gray-600 font-semibold pt-1">
-                Hak Cipta Terpelihara © {new Date().getFullYear()} {subtitle}
+              {TRANSLATION[language].HOME.FOOTER.COPYRIGHT}{new Date().getFullYear()} {TRANSLATION[language].HOME.COMPANY}
               </div>
               <div className="text-sm text-gray-600 font-semibold">
                 

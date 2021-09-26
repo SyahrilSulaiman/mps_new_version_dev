@@ -1,10 +1,12 @@
-import { Height } from '@material-ui/icons';
-import React,{ useState, useEffect } from 'react';
+import React,{ useContext } from 'react';
 import ios_out from './icon_safari_out.png'
 import { Pane, Text } from 'evergreen-ui';
+import { TRANSLATION } from '../../Translation';
+import { ContextHandler } from '../../contexts/ContextHandler';
 
 export default function Modal({Close}){
-    const height = 22;
+    const {language} = useContext(ContextHandler)
+
     return(
         <div className="fixed z-10 inset-0 overflow-y-auto">
             <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -21,7 +23,7 @@ export default function Modal({Close}){
                             <Pane className=" items-center">
                                 <Pane display="block" className="bg-white mb-3">
                                     <Pane paddingLeft={10}>
-                                        <Text size={600} className="font-bold">Cara Install</Text>
+                                        <Text size={600} className="font-bold">{TRANSLATION[language].LOGIN.INSTRUCTION.TITLE}</Text>
                                     </Pane>
                                 </Pane>
                                 <hr className="divide-y"/>
@@ -31,13 +33,13 @@ export default function Modal({Close}){
                                     </Pane>
                                     <Pane paddingLeft={25}>
                                         <Pane>
-                                            <Text size={400} className="font-semibold">1. Buka aplikasi ini melalui Chrome</Text>
+                                            <Text size={400} className="font-semibold">1. {TRANSLATION[language].LOGIN.INSTRUCTION.ANDROID.ITEM_1}</Text>
                                         </Pane>
                                         <Pane>
-                                            <Text size={400} className="font-semibold">2. Tekan ikon menu <i className="fas fa-ellipsis-v text-red-700"></i></Text>
+                                            <Text size={400} className="font-semibold">2. {TRANSLATION[language].LOGIN.INSTRUCTION.ANDROID.ITEM_2} <i className="fas fa-ellipsis-v text-red-700"></i></Text>
                                         </Pane>
                                         <Pane>
-                                            <Text size={400} className="font-semibold">3. Pilih <strong>Add to homescreen</strong></Text>
+                                            <Text size={400} className="font-semibold">3. {TRANSLATION[language].LOGIN.INSTRUCTION.ANDROID.ITEM_3} <strong>Add to homescreen</strong></Text>
                                         </Pane>
                                     </Pane>
                                 </Pane>
@@ -48,13 +50,13 @@ export default function Modal({Close}){
                                     </Pane>
                                     <Pane paddingLeft={25}>
                                         <Pane>
-                                            <Text size={400} className="font-semibold">1. Buka aplikasi ini melalui Safari</Text>
+                                            <Text size={400} className="font-semibold">1. {TRANSLATION[language].LOGIN.INSTRUCTION.IOS.ITEM_1}</Text>
                                         </Pane>
                                         <Pane>
-                                            <Text size={400} className="font-semibold">2. Tekan ikon menu <img className="inline h-5" src={ios_out} alt=""/></Text>
+                                            <Text size={400} className="font-semibold">2. {TRANSLATION[language].LOGIN.INSTRUCTION.IOS.ITEM_2} <img className="inline h-5" src={ios_out} alt=""/></Text>
                                         </Pane>
                                         <Pane>
-                                            <Text size={400} className="font-semibold">3. Pilih <strong>Add to homescreen</strong></Text>
+                                            <Text size={400} className="font-semibold">3. {TRANSLATION[language].LOGIN.INSTRUCTION.IOS.ITEM_3} <strong>Add to homescreen</strong></Text>
                                         </Pane>
                                     </Pane>
                                 </Pane>
@@ -64,7 +66,7 @@ export default function Modal({Close}){
                     <hr />
                     <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                         <button type="button" onClick={Close} className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
-                            Ok
+                        {TRANSLATION[language].CONSTANT.CLOSE}
                         </button>
                     </div>
                 </div>

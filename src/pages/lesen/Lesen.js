@@ -1,4 +1,4 @@
-import React,{ useState } from 'react'
+import React,{ useState, useContext} from 'react'
 import useFetch from '../../hooks/useFetch'
 import Sidebar from "../../Sidebar"
 import Navbar from "../../components/Navbars/AdminNavbar"
@@ -9,8 +9,12 @@ import NumberFormat from 'react-number-format';
 import { useHistory, useLocation } from "react-router-dom";
 import { getNOKP, getEmail, setAuthorization } from "../../Utils/Common";
 import { SERVER_URL } from '../../Constants';
+import { TRANSLATION } from '../../Translation';
+import { ContextHandler } from "../../contexts/ContextHandler";
 
 function Lesen() {
+    const {language} = useContext(ContextHandler);
+
     const nokp = getNOKP();
     const email = getEmail();
     const auth = setAuthorization(nokp,email);
@@ -146,7 +150,7 @@ if(loading){
                                         display="flex"
                                         alignItems="center"
                                     >
-                                        MAKLUMAT PEMBAYARAN LESEN
+                                        { TRANSLATION[language].LESEN.DETAIL.TITLE }
                                 </Heading>
                                 </div>
                                 <Pane display="flex" alignItems="center" justifyContent="center" height={400}>
@@ -169,7 +173,7 @@ else if(!loading){
                     <div className=" w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
                         <div className="flex flex-wrap">
                             <Pane background="#2c3e50" className="xl:mx-4 xl:rounded-md" width="100%">
-                                <Topbar title="Bil / Maklumat Pembayaran" leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => window.history.back()} />
+                                <Topbar title={TRANSLATION[language].LESEN.BREADCRUMB} leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => history.goBack()} />
                             </Pane>
                             <div className="w-full px-4 mt-3">
                                 <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-lg xs:mt-16">
@@ -185,12 +189,12 @@ else if(!loading){
                                             display="flex"
                                             alignItems="center"
                                         >
-                                            MAKLUMAT PEMBAYARAN LESEN
+                                            {TRANSLATION[language].LESEN.DETAIL.TITLE.toUpperCase()}
                                         </Heading>
 
                                         <Pane background="#c7ecee" marginBottom={majorScale(2)}>
                                             <Paragraph padding={majorScale(2)} size={400}>
-                                                Berikut merupakan maklumat lesen {location.state.data.TITLE} : <b>{data.NOAKAUN}</b>.
+                                            {TRANSLATION[language].LESEN.DETAIL.SUBTITLE} {location.state.data.TITLE} : <b>{data.NOAKAUN}</b>.
                                             </Paragraph>
                                         </Pane>
 
@@ -201,24 +205,24 @@ else if(!loading){
                                             paddingX={majorScale(1)}
                                         >
                                             <Pane>
-                                                <Text fontWeight={600}>Jenis Bil</Text>
-                                                <Heading size={100}>LESEN - {location.state.data.TITLE.toUpperCase()}</Heading>
+                                                <Text fontWeight={600}>{TRANSLATION[language].LESEN.DETAIL.TYPE}</Text>
+                                                <Heading size={100}>{TRANSLATION[language].BILL_MENU.LESEN} - {location.state.data.TITLE.toUpperCase()}</Heading>
                                             </Pane>
                                             <Pane>
-                                                <Text fontWeight={600}>Nombor Akaun</Text>
-                                                <Heading size={100}>{ data.NOAKAUN ? data.NOAKAUN : "Tiada"}</Heading>
+                                                <Text fontWeight={600}>{TRANSLATION[language].SEARCH.MENU.ACCOUNT.TITLE}</Text>
+                                                <Heading size={100}>{ data.NOAKAUN ? data.NOAKAUN : TRANSLATION[language].CONSTANT.NONE}</Heading>
                                             </Pane>
                                             <Pane>
-                                                <Text fontWeight={600}>Nama Pemilik</Text>
-                                                <Heading size={100}>{ data.NAMA_PEMILIK ? data.NAMA_PEMILIK : "Tiada"}</Heading>
+                                                <Text fontWeight={600}>{TRANSLATION[language].CONSTANT.OWNER}</Text>
+                                                <Heading size={100}>{ data.NAMA_PEMILIK ? data.NAMA_PEMILIK : TRANSLATION[language].CONSTANT.NONE}</Heading>
                                             </Pane>
                                             <Pane>
-                                                <Text fontWeight={600}>Nama Syarikat</Text>
-                                                <Heading size={100}>{ data.NAMA_SYARIKAT ? data.NAMA_SYARIKAT : "Tiada"}</Heading>
+                                                <Text fontWeight={600}>{TRANSLATION[language].CONSTANT.COMPANY_NAME}</Text>
+                                                <Heading size={100}>{ data.NAMA_SYARIKAT ? data.NAMA_SYARIKAT : TRANSLATION[language].CONSTANT.NONE}</Heading>
                                             </Pane>
                                             <Pane>
-                                                <Text fontWeight={600}>Alamat Syarikat</Text>
-                                                <Heading size={100}>{ data.ALAMAT_SYARIKAT ? data.ALAMAT_SYARIKAT : "Tiada"}</Heading>
+                                                <Text fontWeight={600}>{TRANSLATION[language].CONSTANT.COMPANY_ADDRESS}</Text>
+                                                <Heading size={100}>{ data.ALAMAT_SYARIKAT ? data.ALAMAT_SYARIKAT : TRANSLATION[language].CONSTANT.NONE}</Heading>
                                             </Pane>
                                             <Pane>
                                                 <Text fontWeight={600}>Tempoh Lesen</Text>
@@ -233,15 +237,15 @@ else if(!loading){
                                             padding={minorScale(2)}
                                         >
                                             <Pane>
-                                                <Text fontWeight={600}>Senarai Aktiviti</Text>
+                                                <Text fontWeight={600}>{TRANSLATION[language].LESEN.DETAIL.ACTIVITY}</Text>
                                                 {(!isLoading) ?
                                                     (response.data.status === 'FAILED') ? 
-                                                        <Heading size={100}>Tiada</Heading>
+                                                        <Heading size={100}>{TRANSLATION[language].CONSTANT.NONE}</Heading>
                                                     :
                                                     response.data.map((res,index) => {
                                                     return (
                                                         <div className="pt-2" key={index}>
-                                                            <Heading size={100}>Kod Aktivit - { res.KOD_AKTIVITI}</Heading>
+                                                            <Heading size={100}>{TRANSLATION[language].LESEN.DETAIL.CODE} - { res.KOD_AKTIVITI}</Heading>
                                                             <Heading size={100}>{ res.KETERANGAN}</Heading>
                                                         </div>
                                                         )
@@ -256,8 +260,8 @@ else if(!loading){
                                             padding={minorScale(2)}
                                         >
                                             <Pane>
-                                                <Heading size={200}>Status Bayaran</Heading>
-                                                <Heading size={200} fontWeight={400}>{ data.STATUS === "PAID" ? (<span className="uppercase font-medium text-xs text-green-400">Telah Dibayar</span>) : (<span className="uppercase font-medium text-xs text-red-400">Tertunggak</span>)}</Heading>
+                                                <Heading size={200}>{TRANSLATION[language].CONSTANT.PAYMENT_STATUS}</Heading>
+                                                <Heading size={200} fontWeight={400}>{ data.STATUS === "PAID" ? (<span className="uppercase font-medium text-xs text-green-400">{TRANSLATION[language].CONSTANT.PAID}</span>) : (<span className="uppercase font-medium text-xs text-red-400">{TRANSLATION[language].CONSTANT.PENDING}</span>)}</Heading>
                                             </Pane>
                                         </Card>
 
@@ -282,7 +286,7 @@ else if(!loading){
                                                 padding={minorScale(2)}
                                             >
                                                 <Pane>
-                                                    <Heading size={200}>Jumlah Tunggakan</Heading>
+                                                    <Heading size={200}>{TRANSLATION[language].CONSTANT.PENDING_AMOUNT}</Heading>
                                                     <Heading size={500}>
                                                         <NumberFormat value={(parseInt(data.BAKI)).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'RM'} />
                                                     </Heading>
@@ -298,7 +302,7 @@ else if(!loading){
                                                     onClick={() => window.history.back()}
                                                     iconBefore={ArrowLeftIcon}
                                                 >
-                                                    Kembali
+                                                    {TRANSLATION[language].CONSTANT.BACK}
                                                 </Button>
                                                 <Button
                                                     appearance="primary"
@@ -310,11 +314,11 @@ else if(!loading){
                                                     // onClick={disabledButton}
                                                     iconAfter={ArrowRightIcon}
                                                 >
-                                                    Bayar
+                                                    {TRANSLATION[language].CONSTANT.PAY}
                                                 </Button>
                                             </Pane>
                                         </div>
-                                        <div className="flex flex-wrap py-1 w-full mt-4 rounded-md">
+                                        <div className="flex flex-wrap w-full mt-4 rounded-md">
                                             <Pane width="100%" >
                                                 <Button
                                                     appearance="primary"
@@ -324,7 +328,7 @@ else if(!loading){
                                                     onClick={(e) => handleDelete(data.NOAKAUN)}
                                                     iconAfter={DeleteIcon}
                                                 >
-                                                    Hapus
+                                                    {TRANSLATION[language].CONSTANT.DELETE}
                                                 </Button>
                                             </Pane>
                                         </div>

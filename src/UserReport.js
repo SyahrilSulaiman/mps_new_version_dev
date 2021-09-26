@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { TRANSLATION } from "./Translation";
+import { ContextHandler } from "./contexts/ContextHandler";
 import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
 import {
@@ -16,6 +18,7 @@ import { SERVER_URL } from './Constants';
 
 
 function Bill(props) {
+  const {language} = useContext(ContextHandler)
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchResult, setSearchResult] = useState([]);
@@ -50,7 +53,7 @@ function Bill(props) {
       .then((response) => response.json())
       .then((result) => {
         setLoading(true);
-        if (result.status == "success") {
+        if (result.status.toLowerCase() === "success") {
           setData(result.data);
           setSearchResult(result.data);
           setLoading(false);
@@ -73,40 +76,24 @@ function Bill(props) {
     window.location.href = SERVER_URL+"rp/penyata_semasa.php?noakaun=" + btoa(btoa(e))+"&token="+accessToken
   }
 
-  const dataa = {
-    columns: [
-      {
-        label: "Akaun",
-        field: "A_NO",
-        sort: "asc",
-        width: 500,
-      },
-      {
-        label: "No. Invois",
-        field: "AP_INVOICE_NO",
-      },
-    ],
-    rows: data,
-  };
-
-  if (loading == true) {
+  if (loading === true) {
     return (
       <div>
         <Sidebar />
         <div
           className="relative md:ml-64 bg-gray-400"
-          style={{ height: "100vh", background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)" }}
+          style={{ height: "100vh", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)" }}
         >
           <Navbar />
           <div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16">
-            <div className="flex flex-wrap " style={{ background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
+            <div className="flex flex-wrap " style={{ background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
               <Pane
                 background="#2c3e50"
                 className="xl:mx-4 xl:rounded-md"
                 width="100%"
               >
                 <Topbar
-                  title="Laporan Transaksi"
+                  title={TRANSLATION[language].STATEMENT}
                 />
               </Pane>
 
@@ -125,16 +112,16 @@ function Bill(props) {
         </div>
       </div>
     );
-  } else if (loading == false && data !== null)
+  } else if (loading === false && data !== null)
     return (
       <div>
         <Sidebar />
         <div
           className="relative md:ml-64 bg-gray-400"
-          style={{ height: "100vh", background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)" }}
+          style={{ height: "100vh", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)" }}
         >
           <Navbar />
-          <div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
+          <div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
             <div className="flex flex-wrap ">
               <Pane
                 background="#2c3e50"
@@ -142,7 +129,7 @@ function Bill(props) {
                 width="100%"
               >
                 <Topbar
-                  title="Laporan Penyata Akaun"
+                  title={TRANSLATION[language].STATEMENT}
                 />
               </Pane>
 
@@ -153,7 +140,7 @@ function Bill(props) {
               >
                 <TextInput
                   width="100%"
-                  placeholder="carian..."
+                  placeholder={TRANSLATION[language].CONSTANT.SEARCH+"..."} 
                   value={search}
                   onChange={handleSearch}
                 />
@@ -176,7 +163,7 @@ function Bill(props) {
                     <Pane display="grid" gridTemplateColumns="50px 1fr 20px">
                       <Heading size={100}></Heading>
                       <Pane>
-                        <Heading size={200}> -- Tiada Maklumat --</Heading>
+                        <Heading size={200}> -- {TRANSLATION[language].CONSTANT.NONE} --</Heading>
                       </Pane>
                       <Heading></Heading>
                     </Pane>
@@ -219,7 +206,7 @@ function Bill(props) {
                   justifyContent="center"
                   paddingY={100}
                 >
-                  <Heading size={200}>Tiada data dijumpai.</Heading>
+                  <Heading size={200}>-- {TRANSLATION[language].CONSTANT.NONE}  --</Heading>
                 </Pane>
               </div>
             </div>

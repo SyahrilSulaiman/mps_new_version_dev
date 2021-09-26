@@ -62,7 +62,7 @@
     "sweetalert": "^2.1.2",
     "sweetalert2": "^10.10.1",
     "web-vitals": "^0.2.4",
-    "workbox": "0.0.0",
+    "workbox": "^0.0.0",
     "workbox-background-sync": "^6.1.0",
     "workbox-broadcast-update": "^6.1.0",
     "workbox-cacheable-response": "^6.1.0",

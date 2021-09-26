@@ -1,13 +1,13 @@
 import React, { useContext } from 'react'
 import { Pane, Heading, Strong, } from "evergreen-ui";
-import { SelectedBillContext } from '../../contexts/SelectedBillContext';
 import { ContextHandler } from '../../contexts/ContextHandler';
 import { Link } from 'react-router-dom';
+import { TRANSLATION } from "../../Translation";
 
-function BillCardList({response, title,code}) {
+function BillCardList({response, title,code, type}) {
   sessionStorage.removeItem("cukai")
-  const { addSelected, handleSelected, handleBgChange } = useContext(ContextHandler)
-  const data = { NOAKAUN:response.NOAKAUN, STATUS:response.STATUS, NOKP:response.NOKP, NOSSM:response.NOSSM, NAMA_PEMILIK:response.NAMA_PEMILIK, BAKI:response.BAKI, NAMA_SYARIKAT:response.NAMA_SYARIKAT, ALAMAT_SYARIKAT:response.ALAMAT_PREMIS, TEMPOH_LESEN:response.TARIKH_TAMAT, TITLE:title, CODE:code}
+  const { addSelected, handleSelected, handleBgChange, language } = useContext(ContextHandler)
+  const data = { NOAKAUN:response.NOAKAUN, STATUS:response.STATUS, NOKP:response.NOKP, NOSSM:response.NOSSM, NAMA_PEMILIK:response.NAMA_PEMILIK, BAKI:response.BAKI, NAMA_SYARIKAT:response.NAMA_SYARIKAT, ALAMAT_SYARIKAT:response.ALAMAT_PREMIS, TEMPOH_LESEN:response.TARIKH_TAMAT, TITLE:title, CODE:code, TYPE:type}
 
   return (
         <div
@@ -35,7 +35,7 @@ function BillCardList({response, title,code}) {
                     <tbody>
                       <tr>
                         <th width="110px">
-                          <Heading size={200}>{ data.NOKP === null ? "No. SSM Syarikat" : "No. Kad Pengenalan" }
+                          <Heading size={200}>{ data.NOKP === null ? TRANSLATION[language].CONSTANT.NOSSM : TRANSLATION[language].CONSTANT.NOKP }
                           </Heading>
                         </th>
                         <td>
@@ -43,21 +43,21 @@ function BillCardList({response, title,code}) {
                         </td>
                       </tr>
                       <tr>
-                        <th><Heading size={200}>No. Akaun </Heading></th>
+                        <th><Heading size={200}>{TRANSLATION[language].CONSTANT.ACCOUNT_NO}</Heading></th>
                         <td>
                           <Strong size={300}> : {data.NOAKAUN === null ? "-" : data.NOAKAUN} </Strong>
                         </td>
                       </tr>
                       <tr>
-                        <th><Heading size={200}>Nama Pemilik </Heading></th>
+                        <th><Heading size={200}>{TRANSLATION[language].CONSTANT.OWNER}</Heading></th>
                         <td>
-                          <Strong size={300}> : {data.NAMA_PEMILIK === null ? "-" : data.NAMA_PEMILIK} </Strong>
+                          <Strong size={300}> : {data.NAMA_PEMILIK === null ? "-" : data.NAMA_PEMILIK.toUpperCase()} </Strong>
                         </td>
                       </tr>
                       <tr>
-                        <th><Heading size={200}>Status </Heading></th>
+                        <th><Heading size={200}>{TRANSLATION[language].CONSTANT.PAYMENT_STATUS}</Heading></th>
                         <td>
-                          <Strong size={300} color={ data.STATUS === "PAID" ? "#47B881" : "#EC4C47"}>: { data.NAMA_PEMILIK === null ? "-" : data.STATUS == "PAID" ? "TELAH DIBAYAR" : "TERTUNGGAK" }</Strong>
+                          <Strong size={300} color={ data.STATUS.toUpperCase() === "PAID"  || data.STATUS.toUpperCase() === 'O' ? "#47B881" : "#EC4C47"}>: { data.STATUS.toUpperCase() === "PAID"  || data.STATUS.toUpperCase() === 'O'  ?  TRANSLATION[language].CONSTANT.PAID.toUpperCase() : TRANSLATION[language].CONSTANT.PENDING.toUpperCase() }</Strong>
                         </td>
                       </tr>
                     </tbody>

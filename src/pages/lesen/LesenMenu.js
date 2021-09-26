@@ -1,66 +1,102 @@
-import React,{ useState,useContext } from 'react'
+import React,{ useState, useContext, useEffect } from "react"
 import Sidebar from "../../Sidebar"
 import Navbar from "../../components/Navbars/AdminNavbar"
 import { Pane, Spinner, toaster, ArrowLeftIcon, Heading, TickCircleIcon } from "evergreen-ui";
 import Topbar from "../../Topbar2";
-import { useHistory } from 'react-router';
-import { useLocation } from 'react-router-dom';
-import { ContextHandler } from '../../contexts/ContextHandler';
-import LesenList from './LesenList';
-import useFetch from '../../hooks/useFetch';
-import EmptyBill from '../../components/EmptyBill';
-import { SERVER_URL } from '../../Constants';
+import { useHistory } from "react-router";
+import { useLocation } from "react-router-dom";
+import { ContextHandler } from "../../contexts/ContextHandler";
+import LesenList from "./LesenList";
+import useFetch from "../../hooks/useFetch";
+import EmptyBill from "../../components/EmptyBill";
+import { SERVER_URL } from "../../Constants";
 import { getNOKP, getEmail, setAuthorization } from "../../Utils/Common";
+import { TRANSLATION } from "../../Translation";
 
 
 function LesenMenu(props) {
-	// const { selectedBil, handleUnpaidBil, unpaidBil } = useContext(SelectedBillContext);
-	const { handleUnpaid, selected, unpaid } = useContext(ContextHandler);
+	const { handleUnpaid, selected, unpaid, language, setUnpaid } = useContext(ContextHandler);
 
 	const nokp = getNOKP();
 	const email = getEmail();
 	const auth = setAuthorization(nokp,email);
+
+	const [response, setResponse] = useState(null)
+	const [loading, setLoading] = useState(true)
+	const [error,setError] = useState(null)
 	
 	const headers = new Headers();
-	headers.append('TOKEN',auth)
+	headers.append("TOKEN",auth)
 
 	const formData = new FormData();
-	formData.append('nokp', nokp)
+	formData.append("nokp", nokp)
+
+	const abortCont = new AbortController()
 
 	const requestOptions = {
-		method : 'POST',
-		redirect : 'follow',
+		method : "POST",
+		redirect : "follow",
 		body : formData,
-		headers : headers
+		headers : headers,
+		signal:abortCont.signal
 	}
 	
     const history = useHistory()
     const location = useLocation()
 
 	const url = SERVER_URL+"int/api_generator.php?api_name=showV2&type="+location.state.type+"&code="+location.state.code;
-	const { response, loading, } = useFetch(url,requestOptions);
+	// const { response, loading, } = useFetch(url,requestOptions);
 	const [ disabled,setDisabled] = useState(false);
+
+
+
+	useEffect(() => {
+		fetch( url, requestOptions )
+		.then(res => {
+			if(!res.ok){
+				throw Error("Could't fetch response from the resource")
+			}
+			return res.json()
+		})
+		.then(res => {
+			if(res.status.toLowerCase() === 'success'){
+				handleUnpaid(res)
+			}
+			setResponse(res)
+			setLoading(false)
+			setError(null)
+		})
+		.catch(err => {
+			if(err.name === "AbortError"){
+				console.log("fetch aborted")
+			}
+			else{
+				setLoading(false)
+				setError(err.message)
+			}
+		})
+	}, []);
 
 	const handleBayarSemua = () => {
         setDisabled(true);
 		handleUnpaid(response);
 		if (unpaid.length < 1) {
-			toaster.danger("Tiada bil tertunggak buat masa sekarang.", { id: "forbidden-action" });
+			toaster.danger(TRANSLATION[language].MESSAGE.emptyUnpaid, { id: "forbidden-action" });
 		}
 		else {
 			history.push({
-				pathname: '/multiplepayment',
+				pathname: "/multiplepayment",
 				state: { payBill: unpaid }
 			})
 		}
 	}
 
     const handleBayarSelected = () => {
-		console.log('Handle bayar selected')
+		console.log("Handle bayar selected")
 	};
     const handleAddBill = () => {
 		history.push({
-			pathname:'/carian',
+			pathname:"/carian",
 			state:{type:location.state.type, code:location.state.code, title:location.state.title, from:location.pathname}
 		})
 	};
@@ -73,7 +109,7 @@ function LesenMenu(props) {
                 <div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)" }}>
                     <div className="flex flex-wrap">
                     <Pane background="#2c3e50" className="xl:mx-6 xl:rounded-md mb-5" width="100%">
-							<Topbar title={"Bil / "+location.state.title} leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => history.goBack()} />
+							<Topbar title={TRANSLATION[language].BREADCRUMB.LIST+' '+location.state.title} leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => history.goBack()} />
 						</Pane>
 						<div className="w-full lg:w-6/12 xl:w-4/12 px-6" onClick={handleAddBill}>
 							<div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg cursor-pointer">
@@ -81,15 +117,15 @@ function LesenMenu(props) {
 									<div className="flex flex-wrap">
 										<div className="relative w-full pr-4 max-w-full flex-grow flex-1">
 											<h5 className="text-gray-500 uppercase font-bold text-xs">
-												Tambah Bil
+												{TRANSLATION[language].ACTION.ADD_BILL.TITLE}
 											</h5>
 											<span className="font-semibold text-xs text-gray-800">
-												<Pane display="flex">Tekan ini untuk menambah bil</Pane>
+												<Pane display="flex">{TRANSLATION[language].ACTION.ADD_BILL.SUBTITLE}</Pane>
 											</span>
 										</div>
 										<div className="relative w-auto pl-4 flex-initial" onClick={handleAddBill}>
 											<div className="text-white p-3 text-center inline-flex items-center justify-center w-15 h-8 shadow-lg rounded bg-green-500">
-												<i className="fas fa-plus"></i> <Heading size={200} className="pl-2" color="white">Bil</Heading>
+												<i className="fas fa-plus"></i> <Heading size={200} className="pl-2" color="white">{TRANSLATION[language].ACTION.ADD_BILL.BUTTON}</Heading>
 											</div>
 										</div>
 									</div>
@@ -111,10 +147,10 @@ function LesenMenu(props) {
 									<div className="flex flex-wrap">
 										<div className="relative w-full pr-4 max-w-full flex-grow flex-1">
 											<h5 className="text-gray-500 uppercase font-bold text-xs">
-												<Pane display="flex"> Pembayaran akaun terpilih </Pane>
+												<Pane display="flex"> {TRANSLATION[language].ACTION.SELECT_BILL.TITLE} </Pane>
 											</h5>
 											<span className="font-semibold text-xs text-gray-800">
-												<Pane display="flex"> Sila tekan pada <TickCircleIcon color="success" marginLeft="2px" marginRight="2px"/> untuk pilih bil</Pane>
+												<Pane display="flex"> {TRANSLATION[language].ACTION.SELECT_BILL.SUBTITLE1} <TickCircleIcon color="success" marginLeft="2px" marginRight="2px"/> {TRANSLATION[language].ACTION.SELECT_BILL.SUBTITLE2}</Pane>
 											</span>
 										</div>
 										<div
@@ -147,10 +183,10 @@ function LesenMenu(props) {
 									<div className="flex flex-wrap">
 										<div className="relative w-full pr-4 max-w-full flex-grow flex-1">
 											<h5 className="text-gray-500 uppercase font-bold text-xs">
-												Pembayaran semua bil
+											{TRANSLATION[language].ACTION.PAY_BILL.TITLE}
 											</h5>
 											<span className="font-semibold text-xs text-gray-800">
-												<Pane>Membayar keseluruhan bil yang tertunggak</Pane>
+												<Pane>{TRANSLATION[language].ACTION.PAY_BILL.SUBTITLE}</Pane>
 											</span>
 										</div>
 										<div
@@ -178,16 +214,15 @@ function LesenMenu(props) {
 											<Spinner />
 										</Pane>
 									</div>
-								: 	(response.data !== null)
+								: 	(response.status === "success")
 								? 
 									response.data.map((res,index) => {
-										return <LesenList response={res} title={location.state.title} code={location.state.code} key={index}/>
+										return <LesenList response={res} title={location.state.title} type={location.state.type} code={location.state.code} key={index}/>
 									})
 								: <EmptyBill />	
 
 							}
 						</div>
-						
 					</div>
                 </div>
             </div>

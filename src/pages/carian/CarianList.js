@@ -1,17 +1,19 @@
-import React,{ useState, useEffect } from 'react'
-import useFetch from '../../hooks/useFetch'
-import swal from "sweetalert"
+import React,{ useState } from 'react'
 import { Pane, TextInputField, Button, SearchIcon, ArrowLeftIcon, Heading, toaster } from "evergreen-ui";
-import NoScroll from "no-scroll";
 import CarianItem from './CarianItem';
 import { getNOKP, getEmail, setAuthorization } from "../../Utils/Common";
 import { SERVER_URL } from '../../Constants';
+import { TRANSLATION } from '../../Translation';
+import { ContextHandler } from "../../contexts/ContextHandler";
+import { useContext } from 'react'
+import swal from 'sweetalert';
+import NoScroll from 'no-scroll'
 
 function CarianList({type, code, carianBy}) {
     const [search, setSearch] = useState("");
     const [display, setDisplay] = useState(false);
-    const [bill, setBill] = useState([]);
     const [array, setArray] = useState([]);
+    const {language} = useContext(ContextHandler)
 
     // fetch state
     const [ response, setResponse ] = useState(null)
@@ -54,15 +56,15 @@ function CarianList({type, code, carianBy}) {
         setError(null)
         if(response.status === "success")
         {
-            toaster.success('Berjaya tambah akaun untuk pembayaran.',{id:"forbidden-action"})
+            toaster.success(TRANSLATION[language].MESSAGE.addMessage,{id:"forbidden-action"})
         }
         else if(response.status === "failure")
         {
-            toaster.danger("Akaun ini telah didaftarkan ke senarai bayaran anda.",{id:"forbidden-action"});
+            toaster.danger(TRANSLATION[language].MESSAGE.failToAddMessage,{id:"forbidden-action"});
         }
         else
         {
-            toaster.danger('Maaf. Sila hubungi bahagian pihak pentadbiran.',{id:"forbidden-action"});
+            toaster.danger(TRANSLATION[language].MESSAGE.errorMessage,{id:"forbidden-action"});
         }
     })
     .catch(err => {
@@ -72,7 +74,7 @@ function CarianList({type, code, carianBy}) {
         else{
             setAddLoading(false)
             setError(err.message)
-            toaster.danger(err.message,{id:"forbidden-action"});
+            toaster.danger(error,{id:"forbidden-action"});
         }
     })
     }
@@ -108,15 +110,15 @@ function CarianList({type, code, carianBy}) {
         setError(null)
         if(response.status === "success")
         {
-            toaster.success('Berjaya tambah akaun untuk pembayaran.',{id:"forbidden-action"})
+            toaster.success(TRANSLATION[language].MESSAGE.addMessage,{id:"forbidden-action"})
         }
         else if(response.status === "failure")
         {
-            toaster.danger("Akaun ini telah didaftarkan ke senarai bayaran anda.",{id:"forbidden-action"});
+            toaster.danger(TRANSLATION[language].MESSAGE.failToAddMessage,{id:"forbidden-action"});
         }
         else
         {
-            toaster.danger('Maaf. Sila hubungi bahagian pihak pentadbiran.',{id:"forbidden-action"});
+            toaster.danger(TRANSLATION[language].MESSAGE.errorMessage,{id:"forbidden-action"});
         }
     })
     .catch(err => {
@@ -126,7 +128,7 @@ function CarianList({type, code, carianBy}) {
         else{
             setAddLoading(false)
             setError(err.message)
-            toaster.danger(err.message,{id:"forbidden-action"});
+            toaster.danger(error,{id:"forbidden-action"});
         }
     })
     }
@@ -165,10 +167,27 @@ function CarianList({type, code, carianBy}) {
           return res.json()
         })
         .then(response => {
+          let alert = '';
+
+          if(type === 'akaun')
+            alert = TRANSLATION[language].MESSAGE.accountNotFoundMessage
+          if(type === 'kp')
+            alert = TRANSLATION[language].MESSAGE.kpNotFoundMessage
+          if(type === 'ssm')
+            alert = TRANSLATION[language].MESSAGE.ssmNotFoundMessage
+
+          if(response.status === 'SUCCESS'){
+            setDisplay(true)
+            NoScroll.on()
+          }
+          if(response.status === 'FAILED'){
+            swal(TRANSLATION[language].MESSAGE.notFoundMessage,alert,"error")
+            setDisplay(false)
+            NoScroll.off()
+          }
           setResponse(response.data)
           setLoading(false)
           setError(null)
-          setDisplay(true)
         })
       .catch(err => {
         if(err.name === 'AbortError')
@@ -210,15 +229,15 @@ function CarianList({type, code, carianBy}) {
         setError(null)
         if(response.status === "success")
         {
-            toaster.success('Berjaya tambah akaun untuk pembayaran.',{id:"forbidden-action"})
+            toaster.success(TRANSLATION[language].MESSAGE.addMessage,{id:"forbidden-action"})
         }
         else if(response.status === "failure")
         {
-            toaster.danger("Akaun ini telah didaftarkan ke senarai bayaran anda.",{id:"forbidden-action"});
+            toaster.danger(TRANSLATION[language].MESSAGE.failToAddMessage,{id:"forbidden-action"});
         }
         else
         {
-            toaster.danger('Maaf. Sila hubungi bahagian pihak pentadbiran.',{id:"forbidden-action"});
+            toaster.danger(TRANSLATION[language].MESSAGE.errorMessage,{id:"forbidden-action"});
         }
     })
     .catch(err => {
@@ -263,30 +282,30 @@ function CarianList({type, code, carianBy}) {
                     onChange={(e) => handleChange(e)}
                     label={
                       type === "akaun"
-                        ? "Nombor Akaun"
+                        ? TRANSLATION[language].SEARCH.MENU.ACCOUNT.TITLE
                         : type === "ssm"
-                        ? "Nombor ROC/ROB Syarikat"
+                        ? TRANSLATION[language].SEARCH.MENU.NOSSM.TITLE
                         : type === "kp"
-                        ? "Nombor Kad Pengenalan"
-                        : "Carian..."
+                        ? TRANSLATION[language].SEARCH.MENU.NOKP.TITLE
+                        : TRANSLATION[language].CONSTANT.SEARCH + "..."
                     }
                     description={
                       type === "akaun"
-                        ? "Lengkapkan maklumat nombor akaun dibawah."
+                        ? TRANSLATION[language].SEARCH.MENU.ACCOUNT.SUBTITLE
                         : type === "ssm"
-                        ? "Lengkapkan nombor ROC/ROB syarikat dibawah."
+                        ? TRANSLATION[language].SEARCH.MENU.NOSSM.SUBTITLE
                         : type === "kp"
-                        ? "Lengkapkan nombor kad pengenalan dibawah"
+                        ? TRANSLATION[language].SEARCH.MENU.NOKP.SUBTITLE
                         : "Carian..."
                     }
                     placeholder={
                       type === "akaun"
-                        ? "cth: 1234567"
+                        ? TRANSLATION[language].CONSTANT.EXAMPLE + ": 1234567"
                         : type === "ssm"
-                        ? "cth 123456-X"
+                        ? TRANSLATION[language].CONSTANT.EXAMPLE + ": 123456-X"
                         : type === "kp"
-                        ? "cth: 901212059876"
-                        : "Carian..."
+                        ? TRANSLATION[language].CONSTANT.EXAMPLE + ": 901212059876"
+                        : TRANSLATION[language].CONSTANT.SEARCH + "..."
                     }
                   />
                 </Pane>
@@ -299,7 +318,7 @@ function CarianList({type, code, carianBy}) {
                     className="float-right"
                     onClick = {() => handleSubmit()}
                   >
-                    {addLoading ? "Mencari.." : "Cari"}
+                    {addLoading ? TRANSLATION[language].CONSTANT.SEARCHING + "..." : TRANSLATION[language].CONSTANT.SEARCH_NOUN}
                   </Button>
 
                   <Button
@@ -309,7 +328,7 @@ function CarianList({type, code, carianBy}) {
                     intent="danger"
                     onClick={() => window.history.back()}
                   >
-                    Kembali
+                    {TRANSLATION[language].CONSTANT.BACK}
                   </Button>
                 </Pane>
                 <Pane marginTop={5}  background="#fff">
@@ -323,7 +342,7 @@ function CarianList({type, code, carianBy}) {
                           intent="warning"
                           className=""
                         >
-                          Set Semula
+                          {TRANSLATION[language].CONSTANT.RESET}
                         </Button>
                         <Button
                           type="button"
@@ -331,7 +350,7 @@ function CarianList({type, code, carianBy}) {
                           appearance="primary"
                           className="float-right"
                         >
-                          {addLoading ? "Menambah.." : "Tambah Semua"}
+                          {addLoading ? TRANSLATION[language].CONSTANT.ADDING+"..." : TRANSLATION[language].CONSTANT.ADD_ALL}
                         </Button>
                         <Button
                           type="button"
@@ -339,7 +358,7 @@ function CarianList({type, code, carianBy}) {
                           appearance="primary"
                           className="float-right mr-2"
                         >
-                          {addLoading ? "Menambah.." : "Tambah "+array.length+" Bil"}
+                          {addLoading ? TRANSLATION[language].CONSTANT.ADDING+"..." : TRANSLATION[language].CONSTANT.ADD+" "+array.length+" "+TRANSLATION[language].CONSTANT.BILL}
                         </Button>
                       </>
                     ) : (
@@ -349,7 +368,7 @@ function CarianList({type, code, carianBy}) {
                 </Pane>
                 <Pane marginTop={10} padding={10} background="#2d3436">
                   <Heading size={400} textAlign="center" color="white">
-                    Senarai bil akan dipaparkan dibawah
+                    {TRANSLATION[language].SEARCH.STATEMENT}
                   </Heading>
                 </Pane>
               </div>
@@ -362,16 +381,6 @@ function CarianList({type, code, carianBy}) {
           <div className="flex flex-wrap">
             <div className="w-full">
               <Pane background="tint1">
-                {/* {
-                  <Carian
-                    className="bg-gray-100"
-                    bill={bill}
-                    type={type}
-                    display={display}
-                    handleAdd={ bill.length > 1 ? handleChoose : handleAdd }
-                    array={array}
-                  />
-                } */}
                 {
                   (display) ?
                   carianBy === 'lesen' ?

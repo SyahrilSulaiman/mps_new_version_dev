@@ -1,13 +1,11 @@
 /*eslint-disable*/
-import React from "react";
-// import Bckg1 from "../assets/img/pattern_react.png";
-// import logo1 from "../assets/img/logo1.png";
+import React,{ useContext} from "react";
 import IndexNavbar from "../components/Navbars/IndexNavbar.js";
 import Footer from "../components/Footers/Footer.js";
-import {title, subtitle} from "../Constants";
-// import Image from "../assets/img/photo-1498050108023-c5249f4df085.jfif"
-
+import { TRANSLATION } from "../Translation.js";
+import { ContextHandler } from "../contexts/ContextHandler.js";
 export default function Index() {
+  const {language} = useContext(ContextHandler)
   return (
     <>
       <IndexNavbar fixed />
@@ -21,23 +19,23 @@ export default function Index() {
             style={{ height: "120px", marginBottom:"20px" }}></img>
             <div className="pt-8 sm:pt-0">
               <h2 className="font-semibold text-4xl text-gray-700">
-                Selamat Datang ke {title}
+                {TRANSLATION[language].HOME.WELCOME}
               </h2>
               <p className="mt-1 text-lg leading-relaxed text-gray-600">
-              {title} merupakan sebuah gerbang pembayaran pelbagai bil <br></br><span className="text-bold text-gray-700">{subtitle}</span>
+              {TRANSLATION[language].HOME.SUBTITLE}<br></br><span className="text-bold text-gray-700">{TRANSLATION[language].HOME.COMPANY}</span>
               </p>
               <div className="mt-12">
                 <a
                   href="/register"
                   className="get-started text-white font-bold px-3 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blue-500 active:bg-blue-600 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                 >
-                  Pendaftaran
+                  {TRANSLATION[language].REGISTER.REGISTER_BUTTON}
                 </a>
                 <a
                   href="/login"
                   className="github-star ml-1 text-white font-bold px-3 py-4 rounded outline-none focus:outline-none mb-1 bg-gray-800 active:bg-gray-700 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                 >
-                  log masuk
+                  {TRANSLATION[language].CONSTANT.LOGIN}
                 </a>
               </div>
             </div>
@@ -46,7 +44,6 @@ export default function Index() {
 
         <img
           className="absolute top-0 b-auto right-0 pt-16 sm:w-6/12 -mt-48 sm:mt-0 w-10/12 max-h-860px"
-          // src={Bckg1}
           src={process.env.PUBLIC_URL + "/assets/img/pattern_react.png"}
         />
       </section>
@@ -84,13 +81,10 @@ export default function Index() {
                 <blockquote className="relative p-8">
                   
                   <h4 className="text-xl font-bold text-white">
-                    Kemudahan untuk semua
+                  {TRANSLATION[language].HOME.DETAIL_IMAGE.TITLE}
                   </h4>
                   <p className="text-md font-light mt-2 text-white">
-                    Pembayaran atas talian secara tidak langsung 
-                    dapat meringankan beban orang ramai untuk membuat 
-                    pembayaran cukai taksiran atas talian di mana-mana sahaja
-                    pada bila-bila masa sahaja.
+                  {TRANSLATION[language].HOME.DETAIL_IMAGE.SUBTITLE}
                   </p>
                 </blockquote>
               </div>
@@ -105,10 +99,10 @@ export default function Index() {
                         <i className="fas fa-sitemap"></i>
                       </div>
                       <h6 className="text-xl mb-1 font-semibold">
-                        Mesra Pengguna
+                      {TRANSLATION[language].HOME.DETAIL_1.TITLE}
                       </h6>
                       <p className="mb-4 text-gray-600">
-                        Dengan menggunakan teknologi yang terkini, sistem ini dihasilkan dengan mesra pengguna.
+                      {TRANSLATION[language].HOME.DETAIL_1.SUBTITLE}
                       </p>
                     </div>
                   </div>
@@ -118,11 +112,10 @@ export default function Index() {
                         <i className="fas fa-drafting-compass"></i>
                       </div>
                       <h6 className="text-xl mb-1 font-semibold">
-                        Pelbagai Platform
+                      {TRANSLATION[language].HOME.DETAIL_2.TITLE}
                       </h6>
                       <p className="mb-4 text-gray-600">
-                        Selain melayari di laman sesawang, anda boleh simpan sebagai satu aplikasi pintar
-                        di telefon anda.
+                      {TRANSLATION[language].HOME.DETAIL_2.SUBTITLE}
                       </p>
                     </div>
                   </div>
@@ -133,10 +126,11 @@ export default function Index() {
                       <div className="text-gray-600 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white">
                         <i className="fas fa-newspaper"></i>
                       </div>
-                      <h6 className="text-xl mb-1 font-semibold">Pembayaran Lebih Pantas</h6>
+                      <h6 className="text-xl mb-1 font-semibold">
+                        {TRANSLATION[language].HOME.DETAIL_3.TITLE}
+                      </h6>
                       <p className="mb-4 text-gray-600">
-                        Anda tidak perlu ke kaunter untuk membuat pembayaran malah anda boleh membuat pembayaran di atas talian 
-                        dengan menggunakan sistem MyMPS di mana sahaja anda berada pada bila-bila masa sahaja.
+                        {TRANSLATION[language].HOME.DETAIL_3.SUBTITLE}
                       </p>
                     </div>
                   </div>
@@ -146,11 +140,10 @@ export default function Index() {
                         <i className="fas fa-file-alt"></i>
                       </div>
                       <h6 className="text-xl mb-1 font-semibold">
-                        Lebih Sistematik
+                        {TRANSLATION[language].HOME.DETAIL_4.TITLE}
                       </h6>
                       <p className="mb-4 text-gray-600">
-                        Antara salah satu kelebihan menggunakan sistem ialah urusan anda yang berkenaan
-                        dengan cukai taksiran lebih mudah diurus.
+                        {TRANSLATION[language].HOME.DETAIL_4.SUBTITLE}
                       </p>
                     </div>
                   </div>
@@ -172,7 +165,7 @@ export default function Index() {
           </div>
         </div>
       </section>
-      <Footer title={title} subtitle={subtitle}/>
+      <Footer />
     </>
   );
 }

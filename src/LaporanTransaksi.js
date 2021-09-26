@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { TRANSLATION } from "./Translation";
+import { ContextHandler } from "./contexts/ContextHandler";
 import Sidebar from "./Sidebar";
 import Navbar from "./components/Navbars/AdminNavbar";
 import {
@@ -13,6 +15,7 @@ import {  getNOKP, getEmail, setAuthorization } from "./Utils/Common";
 import { SERVER_URL } from './Constants';
 
 function Bill(props) {
+  const { language } = useContext(ContextHandler)
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -46,7 +49,7 @@ function Bill(props) {
       .then((response) => response.json())
       .then((result) => {
         setLoading(true);
-        if (result.status == "success") {
+        if (result.status.toLowerCase() === "success") {
           setData(result.data);
           setSearchResult(result.data);
           setLoading(false);
@@ -107,10 +110,10 @@ function Bill(props) {
         <Sidebar />
         <div
           className="relative md:ml-64 bg-gray-400"
-          style={{ height: "100vh", background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)" }}
+          style={{ height: "100vh", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)" }}
         >
           <Navbar />
-          <div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "rgb(34,81,122)", background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
+          <div className="w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
             <div className="flex flex-wrap ">
               <Pane
                 background="#2c3e50"
@@ -118,7 +121,7 @@ function Bill(props) {
                 width="100%"
               >
                 <Topbar
-                  title="Laporan Transaksi"
+                  title={TRANSLATION[language].TRANSACTION}
                 />
               </Pane>
 
@@ -129,7 +132,7 @@ function Bill(props) {
               >
                 <TextInput
                   width="100%"
-                  placeholder="carian..."
+                  placeholder={TRANSLATION[language].CONSTANT.SEARCH+"..."} 
                   value={search}
                   onChange = {handleSearch}
                 />
@@ -143,13 +146,13 @@ function Bill(props) {
                       <Pane className="p-4">
                         <Heading size={200}>Akaun : {data.A_NO}</Heading>
                         <Heading size={200}>No Invois : {data.AP_INVOICE_NO}</Heading>
-                        <Heading size={200}>No Resit : {(data.AP_RECEIPT_NO !== '' || data.AP_RECEIPT_NO !== null) ? data.AP_RECEIPT_NO : 'Tiada Maklumat'}</Heading>
+                        <Heading size={200}>No Resit : {(data.AP_RECEIPT_NO !== '' || data.AP_RECEIPT_NO !== null) ? data.AP_RECEIPT_NO : TRANSLATION[language].CONSTANT.NONE}</Heading>
                         <Heading size={200}>Pembayar : {data.AP_PAYOR_NAME}</Heading>
                         <Heading size={200}>Emel : {data.AP_PAYOR_EMAIL}</Heading>
                         <Heading size={200}>No. Telefon : {data.AP_PAYOR_PHONE}</Heading>
                         <Heading size={200}>Jumlah Pembayaran : RM {data.AP_AMOUNT}</Heading>
-                        <Heading size={200}>Tarikh : {data.AP_DATETIME_PAYMENT !== null ? data.AP_DATETIME_PAYMENT : 'Tiada Maklumat'}</Heading>
-                        <Heading size={200}>Status : {data.AP_STATUS == '1' ? "Berjaya" : "Tidak Berjaya"}</Heading>
+                        <Heading size={200}>Tarikh : {data.AP_DATETIME_PAYMENT !== null ? data.AP_DATETIME_PAYMENT : TRANSLATION[language].CONSTANT.NONE}</Heading>
+                        <Heading size={200}>Status : {data.AP_STATUS == '1' ? TRANSLATION[language].CONSTANT.SUCCESS : TRANSLATION[language].CONSTANT.UNSUCCESS}</Heading>
                       </Pane>
                     </Pane>
                   )
@@ -159,7 +162,7 @@ function Bill(props) {
                     <Pane display="grid" gridTemplateColumns="50px 1fr 20px">
                       <Heading size={100}></Heading>
                       <Pane>
-                        <Heading size={200}> -- Tiada Maklumat --</Heading>
+                        <Heading size={200}> -- {TRANSLATION[language].CONSTANT.NONE} --</Heading>
                       </Pane>
                       <Heading></Heading>
                     </Pane>
@@ -189,7 +192,7 @@ function Bill(props) {
                 width="100%"
               >
                 <Topbar
-                  title="Laporan Transaksi"
+                  title={TRANSLATION[language].TRANSACTION}
                   leftButtonIcon={ArrowLeftIcon}
                   onClickLeftButton={() => window.history.back()}
                 />
@@ -202,7 +205,7 @@ function Bill(props) {
                   justifyContent="center"
                   paddingY={100}
                 >
-                  <Heading size={200}>Tiada data dijumpai.</Heading>
+                  <Heading size={200}>-- {TRANSLATION[language].CONSTANT.NONE} --</Heading>
                 </Pane>
               </div>
             </div>

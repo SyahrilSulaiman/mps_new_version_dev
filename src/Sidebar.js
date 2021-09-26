@@ -1,21 +1,21 @@
 /*eslint-disable*/
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { removeUserSession } from "./Utils/Common";
-
-import NotificationDropdown from "./components/Dropdowns/NotificationDropdown.js";
-import UserDropdown from "./components/Dropdowns/UserDropdown.js";
-
-import { Dialog, Heading } from "evergreen-ui";
+import {ContextHandler} from "./contexts/ContextHandler"
+import { TRANSLATION } from "./Translation";
+import { Dialog, Heading, Button } from "evergreen-ui";
 
 export default function Sidebar() {
-
+  const {handleLanguage, language} = useContext(ContextHandler);
   const [collapseShow, setCollapseShow] = React.useState("hidden");
   const [dialog, setDialog] = useState(false);
+  const history = useHistory()
 
   const handleLogout = () => {
     removeUserSession();
-    window.location.href = "/login";
+    history.push("/login")
+    // window.location.href = "/login";
   }
 
   return (
@@ -35,16 +35,11 @@ export default function Sidebar() {
             className="md:block text-left md:pb-2 text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
             to="/bill"
           >
-            Portal MyMPS
+            {TRANSLATION[language].HOME.TITLE}
           </Link>
           {/* User */}
           
             <ul className="md:hidden items-center flex flex-wrap list-none">
-              {// <i className="fas fa-user"></i>
-              // <li className="inline-block relative">
-              //   <UserDropdown />
-              // </li>
-              }
             </ul>
         
           {/* Collapse */}
@@ -62,7 +57,7 @@ export default function Sidebar() {
                     className="md:block text-left md:pb-2 text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
                     to="/bill"
                   >
-                    Portal MyMPS
+                    {TRANSLATION[language].HOME.TITLE}
                   </Link>
                 </div>
                 <div className="w-6/12 flex justify-end">
@@ -78,7 +73,11 @@ export default function Sidebar() {
             </div>
             {/* Heading */}
             <h6 className="md:min-w-full text-gray-600 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              Menu Utama
+              <Button marginRight={2} appearance={language === 'BM' ? "primary" : 'default'} onClick={() => handleLanguage('BM')}>BM</Button>
+              <Button marginRight={2} appearance={language === 'EN' ? "primary" : 'default'} onClick={() => handleLanguage('EN')}>EN</Button>
+            </h6>
+            <h6 className="md:min-w-full text-gray-600 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
+            {TRANSLATION[language].NAVIGATION.MENU}
             </h6>
             {/* Navigation */}
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
@@ -100,7 +99,7 @@ export default function Sidebar() {
                         : "text-gray-400")
                     }
                   ></i>{" "}
-                  Profil
+                  {TRANSLATION[language].NAVIGATION.PROFILE}
                 </Link>
               </li>
 
@@ -122,7 +121,7 @@ export default function Sidebar() {
                         : "text-gray-400")
                     }
                   ></i>{" "}
-                  Bil
+                  {TRANSLATION[language].NAVIGATION.BILL}
                 </Link>
               </li>
 
@@ -144,7 +143,7 @@ export default function Sidebar() {
                         : "text-gray-400")
                     }
                   ></i>{" "}
-                  Laporan Transaksi
+                  {TRANSLATION[language].NAVIGATION.TRANSACTION}
                 </Link>
               </li>
               <li className="items-center">
@@ -165,47 +164,20 @@ export default function Sidebar() {
                         : "text-gray-400")
                     }
                   ></i>{" "}
-                  Laporan Penyata Akaun
+                  {TRANSLATION[language].NAVIGATION.STATEMENT}
                 </Link>
               </li>
 
-              
-              {
-                //Printout by list
-                /* <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/bayaran-akaun") !== -1
-                      ? "text-blue-500 hover:text-blue-600"
-                      : "text-gray-800 hover:text-gray-600")
-                  }
-                  to="/bayaran-akaun"
-                >
-                  <i
-                    className={
-                      "fas fa-file mr-2 text-sm " +
-                      (window.location.href.indexOf("/bayaran-akaun") !== -1
-                        ? "opacity-75"
-                        : "text-gray-400")
-                    }
-                  ></i>{" "}
-                  Resit Bayaran
-                </Link>
-              </li> */
-              }
-
               <li className="items-center">
-                <Link
+                <div
                   className={
                     "text-xs uppercase py-3 font-bold block text-gray-800 hover:text-gray-600"
                   }
                   onClick={() => setDialog(true)}
-                  to="#"
                 >
                   <i className="fas fa-sign-out-alt mr-2 text-sm text-gray-400"></i>{" "}
-                  Log Keluar
-                </Link>
+                  {TRANSLATION[language].CONSTANT.LOGOUT}
+                </div>
               </li>
 
             </ul>
@@ -222,7 +194,7 @@ export default function Sidebar() {
           intent="success"
           shouldCloseOnOverlayClick={false}
         >
-          <Heading size={200}>Anda pasti untuk log keluar?</Heading>
+          <Heading size={200}>{TRANSLATION[language].MESSAGE.logoutMessage}</Heading>
         </Dialog>
       </nav>
     </>

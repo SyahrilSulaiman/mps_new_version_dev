@@ -1,5 +1,14 @@
   import sha256 from 'js-sha256';
 
+  export const getLanguage = () => {
+    if(sessionStorage.getItem('language') === null){
+      sessionStorage.setItem('language','BM')
+      return sessionStorage.getItem('language');
+    }
+    else
+      return sessionStorage.getItem('language');
+  }
+
   export const getNOKP = () => {
     return sessionStorage.getItem('nokp');
   }

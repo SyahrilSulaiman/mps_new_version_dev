@@ -1,18 +1,17 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { TickCircleIcon, CrossIcon } from "evergreen-ui";
-
+import { getLanguage } from '../Utils/Common';
 export const ContextHandler = createContext()
 
 const ContextHandlerProvider = (props) => {
     const [selected, setSelected] = useState([])
     const [unpaid, setUnpaid] = useState([])
-
-    useEffect(() => {},[unpaid])
+    const [language,setLanguage] = useState(getLanguage())
 
     const handleUnpaid = (dataset) => {
         const tempArray = []
         dataset.data.map((element,index) => {
-            if(element.STATUS.toUpperCase() === 'PENDING PAYMENT'){
+            if(element.STATUS.toUpperCase() === 'PENDING PAYMENT' || element.STATUS.toUpperCase() ===  'PENDING' || element.STATUS.toUpperCase() ===  'X' ){
                 tempArray.push(element)
             }
             return tempArray
@@ -58,8 +57,14 @@ const ContextHandlerProvider = (props) => {
         setSelected([])
     }
 
+    const handleLanguage = (language) => {
+        setLanguage(language.toUpperCase())
+        sessionStorage.removeItem('language')
+        sessionStorage.setItem('language',language)
+    }
+
     return ( 
-        <ContextHandler.Provider value={{handleUnpaid, addSelected, handleBgChange, handleSelected, resetSelected, selected, unpaid}}>
+        <ContextHandler.Provider value={{handleUnpaid, addSelected, handleBgChange, handleSelected, resetSelected, selected, unpaid, language, handleLanguage, setUnpaid}}>
             {props.children}
         </ContextHandler.Provider>
      );
