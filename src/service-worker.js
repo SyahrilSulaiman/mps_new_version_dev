@@ -65,11 +65,11 @@ registerRoute(
 
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
-  }
-});
+// self.addEventListener('message', (event) => {
+//   if (event.data && event.data.type === 'SKIP_WAITING') {
+//     self.skipWaiting();
+//   }
+// });
 
 // Any other custom service worker logic can go here.
 
@@ -80,11 +80,6 @@ const STYLE_CACHE = "stylesheets";
 const IMAGE_CACHE = "images";
 const FONT_CACHE = "fonts";
 
-self.addEventListener("message", (event) => {
-  if (event.data && event.data.type === "SKIP_WAITING") {
-    self.skipWaiting();
-  }
-});
 
 registerRoute(
   ({event}) => event.request.destination === 'document',
@@ -96,52 +91,58 @@ registerRoute(
       }),
     ],
   })
-);
-
-registerRoute(
-  ({event}) => event.request.destination === 'script',
-  new StaleWhileRevalidate({
-    cacheName: JS_CACHE,
-    plugins: [
-      new ExpirationPlugin({
-        maxEntries: 15,
-      }),
-    ],
-  })
-);
-
-registerRoute(
-  ({event}) => event.request.destination === 'style',
-  new StaleWhileRevalidate({
-    cacheName: STYLE_CACHE,
-    plugins: [
-      new ExpirationPlugin({
-        maxEntries: 15,
-      }),
-    ],
-  })
-);
-
-registerRoute(
-  ({event}) => event.request.destination === 'image',
-  new StaleWhileRevalidate({
-    cacheName: IMAGE_CACHE,
-    plugins: [
-      new ExpirationPlugin({
-        maxEntries: 15,
-      }),
-    ],
-  })
-);
-
-registerRoute(
-  ({event}) => event.request.destination === 'font',
-  new StaleWhileRevalidate({
-    cacheName: FONT_CACHE,
-    plugins: [
-      new ExpirationPlugin({
-        maxEntries: 15,
-      }),
-    ],
-  })
-);
+  );
+  
+  registerRoute(
+    ({event}) => event.request.destination === 'script',
+    new StaleWhileRevalidate({
+      cacheName: JS_CACHE,
+      plugins: [
+        new ExpirationPlugin({
+          maxEntries: 15,
+        }),
+      ],
+    })
+    );
+    
+    registerRoute(
+      ({event}) => event.request.destination === 'style',
+      new StaleWhileRevalidate({
+        cacheName: STYLE_CACHE,
+        plugins: [
+          new ExpirationPlugin({
+            maxEntries: 15,
+          }),
+        ],
+      })
+      );
+      
+      registerRoute(
+        ({event}) => event.request.destination === 'image',
+        new StaleWhileRevalidate({
+          cacheName: IMAGE_CACHE,
+          plugins: [
+            new ExpirationPlugin({
+              maxEntries: 15,
+            }),
+          ],
+        })
+        );
+        
+        registerRoute(
+          ({event}) => event.request.destination === 'font',
+          new StaleWhileRevalidate({
+            cacheName: FONT_CACHE,
+            plugins: [
+              new ExpirationPlugin({
+                maxEntries: 15,
+              }),
+            ],
+          })
+          );
+          
+          self.addEventListener("message", (event) => {
+            if (event.data && event.data.type === "SKIP_WAITING") {
+              self.skipWaiting();
+            }
+          });

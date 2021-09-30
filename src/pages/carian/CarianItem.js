@@ -23,9 +23,9 @@ function CarianItem({response,loading, handleAdd, array}) {
         }
         else{
             return(
-                response.map((res) => {
+                response.map((res,index) => {
                     return (
-                        <div key={res.NOAKAUN} className="mx-auto w-full" 
+                        <div key={res.NOAKAUN+"_"+index} className="mx-auto w-full" 
                         onClick={() => handleAdd(res.NOAKAUN)}
                         >
                             <Pane display="grid" gridTemplateColumns="40px 1fr 40px" marginBottom={10} className={"cursor-pointer "+ ((array.findIndex(element => element.account === res.NOAKAUN) !== -1 )? 'bg-green-300 hover:bg-green-400' : 'bg-gray-300 hover:bg-gray-400')}>

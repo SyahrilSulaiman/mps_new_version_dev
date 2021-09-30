@@ -26,7 +26,8 @@ function Lesen() {
     const [isError, setIsError] = useState(null)
 
     const handleView = (e) => {
-        console.log('handleView ', e)
+        window.location.href = SERVER_URL+"rp/lesen.php?token="+e
+        // console.log(SERVER_URL+"rp/lesen.php?token="+e)
     }
 
     const handleDelete = (e)  => {
@@ -105,6 +106,10 @@ function Lesen() {
 
     const disabledButton = () => {
 		toaster.danger("Fungsi belum diaktifkan.",{ description: "Harap maaf. Fungsi pembayaran belum diaktifkan.", id: "forbidden-action"});
+	}
+
+    const paidButton = () => {
+		toaster.success("Bill telah dibayar",{ description: "Akaun ini telah dibayar", id: "forbidden-action"});
 	}
 
     const location = useLocation();
@@ -239,7 +244,7 @@ else if(!loading){
                                             <Pane>
                                                 <Text fontWeight={600}>{TRANSLATION[language].LESEN.DETAIL.ACTIVITY}</Text>
                                                 {(!isLoading) ?
-                                                    (response.data.status === 'FAILED') ? 
+                                                    (response.status.toLowerCase() === 'failed') ? 
                                                         <Heading size={100}>{TRANSLATION[language].CONSTANT.NONE}</Heading>
                                                     :
                                                     response.data.map((res,index) => {
@@ -261,25 +266,27 @@ else if(!loading){
                                         >
                                             <Pane>
                                                 <Heading size={200}>{TRANSLATION[language].CONSTANT.PAYMENT_STATUS}</Heading>
-                                                <Heading size={200} fontWeight={400}>{ data.STATUS === "PAID" ? (<span className="uppercase font-medium text-xs text-green-400">{TRANSLATION[language].CONSTANT.PAID}</span>) : (<span className="uppercase font-medium text-xs text-red-400">{TRANSLATION[language].CONSTANT.PENDING}</span>)}</Heading>
+                                                <Heading size={200} fontWeight={400}>{ (data.STATUS.toUpperCase() === "PAID" || data.STATUS.toUpperCase() === "O") ? (<span className="uppercase font-medium text-xs text-green-400">{TRANSLATION[language].CONSTANT.PAID}</span>) : (<span className="uppercase font-medium text-xs text-red-400">{TRANSLATION[language].CONSTANT.PENDING}</span>)}</Heading>
                                             </Pane>
                                         </Card>
 
+                                        {
+                                            //(data.STATUS.toUpperCase() === "PAID" || data.STATUS.toUpperCase() === "O") &&
+                                            <Card
+                                                background="tint2"
+                                                marginBottom={majorScale(2)}
+                                                padding={minorScale(2)}
+                                                onClick={() => handleView(data.PDF)}
+                                                className="cursor-pointer hover:bg-gray-300"
+                                            >
+                                                <Pane display="grid" gridTemplateColumns="1fr 10px">
+                                                    <Heading size={200}>Cetak Lesen PDF</Heading>
+                                                    <Heading className="mx-auto"><Icon icon={ChevronRightIcon}></Icon></Heading>
+                                                </Pane>
+                                            </Card>
+                                        }
 
-                                        {/* <Card
-                                            background="tint2"
-                                            marginBottom={majorScale(2)}
-                                            padding={minorScale(2)}
-                                            onClick={() => handleView(data.NOAKAUN)}
-                                            className="cursor-pointer hover:bg-gray-300"
-                                        >
-                                            <Pane display="grid" gridTemplateColumns="1fr 10px">
-                                                <Heading size={200}>Cetak Bil PDF</Heading>
-                                                <Heading className="mx-auto"><Icon icon={ChevronRightIcon}></Icon></Heading>
-                                            </Pane>
-                                        </Card> */}
-
-                                        { data.STATUS !== "PAID" &&
+                                        { (data.STATUS.toUpperCase() === "PENDING PAYMENT" || data.STATUS.toUpperCase() === "PENDING" || data.STATUS.toUpperCase() === "X") &&
                                             <Card
                                                 background="tint2"
                                                 marginBottom={majorScale(1)}
@@ -309,9 +316,7 @@ else if(!loading){
                                                     intent="success"
                                                     type="button"
                                                     className="float-right cursor-pointer"
-                                                    onClick={() => handlePayment()}
-                                                    // className="float-right cursor-not-allowed opacity-75"
-                                                    // onClick={disabledButton}
+                                                    onClick={ (data.STATUS.toUpperCase() === "PENDING PAYMENT" || data.STATUS.toUpperCase() === "PENDING" || data.STATUS.toUpperCase() === "X") ? () => handlePayment() : () => paidButton() }
                                                     iconAfter={ArrowRightIcon}
                                                 >
                                                     {TRANSLATION[language].CONSTANT.PAY}

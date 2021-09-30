@@ -9,7 +9,8 @@ import { useContext } from 'react'
 import swal from 'sweetalert';
 import NoScroll from 'no-scroll'
 
-function CarianList({type, code, carianBy}) {
+function CarianList({type, code, carianBy, searchCode}) {
+    NoScroll.on()
     const [search, setSearch] = useState("");
     const [display, setDisplay] = useState(false);
     const [array, setArray] = useState([]);
@@ -142,7 +143,7 @@ function CarianList({type, code, carianBy}) {
     }
 
     const handleSubmit = () => {
-      const url = SERVER_URL+"int/api_generator.php?api_name=searchV2&type="+carianBy+"&code="+code
+      const url = SERVER_URL+"int/api_generator.php?api_name=searchV2&type="+carianBy+"&code="+searchCode
       const headers = new Headers();
       headers.append('TOKEN',auth);
       
@@ -168,7 +169,7 @@ function CarianList({type, code, carianBy}) {
         })
         .then(response => {
           let alert = '';
-
+          console.log(response)
           if(type === 'akaun')
             alert = TRANSLATION[language].MESSAGE.accountNotFoundMessage
           if(type === 'kp')
@@ -382,7 +383,7 @@ function CarianList({type, code, carianBy}) {
             <div className="w-full">
               <Pane background="tint1">
                 {
-                  (display) ?
+                  (!loading && display) ?
                   carianBy === 'lesen' ?
                     <CarianItem className="bg-gray-100" response={response} loading={loading} handleAdd={response.length > 1 ? handleChoose : handleAdd} array={array} />
                     : carianBy === 'permit' ?

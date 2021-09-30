@@ -25,7 +25,8 @@ function SinglePayment() {
 
     const [accountNo, setAccountNo] = useState(location.state.NOAKAUN);
     const [amount, setAmount]       = useState(location.state.BAKI);
-    const [invoiceNo, setInvoiceNo] = useState(location.state.CODE + year + Math.floor(1000000000000 + Math.random() * 9999999999999));  
+    let tempInvoice =  (location.state.CODE + year.toString() ).padEnd(18,Math.floor(1000000000000 + Math.random() * 9999999999999))
+    const [invoiceNo, setInvoiceNo] = useState(tempInvoice);  
     const [receiptno, setReceiptNo] = useState("");
     const [billStatus, setBillStatus] = useState("PENDING PAYMENT");
     const [openAmount, setOpenAmount] = useState(amount)
@@ -89,6 +90,7 @@ function SinglePayment() {
             formdata.append("payorphone", payorphone);
             formdata.append("method", 0);
             formdata.append("nokp", sessionStorage.nokp);
+            formdata.append('code',location.state.CODE)
 
             var requestOptions = {
                 method: 'POST',
@@ -102,7 +104,7 @@ function SinglePayment() {
             fetch(urlAPI1, requestOptions)
                 .then(response => response.json())
                 .then(result => {
-                    if (result.status == "success") {
+                    if (result.status.toLowerCase() === "success") {
 
                         setReceiptNo(result.receiptNo);
                         if(result.newInvoice !== ""){
@@ -156,6 +158,7 @@ function SinglePayment() {
             formdata.append("payorphone", payorphone);
             formdata.append("method", 1);
             formdata.append("nokp", sessionStorage.nokp);
+            formdata.append('code',location.state.CODE)
 
             var requestOptions = {
                 method: 'POST',
@@ -169,7 +172,7 @@ function SinglePayment() {
             fetch(urlAPI1, requestOptions)
                 .then(response => response.json())
                 .then(result => {
-                    if (result.status == "success") {
+                    if (result.status.toLowerCase() === "success") {
                         setReceiptNo(result.receiptNo);
 
                         if(result.newInvoice !== ""){

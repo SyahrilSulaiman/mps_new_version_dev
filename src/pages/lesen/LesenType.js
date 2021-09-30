@@ -8,10 +8,10 @@ import { SERVER_URL } from "../../Constants"
 
 export default function lesen() {
     const listMenu = [
-        {"title":"Lesen Tred / Penjana","subtitle":"-","status":true, "to":"/menulesen", data:{title:"Lesen Tred / Penjana", api:SERVER_URL+"int/api_generator.php?api_name=showV2&type=lesen&code=L", code:'L', type:'lesen'}},
-        {"title":"Lesen Pasar Malam","subtitle":"-","status":true, "to":"/menulesen", data:{title:"Lesen Pasar Malam", api:SERVER_URL+"int/api_generator.php?api_name=showV2&type=lesen&code=LR", code:'LR', type:'lesen'}},
-        {"title":"Visual Papan Iklan","subtitle":"-","status":true, "to":"/menulesen", data:{title: "Visual Papan Iklan", api:SERVER_URL+"int/api_generator.php?api_name=showV2&type=lesen&code=LV", code:'LV', type:'lesen'}},
-        {"title":"Permit Lesen","subtitle":"-","status":true, "to":"/menulesen", data:{title:"Permit Lesen", api:SERVER_URL+"int/api_generator.php?api_name=showV2&type=lesen&code=PS", code:'PS', type:'lesen'}},
+        {"title":"Lesen Perniagaan Tred / Kritikal","subtitle":"-","status":true, "to":"/menulesen", data:{title:"Lesen Perniagaan Tred / Kritikal", api:SERVER_URL+"int/api_generator.php?api_name=showV2&type=lesen&code=L", code:'L', searchCode:'L', type:'lesen'}},
+        {"title":"Lesen Penjaja / Pasar Malam / Pasar Pagi","subtitle":"-","status":true, "to":"/menulesen", data:{title:"Lesen Penjaja / Pasar Malam / Pasar Pagi", api:SERVER_URL+"int/api_generator.php?api_name=showV2&type=lesen&code=LR", code:'LR',  searchCode:'L', type:'lesen'}},
+        {"title":"Lesen Visual Papan Iklan Luaran","subtitle":"-","status":true, "to":"/menulesen", data:{title: "Lesen Visual Papan Iklan Luaran", api:SERVER_URL+"int/api_generator.php?api_name=showV2&type=lesen&code=LV", code:'LV',  searchCode:'LV', type:'lesen'}},
+        {"title":"Permit Sementara","subtitle":"-","status":true, "to":"/menulesen", data:{title:"Permit Sementara", api:SERVER_URL+"int/api_generator.php?api_name=showV2&type=lesen&code=PS", code:'PS',  searchCode:'PS', type:'lesen'}},
     ]
 
     return (

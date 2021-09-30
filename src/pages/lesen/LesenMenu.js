@@ -43,6 +43,7 @@ function LesenMenu(props) {
 	
     const history = useHistory()
     const location = useLocation()
+	console.log(location)
 
 	const url = SERVER_URL+"int/api_generator.php?api_name=showV2&type="+location.state.type+"&code="+location.state.code;
 	// const { response, loading, } = useFetch(url,requestOptions);
@@ -86,18 +87,28 @@ function LesenMenu(props) {
 		else {
 			history.push({
 				pathname: "/multiplepayment",
-				state: { payBill: unpaid }
+				state: { payBill: unpaid, code:location.state.code, type:location.state.type}
 			})
 		}
 	}
 
     const handleBayarSelected = () => {
-		console.log("Handle bayar selected")
-	};
+        setDisabled(true);
+		handleUnpaid(response);
+		if (unpaid.length < 1) {
+			toaster.danger(TRANSLATION[language].MESSAGE.emptyUnpaid, { id: "forbidden-action" });
+		}
+		else {
+			history.push({
+				pathname: "/multiplepayment",
+				state: { payBill: selected, code:location.state.code, type:location.state.type}
+			})
+		}
+	}
     const handleAddBill = () => {
 		history.push({
 			pathname:"/carian",
-			state:{type:location.state.type, code:location.state.code, title:location.state.title, from:location.pathname}
+			state:{type:location.state.type, code:location.state.code, searchCode:location.state.searchCode, title:location.state.title, from:location.pathname}
 		})
 	};
 

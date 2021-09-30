@@ -14,6 +14,7 @@ function Carian() {
     const [type, setType] = useState('');
     const history = useHistory()
     const location = useLocation();
+    console.log(location)
 
     return (
         <div>
@@ -38,7 +39,7 @@ function Carian() {
                                 <option value="ssm">{TRANSLATION[language].SEARCH.MENU.NOSSM.TITLE}</option>
                                 <option value="akaun">{TRANSLATION[language].SEARCH.MENU.ACCOUNT.TITLE}</option>
                             </SelectField>
-                            <CarianList type={type} code={location.state.code} carianBy = {location.state.type}/>
+                            <CarianList type={type} code={location.state.code} searchCode={location.state.searchCode} carianBy = {location.state.type}/>
                         </Pane>
                     </div>
                 </div>
