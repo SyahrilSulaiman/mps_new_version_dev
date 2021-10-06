@@ -101,7 +101,6 @@ export const TRANSLATION =
             "DISTRICT":"Mukim",
             "DATE":"Tempoh Cukai",
             "PAYMENT_DATE":"Tempoh Bayaran",
-            "PRINT_BILL":"Cetak Cukai PDF",
         }, 
 
         "LESEN" : {
@@ -328,6 +327,7 @@ export const TRANSLATION =
             "PASSWORD":"Kata laluan",
             "COMPANY_ADDRESS":"Alamat Syarikat",
             "PRINT_RECEIPT":"Cetak Resit PDF",
+            "PRINT_BILL":"Cetak Bil PDF",
             "PAYMENT_AMOUNT":"Jumlah Pembayaran",
             "PENDING_AMOUNT":"Jumlah Pembayaran",
             "PAYMENT_STATUS":"Status Bayaran",
@@ -454,7 +454,6 @@ export const TRANSLATION =
             "DISTRICT":"District",
             "DATE":"Tax Period",
             "PAYMENT_DATE":"Payment Period",
-            "PRINT_BILL":"Print PDF Tax",
         }, 
 
         "LESEN" : {
@@ -681,6 +680,7 @@ export const TRANSLATION =
             "UPDATE":"Update",
             "PASSWORD":"Password",
             "PRINT_RECEIPT":"Print PDF Receipt",
+            "PRINT_BILL":"Print PDF Tax",
             "PAYMENT_AMOUNT":"Payment Amount",
             "PENDING_AMOUNT":"Pending Amount",
             "PAYMENT_STATUS":"Payment Status",

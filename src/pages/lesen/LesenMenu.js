@@ -12,9 +12,11 @@ import EmptyBill from "../../components/EmptyBill";
 import { SERVER_URL } from "../../Constants";
 import { getNOKP, getEmail, setAuthorization } from "../../Utils/Common";
 import { TRANSLATION } from "../../Translation";
+import noScroll from "no-scroll"
 
 
 function LesenMenu(props) {
+	noScroll.off();
 	const { handleUnpaid, selected, unpaid, language, setUnpaid } = useContext(ContextHandler);
 
 	const nokp = getNOKP();
@@ -24,7 +26,6 @@ function LesenMenu(props) {
 	const [response, setResponse] = useState(null)
 	const [loading, setLoading] = useState(true)
 	const [error,setError] = useState(null)
-	
 	const headers = new Headers();
 	headers.append("TOKEN",auth)
 
@@ -43,13 +44,9 @@ function LesenMenu(props) {
 	
     const history = useHistory()
     const location = useLocation()
-	console.log(location)
 
 	const url = SERVER_URL+"int/api_generator.php?api_name=showV2&type="+location.state.type+"&code="+location.state.code;
-	// const { response, loading, } = useFetch(url,requestOptions);
 	const [ disabled,setDisabled] = useState(false);
-
-
 
 	useEffect(() => {
 		fetch( url, requestOptions )

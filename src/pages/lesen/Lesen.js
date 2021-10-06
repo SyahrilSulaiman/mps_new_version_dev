@@ -7,7 +7,7 @@ import swal from 'sweetalert2';
 import { Heading, Spinner, Pane, Button, Text, Paragraph, majorScale, minorScale, Card, ArrowRightIcon,Icon , ChevronRightIcon, ArrowLeftIcon, toaster, DeleteIcon } from 'evergreen-ui';
 import NumberFormat from 'react-number-format';
 import { useHistory, useLocation } from "react-router-dom";
-import { getNOKP, getEmail, setAuthorization } from "../../Utils/Common";
+import { getNOKP, getEmail, setAuthorization, getAccessToken} from "../../Utils/Common";
 import { SERVER_URL } from '../../Constants';
 import { TRANSLATION } from '../../Translation';
 import { ContextHandler } from "../../contexts/ContextHandler";
@@ -17,6 +17,7 @@ function Lesen() {
 
     const nokp = getNOKP();
     const email = getEmail();
+    const accessToken = getAccessToken();
     const auth = setAuthorization(nokp,email);
     const abortCont = new AbortController()
     const history = useHistory()
@@ -28,6 +29,12 @@ function Lesen() {
     const handleView = (e) => {
         window.location.href = SERVER_URL+"rp/lesen.php?token="+e
         // console.log(SERVER_URL+"rp/lesen.php?token="+e)
+    }
+
+    const handleReceipt = (e) => {
+        const url = SERVER_URL+'rp/resit.php?invoice=' + btoa(e)+"&token="+accessToken;
+        // window.location.href = SERVER_URL+'rp/resit.php?invoice=' + btoa(e)+"&token="+accessToken
+        console.log(url)
     }
 
     const handleDelete = (e)  => {
@@ -269,23 +276,24 @@ else if(!loading){
                                                 <Heading size={200} fontWeight={400}>{ (data.STATUS.toUpperCase() === "PAID" || data.STATUS.toUpperCase() === "O") ? (<span className="uppercase font-medium text-xs text-green-400">{TRANSLATION[language].CONSTANT.PAID}</span>) : (<span className="uppercase font-medium text-xs text-red-400">{TRANSLATION[language].CONSTANT.PENDING}</span>)}</Heading>
                                             </Pane>
                                         </Card>
-
                                         {
-                                            //(data.STATUS.toUpperCase() === "PAID" || data.STATUS.toUpperCase() === "O") &&
-                                            <Card
-                                                background="tint2"
-                                                marginBottom={majorScale(2)}
-                                                padding={minorScale(2)}
-                                                onClick={() => handleView(data.PDF)}
-                                                className="cursor-pointer hover:bg-gray-300"
-                                            >
-                                                <Pane display="grid" gridTemplateColumns="1fr 10px">
-                                                    <Heading size={200}>Cetak Lesen PDF</Heading>
-                                                    <Heading className="mx-auto"><Icon icon={ChevronRightIcon}></Icon></Heading>
-                                                </Pane>
-                                            </Card>
+                                        (data.STATUS.toUpperCase() === "PAID" || data.STATUS.toUpperCase() === "X") &&
+                                            <Pane>
+                                                <button type = "button" className="bg-teal-500 hover:bg-teal-400 text-white py-2 px-4 mr-2 rounded inline-flex items-center text-xs font-medium"
+                                                    onClick={() => handleView(data.PDF)}
+                                                    >
+                                                    (Test) &nbsp;<i className="fas fa-file-download"></i>&nbsp;{TRANSLATION[language].CONSTANT.PRINT_BILL}
+                                                </button>
+                                                {   (!isLoading) &&
+                                                        (response.invoiceNo !== null)  &&
+                                                        <button type = "button" className="bg-teal-500 hover:bg-teal-400 text-white py-2 px-4 rounded inline-flex items-center text-xs font-medium"
+                                                            onClick={() => handleReceipt(btoa(response.invoiceNo))}
+                                                            >
+                                                            (Test) &nbsp;<i className="fas fa-receipt"></i>&nbsp;{TRANSLATION[language].CONSTANT.PRINT_RECEIPT}
+                                                        </button>
+                                                }
+                                            </Pane>
                                         }
-
                                         { (data.STATUS.toUpperCase() === "PENDING PAYMENT" || data.STATUS.toUpperCase() === "PENDING" || data.STATUS.toUpperCase() === "X") &&
                                             <Card
                                                 background="tint2"
@@ -311,25 +319,23 @@ else if(!loading){
                                                 >
                                                     {TRANSLATION[language].CONSTANT.BACK}
                                                 </Button>
-                                                <Button
-                                                    appearance="primary"
-                                                    intent="success"
-                                                    type="button"
-                                                    className="float-right cursor-pointer"
-                                                    onClick={ (data.STATUS.toUpperCase() === "PENDING PAYMENT" || data.STATUS.toUpperCase() === "PENDING" || data.STATUS.toUpperCase() === "X") ? () => handlePayment() : () => paidButton() }
-                                                    iconAfter={ArrowRightIcon}
-                                                >
-                                                    {TRANSLATION[language].CONSTANT.PAY}
-                                                </Button>
-                                            </Pane>
-                                        </div>
-                                        <div className="flex flex-wrap w-full mt-4 rounded-md">
-                                            <Pane width="100%" >
+                                                { (data.STATUS.toUpperCase() === "PENDING PAYMENT" || data.STATUS.toUpperCase() === "PENDING" || data.STATUS.toUpperCase() === "X") &&
+                                                    <Button
+                                                        appearance="primary"
+                                                        intent="success"
+                                                        type="button"
+                                                        className="float-right ml-2 cursor-pointer"
+                                                        onClick={ (data.STATUS.toUpperCase() === "PENDING PAYMENT" || data.STATUS.toUpperCase() === "PENDING" || data.STATUS.toUpperCase() === "X") ? () => handlePayment() : () => paidButton() }
+                                                        iconAfter={ArrowRightIcon}
+                                                    >
+                                                        {TRANSLATION[language].CONSTANT.PAY}
+                                                    </Button>
+                                                }
                                                 <Button
                                                     appearance="primary"
                                                     intent="danger"
                                                     type="button"
-                                                    className="float-right"
+                                                    className="float-right cursor-pointer"
                                                     onClick={(e) => handleDelete(data.NOAKAUN)}
                                                     iconAfter={DeleteIcon}
                                                 >

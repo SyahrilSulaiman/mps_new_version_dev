@@ -106,7 +106,7 @@ function MultiplePayment() {
                 redirect: 'follow',
                 headers : myHeaders
             };
-            const url = SERVER_URL+"int/api_generator.php?api_name=multipayment"
+            const url = SERVER_URL+"int/api_generator.php?api_name=multiPayment"
 
             fetch(url, requestOptions)
             .then(response => response.json())
@@ -161,7 +161,7 @@ function MultiplePayment() {
                 redirect: 'follow',
                 headers : myHeaders
             };
-            const url = SERVER_URL+"int/api_generator.php?api_name=multipayment"
+            const url = SERVER_URL+"int/api_generator.php?api_name=multiPayment"
 
             fetch(url, requestOptions)
             .then(response => response.json())
@@ -274,7 +274,7 @@ function MultiplePayment() {
                                     ]}
                                 ></SegmentedControl>
                             </Pane>
-                            <Pane paddingX={20} style={{ height: "150vh" }}>
+                            <Pane paddingX={20} style={{ height: "130vh" }}>
                                 {method === "CARD" && (
                                     <Pane marginY={15} style={{ height: "50vh" }}>
                                         <Paragraph fontWeight="bold" fontSize={13}>

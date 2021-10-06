@@ -95,7 +95,7 @@ registerRoute(
   
   registerRoute(
     ({event}) => event.request.destination === 'script',
-    new StaleWhileRevalidate({
+    new NetworkFirst({
       cacheName: JS_CACHE,
       plugins: [
         new ExpirationPlugin({

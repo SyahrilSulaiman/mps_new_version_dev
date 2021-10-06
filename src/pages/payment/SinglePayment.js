@@ -99,7 +99,7 @@ function SinglePayment() {
                 headers:myHeaders
             };
 
-            var urlAPI1 = SERVER_URL+"int/api_generator.php?api_name=register_payment";
+            var urlAPI1 = SERVER_URL+"int/api_generator.php?api_name=singlePayment";
 
             fetch(urlAPI1, requestOptions)
                 .then(response => response.json())
@@ -167,7 +167,7 @@ function SinglePayment() {
                 headers:myHeaders
             };
 
-            var urlAPI1 = SERVER_URL+"int/api_generator.php?api_name=register_payment";
+            var urlAPI1 = SERVER_URL+"int/api_generator.php?api_name=singlePayment";
 
             fetch(urlAPI1, requestOptions)
                 .then(response => response.json())
@@ -283,7 +283,7 @@ function SinglePayment() {
                             ]}
                         ></SegmentedControl>
                     </Pane>
-                    <Pane paddingX={20} style={{ height: "100vh" }}>
+                    <Pane paddingX={20} style={{ height: "130vh" }}>
                         {method === "CARD" && (
                             <Pane marginY={15} style={{ height: "50vh" }}>
                                 <Paragraph fontWeight="bold" fontSize={13}>
