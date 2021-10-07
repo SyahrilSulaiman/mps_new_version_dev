@@ -33,8 +33,7 @@ function Lesen() {
 
     const handleReceipt = (e) => {
         const url = SERVER_URL+'rp/resit.php?invoice=' + btoa(e)+"&token="+accessToken;
-        // window.location.href = SERVER_URL+'rp/resit.php?invoice=' + btoa(e)+"&token="+accessToken
-        console.log(url)
+        window.location.href = SERVER_URL+'rp/resit.php?invoice=' + btoa(e)+"&token="+accessToken
     }
 
     const handleDelete = (e)  => {
@@ -277,19 +276,19 @@ else if(!loading){
                                             </Pane>
                                         </Card>
                                         {
-                                        (data.STATUS.toUpperCase() === "PAID" || data.STATUS.toUpperCase() === "X") &&
+                                        (data.STATUS.toUpperCase() === "PAID" || data.STATUS.toUpperCase() === "O") &&
                                             <Pane>
                                                 <button type = "button" className="bg-teal-500 hover:bg-teal-400 text-white py-2 px-4 mr-2 rounded inline-flex items-center text-xs font-medium"
                                                     onClick={() => handleView(data.PDF)}
                                                     >
-                                                    (Test) &nbsp;<i className="fas fa-file-download"></i>&nbsp;{TRANSLATION[language].CONSTANT.PRINT_BILL}
+                                                    <i className="fas fa-file-download"></i>&nbsp;{TRANSLATION[language].CONSTANT.PRINT_BILL}
                                                 </button>
                                                 {   (!isLoading) &&
                                                         (response.invoiceNo !== null)  &&
                                                         <button type = "button" className="bg-teal-500 hover:bg-teal-400 text-white py-2 px-4 rounded inline-flex items-center text-xs font-medium"
                                                             onClick={() => handleReceipt(btoa(response.invoiceNo))}
                                                             >
-                                                            (Test) &nbsp;<i className="fas fa-receipt"></i>&nbsp;{TRANSLATION[language].CONSTANT.PRINT_RECEIPT}
+                                                            <i className="fas fa-receipt"></i>&nbsp;{TRANSLATION[language].CONSTANT.PRINT_RECEIPT}
                                                         </button>
                                                 }
                                             </Pane>
@@ -308,7 +307,7 @@ else if(!loading){
                                                 </Pane>
                                             </Card>
                                         }
-                                        <div className="flex flex-wrap py-1 w-full mt-4 rounded-md">
+                                        <div className="flex flex-wrap py-1 w-full mt-2 rounded-md">
                                             <Pane width="100%" >
                                                 <Button
                                                     appearance="primary"
@@ -331,18 +330,36 @@ else if(!loading){
                                                         {TRANSLATION[language].CONSTANT.PAY}
                                                     </Button>
                                                 }
-                                                <Button
-                                                    appearance="primary"
-                                                    intent="danger"
-                                                    type="button"
-                                                    className="float-right cursor-pointer"
-                                                    onClick={(e) => handleDelete(data.NOAKAUN)}
-                                                    iconAfter={DeleteIcon}
-                                                >
-                                                    {TRANSLATION[language].CONSTANT.DELETE}
-                                                </Button>
+                                                { (data.STATUS.toUpperCase() === "PAID" || data.STATUS.toUpperCase() === "O") &&
+                                                    <Button
+                                                        appearance="primary"
+                                                        intent="danger"
+                                                        type="button"
+                                                        className="float-right cursor-pointer"
+                                                        onClick={(e) => handleDelete(data.NOAKAUN)}
+                                                        iconAfter={DeleteIcon}
+                                                    >
+                                                        {TRANSLATION[language].CONSTANT.DELETE}
+                                                    </Button>
+                                                }
                                             </Pane>
                                         </div>
+                                        { (data.STATUS.toUpperCase() === "PENDING PAYMENT" || data.STATUS.toUpperCase() === "PENDING" || data.STATUS.toUpperCase() === "X") &&
+                                        <div className="flex flex-wrap w-full mt-2 rounded-md">
+                                            <Pane width = "100%">
+                                            <Button
+                                                        appearance="primary"
+                                                        intent="danger"
+                                                        type="button"
+                                                        className="float-right cursor-pointer"
+                                                        onClick={(e) => handleDelete(data.NOAKAUN)}
+                                                        iconAfter={DeleteIcon}
+                                                    >
+                                                        {TRANSLATION[language].CONSTANT.DELETE}
+                                                    </Button>
+                                            </Pane>
+                                        </div>
+                                        }
                                     </div>
                                 </div>
                             </div>
