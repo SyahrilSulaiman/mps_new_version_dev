@@ -4,10 +4,10 @@ import { ContextHandler } from '../../contexts/ContextHandler';
 import { Link } from 'react-router-dom';
 import { TRANSLATION } from "../../Translation";
 
-function CukaiList({response, title,code, type}) {
+function TestPermitList({response, title,code, type}) {
   sessionStorage.removeItem("cukai")
   const { addSelected, handleSelected, handleBgChange, language } = useContext(ContextHandler)
-  const data = { NOAKAUN:response.NOAKAUN, STATUS:response.STATUS, NOKP:response.NOKP, NOSSM:response.NOSSM, NAMA_PEMILIK:response.NAMA_PEMILIK,  MUKIM:response.MUKIM, BAKI:response.BAKI, ALAMAT:response.ALAMAT, TEMPOH_CUKAI:response.TEMPOH_CUKAI, TEMPOH_BAYARAN:response.TEMPOH_BAYARAN, TITLE:title, CODE:code, TYPE:type, PDF:response.PDF, PRINT:response.PRINT}
+  const data = { NOAKAUN:response.NOAKAUN, STATUS:response.STATUS, NAMA_PEMILIK:response.NAMA_PEMILIK, NAMA_COMPANY:response.NAMA_COMPANY, KETERANGAN:response.KETERANGAN, BAKI:response.BAKI, ALAMAT:response.ALAMAT, DATE:response.DATE, DATE_END:response.DATE_END, TITLE:title, CODE:code, TYPE:type, PDF:response.PDF, PRINT:response.PRINT}
 
   return (
         <div
@@ -27,21 +27,12 @@ function CukaiList({response, title,code, type}) {
                 </Pane>
                 <Link 
                   to={{
-                    pathname: "/"+type,
+                    pathname: "/permit",
                     state:{ data }
                   }}
                 >
                   <table border="1" cellPadding="0" className="text-left overflow-x:auto">
                     <tbody>
-                      <tr>
-                        <th width="110px">
-                          <Heading size={200}>{ data.NOKP === null ? TRANSLATION[language].CONSTANT.NOSSM : TRANSLATION[language].CONSTANT.NOKP }
-                          </Heading>
-                        </th>
-                        <td>
-                            <Strong size={300}> : { data.NOKP === null ? data.NOSSM : data.NOKP } </Strong>
-                        </td>
-                      </tr>
                       <tr>
                         <th><Heading size={200}>{TRANSLATION[language].CONSTANT.ACCOUNT_NO}</Heading></th>
                         <td>
@@ -52,6 +43,15 @@ function CukaiList({response, title,code, type}) {
                         <th><Heading size={200}>{TRANSLATION[language].CONSTANT.OWNER}</Heading></th>
                         <td>
                           <Strong size={300}> : {data.NAMA_PEMILIK === null ? "-" : data.NAMA_PEMILIK.toUpperCase()} </Strong>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th width="110px">
+                          <Heading size={200}>{ TRANSLATION[language].CONSTANT.COMPANY_NAME }
+                          </Heading>
+                        </th>
+                        <td>
+                            <Strong size={300}> : { data.NAMA_COMPANY === null ? "-" : data.NAMA_COMPANY } </Strong>
                         </td>
                       </tr>
                       <tr>
@@ -73,4 +73,4 @@ function CukaiList({response, title,code, type}) {
   )
 }
 
-export default CukaiList
+export default TestPermitList

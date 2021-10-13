@@ -42,10 +42,11 @@ function Bill(props) {
 	}
 
     const listMenu = [
-        {"title":"Cukai Taksiran","subtitle":"Senarai bil cukai Taksiran","status":true, "to":"cukaitaksiran"},
-        // {"title":"Lesen","subtitle":"Senarai bil lesen","status":false, "to":"#"},
+        {"title":"Cukai Taksiran", "subtitle":"Senarai bil cukai Taksiran", "status":true, "to":"menucukai", data:{title:"Cukai Taksiran", code:'A', searchCode:'A', type:'cukai'}},
         {"title":"Lesen","subtitle":"Senarai bil lesen","status":true, "to":"jenislesen"},
+        {"title":"Permit","subtitle":"Senarai bil permit","status":true, "to":"jenispermit"},
         {"title":"Kompaun","subtitle":"Senarai bil kompaun","status":false, "to":"#"},
+        {"title":"Permit 2","subtitle":"Test","status":true, "to":"test_permit"},
     ]
 
 	return (

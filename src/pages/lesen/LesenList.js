@@ -4,10 +4,10 @@ import { ContextHandler } from '../../contexts/ContextHandler';
 import { Link } from 'react-router-dom';
 import { TRANSLATION } from "../../Translation";
 
-function BillCardList({response, title,code, type}) {
+function LesenList({response, title,code, type}) {
   sessionStorage.removeItem("cukai")
   const { addSelected, handleSelected, handleBgChange, language } = useContext(ContextHandler)
-  const data = { NOAKAUN:response.NOAKAUN, STATUS:response.STATUS, NOKP:response.NOKP, NOSSM:response.NOSSM, NAMA_PEMILIK:response.NAMA_PEMILIK, BAKI:response.BAKI, NAMA_SYARIKAT:response.NAMA_SYARIKAT, ALAMAT_SYARIKAT:response.ALAMAT_PREMIS, TEMPOH_LESEN:response.TARIKH_TAMAT, TITLE:title, CODE:code, TYPE:type, PDF:response.PDF}
+  const data = { NOAKAUN:response.NOAKAUN, STATUS:response.STATUS, NOKP:response.NOKP, NOSSM:response.NOSSM, NAMA_PEMILIK:response.NAMA_PEMILIK, BAKI:response.BAKI, NAMA_SYARIKAT:response.NAMA_SYARIKAT, ALAMAT_SYARIKAT:response.ALAMAT_PREMIS, TEMPOH_LESEN:response.TARIKH_TAMAT, TITLE:title, CODE:code, TYPE:type, PDF:response.PDF, PRINT:response.PRINT}
 
   return (
         <div
@@ -73,4 +73,4 @@ function BillCardList({response, title,code, type}) {
   )
 }
 
-export default BillCardList
+export default LesenList

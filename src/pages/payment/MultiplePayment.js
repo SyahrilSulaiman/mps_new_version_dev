@@ -48,7 +48,7 @@ function MultiplePayment() {
         }
         let total = 0;
         for(var i = 0; i < account.length; i++){
-            setAmount(total = total + (account[i].BAKI ));
+            setAmount(total = total + Number(account[i].BAKI));
         }
 
         fetch(PAYMENT_URL+'fpx/bankList.php')
@@ -235,7 +235,7 @@ function MultiplePayment() {
                                         <Pane display="grid" gridTemplateColumns="1fr 1fr">
                                             <Heading size={200}>AKAUN {index + 1}</Heading>
                                             <Heading size={100} textAlign="right">{bill.NOAKAUN}&emsp;&emsp;
-                                                <NumberFormat value={(bill.BAKI ).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'RM'} />
+                                                <NumberFormat value={Number(bill.BAKI).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'RM'} />
                                             </Heading>
                                         </Pane>
                                     </Pane>
@@ -246,7 +246,7 @@ function MultiplePayment() {
                                     <Pane display="grid" gridTemplateColumns="1fr 1fr">
                                         <Heading size={200}>JUMLAH</Heading>
                                         <Heading size={100} textAlign="right">(Untuk {account.length} Akaun)&emsp;&emsp;
-                                            <NumberFormat value={amount.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'RM'} />
+                                            <NumberFormat value={Number(amount).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'RM'} />
                                         </Heading>
                                     </Pane>
                                 </Pane>
@@ -274,7 +274,7 @@ function MultiplePayment() {
                                     ]}
                                 ></SegmentedControl>
                             </Pane>
-                            <Pane paddingX={20} style={{ height: "130vh" }}>
+                            <Pane paddingX={20} paddingBottom={60}>
                                 {method === "CARD" && (
                                     <Pane marginY={15} style={{ height: "50vh" }}>
                                         <Paragraph fontWeight="bold" fontSize={13}>
@@ -478,7 +478,7 @@ function MultiplePayment() {
                             <input type="hidden" name="channel" value="01" />
                             <input type="hidden" name="web_return_address" value={SERVER_URL+"int/resitpembayaran.php"} />
                             <input type="hidden" name="web_service_return_address" value={SERVER_URL+"int/callback.php"} />
-                            <input type="hidden" name="payment_amount" value={amount.toFixed(2)} />
+                            <input type="hidden" name="payment_amount" value={Number(amount).toFixed(2)} />
                             <input type="hidden" name="payment_description" value={"Cukai " + invoiceNo} />
                             <input type="hidden" name="email" value={payoremail} />
                         </form>
@@ -488,7 +488,7 @@ function MultiplePayment() {
                             <input type="hidden" name="payment_ref_no" value={invoiceNo} />
                             <input type="hidden" name="web_return_address" value={SERVER_URL+"int/resitpembayaran.php"} />
                             <input type="hidden" name="web_service_return_address" value={SERVER_URL+"int/callback.php"} />
-                            <input type="hidden" name="payment_amount" value={amount.toFixed(2)} />
+                            <input type="hidden" name="payment_amount" value={Number(amount).toFixed(2)} />
                             <input type="hidden" name="payment_description" value={"Cukai " + invoiceNo} />
                             <input type="hidden" name="email" value={payoremail} />
                         </form>

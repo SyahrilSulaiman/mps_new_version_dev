@@ -7,7 +7,7 @@ export default function Carian({bill,type, display, handleAdd, array}){
     const [loading,setLoading] = useState(false);
     let accountType = "";
     useEffect(()=>{
-        console.log('Selected Bill :', array);
+        // console.log('Selected Bill :', array);
     },[array])
 
         useEffect(() =>{

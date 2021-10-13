@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from 'react'
+import React,{ useState, useContext } from 'react'
 import  useFetch  from './../../hooks/useFetch'
 import { useHistory, useLocation } from 'react-router-dom'
 import { getNOKP, getEmail, setAuthorization } from "./../../Utils/Common";
@@ -6,11 +6,14 @@ import { SERVER_URL, PAYMENT_URL } from './../../Constants';
 import swal from "sweetalert";
 import { toaster, Heading, Pane, ArrowLeftIcon, TextInputField, Dialog, Checkbox, Text, Button, SegmentedControl, Paragraph, BanCircleIcon, TickCircleIcon, UnorderedList, ListItem } from "evergreen-ui";
 import Topbar from "./../../Topbar";
+import { TRANSLATION } from '../../Translation';
+import { ContextHandler } from "../../contexts/ContextHandler";
 
 const FPX = 'FPX'
 const CARD = 'CARD'
 
 function SinglePayment() {
+    const {language} = useContext(ContextHandler);
     const history = useHistory();
     const location = useLocation();
     const year = new Date().getFullYear();
@@ -46,7 +49,7 @@ function SinglePayment() {
     if(!loading){
         if(error !== null){
             console.log(error);
-            toaster.danger("Sistem Ralat.", { id: "forbidden-action", description: "Tiada pembayaran yang boleh dibuat pada masa ini. Sila hubungi pentadbir sistem untuk berurusan dengan lebih lanjut." })
+            toaster.danger(TRANSLATION[language].CONSTANT.ERROR, { id: "forbidden-action", description: TRANSLATION[language].MESSAGE.failToMakePaymentMessage })
         }
     }
 
@@ -56,27 +59,27 @@ function SinglePayment() {
         setDialog(false);
 
         if(openAmount == 0.00 || openAmount == "") {
-            toaster.danger("Harap maaf, Pembayaran batal kerana maklumat pembayaran tidak lengkap.", { id: "forbidden-action" });
+            toaster.danger(TRANSLATION[language].MESSAGE.incompletePaymentMessage, { id: "forbidden-action" });
             return false;
         }
         if(openAmount < 100.00 && amount > 100.00 && billStatus === 'PENDING PAYMENT') {
-            toaster.danger("Harap maaf, Pembayaran batal kerana jumlah pembayaran tidak mencukupi nilai minimum.", { id: "forbidden-action" });
+            toaster.danger(TRANSLATION[language].MESSAGE.minimumPaymentRequirementMessage, { id: "forbidden-action" });
             return false;
         }
         else if (payorname == "") {
-            toaster.danger("Harap maaf, Sila lengkapkan maklumat nama pembayar sebelum membuat pembayaran.", { id: "forbidden-action" });
+            toaster.danger(TRANSLATION[language].MESSAGE.incompletePaymentNameMessage, { id: "forbidden-action" });
             return false;
         }
         else if (payoremail == "") {
-            toaster.danger("Harap maaf, Sila lengkapkan maklumat emel pembayar sebelum membuat pembayaran.", { id: "forbidden-action" });
+            toaster.danger(TRANSLATION[language].MESSAGE.incompletePaymentEmailMessage, { id: "forbidden-action" });
             return false;
         }
         else if (payorphone == "") {
-            toaster.danger("Harap maaf, Sila lengkapkan maklumat nombor telefon pembayar sebelum membuat pembayaran.", { id: "forbidden-action" });
+            toaster.danger(TRANSLATION[language].MESSAGE.incompletePaymentPhoneMessage, { id: "forbidden-action" });
             return false;
         }
         else if (bankCode == "") {
-            toaster.danger("Harap maaf, Sila membuat pilihan bank sebelum membuat pembayaran.", { id: "forbidden-action" });
+            toaster.danger(TRANSLATION[language].MESSAGE.incompletePaymentBankMessage, { id: "forbidden-action" });
             return false;
         }
         else {
@@ -114,7 +117,7 @@ function SinglePayment() {
                         document.getElementById("bayar").submit();
                     }
                     else {
-                        toaster.danger("Harap maaf, tidak boleh membuat sebarang pembayaran pada masa kini.", { id: "forbidden-action" });
+                        toaster.danger( TRANSLATION[language].MESSAGE.failToMakePaymentMessage, { id: "forbidden-action" });
                     }
                 })
 
@@ -128,23 +131,23 @@ function SinglePayment() {
         setDialog(false);
 
         if(openAmount == 0.00 || openAmount == "") {
-            toaster.danger("Harap maaf, Pembayaran batal kerana maklumat jumlah pembayaran tidak lengkap.", { id: "forbidden-action" });
+            toaster.danger(TRANSLATION[language].MESSAGE.incompletePaymentMessage, { id: "forbidden-action" });
             return false;
         }
         if(openAmount < 100.00 && amount > 100.00 && billStatus === 'PENDING PAYMENT') {
-            toaster.danger("Harap maaf, Pembayaran batal kerana jumlah pembayaran tidak mencukupi nilai minimum.", { id: "forbidden-action" });
+            toaster.danger(TRANSLATION[language].MESSAGE.minimumPaymentRequirementMessage, { id: "forbidden-action" });
             return false;
         }
         else if (payorname == "") {
-            toaster.danger("Harap maaf, Sila lengkapkan maklumat nama pembayar sebelum membuat pembayaran.", { id: "forbidden-action" });
+            toaster.danger(TRANSLATION[language].MESSAGE.incompletePaymentNameMessage, { id: "forbidden-action" });
             return false;
         }
         else if (payoremail == "") {
-            toaster.danger("Harap maaf, Sila lengkapkan maklumat emel pembayar sebelum membuat pembayaran.", { id: "forbidden-action" });
+            toaster.danger(TRANSLATION[language].MESSAGE.incompletePaymentEmailMessage, { id: "forbidden-action" });
             return false;
         }
         else if (payorphone == "") {
-            toaster.danger("Harap maaf, Sila lengkapkan maklumat nombor telefon pembayar sebelum membuat pembayaran.", { id: "forbidden-action" });
+            toaster.danger(TRANSLATION[language].MESSAGE.incompletePaymentPhoneMessage, { id: "forbidden-action" });
             return false;
         }
         else {
@@ -182,7 +185,7 @@ function SinglePayment() {
                         document.getElementById("bayarCC").submit();
                     }
                     else {
-                        toaster.danger("Harap maaf, tidak boleh membuat sebarang pembayaran pada masa kini.", { id: "forbidden-action" });
+                        toaster.danger(TRANSLATION[language].MESSAGE.failToMakePaymentMessage, { id: "forbidden-action" });
                     }
                 })
 
@@ -283,7 +286,7 @@ function SinglePayment() {
                             ]}
                         ></SegmentedControl>
                     </Pane>
-                    <Pane paddingX={20} style={{ height: "130vh" }}>
+                    <Pane paddingX={20} paddingBottom={60}>
                         {method === "CARD" && (
                             <Pane marginY={15} style={{ height: "50vh" }}>
                                 <Paragraph fontWeight="bold" fontSize={13}>

@@ -12,7 +12,7 @@ import { SERVER_URL } from '../../Constants';
 import { TRANSLATION } from '../../Translation';
 import { ContextHandler } from "../../contexts/ContextHandler";
 
-function Lesen() {
+function Permit() {
     const {language} = useContext(ContextHandler);
 
     const nokp = getNOKP();
@@ -27,8 +27,7 @@ function Lesen() {
     const [isError, setIsError] = useState(null)
 
     const handleView = (e) => {
-        window.location.href = SERVER_URL+"rp/lesen.php?token="+e
-        // console.log(SERVER_URL+"rp/lesen.php?token="+e)
+        window.location.href = SERVER_URL+"rp/bil_cukai_taksiran.php?noakaun=" + btoa(e)+"&token="+accessToken
     }
 
     const handleReceipt = (e) => {
@@ -134,7 +133,7 @@ function Lesen() {
 		headers : headers
 	}
 
-    const url = SERVER_URL+"int/api_generator.php?api_name=getActivity&code="+data.CODE
+    const url = SERVER_URL+"int/api_generator.php?api_name=getInvoice&code="+data.CODE
     const {response, loading:isLoading, error} = useFetch(url, requestOptions)
 
 if(loading){
@@ -184,7 +183,7 @@ else if(!loading){
                     <div className=" w-full xl:pt-24 lg:pt-24 md:pt-16 sm:pt-16 xs:pt-16" style={{ background: "linear-gradient(90deg, rgba(34,81,122,1) 0%, rgba(27,147,171,1) 100%)"}}>
                         <div className="flex flex-wrap">
                             <Pane background="#2c3e50" className="xl:mx-4 xl:rounded-md" width="100%">
-                                <Topbar title={TRANSLATION[language].LESEN.BREADCRUMB} leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => history.goBack()} />
+                                <Topbar title={TRANSLATION[language].PERMIT.BREADCRUMB} leftButtonIcon={ArrowLeftIcon} onClickLeftButton={() => history.goBack()} />
                             </Pane>
                             <div className="w-full px-4 mt-3">
                                 <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 shadow-lg xs:mt-16">
@@ -200,12 +199,12 @@ else if(!loading){
                                             display="flex"
                                             alignItems="center"
                                         >
-                                            {TRANSLATION[language].LESEN.DETAIL.TITLE.toUpperCase()}
+                                            {TRANSLATION[language].PERMIT.TITLE.toUpperCase()}
                                         </Heading>
 
                                         <Pane background="#c7ecee" marginBottom={majorScale(2)}>
                                             <Paragraph padding={majorScale(2)} size={400}>
-                                            {TRANSLATION[language].LESEN.DETAIL.SUBTITLE} {location.state.data.TITLE} : <b>{data.NOAKAUN}</b>.
+                                            {TRANSLATION[language].PERMIT.SUBTITLE} : <b>{data.NOAKAUN}</b>.
                                             </Paragraph>
                                         </Pane>
 
@@ -216,8 +215,8 @@ else if(!loading){
                                             paddingX={majorScale(1)}
                                         >
                                             <Pane>
-                                                <Text fontWeight={600}>{TRANSLATION[language].LESEN.DETAIL.TYPE}</Text>
-                                                <Heading size={100}>{TRANSLATION[language].BILL_MENU.LESEN} - {location.state.data.TITLE.toUpperCase()}</Heading>
+                                                <Text fontWeight={600}>{TRANSLATION[language].PERMIT.TYPE}</Text>
+                                                <Heading size={100}>{TRANSLATION[language].CUKAI.TYPE.SUBTITLE.toUpperCase()}</Heading>
                                             </Pane>
                                             <Pane>
                                                 <Text fontWeight={600}>{TRANSLATION[language].SEARCH.MENU.ACCOUNT.TITLE}</Text>
@@ -228,42 +227,20 @@ else if(!loading){
                                                 <Heading size={100}>{ data.NAMA_PEMILIK ? data.NAMA_PEMILIK : TRANSLATION[language].CONSTANT.NONE}</Heading>
                                             </Pane>
                                             <Pane>
-                                                <Text fontWeight={600}>{TRANSLATION[language].CONSTANT.COMPANY_NAME}</Text>
-                                                <Heading size={100}>{ data.NAMA_SYARIKAT ? data.NAMA_SYARIKAT : TRANSLATION[language].CONSTANT.NONE}</Heading>
+                                                <Text fontWeight={600}>{TRANSLATION[language].CONSTANT.COMOANY_NAME}</Text>
+                                                <Heading size={100}>{ data.MUKIM ? data.MUKIM : TRANSLATION[language].CONSTANT.NONE}</Heading>
                                             </Pane>
                                             <Pane>
-                                                <Text fontWeight={600}>{TRANSLATION[language].CONSTANT.COMPANY_ADDRESS}</Text>
-                                                <Heading size={100}>{ data.ALAMAT_SYARIKAT ? data.ALAMAT_SYARIKAT : TRANSLATION[language].CONSTANT.NONE}</Heading>
+                                                <Text fontWeight={600}>{TRANSLATION[language].CONSTANT.ADDRESS}</Text>
+                                                <Heading size={100}>{ data.ALAMAT ? data.ALAMAT : TRANSLATION[language].CONSTANT.NONE}</Heading>
                                             </Pane>
                                             <Pane>
-                                                <Text fontWeight={600}>{TRANSLATION[language].LESEN.DETAIL.DATE}</Text>
-                                                <Heading size={100}>
-                                                { data.TEMPOH_LESEN}
-                                                </Heading>
+                                                <Text fontWeight={600}>{TRANSLATION[language].PERMIT.DESC}</Text>
+                                                <Heading size={100}>{data.KETERANGAN}</Heading>
                                             </Pane>
-                                        </Card>
-                                        <Card
-                                            background="tint2"
-                                            marginBottom={majorScale(2)}
-                                            padding={minorScale(2)}
-                                        >
                                             <Pane>
-                                                <Text fontWeight={600}>{TRANSLATION[language].LESEN.DETAIL.ACTIVITY}</Text>
-                                                {(!isLoading) ?
-                                                    (response.status.toLowerCase() === 'failed') ? 
-                                                        <Heading size={100}>{TRANSLATION[language].CONSTANT.NONE}</Heading>
-                                                    :
-                                                    response.data.map((res,index) => {
-                                                    return (
-                                                        <div className="pt-2" key={index}>
-                                                            <Heading size={100}>{TRANSLATION[language].LESEN.DETAIL.CODE} - { res.KOD_AKTIVITI}</Heading>
-                                                            <Heading size={100}>{ res.KETERANGAN}</Heading>
-                                                            <Heading size={100}>{TRANSLATION[language].CONSTANT.AMOUNT} : <NumberFormat value={(parseInt(res.AMAUN)).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'RM'} /></Heading>
-                                                        </div>
-                                                        )
-                                                        
-                                                })
-                                                : ''}
+                                                <Text fontWeight={600}>{TRANSLATION[language].PERMIT.DATE}</Text>
+                                                <Heading size={100}>{data.DATE ? data.DATE : data.DATE_END}</Heading>
                                             </Pane>
                                         </Card>
                                         <Card
@@ -276,26 +253,23 @@ else if(!loading){
                                                 <Heading size={200} fontWeight={400}>{ (data.STATUS.toUpperCase() === "PAID" || data.STATUS.toUpperCase() === "O") ? (<span className="uppercase font-medium text-xs text-green-400">{TRANSLATION[language].CONSTANT.PAID}</span>) : (<span className="uppercase font-medium text-xs text-red-400">{TRANSLATION[language].CONSTANT.PENDING}</span>)}</Heading>
                                             </Pane>
                                         </Card>
-                                        {
-                                        (data.STATUS.toUpperCase() === "PAID" || data.STATUS.toUpperCase() === "O") &&
-                                            <Pane>
-                                                {data.PRINT.toString() === '0' &&
-                                                    <button type = "button" className="bg-teal-500 hover:bg-teal-400 text-white py-2 px-4 mr-2 rounded inline-flex items-center text-xs font-medium"
-                                                        onClick={() => handleView(data.PDF)}
+
+                                        {/* <Pane className="mb-4">
+                                                <button type = "button" className="bg-teal-500 hover:bg-teal-400 text-white py-2 px-4 mr-2 rounded inline-flex items-center text-xs font-medium"
+                                                    onClick={() => handleView(btoa(data.NOAKAUN))}
+                                                    >
+                                                    <i className="fas fa-file-download"></i>&nbsp;{TRANSLATION[language].PERMIT.PRINT_PERMIT}
+                                                </button>
+                                            {   (!isLoading) &&
+                                                    (response.invoiceNo !== null && (data.STATUS === 'O' || data.STATUS === 'PAID' ))  &&
+                                                    <button type = "button" className="bg-teal-500 hover:bg-teal-400 text-white py-2 px-4 rounded inline-flex items-center text-xs font-medium"
+                                                        onClick={() => handleReceipt(btoa(response.invoiceNo))}
                                                         >
-                                                        <i className="fas fa-file-download"></i>&nbsp;{TRANSLATION[language].LESEN.DETAIL.PRINT_LICENSE}
+                                                        <i className="fas fa-receipt"></i>&nbsp;{TRANSLATION[language].CONSTANT.PRINT_RECEIPT}
                                                     </button>
-                                                }
-                                                {   (!isLoading) &&
-                                                        (response.invoiceNo !== null)  &&
-                                                        <button type = "button" className="bg-teal-500 hover:bg-teal-400 text-white py-2 px-4 rounded inline-flex items-center text-xs font-medium"
-                                                            onClick={() => handleReceipt(btoa(response.invoiceNo))}
-                                                            >
-                                                            <i className="fas fa-receipt"></i>&nbsp;{TRANSLATION[language].CONSTANT.PRINT_RECEIPT}
-                                                        </button>
-                                                }
-                                            </Pane>
-                                        }
+                                            }
+                                        </Pane> */}
+
                                         { (data.STATUS.toUpperCase() === "PENDING PAYMENT" || data.STATUS.toUpperCase() === "PENDING" || data.STATUS.toUpperCase() === "X") &&
                                             <Card
                                                 background="tint2"
@@ -374,4 +348,4 @@ else if(!loading){
     }
 }
 
-export default Lesen
+export default Permit

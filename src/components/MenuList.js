@@ -3,7 +3,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export default function MenuList({menu}) {
-
     return (
         menu.map((res,index) => {
             return <Link to={ res.to === "#" ? "#" : { pathname:res.to, state:res.data }} key={index}>

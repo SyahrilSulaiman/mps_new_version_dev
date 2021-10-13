@@ -101,6 +101,8 @@ export const TRANSLATION =
             "DISTRICT":"Mukim",
             "DATE":"Tempoh Cukai",
             "PAYMENT_DATE":"Tempoh Bayaran",
+            "PRINT_BILL":"Cetak Bil PDF",
+            "BREADCRUMB":"Cukai / Maklumat Cukai"
         }, 
 
         "LESEN" : {
@@ -134,7 +136,15 @@ export const TRANSLATION =
             "BREADCRUMB":"Lesen / Maklumat Lesen"
         }, 
 
-        "PERMIT" : {},
+        "PERMIT" : {
+            "BREADCRUMB":"Permit / Maklumat Permit",
+            "TITLE":"Maklumat Pembayaran Permit",
+            "SUBTITLE":"Berikut merupakan maklumat permit bagi akaun : ",
+            "TYPE":"Jenis Permit",
+            "DATE":"Tarikh Akhir",
+            "PRINT_PERMIT":"Cetak Permit PDF",
+            "DESC":"Keterangan",
+        },
 
         "SEARCH":{
             "TITLE":"Carian",
@@ -247,10 +257,19 @@ export const TRANSLATION =
             "failedRegisterMessage":"Pendaftaran pengguna tidak berjaya!",
             "successUpdateProfileMessage":"Kemaskini Berjaya",
             "failUpdateProfileMessage":"Kemaskini tidak Berjaya",
+            "maintenanceFunctionMessage":"Fungsi ini masih dalam penyelenggaraan",
+            "failToMakePaymentMessage":"Tiada pembayaran yang boleh dibuat pada masa ini. Sila hubungi pentadbir sistem untuk berurusan dengan lebih lanjut",
+            "incompletePaymentMessage":"Harap maaf, Pembayaran batal kerana maklumat pembayaran tidak lengkap",
+            "minimumPaymentRequirementMessage":"Harap maaf, Pembayaran batal kerana jumlah pembayaran tidak mencukupi nilai minimum",
+            "incompletePaymentNameMessage":"Harap maaf, Sila lengkapkan maklumat nama pembayar sebelum membuat pembayaran",
+            "incompletePaymentEmailMessage":"Harap maaf, Sila lengkapkan maklumat emel pembayar sebelum membuat pembayaran",
+            "incompletePaymentPhoneMessage":"Harap maaf, Sila lengkapkan maklumat nombor telefon pembayar sebelum membuat pembayaran",
+            "incompletePaymentBankMessage":"Harap maaf, Sila membuat pilihan bank sebelum membuat pembayaran",
         },
 
-        "SINGLE-PAYMENT":{},
+        "SINGLE-PAYMENT":{
 
+        },
         "MULTI-PAYMENT":{},
 
         "BREADCRUMB":{
@@ -314,6 +333,7 @@ export const TRANSLATION =
             "NOSSM": "No. SSM Syarikat",
             "OWNER": "Nama Pemilik",
             "COMPANY_NAME":"Nama Syarikat",
+            "ADDRESS":"Alamat",
             "PERIOD":"Tempoh",
             "LICENSE":"Lesen",
             "TAXES":"Cukai",
@@ -327,7 +347,6 @@ export const TRANSLATION =
             "PASSWORD":"Kata laluan",
             "COMPANY_ADDRESS":"Alamat Syarikat",
             "PRINT_RECEIPT":"Cetak Resit PDF",
-            "PRINT_BILL":"Cetak Bil PDF",
             "PAYMENT_AMOUNT":"Jumlah Pembayaran",
             "PENDING_AMOUNT":"Jumlah Pembayaran",
             "PAYMENT_STATUS":"Status Bayaran",
@@ -445,7 +464,7 @@ export const TRANSLATION =
 
         "CUKAI" : {
             "TITLE":"Tax Payment Information",
-            "SUBTITLE":"Assestment tax bill information of account",
+            "SUBTITLE":"Assestment tax bill information of account : ",
             "TYPE":{
                 "TITLE":"Tax Type",
                 "SUBTITLE":"Tax - Assestment Tax"
@@ -454,6 +473,8 @@ export const TRANSLATION =
             "DISTRICT":"District",
             "DATE":"Tax Period",
             "PAYMENT_DATE":"Payment Period",
+            "PRINT_BILL":"Print PDF Tax",
+            "BREADCRUMB":"Tax / Tax Detail"
         }, 
 
         "LESEN" : {
@@ -487,7 +508,15 @@ export const TRANSLATION =
             "BREADCRUMB":"License / License Detail"
         }, 
 
-        "PERMIT" : {},
+        "PERMIT" : {
+            "BREADCRUMB":"Permit / Permit Detail",
+            "TITLE":"Permit Payment Information",
+            "SUBTITLE":"Permit information of account : ",
+            "TYPE":"Permit Type",
+            "DATE":"End Date",
+            "PRINT_PERMIT":"Print Permit PDF",
+            "DESC":"Description",
+        },
 
         "SEARCH":{
             "TITLE":"Search",
@@ -600,6 +629,16 @@ export const TRANSLATION =
             "failedRegisterMessage":"Registration failed",
             "successUpdateProfileMessage":"Update Successful",
             "failUpdateProfileMessage":"Update Fail",
+            "maintenanceFunctionMessage":"Function is under maintenance",
+            "failToMakePaymentMessage":"No payments can be made at this time. Please contact the system administrator",
+            "incompletePaymentMessage":"Sorry, the payment was canceled due to incomplete payment information",
+            "minimumPaymentRequirementMessage":"Sorry, the payment was canceled because the payment amount did not meet the minimum value",
+            "incompletePaymentNameMessage":"Sorry, please complete the payee name before making the payment",
+            "incompletePaymentEmailMessage":"Sorry, please complete the payee email before making a payment",
+            "incompletePaymentPhoneMessage":"Sorry, please complete the payee phone number before making a payment",
+            "incompletePaymentBankMessage":"Sorry, please select a bank before making a payment",
+            // ---------------------
+
         },
 
         "SINGLE-PAYMENT":{},
@@ -667,6 +706,7 @@ export const TRANSLATION =
             "NOSSM": "Company Registration Number",
             "OWNER": "Owner Name",
             "COMPANY_NAME":"Company Name",
+            "ADDRESS":"Address",
             "COMPANY_ADDRESS":"Company Address",
             "PERIOD":"Period",
             "LICENSE":"License",
@@ -680,7 +720,6 @@ export const TRANSLATION =
             "UPDATE":"Update",
             "PASSWORD":"Password",
             "PRINT_RECEIPT":"Print PDF Receipt",
-            "PRINT_BILL":"Print PDF Tax",
             "PAYMENT_AMOUNT":"Payment Amount",
             "PENDING_AMOUNT":"Pending Amount",
             "PAYMENT_STATUS":"Payment Status",

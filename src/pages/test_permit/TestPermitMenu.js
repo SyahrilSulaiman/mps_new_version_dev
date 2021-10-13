@@ -6,16 +6,16 @@ import Topbar from "../../Topbar2";
 import { useHistory } from "react-router";
 import { useLocation } from "react-router-dom";
 import { ContextHandler } from "../../contexts/ContextHandler";
-import CukaiList from "./CukaiList";
 import useFetch from "../../hooks/useFetch";
 import EmptyBill from "../../components/EmptyBill";
 import { SERVER_URL } from "../../Constants";
 import { getNOKP, getEmail, setAuthorization } from "../../Utils/Common";
 import { TRANSLATION } from "../../Translation";
 import noScroll from "no-scroll"
+import TestPermitList from "./TestPermitList";
 
 
-function CukaiMenu(props) {
+function TestPermitMenu(props) {
 	noScroll.off();
 	const { handleUnpaid, selected, unpaid, language, setUnpaid } = useContext(ContextHandler);
 
@@ -103,6 +103,7 @@ function CukaiMenu(props) {
 		}
 	}
     const handleAddBill = () => {
+        // toaster.notify(TRANSLATION[language].MESSAGE.maintenanceFunctionMessage, { id: "forbidden-action" });
 		history.push({
 			pathname:"/carian",
 			state:{type:location.state.type, code:location.state.code, searchCode:location.state.searchCode, title:location.state.title, from:location.pathname}
@@ -143,9 +144,6 @@ function CukaiMenu(props) {
                         <div 
 							className="w-full lg:w-6/12 xl:w-4/12 px-6"
 							onClick={handleBayarSelected}
-
-							// className="w-full lg:w-6/12 xl:w-4/12 px-6 opacity-75"
-							// onClick={disabledButton}
 						>
 							<div 
 								className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg cursor-pointer"
@@ -225,7 +223,7 @@ function CukaiMenu(props) {
 								: 	(response.status === "success")
 								? 
 									response.data.map((res,index) => {
-										return <CukaiList response={res} title={location.state.title} type={location.state.type} code={location.state.code} key={index}/>
+										return <TestPermitList response={res} title={location.state.title} type={location.state.type} code={location.state.code} key={index}/>
 									})
 								: <EmptyBill />	
 
@@ -238,4 +236,4 @@ function CukaiMenu(props) {
     )
 }
 
-export default CukaiMenu
+export default TestPermitMenu

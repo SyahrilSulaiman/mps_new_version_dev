@@ -169,7 +169,7 @@ function CarianList({type, code, carianBy, searchCode}) {
         })
         .then(response => {
           let alert = '';
-          console.log(response)
+          // console.log(response)
           if(type === 'akaun')
             alert = TRANSLATION[language].MESSAGE.accountNotFoundMessage
           if(type === 'kp')
@@ -383,16 +383,9 @@ function CarianList({type, code, carianBy, searchCode}) {
             <div className="w-full">
               <Pane background="tint1">
                 {
-                  (!loading && display) ?
-                  carianBy === 'lesen' ?
+                  (!loading && display) &&
                     <CarianItem className="bg-gray-100" response={response} loading={loading} handleAdd={response.length > 1 ? handleChoose : handleAdd} array={array} />
-                    : carianBy === 'permit' ?
-                      'permit'
-                      : carianBy === 'kompaun' ?
-                        'kompaun'
-                        : 
-                          ''
-                    : ''
+
                 }
               </Pane>
             </div>

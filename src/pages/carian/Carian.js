@@ -1,5 +1,5 @@
 import { Pane, SelectField, ArrowLeftIcon } from 'evergreen-ui'
-import React,{ useState } from 'react'
+import React,{ useState, useContext } from 'react'
 import {useLocation, useHistory} from 'react-router-dom'
 import Navbar from '../../components/Navbars/AdminNavbar'
 import Sidebar from '../../Sidebar'
@@ -7,14 +7,12 @@ import Topbar from '../../Topbar2'
 import CarianList from './CarianList'
 import { TRANSLATION } from '../../Translation';
 import { ContextHandler } from "../../contexts/ContextHandler";
-import { useContext } from 'react'
 
 function Carian() {
     const {language} = useContext(ContextHandler)
     const [type, setType] = useState('');
     const history = useHistory()
     const location = useLocation();
-    console.log(location)
 
     return (
         <div>

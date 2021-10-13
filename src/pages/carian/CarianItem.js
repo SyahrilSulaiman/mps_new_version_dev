@@ -34,7 +34,7 @@ function CarianItem({response,loading, handleAdd, array}) {
                                 <Pane padding={10}>
                                     <Heading size={200}>{"AKAUN " + res.NOAKAUN}</Heading>
                                     <Heading size={200}>{res.NAMA_PEMILIK}</Heading>
-                                    <Heading size={200}>{res.NOKP}</Heading>
+                                    <Heading size={200}>{res.NOKP === '' ? res.NOKP : res.NOSSM}</Heading>
                                 </Pane>
                                 <Pane padding={20} justifyContent="center" marginTop={7}>
                                     <i className="fas fa-chevron-right"></i>

@@ -47,6 +47,14 @@ import Lesen from "./pages/lesen/Lesen"
 import JenisLesen from "./pages/lesen/LesenType";
 import LesenMenu from "./pages/lesen/LesenMenu"
 
+// permit
+import Permit from "./pages/permit/Permit"
+import JenisPermit from "./pages/permit/PermitType"
+import PermitMenu from "./pages/permit/PermitMenu"
+
+// Test Permit
+import TestPermitType from "./pages/test_permit/TestPermitType"
+
 // cukai
 import Cukai from "./pages/cukai/Cukai"
 import CukaiMenu from "./pages/cukai/CukaiMenu"
@@ -75,6 +83,7 @@ import { useLoading, Audio } from "@agney/react-loading";
 import SelectedBillContextProvider from './contexts/SelectedBillContext';
 import ContextHandlerProvider from './contexts/ContextHandler';
 import { SERVER_URL } from './Constants';
+import TestPermitMenu from "./pages/test_permit/TestPermitMenu";
 
 //import "./main.css";
 
@@ -238,7 +247,17 @@ function App() {
                     <PrivateRoute path="/lesen" component={Lesen} />
                     <PrivateRoute path="/jenislesen" component={JenisLesen} />
                     <PrivateRoute path="/menulesen" component={LesenMenu} />
+
+                    <PrivateRoute path="/cukai" component={Cukai} />
+                    <PrivateRoute path="/menucukai" component={CukaiMenu} />
+
+                    <PrivateRoute path="/permit" component={Permit} />
+                    <PrivateRoute path="/jenispermit" component={JenisPermit} />
+                    <PrivateRoute path="/menupermit" component={PermitMenu} />
                     
+                    <PrivateRoute path="/test_permit"  component={TestPermitType} />
+                    <PrivateRoute path="/testpermitmenu" component={TestPermitMenu} />
+
                     <PrivateRoute path="/paymentV2" component={SinglePayment} />
                     <PrivateRoute path="/multiplepayment" component={MultiplePayment} />
 
@@ -285,6 +304,16 @@ function App() {
                   <PrivateRoute path="/jenislesen" component={JenisLesen} />
                   <PrivateRoute path="/menulesen" component={LesenMenu} />
 
+                  <PrivateRoute path="/cukai" component={Cukai} />
+                  <PrivateRoute path="/menucukai" component={CukaiMenu} />
+
+                  <PrivateRoute path="/permit" component={Permit} />
+                  <PrivateRoute path="/jenispermit" component={JenisPermit} />
+                  <PrivateRoute path="/menupermit" component={PermitMenu} />
+
+                  <PrivateRoute path="/test_permit"  component={TestPermitType} />
+                  <PrivateRoute path="/testpermitmenu" component={TestPermitMenu} />
+                    
                   <PrivateRoute path="/paymentV2" component={SinglePayment} />
                   <PrivateRoute path="/multiplepayment" component={MultiplePayment} />
 
